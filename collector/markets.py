@@ -306,6 +306,37 @@ def _calculer(conf, resultats, ind):
     ind["source"] = "calculé"
 
 
+def inspecter(conf):
+    """
+    Affiche ce que la source renvoie réellement pour un indicateur : le nom
+    exact de la série et ses dernières observations. C'est ce qui permet de
+    vérifier qu'un chiffre mesure bien ce qu'on croit.
+    """
+    print(f"Indicateur : {conf['id']} — {conf['label']}")
+    print(f"Source : {conf['source']}  |  clé : {conf.get('cle')}\n")
+
+    if conf["source"] != "bce":
+        ind = _neuf(conf)
+        RECUPERATEURS[conf["source"]](conf, ind)
+        print(json.dumps(ind, ensure_ascii=False, indent=2))
+        return
+
+    url = (f"https://data-api.ecb.europa.eu/service/data/{conf['cle']}"
+           "?lastNObservations=6&format=csvdata")
+    lignes = list(csv.DictReader(io.StringIO(_get(url).text)))
+    if not lignes:
+        print("Réponse vide.")
+        return
+    descriptifs = [c for c in lignes[0] if c in
+                   ("TITLE", "TITLE_COMPL", "UNIT_MEASURE", "UNIT", "FREQ", "KEY", "SERIES")]
+    print("Description de la série :")
+    for colonne in descriptifs:
+        print(f"  {colonne} = {lignes[0][colonne]}")
+    print("\nDernières observations :")
+    for l in lignes:
+        print(f"  {l.get('TIME_PERIOD')}  {l.get('OBS_VALUE')}")
+
+
 def tous_les_indicateurs(config, verbeux=True):
     actifs = [i for i in config["indicateurs"] if i.get("actif", True)]
 

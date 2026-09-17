@@ -28,6 +28,24 @@ Une seule limite à connaître : sur un dépôt **privé**, GitHub offre
 17 par jour tiennent largement dedans. Sur un dépôt **public**, c'est illimité.
 Comme il n'y a aucune donnée personnelle ici, le public est le choix simple.
 
+## Comment la page est organisée
+
+En haut, toujours visibles : le taux de dépôt BCE en gros, le CAC 40, le
+Bitcoin, le résumé du jour et les alertes en cours.
+
+En dessous, trois vues qui ne se mélangent pas :
+
+- **Actualités** — le flux, ses rubriques, la recherche, les sujets gardés et
+  la vue hebdomadaire. Le compteur doré indique ce qui est arrivé depuis ta
+  dernière visite.
+- **Chiffres** — les 47 indicateurs, répartis en quatre familles : taux et
+  épargne, marchés, crypto, économie. Quatre écrans courts au lieu d'un mur.
+- **Agenda** — les prochains rendez-vous, avec un compteur doré pour ceux qui
+  tombent dans les sept jours.
+
+La vue et la famille choisies sont mémorisées : tu retrouves la page là où tu
+l'avais laissée.
+
 ## Mise en route
 
 1. Crée un dépôt GitHub, par exemple `veille`, et pousse ce dossier dedans.
@@ -153,8 +171,13 @@ sont en échec. Le collecteur, lui, signale ses propres plantages.
 Pour vérifier les chiffres à la main :
 
 ```bash
-python collector/fetch.py --check-chiffres
+python collector/fetch.py --check-chiffres        # teste les 47 indicateurs
+python collector/fetch.py --inspecter inflation_fr # montre ce que la série renvoie vraiment
 ```
+
+`--inspecter` affiche le nom exact de la série chez la source et ses six
+dernières observations. C'est l'outil à sortir quand un chiffre semble faux :
+il dit si l'erreur vient de la série choisie ou de son interprétation.
 
 ## L'historique
 
@@ -195,8 +218,16 @@ Tout est dans `collector/sources.yaml`, en français, sans code.
   suis un nouveau sujet. La syntaxe Google marche (`"guillemets"`, `OR`,
   `-exclusion`, `site:lesechos.fr`).
 - `poids` : de 1 à 3, fait remonter la source dans le classement.
-- chaque source est plafonnée à 30 articles par collecte : une requête large ne
-  peut plus noyer les autres.
+- `exiger:` : le titre doit contenir au moins un de ces mots. C'est
+  indispensable en français, où « arrêté » ramène autant de faits divers que de
+  textes réglementaires.
+- `exclure:` : mots qui disqualifient un titre pour cette source.
+- `exclure_partout:` en haut du fichier : faits divers, lois de finances
+  étrangères, pages de cotation, offres d'emploi. Écarté quelle que soit la
+  source.
+- chaque source est plafonnée à 30 articles par collecte, et chaque média à 6
+  sujets : un site qui publie quinze variations du même titre ne peut plus
+  occuper la page.
 - `signaux_forts` : les mots qui font passer un article en tête et lui
   donnent son liseré doré.
 - `bruit` : les titres à jeter.

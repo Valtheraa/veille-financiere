@@ -67,11 +67,13 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;pad
   max-width:64ch;border-left:2px solid var(--or);padding-left:16px;margin:4px 0 0}
 
 /* ---------- chiffres ---------- */
-.chiffres{display:grid;gap:30px 48px;padding:30px 0 6px}
+.chiffres{display:grid;gap:38px 52px;padding:26px 0 6px;align-items:start}
 @media(min-width:760px){.chiffres{grid-template-columns:1fr 1fr}}
 @media(min-width:1040px){.chiffres{grid-template-columns:1fr 1fr 1fr}}
 .groupe-tete{display:flex;align-items:center;justify-content:space-between;
-  gap:12px;margin-bottom:4px;min-height:22px}
+  gap:12px;margin-bottom:6px;padding-bottom:8px;min-height:22px;
+  border-bottom:1px solid var(--bordure)}
+.bloc .ligne:first-of-type{border-top:none}
 .ligne{display:flex;align-items:baseline;justify-content:space-between;gap:14px;
   padding:11px 0;border-top:1px solid var(--filet)}
 .ligne-nom{min-width:0}
@@ -82,7 +84,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;pad
 .alertes{border-left:2px solid var(--or);padding:2px 0 2px 16px;margin:0 0 26px}
 .alertes p{margin:0 0 4px;font-size:14px}
 .alertes .valeur{font-family:var(--chiffre);font-weight:500;letter-spacing:-.022em}
-.agenda{padding:30px 0 4px;border-top:1px solid var(--filet);margin-top:26px}
+.agenda{padding:26px 0 4px}
 .agenda .ligne-nom .nom{font-size:14.5px}
 .agenda .quand{font-size:12.5px;color:var(--doux);font-variant-numeric:tabular-nums;white-space:nowrap}
 .agenda .quand.proche{color:var(--or)}
@@ -111,15 +113,30 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;pad
 .bascule-devise button[aria-pressed="true"]{color:#12100A;background:var(--or);font-weight:600}
 
 /* ---------- filtres ---------- */
-.filtres{position:sticky;top:0;z-index:5;background:var(--noir);
-  padding:16px 0 12px;margin-top:36px;border-top:1px solid var(--filet)}
+.vues{position:sticky;top:0;z-index:6;background:var(--noir);display:flex;gap:26px;
+  padding:16px 0 0;margin-top:30px;border-top:1px solid var(--filet);
+  box-shadow:0 12px 16px -12px var(--noir)}
+.vue{font-size:15px;color:var(--doux);padding:10px 0 12px;border-bottom:1px solid transparent;
+  white-space:nowrap}
+.vue[aria-pressed="true"]{color:var(--texte);border-bottom-color:var(--or)}
+.vue .n{font-size:11px;color:var(--or);margin-left:6px;font-variant-numeric:tabular-nums;
+  vertical-align:super}
+.familles{display:flex;gap:16px;overflow-x:auto;scrollbar-width:none;
+  padding:16px 0 0;margin-bottom:4px}
+.familles::-webkit-scrollbar{display:none}
+.famille{font-size:13px;color:var(--tres-doux);white-space:nowrap;padding:4px 0;
+  border-bottom:1px solid transparent}
+.famille[aria-pressed="true"]{color:var(--or);border-bottom-color:var(--filet)}
+.vide-vue{padding:40px 0;color:var(--doux);max-width:40ch}
+.filtres{padding:16px 0 12px;border-top:1px solid var(--filet);margin-top:4px}
 .onglets{display:flex;gap:18px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
 .onglets::-webkit-scrollbar{display:none}
 .onglet{white-space:nowrap;font-size:13.5px;color:var(--doux);padding:5px 0;
   border-bottom:1px solid transparent}
 .onglet[aria-pressed="true"]{color:var(--texte);border-bottom-color:var(--or)}
 .onglet .n{font-size:11px;color:var(--or);margin-left:5px;font-variant-numeric:tabular-nums}
-.outils{display:flex;gap:16px;align-items:center;margin-top:12px}
+.outils{display:flex;gap:14px 18px;align-items:center;margin-top:14px;flex-wrap:wrap}
+.outils .recherche{min-width:min(100%,260px)}
 .recherche{flex:1;background:transparent;border:none;border-bottom:1px solid var(--filet);
   padding:7px 0;color:var(--texte);font-size:14px}
 .recherche::placeholder{color:var(--tres-doux)}
@@ -128,14 +145,17 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;pad
 .bascule input{accent-color:var(--or);width:16px;height:16px}
 
 /* ---------- flux ---------- */
-.jour{font-size:12px;color:var(--tres-doux);margin:28px 0 2px;font-variant-numeric:tabular-nums}
-.article{display:block;padding:16px 0 16px 14px;border-top:1px solid var(--filet);
+.jour{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--or);
+  font-weight:500;margin:34px 0 10px;padding-top:16px;border-top:1px solid var(--filet)}
+.jour:first-of-type{margin-top:18px;border-top:none;padding-top:0}
+.article{display:block;padding:18px 0 18px 14px;border-top:1px solid var(--filet);
   border-left:2px solid transparent}
+.article:first-of-type{border-top:none}
 .article.marquant{border-left-color:var(--or)}
 .article.lu{opacity:.42}
 .article{position:relative}
-.titre{display:block;font-family:var(--chiffre);font-weight:500;font-size:18px;
-  line-height:1.35;letter-spacing:-.022em;margin:0 0 6px;max-width:68ch}
+.titre{display:block;font-family:var(--chiffre);font-weight:500;font-size:17.5px;
+  line-height:1.42;letter-spacing:-.022em;margin:0 0 7px;max-width:64ch}
 .meta{font-size:12.5px;color:var(--tres-doux);display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center}
 .puce{width:5px;height:5px;background:var(--or);display:inline-block}
 .signal{color:var(--or-sombre)}
@@ -155,6 +175,11 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;pad
   font-size:12.5px;display:inline-flex;align-items:center;gap:5px}
 .copier svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.6}
 .copier[data-fait="oui"]{color:var(--or);border-bottom-color:transparent}
+.article .copier,.article .epingler{opacity:.42}
+.article:hover .copier,.article:hover .epingler,
+.article:focus-within .copier,.article:focus-within .epingler{opacity:1}
+.epingler[aria-pressed="true"]{opacity:1}
+@media (hover:none){.article .copier,.article .epingler{opacity:.62}}
 .copier-tout{color:var(--doux);font-size:13px;border-bottom:1px solid var(--bordure);
   padding-bottom:1px;white-space:nowrap}
 .copier-tout[data-fait="oui"]{color:var(--or);border-bottom-color:transparent}
@@ -175,10 +200,18 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;pad
 
   <section class="alertes" id="alertes" hidden aria-label="Alertes"></section>
 
-  <section class="chiffres" id="chiffres" aria-label="Tous les indicateurs"></section>
+  <nav class="vues" id="vues" aria-label="Vues"></nav>
 
-  <section class="agenda" id="agenda" hidden aria-label="Prochains rendez-vous"></section>
+  <div id="bloc-chiffres" hidden>
+    <div class="familles" id="familles"></div>
+    <section class="chiffres" id="chiffres" aria-label="Indicateurs"></section>
+  </div>
 
+  <div id="bloc-agenda" hidden>
+    <section class="agenda" id="agenda" aria-label="Prochains rendez-vous"></section>
+  </div>
+
+  <div id="bloc-actus">
   <nav class="filtres" aria-label="Filtres">
     <div class="onglets" id="onglets"></div>
     <div class="outils">
@@ -192,6 +225,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;pad
   <main id="flux"></main>
 
   <section class="archive" id="archive" hidden aria-label="Archive"></section>
+  </div>
   <section class="lectures" id="lectures" hidden aria-label="Ce que je lis"></section>
 
   <footer class="pied">
@@ -222,6 +256,8 @@ const CLE_VISITE = "veille:derniere-visite";
 const CLE_LUS = "veille:lus";
 const CLE_DEVISE = "veille:devise";
 const CLE_EPINGLES = "veille:epingles";
+const CLE_VUE = "veille:vue";
+const CLE_FAMILLE = "veille:famille";
 const CLE_LECTURES = "veille:lectures";
 
 const stockage = {
@@ -236,7 +272,14 @@ let lus = new Set(stockage.lire(CLE_LUS, []));
 let epingles = stockage.lire(CLE_EPINGLES, []);
 let lectures = stockage.lire(CLE_LECTURES, {});
 let archive = null;
+let combienAffiches = 60;
+const PAS_AFFICHAGE = 60;
 const visitePrecedente = stockage.lire(CLE_VISITE, null);
+
+function ech(valeur){
+  return String(valeur ?? "").replace(/[&<>"']/g, (c) =>
+    ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
 
 const fr = {
   heure: new Intl.DateTimeFormat("fr-FR",{hour:"2-digit",minute:"2-digit"}),
@@ -260,6 +303,7 @@ function valeurAffichee(ind){
 
   let decimales = 2;
   if (unite === "%" || unite === "pt") decimales = 2;
+  else if (ind.groupe === "devises") decimales = 4;
   else if (Math.abs(brut) >= 1000) decimales = 0;
   else if (unite === "/100") decimales = 0;
 
@@ -270,16 +314,103 @@ function valeurAffichee(ind){
   return nombre + " " + unite;
 }
 
+function signe(valeur, decimales){
+  const texte = Math.abs(valeur).toLocaleString("fr-FR",
+    {minimumFractionDigits:decimales, maximumFractionDigits:decimales});
+  return (valeur > 0 ? "+" : valeur < 0 ? "−" : "") + texte;
+}
+
 function variation(ind){
   if (ind.variation_pct !== null && ind.variation_pct !== undefined && ind.variation_pct !== 0){
-    const s = ind.variation_pct > 0 ? "+" : "";
-    return { texte:s+ind.variation_pct.toFixed(2)+" %", classe:ind.variation_pct>0?"pos":"neg" };
+    return { texte: signe(ind.variation_pct, 2) + " %", classe: ind.variation_pct > 0 ? "pos" : "neg" };
   }
   if (ind.variation !== null && ind.variation !== undefined && ind.variation !== 0){
-    const s = ind.variation > 0 ? "+" : "";
-    return { texte:s+ind.variation.toFixed(2), classe:ind.variation>0?"pos":"neg" };
+    // Une variation de taux s'exprime en points, jamais en pourcents.
+    const unite = (ind.unite === "%" || ind.unite === "pt") ? " pt" : "";
+    return { texte: signe(ind.variation, 2) + unite, classe: ind.variation > 0 ? "pos" : "neg" };
   }
   return { texte:"stable", classe:"" };
+}
+
+// Les séries mensuelles (inflation, chômage) décrivent un mois passé :
+// l'afficher évite de confondre le chiffre du mois avec celui du jour.
+const moisFr = new Intl.DateTimeFormat("fr-FR", {month:"long", year:"numeric"});
+function reference(ind){
+  if (!ind.date) return "";
+  const date = new Date(ind.date);
+  if (isNaN(date)) return "";
+  const jours = (Date.now() - date.getTime()) / 86400000;
+  return jours > 20 ? moisFr.format(date) : "";
+}
+
+const PEUR = { "Extreme Fear":"peur extrême", "Fear":"peur", "Neutral":"neutre",
+               "Greed":"avidité", "Extreme Greed":"avidité extrême" };
+
+/* ---------- vues ---------- */
+
+const VUES = [
+  { id:"actus",    label:"Actualités" },
+  { id:"chiffres", label:"Chiffres" },
+  { id:"agenda",   label:"Agenda" },
+];
+
+// Les dix groupes d'indicateurs sont rassemblés en quatre familles : un écran
+// de quarante-sept lignes ne se lit pas, quatre écrans courts se parcourent.
+const FAMILLES = [
+  { id:"taux",     label:"Taux & épargne", groupes:["banques_centrales","taux_marche","obligations","epargne","credit_immo"] },
+  { id:"marches",  label:"Marchés",        groupes:["indices","devises","matieres"] },
+  { id:"crypto",   label:"Crypto",         groupes:["crypto"] },
+  { id:"economie", label:"Économie",       groupes:["economie"] },
+];
+
+let vueActive = stockage.lire(CLE_VUE, "actus");
+let familleActive = stockage.lire(CLE_FAMILLE, "taux");
+
+function afficherVues(){
+  const barre = document.getElementById("vues");
+  const neufs = donnees.articles.filter(estNouveau).length;
+  const proches = (donnees.agenda || []).filter(r => r.jours <= 7).length;
+
+  barre.innerHTML = "";
+  for (const vue of VUES){
+    const compte = vue.id === "actus" ? neufs : vue.id === "agenda" ? proches : 0;
+    const bouton = document.createElement("button");
+    bouton.className = "vue";
+    bouton.setAttribute("aria-pressed", String(vue.id === vueActive));
+    bouton.innerHTML = ech(vue.label) + (compte ? `<span class="n">${compte}</span>` : "");
+    bouton.addEventListener("click", () => {
+      vueActive = vue.id;
+      stockage.ecrire(CLE_VUE, vue.id);
+      afficherVues();
+      scrollTo({ top: document.getElementById("vues").offsetTop - 8, behavior:"smooth" });
+    });
+    barre.appendChild(bouton);
+  }
+  document.getElementById("bloc-chiffres").hidden = vueActive !== "chiffres";
+  document.getElementById("bloc-agenda").hidden = vueActive !== "agenda";
+  document.getElementById("bloc-actus").hidden = vueActive !== "actus";
+  if (vueActive === "chiffres") afficherFamilles();
+}
+
+function afficherFamilles(){
+  const barre = document.getElementById("familles");
+  barre.innerHTML = "";
+  for (const famille of FAMILLES){
+    const presente = (donnees.groupes || []).some(g => famille.groupes.includes(g.id));
+    if (!presente) continue;
+    const bouton = document.createElement("button");
+    bouton.className = "famille";
+    bouton.setAttribute("aria-pressed", String(famille.id === familleActive));
+    bouton.textContent = famille.label;
+    bouton.addEventListener("click", () => {
+      familleActive = famille.id;
+      stockage.ecrire(CLE_FAMILLE, famille.id);
+      afficherFamilles();
+      afficherChiffres();
+    });
+    barre.appendChild(bouton);
+  }
+  afficherChiffres();
 }
 
 /* ---------- micro-courbes ---------- */
@@ -306,15 +437,18 @@ function afficherAlertes(){
   zone.hidden = liste.length === 0 && anomalies.length === 0;
   zone.innerHTML = liste.map(a => {
     const unite = a.unite ? ` ${a.unite}` : "";
-    return `<p>${a.message} — <span class="valeur">${a.valeur}${unite}</span></p>`;
-  }).join("") + anomalies.map(a => `<p class="muet">${a.message}</p>`).join("");
+    return `<p>${ech(a.message)} — <span class="valeur">${ech(a.valeur)}${ech(unite)}</span></p>`;
+  }).join("") + anomalies.map(a => `<p class="muet">${ech(a.message)}</p>`).join("");
 }
 
 function afficherAgenda(){
   const zone = document.getElementById("agenda");
   const liste = donnees.agenda || [];
-  zone.hidden = liste.length === 0;
-  if (!liste.length) return;
+  if (!liste.length){
+    zone.innerHTML = `<p class="vide-vue">Aucun rendez-vous programmé. Ajoute des dates dans
+      collector/agenda.yaml, notamment les réunions de la BCE et de la Fed.</p>`;
+    return;
+  }
   zone.innerHTML = `<div class="groupe-tete"><span class="legende">Prochains rendez-vous</span></div>` +
     liste.map(r => {
       const quand = r.jours === 0 ? "aujourd'hui" : r.jours === 1 ? "demain" : `dans ${r.jours} jours`;
@@ -372,7 +506,8 @@ function afficherHero(){
 function afficherChiffres(){
   const cible = document.getElementById("chiffres");
   cible.innerHTML = "";
-  const groupes = donnees.groupes || [];
+  const famille = FAMILLES.find(f => f.id === familleActive) || FAMILLES[0];
+  const groupes = (donnees.groupes || []).filter(g => famille.groupes.includes(g.id));
 
   for (const groupe of groupes){
     const membres = (donnees.indicateurs || []).filter(i => i.groupe === groupe.id);
@@ -408,13 +543,14 @@ function afficherChiffres(){
       const v = variation(ind);
       if (ind.statut !== "ok"){
         ligne.className = "ligne vide";
-        ligne.innerHTML = `<span class="ligne-nom"><span class="nom">${ind.label}</span></span>
+        ligne.innerHTML = `<span class="ligne-nom"><span class="nom">${ech(ind.label)}</span></span>
           <span class="ligne-val"><span class="val">indisponible</span></span>`;
       } else {
         ligne.className = "ligne";
+        const note = [PEUR[ind.note] || ind.note, reference(ind)].filter(Boolean).join(" — ");
         ligne.innerHTML = `<span class="ligne-nom">
-            <span class="nom">${ind.label}</span>
-            ${ind.note ? `<span class="note">${ind.note}</span>` : ""}
+            <span class="nom">${ech(ind.label)}</span>
+            ${note ? `<span class="note">${ech(note)}</span>` : ""}
           </span>
           <span class="ligne-val">
             ${courbe(ind.id)}
@@ -610,7 +746,7 @@ function afficherOnglets(){
     b.className = "onglet";
     b.setAttribute("aria-pressed", String(o.id === categorieActive));
     b.innerHTML = o.label + (o.n ? `<span class="n">${o.n}</span>` : "");
-    b.addEventListener("click", () => { categorieActive = o.id; afficherOnglets(); afficherFlux(); });
+    b.addEventListener("click", () => { categorieActive = o.id; combienAffiches = PAS_AFFICHAGE; afficherOnglets(); afficherFlux(); });
     barre.appendChild(b);
   }
 }
@@ -649,8 +785,9 @@ function afficherFlux(){
     cible.appendChild(bilan);
   }
 
+  const visibles = liste.slice(0, combienAffiches);
   let jourCourant = null;
-  for (const a of liste){
+  for (const a of visibles){
     if (categorieActive === "semaine") jourCourant = "—";
     const date = new Date(a.publie_le);
     const jour = fr.jour.format(date);
@@ -663,17 +800,18 @@ function afficherFlux(){
     }
     const bloc = document.createElement("article");
     bloc.className = "article" + (a.score >= 34 ? " marquant" : "") + (lus.has(a.id) ? " lu" : "");
-    const signaux = (a.signaux||[]).slice(0,2).map(s => `<span class="signal">${s}</span>`).join("");
-    bloc.innerHTML = `<a class="titre" href="${a.url}" target="_blank" rel="noopener">${a.titre}</a>
+    const signaux = (a.signaux||[]).slice(0,2).map(s => `<span class="signal">${ech(s)}</span>`).join("");
+    bloc.innerHTML = `<a class="titre" href="${ech(a.url)}" target="_blank" rel="noopener">${ech(a.titre)}</a>
       <p class="meta">
         ${estNouveau(a) && !lus.has(a.id) ? '<span class="puce" title="Nouveau"></span>' : ""}
-        <span>${a.source}</span><span>${fr.heure.format(date)}</span>${signaux}
+        <span>${ech(a.source)}</span>
+        <span${a.date_estimee ? ' title="Ce flux ne date pas ses entrées"' : ""}>${a.date_estimee ? "date incertaine" : fr.heure.format(date)}</span>${signaux}
         <button class="copier" type="button">${ICONE_COPIE}<span>Copier</span></button>
         <button class="epingler" type="button" aria-pressed="${epingles.some(e => e.id === a.id)}">${ICONE_EPINGLE}<span>Garder</span></button>
       </p>
-      ${a.resume ? `<p class="extrait">${a.resume}</p>` : ""}
+      ${a.resume ? `<p class="extrait">${ech(a.resume)}</p>` : ""}
       ${(a.autres && a.autres.length) ? `<p class="reprises">Aussi chez ${
-        a.autres.slice(0,4).map(o => `<a href="${o.url}" target="_blank" rel="noopener">${o.source}</a>`).join(", ")
+        a.autres.slice(0,4).map(o => `<a href="${ech(o.url)}" target="_blank" rel="noopener">${ech(o.source)}</a>`).join(", ")
       }${a.autres.length > 4 ? ` et ${a.autres.length - 4} autres` : ""}</p>` : ""}`;
 
     bloc.querySelector(".epingler").addEventListener("click", (e) => {
@@ -698,6 +836,16 @@ function afficherFlux(){
       lien.addEventListener("click", () => compter({source: lien.textContent}));
     });
     cible.appendChild(bloc);
+  }
+
+  if (liste.length > visibles.length){
+    const suite = document.createElement("button");
+    suite.className = "copier-tout";
+    suite.style.marginTop = "26px";
+    const restants = liste.length - visibles.length;
+    suite.textContent = `Afficher les ${Math.min(PAS_AFFICHAGE, restants)} suivants (${restants} restants)`;
+    suite.addEventListener("click", () => { combienAffiches += PAS_AFFICHAGE; afficherFlux(); });
+    cible.appendChild(suite);
   }
 }
 
@@ -728,7 +876,7 @@ async function charger(){
     donnees = await reponse.json();
     for (const [nom, rendu] of [["contexte",afficherContexte],["alertes",afficherAlertes],
          ["agenda",afficherAgenda],["chiffres clés",afficherHero],["indicateurs",afficherChiffres],
-         ["onglets",afficherOnglets],["flux",afficherFlux]]){
+         ["onglets",afficherOnglets],["flux",afficherFlux],["vues",afficherVues]]){
       try{ rendu(); }
       catch(erreur){ signalerErreur(`Affichage « ${nom} »`, erreur); return; }
     }
@@ -774,7 +922,7 @@ brancher("importer", "click", () => {
     alert("Sauvegarde illisible. Recopie-la en entier, sans rien couper.");
   }
 });
-brancher("neufs", "change", afficherFlux);
+brancher("neufs", "change", () => { combienAffiches = PAS_AFFICHAGE; afficherFlux(); });
 brancher("copier-tout", "click", (e) => {
   if (!donnees) return;
   const liste = articlesFiltres();

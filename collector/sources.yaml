@@ -160,28 +160,40 @@ recherches:
     actif: true
 
   - nom: Fiscalité et loi de finances
-    q: '"loi de finances" OR "prélèvement forfaitaire" OR "flat tax" OR BOFiP OR "abattement fiscal"'
+    q: '("loi de finances" OR "prélèvement forfaitaire" OR "flat tax" OR BOFiP OR "abattement fiscal") (France OR Bercy OR gouvernement OR Assemblée)'
     categorie: macro
     poids: 3
     actif: true
+    exiger: [france, bercy, gouvernement, assemblée, sénat, budget, impôt, fiscal, épargne, retrait]
 
   - nom: Journal officiel et textes réglementaires
-    q: '("Journal officiel" OR arrêté OR décret) (épargne OR livret OR crédit OR "taux d''usure" OR banque)'
+    q: '"Journal officiel" (épargne OR livret OR crédit OR banque OR "taux d''usure" OR assurance)'
     categorie: macro
     poids: 2
     actif: true
+    # « arrêté » en français est un piège : sans cette exigence, on récolte
+    # des faits divers plutôt que des textes réglementaires.
+    exiger: [journal officiel, décret, réglementation, loi de finances, taux d'usure,
+             épargne, livret, crédit, prêt, banque, assurance, fiscal, impôt, plafond, usure]
+    exclure: [police, interpellé, gendarmerie, suspect, meurtre, agression, au volant,
+              ivresse, rébellion, mafia, incendie]
 
   - nom: Géopolitique à effet marché
     q: '(pétrole OR OPEP OR "droits de douane" OR sanctions OR "chaîne d''approvisionnement") (marchés OR bourse OR inflation)'
     categorie: geo
     poids: 2
     actif: true
+    # Seule la géopolitique qui touche les marchés nous intéresse.
+    exiger: [marché, bourse, pétrole, énergie, inflation, économie, taux, prix, dollar, euro,
+             sanction, douane, approvisionnement, gaz, baril]
 
   - nom: Tensions et énergie
     q: '(Moyen-Orient OR Taïwan OR Ukraine OR "mer Rouge") (énergie OR économie OR marchés)'
     categorie: geo
     poids: 1
     actif: true
+    exiger: [énergie, économie, marché, pétrole, gaz, bourse, prix, approvisionnement, inflation]
+    exclure: [attentat, terroriste, frappe, otage, blessé, tué, arrêté, soldat, missile]
 
 # ---------------------------------------------------------------------
 # Mots-clés qui font remonter un article en tête de liste.
@@ -207,6 +219,44 @@ signaux_forts:
 # ---------------------------------------------------------------------
 # Bruit à écarter : titres qui contiennent un de ces termes sont ignorés.
 # ---------------------------------------------------------------------
+# Écarté partout, quelle que soit la source : le français fait remonter des
+# faits divers sur « arrêté », « sanction » ou « plafond », et les lois de
+# finances de toute la francophonie sur « loi de finances ».
+exclure_partout:
+  - tunisie
+  - tunisien
+  - sénégal
+  - congo
+  - vietnam
+  - nigeria
+  - gabon
+  - kenya
+  - bénin
+  - horoscope
+  - football
+  - recrute
+  - offre d'emploi
+  - concours
+  - cours action
+  - cotation bourse
+  # faits divers : le vocabulaire financier français les attire sans cesse
+  - au volant
+  - interpellé
+  - ivresse
+  - rébellion
+  - meurtre
+  - agression
+  - homicide
+  - féminicide
+  - condamné à
+  - mis en examen
+  - garde à vue
+  - fusillade
+  - attentat
+  - synagogue
+  - terroriste
+  - viol
+
 bruit:
   - horoscope
   - people

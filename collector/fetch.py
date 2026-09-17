@@ -40,7 +40,8 @@ ARCHIVE = RACINE / "docs" / "data" / "archives"
 SORTIE = RACINE / "docs" / "data" / "feed.json"
 
 RETENTION_JOURS = 21
-MAX_ARTICLES = 500
+MAX_ARTICLES = 320
+MAX_PAR_MEDIA = 6
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/126.0 Safari/537.36")
 LIMITE_PAR_SOURCE = 30   # une seule requête ne doit pas noyer le flux
@@ -80,12 +81,33 @@ def cle_doublon(titre: str) -> str:
     return empreinte(base[:80])
 
 
-def date_iso(entree) -> str:
+MOIS_ANGLAIS = {m: i + 1 for i, m in enumerate(
+    ["january", "february", "march", "april", "may", "june", "july",
+     "august", "september", "october", "november", "december"])}
+
+
+def date_iso(entree):
+    """
+    Renvoie (date, estimée). Certains flux institutionnels ne datent pas leurs
+    entrées : plutôt que de les faire passer pour l'actualité du jour, on
+    cherche la date dans le texte, et on signale l'estimation à défaut.
+    """
     for champ in ("published_parsed", "updated_parsed"):
         valeur = getattr(entree, champ, None) or entree.get(champ)
         if valeur:
-            return datetime.fromtimestamp(time.mktime(valeur), tz=timezone.utc).isoformat()
-    return maintenant().isoformat()
+            return datetime.fromtimestamp(time.mktime(valeur), tz=timezone.utc).isoformat(), False
+
+    texte = f"{entree.get('summary', '')} {entree.get('title', '')}"
+    trouve = re.search(r"\b(\d{1,2})\s+([A-Za-z]{3,9})\s+(20\d{2})\b", texte)
+    if trouve:
+        mois = MOIS_ANGLAIS.get(trouve.group(2).lower())
+        if mois:
+            try:
+                return datetime(int(trouve.group(3)), mois, int(trouve.group(1)),
+                                tzinfo=timezone.utc).isoformat(), False
+            except ValueError:
+                pass
+    return maintenant().isoformat(), True
 
 
 # ---------------------------------------------------------------------
@@ -134,6 +156,8 @@ def construire_sources(config):
                     "poids": f.get("poids", 1),
                     "conserver": f.get("conserver"),
                     "secours_q": f.get("secours_q"),
+                    "exiger": f.get("exiger"),
+                    "exclure": f.get("exclure"),
                     "genre": "officiel",
                 }
             )
@@ -145,6 +169,8 @@ def construire_sources(config):
                     "url": url_google_actus(r["q"]),
                     "categorie": r["categorie"],
                     "poids": r.get("poids", 1),
+                    "exiger": r.get("exiger"),
+                    "exclure": r.get("exclure"),
                     "genre": "recherche",
                 }
             )
@@ -175,9 +201,27 @@ def noter(article, signaux_forts, poids_source):
     return score, touches
 
 
+def _contient(texte, mots):
+    t = sans_accents(texte.lower())
+    return any(sans_accents(str(m).lower()) in t for m in mots or [])
+
+
 def est_du_bruit(titre, bruit):
-    t = sans_accents(titre.lower())
-    return any(sans_accents(mot.lower()) in t for mot in bruit)
+    return _contient(titre, bruit)
+
+
+def passe_les_filtres(titre, source, exclusions_globales):
+    """
+    `exiger` : le titre doit contenir au moins un de ces mots, sinon il saute.
+    C'est ce qui empêche « arrêté » de ramener des faits divers.
+    `exclure` : mots qui disqualifient le titre.
+    """
+    if _contient(titre, exclusions_globales) or _contient(titre, source.get("exclure")):
+        return False
+    exiger = source.get("exiger")
+    if exiger and not _contient(titre, exiger):
+        return False
+    return True
 
 
 # ---------------------------------------------------------------------
@@ -188,6 +232,7 @@ def collecter(config, verbeux=True):
     sources = construire_sources(config)
     signaux = config.get("signaux_forts", [])
     bruit = config.get("bruit", [])
+    exclusions = config.get("exclure_partout", [])
 
     articles = {}
     vus = set()
@@ -217,6 +262,8 @@ def collecter(config, verbeux=True):
                     continue
                 if est_du_bruit(titre_brut, bruit):
                     continue
+                if not passe_les_filtres(titre_brut, source, exclusions):
+                    continue
 
                 if genre == "recherche":
                     titre, editeur = separer_source_google(titre_brut, "Google Actualités")
@@ -225,6 +272,7 @@ def collecter(config, verbeux=True):
                     titre, editeur = titre_brut, source["nom"]
                     resume = nettoyer_html(entree.get("summary", ""))[:260]
 
+                publie_le, estimee = date_iso(entree)
                 cle = cle_doublon(titre)
                 if cle in vus:
                     continue
@@ -239,7 +287,8 @@ def collecter(config, verbeux=True):
                     "rubrique": source["nom"],
                     "categorie": source["categorie"],
                     "genre": genre,
-                    "publie_le": date_iso(entree),
+                    "publie_le": publie_le,
+                    "date_estimee": estimee,
                     "resume": resume,
                 }
                 article["score"], article["signaux"] = noter(article, signaux, source["poids"])
@@ -370,9 +419,22 @@ def main():
     parseur.add_argument("--check", action="store_true", help="tester les sources sans écrire")
     parseur.add_argument("--ia", "--resume", dest="ia", action="store_true",
                          help="faire rédiger le résumé et arbitrer les regroupements par Claude")
+    parseur.add_argument("--inspecter", metavar="ID",
+                         help="afficher les dernières observations brutes d'un indicateur")
     parseur.add_argument("--check-chiffres", action="store_true",
                          help="tester chaque indicateur un par un, n'écrit rien")
     args = parseur.parse_args()
+
+    if args.inspecter:
+        from markets import inspecter
+
+        config_chiffres = yaml.safe_load(CONFIG_CHIFFRES.read_text(encoding="utf-8"))
+        conf = next((i for i in config_chiffres["indicateurs"] if i["id"] == args.inspecter), None)
+        if not conf:
+            print(f"Aucun indicateur nommé {args.inspecter}.")
+            return 1
+        inspecter(conf)
+        return 0
 
     if args.check_chiffres:
         from markets import tous_les_indicateurs
@@ -451,6 +513,7 @@ def main():
 
     cle_api = os.environ.get("ANTHROPIC_API_KEY")
     avant_regroupement = len(articles)
+    articles = analyse.limiter_par_media(articles, MAX_PAR_MEDIA)
     articles = analyse.regrouper(
         articles, arbitre=arbitre_claude(cle_api) if cle_api else None
     )

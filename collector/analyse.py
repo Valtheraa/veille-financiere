@@ -227,6 +227,8 @@ MOTS_VIDES = {
     "toute", "toutes", "quoi", "dont", "elle", "elles", "nous", "vous", "ils",
     "selon", "apres", "avant", "encore", "aussi", "ainsi", "cela", "chez",
     "vers", "depuis", "alors", "quand", "pourquoi", "comment", "voici", "voila",
+    "les", "des", "une", "par", "sur", "aux", "que", "qui", "son", "ses", "est",
+    "ont", "non", "pas", "ete", "apr", "ces", "son", "lui", "ils", "sont",
 }
 
 
@@ -236,34 +238,59 @@ def _jetons(titre):
         if unicodedata.category(c) != "Mn"
     )
     mots = re.findall(r"[a-z0-9]+", base)
-    return {m for m in mots if len(m) >= 4 and m not in MOTS_VIDES}
+    # Trois lettres suffisent : « CAC », « BCE », « AMF », « ETF », « PEA ».
+    return {m for m in mots if len(m) >= 3 and m not in MOTS_VIDES}
 
 
-def _poids(articles):
-    """Un mot présent partout ne prouve rien ; un mot rare, beaucoup."""
-    from collections import Counter
-    frequences = Counter()
-    for article in articles:
-        frequences.update(_jetons(article["titre"]))
-    total = max(len(articles), 1)
-    return {mot: math.log(1 + total / compte) for mot, compte in frequences.items()}
-
-
-def _similarite(a, b, poids):
+def _similarite(a, b):
+    """
+    Deux mesures, sans pondération par la rareté : sur un flux de presse, les
+    mots partagés sont justement les mots du sujet (« CAC », « pétrole »,
+    « CLARITY »), et les pénaliser empêchait les reprises de se rejoindre.
+    Le recouvrement pèse plus lourd que l'union, car deux titres du même
+    événement n'ont presque jamais la même longueur.
+    """
     if not a or not b:
         return 0.0
-    commun = sum(poids.get(m, 1.0) for m in a & b)
-    union = sum(poids.get(m, 1.0) for m in a | b)
-    return commun / union if union else 0.0
+    commun = len(a & b)
+    jaccard = commun / len(a | b)
+    recouvrement = commun / min(len(a), len(b))
+    return 0.35 * jaccard + 0.65 * recouvrement
 
 
 def _absorber(tete, article):
-    tete.setdefault("autres", []).append({"source": article["source"], "url": article["url"]})
-    for reprise in article.get("autres", []):
-        tete["autres"].append(reprise)
+    """Rattache un article à un sujet, sans répéter deux fois le même média."""
+    reprises = tete.setdefault("autres", [])
+    candidates = [{"source": article["source"], "url": article["url"]}]
+    candidates += article.get("autres", [])
+    vus = {tete["source"].lower()} | {r["source"].lower() for r in reprises}
+    liens = {tete["url"]} | {r["url"] for r in reprises}
+    for reprise in candidates:
+        if reprise["source"].lower() in vus or reprise["url"] in liens:
+            continue
+        reprises.append(reprise)
+        vus.add(reprise["source"].lower())
+        liens.add(reprise["url"])
 
 
-def regrouper(articles, seuil=0.45, zone_grise=0.30, arbitre=None):
+def limiter_par_media(articles, maxi=6):
+    """
+    Certains sites publient quinze variations du même sujet. On garde leurs
+    meilleurs articles et on laisse la place aux autres médias.
+    """
+    from collections import defaultdict
+    compteur = defaultdict(int)
+    gardes = []
+    for article in sorted(articles, key=lambda a: a["score"], reverse=True):
+        cle = (article["source"] or "").lower()
+        if compteur[cle] >= maxi:
+            continue
+        compteur[cle] += 1
+        gardes.append(article)
+    return gardes
+
+
+def regrouper(articles, seuil=0.30, zone_grise=0.20, arbitre=None):
     """
     Un seul article par sujet : le mieux noté porte le sujet, les autres
     deviennent des reprises listées sous son titre.
@@ -273,24 +300,33 @@ def regrouper(articles, seuil=0.45, zone_grise=0.30, arbitre=None):
     par lequel Claude tranche les cas douteux quand une clé est disponible.
     """
     classes = sorted(articles, key=lambda a: (a["score"], a["publie_le"]), reverse=True)
-    poids = _poids(classes)
-    tetes, empreintes, douteux = [], [], []
+    # Les regroupements sont recalculés à chaque collecte : on repart des
+    # articles seuls, sinon les reprises d'hier s'empilent sur celles d'aujourd'hui.
+    for article in classes:
+        article["autres"] = []
+    tetes, empreintes, vocabulaires, douteux = [], [], [], []
 
     for article in classes:
         jetons = _jetons(article["titre"])
         meilleur, score = None, 0.0
-        for index, reference in enumerate(empreintes):
-            valeur = _similarite(jetons, reference, poids)
+        for index, vocabulaire in enumerate(vocabulaires):
+            valeur = _similarite(jetons, vocabulaire)
+            # Garde-fou anti-dérive : soit deux mots en commun avec le titre qui
+            # porte le sujet, soit trois avec le vocabulaire accumulé du groupe.
+            if len(jetons & empreintes[index]) < 2 and len(jetons & vocabulaire) < 3:
+                valeur = min(valeur, zone_grise)
             if valeur > score:
                 meilleur, score = index, valeur
 
         if meilleur is not None and score >= seuil:
             _absorber(tetes[meilleur], article)
+            if len(tetes[meilleur].get("autres", [])) <= 3:
+                vocabulaires[meilleur] = vocabulaires[meilleur] | jetons
             continue
 
-        article.setdefault("autres", [])
         tetes.append(article)
         empreintes.append(jetons)
+        vocabulaires.append(set(jetons))
         if meilleur is not None and score >= zone_grise:
             douteux.append((len(tetes) - 1, meilleur))
 
@@ -372,10 +408,7 @@ def repartir_archive(dossier, articles):
 
 def resume_automatique(indicateurs, alertes, articles):
     """Deux ou trois phrases factuelles, quand aucune clé n'est configurée."""
-    phrases = []
-
-    if alertes:
-        phrases.append(" ".join(f"{a['message']}." for a in alertes[:2]))
+    phrases = []   # les alertes ont déjà leur bandeau : on ne les répète pas
 
     bougeurs = [
         i for i in indicateurs
@@ -385,7 +418,11 @@ def resume_automatique(indicateurs, alertes, articles):
     bougeurs.sort(key=lambda i: abs(i["variation_pct"]), reverse=True)
     if bougeurs:
         morceaux = [
-            f"{i['label']} {'+' if i['variation_pct'] > 0 else ''}{i['variation_pct']:.2f} %"
+            "{} {}{} %".format(
+                i["label"],
+                "+" if i["variation_pct"] > 0 else "",
+                f"{i['variation_pct']:.2f}".replace(".", ","),
+            )
             for i in bougeurs[:3]
         ]
         phrases.append("Sur 24 heures : " + ", ".join(morceaux) + ".")
