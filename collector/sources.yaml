@@ -5,6 +5,7 @@
 #  Vérifie l'état de tout : python collector/fetch.py --check
 # =====================================================================
 
+# `conserver: N` garde les articles d'une source N jours au lieu de 21.
 # Catégories affichées dans le tableau de bord, dans cet ordre.
 categories:
   - id: taux
@@ -45,18 +46,49 @@ flux:
     categorie: macro
     poids: 2
     actif: true
+    conserver: 180   # publications de fond : gardées six mois
 
   - nom: AMF
     url: https://www.amf-france.org/fr/rss.xml
     categorie: macro
     poids: 3
     actif: true
+    conserver: 180   # publications de fond : gardées six mois
 
   - nom: INSEE — informations rapides
     url: https://www.insee.fr/fr/information/rss/1
     categorie: macro
     poids: 2
     actif: true
+    conserver: 180   # publications de fond : gardées six mois
+
+  - nom: BOFiP — actualités fiscales
+    url: https://bofip.impots.gouv.fr/rss/actualites
+    categorie: macro
+    poids: 3
+    actif: true
+    conserver: 180   # publications de fond : gardées six mois
+
+  - nom: ACPR
+    url: https://acpr.banque-france.fr/rss.xml
+    categorie: macro
+    poids: 2
+    actif: true
+    conserver: 180   # publications de fond : gardées six mois
+
+  - nom: ESMA
+    url: https://www.esma.europa.eu/rss.xml
+    categorie: macro
+    poids: 1
+    actif: true
+    conserver: 180   # publications de fond : gardées six mois
+
+  - nom: Direction générale du Trésor
+    url: https://www.tresor.economie.gouv.fr/rss
+    categorie: macro
+    poids: 1
+    actif: true
+    conserver: 180   # publications de fond : gardées six mois
 
   - nom: Autorité bancaire européenne
     url: https://www.eba.europa.eu/rss.xml
@@ -108,9 +140,21 @@ recherches:
     actif: true
 
   - nom: Banque de détail et courtage
-    q: 'courtier OR "conseiller en gestion de patrimoine" OR "banque de détail" France'
+    q: '"courtier en crédit" OR "conseiller en gestion de patrimoine" OR "courtage en assurance" OR "banque de détail"'
     categorie: macro
     poids: 1
+    actif: true
+
+  - nom: Fiscalité et loi de finances
+    q: '"loi de finances" OR "prélèvement forfaitaire" OR "flat tax" OR BOFiP OR "abattement fiscal"'
+    categorie: macro
+    poids: 3
+    actif: true
+
+  - nom: Journal officiel et textes réglementaires
+    q: '("Journal officiel" OR arrêté OR décret) (épargne OR livret OR crédit OR "taux d''usure" OR banque)'
+    categorie: macro
+    poids: 2
     actif: true
 
   - nom: Géopolitique à effet marché

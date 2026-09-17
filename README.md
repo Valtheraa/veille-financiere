@@ -46,12 +46,20 @@ Comme il n'y a aucune donnée personnelle ici, le public est le choix simple.
 Ensuite, plus rien à faire : le collecteur passe toutes les heures entre 7 h et
 23 h (heure française) et met le tableau de bord à jour tout seul.
 
-### Résumé du jour par Claude (facultatif)
+### Résumé du jour
+
+Un résumé factuel est calculé à chaque collecte sans aucune clé : alertes du
+moment, plus fortes variations sur 24 heures, volume de sujets et rubrique
+dominante.
+
+### Résumé rédigé par Claude (facultatif)
 
 Dans **Settings → Secrets and variables → Actions**, ajoute un secret nommé
-`ANTHROPIC_API_KEY` avec une clé de la console Anthropic. Le collecteur fera
-alors écrire quatre phrases de synthèse en tête de page. Sans ce secret, tout
-le reste fonctionne à l'identique.
+`ANTHROPIC_API_KEY` avec une clé de la console Anthropic. Le résumé calculé est
+alors remplacé par quatre phrases rédigées, et Claude tranche en plus les
+regroupements douteux : deux titres qui parlent visiblement du même événement
+sans partager le même vocabulaire sont fusionnés. Sans ce secret, tout le reste
+fonctionne à l'identique.
 
 ## Tester en local
 
@@ -59,12 +67,120 @@ le reste fonctionne à l'identique.
 pip install -r collector/requirements.txt
 python collector/fetch.py --check     # teste chaque source, n'écrit rien
 python collector/fetch.py             # collecte et écrit docs/data/feed.json
+python collector/fetch.py --check-chiffres   # teste les 47 indicateurs un par un
 python -m http.server -d docs 8000    # puis ouvre http://localhost:8000
 ```
 
 Pour voir l'interface avant la première collecte :
 `cp docs/data/feed.exemple.json docs/data/feed.json` (les chiffres et les
 titres de ce fichier sont fictifs, la première vraie collecte les remplace).
+
+## Être prévenu sans ouvrir la page
+
+`collector/alertes.yaml` décrit les franchissements qui méritent un signal :
+la BCE qui bouge, le Livret A qui change, l'écart France / Allemagne au-dessus
+de 80 points de base, le VIX au-dessus de 25, le CAC 40 qui varie de plus de
+2,5 % dans la journée.
+
+Quand une règle se déclenche, l'action GitHub ouvre une issue sur le dépôt, et
+GitHub t'envoie le mail. Aucun serveur, aucun identifiant SMTP, aucun réglage.
+Une alerte ne sonne qu'au franchissement : tant que le seuil reste dépassé,
+elle se tait.
+
+## Les rendez-vous à venir
+
+`collector/agenda.yaml` alimente le bloc « Prochains rendez-vous ». Trois
+écritures : une date unique, `recurrent: annuel` avec un jour-mois, ou
+`recurrent: mensuel` avec un jour. Les échéances structurelles sont déjà là
+(révisions du Livret A, loi de finances, publications INSEE).
+
+Les calendriers de la BCE et de la Fed sont publiés un an à l'avance mais
+n'ont pas de flux exploitable : le fichier contient l'emplacement et le mode
+d'emploi pour les coller, une fois par an.
+
+## La mémoire longue
+
+Trois mécanismes, complémentaires :
+
+- **L'archive** (`docs/data/archives/`) garde titre, source, date et lien de
+  tout ce qui est passé, un fichier par mois plus un index. Dès que tu tapes
+  trois lettres dans la recherche, le navigateur remonte les mois du plus
+  récent au plus ancien et s'arrête dès qu'il a douze résultats : il ne
+  télécharge jamais tout l'historique.
+- **La rétention par source** : les publications de fond (Banque de France,
+  AMF, INSEE, BOFiP, ACPR, ESMA, Trésor) restent 180 jours au lieu de 21.
+  C'est le `conserver:` dans `sources.yaml`.
+- **Les épingles** : le bouton « Garder » met un sujet de côté dans ton
+  navigateur, dans un onglet dédié, indéfiniment.
+
+## Savoir ce que tu lis vraiment
+
+Le bouton « Mes lectures » en pied de page compare, source par source, ce que
+tu ouvres et ce qui est produit. Une source qui sort trente sujets et que tu
+n'ouvres jamais n'a rien à faire dans `sources.yaml`. Le relevé se copie en un
+clic. La case « Mes sources » réordonne le flux en mettant en tête ce que tu
+ouvres le plus souvent.
+
+Ces compteurs restent dans ton navigateur : ils ne sont ni publiés, ni
+envoyés nulle part.
+
+## Les garde-fous
+
+- **Cohérence des chiffres** : si une valeur s'écarte de plus de 25 % (ou de
+  1,5 point pour un taux) de celle de la veille, c'est une API qui a changé de
+  format, pas un événement. La valeur reste affichée mais n'entre pas dans
+  l'historique, et l'anomalie remonte dans le bandeau et dans le mail.
+- **Panne de Google Actualités** : si huit recherches sur dix deviennent
+  muettes le même jour, c'est signalé comme tel, et non confondu avec une
+  journée creuse.
+- **Diversité** : le tri « Mes sources » n'aligne jamais plus de deux sujets
+  d'affilée venant du même média.
+
+## Sauvegarder ce qui n'existe que chez toi
+
+Les sujets gardés et les compteurs de lecture vivent dans un seul navigateur.
+« Sauvegarder mes gardés » les copie ; « Restaurer » les recolle sur un autre
+appareil, en fusionnant plutôt qu'en écrasant. C'est la seule donnée du projet
+qui n'est pas reconstructible.
+
+## Quand quelque chose casse
+
+Un second workflow, `vigie.yml`, tourne une fois par jour indépendamment du
+collecteur. Il ouvre une issue si la dernière collecte date de plus de six
+heures, si des sources sont injoignables, ou si plus de quatre indicateurs
+sont en échec. Le collecteur, lui, signale ses propres plantages.
+
+Pour vérifier les chiffres à la main :
+
+```bash
+python collector/fetch.py --check-chiffres
+```
+
+## L'historique
+
+Chaque collecte archive une valeur par jour et par indicateur dans
+`docs/data/historique.json`, sur 400 jours. C'est ce qui alimente la
+micro-courbe à gauche de chaque chiffre et la variation sur 30 jours affichée
+au survol. Le fichier se construit tout seul : les courbes apparaissent après
+quatre jours de collecte.
+
+## Régler les chiffres
+
+`collector/indicateurs.yaml` liste les 44 indicateurs, en français. Chaque ligne
+porte un `source` (`bce`, `fed`, `boe`, `marche`, `change`, `crypto`, `global`,
+`peur`, `manuel`, `calcule`) et la clé de la série correspondante.
+
+- pour suivre un ETF ou une action, copie un bloc du groupe `indices` et mets le
+  code Yahoo Finance dans `cle` (`CW8.PA`, `ESE.PA`, `AAPL`…)
+- pour masquer une ligne, `actif: false`
+- les taux de l'épargne réglementée (Livret A, LDDS, LEP, PEL) sont fixés par
+  arrêté et n'ont aucune API : ils sont écrits à la main dans le fichier, à
+  corriger aux révisions du 1er février et du 1er août
+- `calcule` fait une soustraction entre deux indicateurs : c'est ainsi que sont
+  obtenus l'écart France / Allemagne et le rendement réel du Livret A
+
+Les valeurs crypto sont récupérées en euro et en dollar dans le même appel : la
+bascule € / $ en tête du groupe change l'affichage sans recharger.
 
 ## Régler ce que tu suis
 
@@ -88,13 +204,23 @@ affiche en permanence combien de sources sont à corriger.
 ## Comment c'est fait
 
 ```
-collector/sources.yaml   ce que tu suis
-collector/fetch.py       collecte, déduplique, note, écrit le JSON
-collector/markets.py     taux BCE, indices, crypto, change
-docs/index.html          le tableau de bord (aucune dépendance, aucun build)
-docs/data/feed.json      le seul fichier d'échange
-.github/workflows/       la collecte horaire
+collector/sources.yaml      les flux et les recherches
+collector/indicateurs.yaml  les 47 chiffres
+collector/agenda.yaml       les rendez-vous à venir
+collector/alertes.yaml      les seuils qui déclenchent un mail
+collector/fetch.py          collecte, déduplique, note, écrit le JSON
+collector/markets.py        récupère chaque chiffre à sa source
+collector/analyse.py        historique, alertes, agenda, regroupement
+docs/index.html             le tableau de bord (aucune dépendance, aucun build)
+docs/data/feed.json         ce que lit le tableau de bord
+docs/data/historique.json   l'archive qui alimente les courbes
+.github/workflows/          la collecte horaire
 ```
+
+Les articles qui racontent la même chose sont regroupés : le mieux noté porte
+le sujet, les reprises apparaissent sous son titre en « Aussi chez… ». Un
+bouton copie un article avec sa source et son lien, un autre copie d'un coup
+tout ce qui est affiché à l'écran.
 
 Le collecteur garde 21 jours d'historique et retient la date à laquelle il a
 vu un article pour la première fois : c'est ce qui permet au tableau de bord

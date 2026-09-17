@@ -1,0 +1,413 @@
+# =====================================================================
+#  Les chiffres du tableau de bord.
+#  Chaque ligne = un indicateur. Pour en retirer un : actif: false.
+#  Sources disponibles, toutes gratuites et sans clé :
+#    bce      série du portail de données BCE (data-api.ecb.europa.eu)
+#    fed      taux de référence de la Fed de New York
+#    boe      Banque d'Angleterre
+#    marche   Yahoo Finance, avec Stooq en secours (indices, matières, devises)
+#    change   Frankfurter, alimenté par les taux de référence BCE
+#    crypto   CoinGecko (valeur renvoyée en euro ET en dollar)
+#    global   CoinGecko, données agrégées du marché crypto
+#    peur     indice Fear & Greed crypto
+#    manuel   valeur que tu saisis ici à la main
+#    calcule  dérivé d'autres indicateurs (voir `formule`)
+# =====================================================================
+
+groupes:
+  - id: banques_centrales
+    label: Banques centrales
+  - id: taux_marche
+    label: Taux de marché
+  - id: obligations
+    label: Dette souveraine 10 ans
+  - id: epargne
+    label: Épargne réglementée
+  - id: credit_immo
+    label: Crédit immobilier
+  - id: indices
+    label: Indices actions
+  - id: devises
+    label: Devises
+  - id: matieres
+    label: Matières premières
+  - id: crypto
+    label: Crypto
+  - id: economie
+    label: Économie réelle
+
+indicateurs:
+
+  # ---------------- Banques centrales ----------------
+  - id: bce_depot
+    label: BCE — facilité de dépôt
+    groupe: banques_centrales
+    unite: "%"
+    source: bce
+    cle: FM/D.U2.EUR.4F.KR.DFR.LEV
+    note: le taux qui pilote vraiment la rémunération de l'épargne en zone euro
+
+  - id: bce_refi
+    label: BCE — refinancement
+    groupe: banques_centrales
+    unite: "%"
+    source: bce
+    cle: FM/D.U2.EUR.4F.KR.MRR_FR.LEV
+
+  - id: bce_marginal
+    label: BCE — prêt marginal
+    groupe: banques_centrales
+    unite: "%"
+    source: bce
+    cle: FM/D.U2.EUR.4F.KR.MLFR.LEV
+
+  - id: fed_effr
+    label: Fed — taux effectif
+    groupe: banques_centrales
+    unite: "%"
+    source: fed
+    cle: unsecured/effr
+
+  - id: fed_sofr
+    label: Fed — SOFR
+    groupe: banques_centrales
+    unite: "%"
+    source: fed
+    cle: secured/sofr
+
+  - id: boe_bank_rate
+    label: Banque d'Angleterre
+    groupe: banques_centrales
+    unite: "%"
+    source: boe
+    cle: IUDBEDR
+
+  # ---------------- Taux de marché ----------------
+  - id: ester
+    label: "€STR (taux au jour le jour)"
+    groupe: taux_marche
+    unite: "%"
+    source: bce
+    cle: EST/B.EU000A2X2A25.WT
+
+  - id: euribor_3m
+    label: Euribor 3 mois
+    groupe: taux_marche
+    unite: "%"
+    source: bce
+    cle: FM/M.U2.EUR.RT.MM.EURIBOR3MD_.HSTA
+    note: la référence des crédits à taux variable
+
+  - id: euribor_12m
+    label: Euribor 12 mois
+    groupe: taux_marche
+    unite: "%"
+    source: bce
+    cle: FM/M.U2.EUR.RT.MM.EURIBOR1YD_.HSTA
+
+  # ---------------- Obligations ----------------
+  - id: oat_10a
+    label: France (OAT)
+    groupe: obligations
+    unite: "%"
+    source: bce
+    cle: IRS/M.FR.L.L40.CI.0000.EUR.N.Z
+
+  - id: bund_10a
+    label: Allemagne (Bund)
+    groupe: obligations
+    unite: "%"
+    source: bce
+    cle: IRS/M.DE.L.L40.CI.0000.EUR.N.Z
+
+  - id: btp_10a
+    label: Italie (BTP)
+    groupe: obligations
+    unite: "%"
+    source: bce
+    cle: IRS/M.IT.L.L40.CI.0000.EUR.N.Z
+
+  - id: spread_oat_bund
+    label: Écart France / Allemagne
+    groupe: obligations
+    unite: pt
+    source: calcule
+    formule: oat_10a - bund_10a
+    note: le thermomètre du risque politique français
+
+  # ---------------- Épargne réglementée ----------------
+  # Fixés par arrêté, aucune API : à mettre à jour deux fois par an
+  # (révisions au 1er février et au 1er août).
+  - id: livret_a
+    label: Livret A
+    groupe: epargne
+    unite: "%"
+    source: manuel
+    valeur: 1.70
+    date: 2026-08-01
+
+  - id: ldds
+    label: LDDS
+    groupe: epargne
+    unite: "%"
+    source: manuel
+    valeur: 1.70
+    date: 2026-08-01
+
+  - id: lep
+    label: LEP
+    groupe: epargne
+    unite: "%"
+    source: manuel
+    valeur: 2.50
+    date: 2026-08-01
+
+  - id: pel
+    label: PEL (nouveaux plans)
+    groupe: epargne
+    unite: "%"
+    source: manuel
+    valeur: 2.00
+    date: 2026-01-01
+    note: brut, avant flat tax
+
+  # ---------------- Crédit immobilier ----------------
+  # Aucun baromètre de courtier n'a d'API : relevé à la main une fois par
+  # mois, quand les courtiers publient (autour du 3). Moyennes hors assurance.
+  - id: immo_15
+    label: Sur 15 ans
+    groupe: credit_immo
+    unite: "%"
+    source: manuel
+    valeur: 3.28
+    date: 2026-09-01
+
+  - id: immo_20
+    label: Sur 20 ans
+    groupe: credit_immo
+    unite: "%"
+    source: manuel
+    valeur: 3.43
+    date: 2026-09-01
+
+  - id: immo_25
+    label: Sur 25 ans
+    groupe: credit_immo
+    unite: "%"
+    source: manuel
+    valeur: 3.53
+    date: 2026-09-01
+    note: relevé Meilleurtaux et CAFPI, septembre 2026
+
+  # ---------------- Indices ----------------
+  - id: cac40
+    label: CAC 40
+    groupe: indices
+    unite: pts
+    source: marche
+    cle: "^FCHI"
+    secours: "^cac"
+
+  - id: stoxx600
+    label: Stoxx Europe 600
+    groupe: indices
+    unite: pts
+    source: marche
+    cle: "^STOXX"
+
+  - id: dax
+    label: DAX
+    groupe: indices
+    unite: pts
+    source: marche
+    cle: "^GDAXI"
+    secours: "^dax"
+
+  - id: ftse
+    label: FTSE 100
+    groupe: indices
+    unite: pts
+    source: marche
+    cle: "^FTSE"
+    secours: "^ukx"
+
+  - id: sp500
+    label: S&P 500
+    groupe: indices
+    unite: pts
+    source: marche
+    cle: "^GSPC"
+    secours: "^spx"
+
+  - id: nasdaq
+    label: Nasdaq 100
+    groupe: indices
+    unite: pts
+    source: marche
+    cle: "^NDX"
+    secours: "^ndx"
+
+  - id: nikkei
+    label: Nikkei 225
+    groupe: indices
+    unite: pts
+    source: marche
+    cle: "^N225"
+    secours: "^nkx"
+
+  - id: vix
+    label: VIX (volatilité)
+    groupe: indices
+    unite: pts
+    source: marche
+    cle: "^VIX"
+    secours: "^vix"
+    note: au-dessus de 25, les marchés ont peur
+
+  # Ajoute ici tes propres lignes : un ETF, une action, ce que tu suis.
+  # Le code est celui de Yahoo Finance (CW8.PA, ESE.PA, AAPL…).
+  - id: msci_world
+    label: MSCI World (CW8)
+    groupe: indices
+    unite: "€"
+    source: marche
+    cle: CW8.PA
+    actif: true
+
+  # ---------------- Devises ----------------
+  - id: eurusd
+    label: EUR / USD
+    groupe: devises
+    unite: "$"
+    source: change
+    cle: USD
+
+  - id: eurgbp
+    label: EUR / GBP
+    groupe: devises
+    unite: "£"
+    source: change
+    cle: GBP
+
+  - id: eurchf
+    label: EUR / CHF
+    groupe: devises
+    unite: CHF
+    source: change
+    cle: CHF
+
+  - id: eurjpy
+    label: EUR / JPY
+    groupe: devises
+    unite: "¥"
+    source: change
+    cle: JPY
+
+  # ---------------- Matières premières ----------------
+  - id: brent
+    label: Pétrole Brent
+    groupe: matieres
+    unite: "$"
+    source: marche
+    cle: BZ=F
+    secours: cb.f
+    note: le premier canal par lequel la géopolitique touche l'inflation
+
+  - id: or
+    label: Or
+    groupe: matieres
+    unite: "$"
+    source: marche
+    cle: GC=F
+    secours: xauusd
+
+  - id: gaz_europe
+    label: Gaz naturel (TTF)
+    groupe: matieres
+    unite: "$"
+    source: marche
+    cle: TTF=F
+    actif: false
+
+  # ---------------- Crypto ----------------
+  - id: btc
+    label: Bitcoin
+    groupe: crypto
+    source: crypto
+    cle: bitcoin
+
+  - id: eth
+    label: Ethereum
+    groupe: crypto
+    source: crypto
+    cle: ethereum
+
+  - id: sol
+    label: Solana
+    groupe: crypto
+    source: crypto
+    cle: solana
+
+  - id: cap_crypto
+    label: Capitalisation totale
+    groupe: crypto
+    source: global
+    cle: market_cap
+
+  - id: dominance_btc
+    label: Dominance Bitcoin
+    groupe: crypto
+    unite: "%"
+    source: global
+    cle: dominance
+
+  - id: fear_greed
+    label: Peur & avidité
+    groupe: crypto
+    unite: /100
+    source: peur
+
+  # ---------------- Économie réelle ----------------
+  - id: inflation_fr
+    label: Inflation France
+    groupe: economie
+    unite: "%"
+    source: bce
+    cle: ICP/M.FR.N.000000.4.ANR
+    note: sur un an
+
+  - id: inflation_ze
+    label: Inflation zone euro
+    groupe: economie
+    unite: "%"
+    source: bce
+    cle: ICP/M.U2.N.000000.4.ANR
+
+  - id: inflation_sousjacente
+    label: Inflation sous-jacente zone euro
+    groupe: economie
+    unite: "%"
+    source: bce
+    cle: ICP/M.U2.N.XEF000.4.ANR
+
+  - id: chomage_fr
+    label: Chômage France
+    groupe: economie
+    unite: "%"
+    source: bce
+    cle: LFSI/M.FR.S.UNEHRT.TOTAL0.15_74.T
+
+  - id: chomage_ze
+    label: Chômage zone euro
+    groupe: economie
+    unite: "%"
+    source: bce
+    cle: LFSI/M.I9.S.UNEHRT.TOTAL0.15_74.T
+
+  - id: taux_reel_livret_a
+    label: Livret A, inflation déduite
+    groupe: economie
+    unite: pt
+    source: calcule
+    formule: livret_a - inflation_fr
+    note: ce que ton épargne gagne ou perd vraiment

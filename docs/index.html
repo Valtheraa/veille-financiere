@@ -4,221 +4,546 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Veille</title>
-<meta name="description" content="Veille financière personnelle : taux, marchés, crypto, macro.">
+<meta name="description" content="Veille financière : taux, marchés, crypto, macro, géopolitique.">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0E2129">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0D0D0F">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="apple-touch-icon" href="icone-192.png">
 <link rel="icon" href="icone-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Spline+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --encre:#0E2129;
-  --surface:#132C36;
-  --surface-haute:#183742;
-  --trait:#26454F;
-  --texte:#E7EEEA;
-  --texte-doux:#9AB2B2;
-  --hausse:#57A883;
-  --baisse:#CB6248;
-  --laiton:#D6A74C;
-  --focus:#79C3D9;
-  --serif:"Newsreader",Georgia,serif;
-  --sans:"Spline Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --l:clamp(16px,4vw,28px);
-}
-@media (prefers-color-scheme:light){
-  :root{
-    --encre:#EEF1ED;--surface:#FFFFFF;--surface-haute:#F5F7F3;--trait:#D4DCD6;
-    --texte:#12272F;--texte-doux:#5E7278;--hausse:#1F7A5C;--baisse:#AC4429;
-    --laiton:#9A7419;--focus:#1D6A80;
-  }
+  --noir:#0D0D0F;
+  --filet:rgba(255,255,255,.055);
+  --bordure:rgba(255,255,255,.13);
+  --texte:#F2EFE8;
+  --doux:rgba(242,239,232,.46);
+  --tres-doux:rgba(242,239,232,.26);
+  --or:#C9A84C;
+  --or-sombre:rgba(201,168,76,.62);
+  --hausse:#3FA876;
+  --baisse:#E0715F;
+  --chiffre:"Fraunces",Georgia,serif;
+  --sans:"Inter",system-ui,-apple-system,sans-serif;
+  --pad:20px;
 }
 *{box-sizing:border-box}
-html,body{margin:0;padding:0}
+html,body{margin:0;padding:0;background:var(--noir)}
 body{
-  background:var(--encre);color:var(--texte);font-family:var(--sans);
-  font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;
-  padding:0 var(--l) calc(64px + env(safe-area-inset-bottom));
+  color:var(--texte);font-family:var(--sans);font-size:15px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  padding:0 var(--pad) calc(72px + env(safe-area-inset-bottom));
 }
-.enveloppe{max-width:1080px;margin:0 auto}
-a{color:inherit}
-button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
-:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:2px}
+.page{max-width:1120px;margin:0 auto}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;padding:0}
+:focus-visible{outline:1px solid var(--or);outline-offset:4px}
+.legende{
+  font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--or);font-weight:500;
+}
 
 /* ---------- en-tête ---------- */
-.entete{display:flex;align-items:baseline;justify-content:space-between;gap:16px;
-  padding:calc(20px + env(safe-area-inset-top)) 0 14px;flex-wrap:wrap}
-.marque{font-family:var(--serif);font-size:28px;font-weight:500;letter-spacing:-.01em;margin:0}
-.horodatage{font-size:13px;color:var(--texte-doux);font-variant-numeric:tabular-nums}
-.horodatage.perime{color:var(--laiton)}
+.entete{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:calc(22px + env(safe-area-inset-top)) 0 22px}
+.marque{font-family:var(--chiffre);font-size:26px;font-weight:500;margin:0;letter-spacing:-.022em}
+.etat-maj{font-size:12px;color:var(--tres-doux);font-variant-numeric:tabular-nums}
+.etat-maj.perime{color:var(--or)}
 
-/* ---------- résumé ---------- */
-.resume{font-family:var(--serif);font-size:clamp(19px,3.4vw,25px);line-height:1.42;
-  margin:8px 0 28px;max-width:62ch;border-left:3px solid var(--laiton);padding-left:18px}
+/* ---------- micro-courbes ---------- */
+
+function courbe(id){
+  const serie = (donnees.courbes || {})[id];
+  if (!serie || serie.length < 4) return "";
+  const min = Math.min(...serie), max = Math.max(...serie);
+  const etendue = (max - min) || 1;
+  const L = 52, H = 15;
+  const points = serie.map((v,i) =>
+    `${(i/(serie.length-1)*L).toFixed(1)},${(H - ((v-min)/etendue)*H).toFixed(1)}`).join(" ");
+  const monte = serie[serie.length-1] >= serie[0];
+  return `<svg class="courbe" viewBox="0 0 ${L} ${H}" preserveAspectRatio="none" aria-hidden="true">
+    <polyline points="${points}" stroke="${monte ? "var(--hausse)" : "var(--baisse)"}"/></svg>`;
+}
+
+/* ---------- alertes et agenda ---------- */
+
+function afficherAlertes(){
+  const zone = document.getElementById("alertes");
+  const liste = donnees.alertes || [];
+  const anomalies = donnees.anomalies || [];
+  zone.hidden = liste.length === 0 && anomalies.length === 0;
+  zone.innerHTML = liste.map(a => {
+    const unite = a.unite ? ` ${a.unite}` : "";
+    return `<p>${a.message} — <span class="valeur">${a.valeur}${unite}</span></p>`;
+  }).join("") + anomalies.map(a => `<p class="muet">${a.message}</p>`).join("");
+}
+
+function afficherAgenda(){
+  const zone = document.getElementById("agenda");
+  const liste = donnees.agenda || [];
+  zone.hidden = liste.length === 0;
+  if (!liste.length) return;
+  zone.innerHTML = `<div class="groupe-tete"><span class="legende">Prochains rendez-vous</span></div>` +
+    liste.map(r => {
+      const quand = r.jours === 0 ? "aujourd'hui" : r.jours === 1 ? "demain" : `dans ${r.jours} jours`;
+      return `<div class="ligne">
+        <span class="ligne-nom"><span class="nom">${r.label}</span>
+        ${r.detail ? `<span class="note">${r.detail}</span>` : ""}</span>
+        <span class="quand${r.jours <= 3 ? " proche" : ""}">${fr.date.format(new Date(r.date))} — ${quand}</span>
+      </div>`;
+    }).join("");
+}
+
+/* ---------- hero ---------- */
+.hero{display:grid;gap:28px;padding:6px 0 34px;border-bottom:1px solid var(--filet)}
+@media(min-width:760px){.hero{grid-template-columns:1.4fr 1fr 1fr;align-items:end;gap:44px}}
+.hero-nom{margin:0 0 10px}
+.hero-valeur{font-family:var(--chiffre);font-weight:500;line-height:.94;
+  font-size:clamp(52px,12vw,76px);letter-spacing:-.022em;font-variant-numeric:tabular-nums}
+.hero-sec .hero-valeur{font-size:clamp(30px,7vw,38px)}
+.hero-pied{margin-top:8px;font-size:13px;color:var(--doux)}
+.resume{grid-column:1/-1;font-family:var(--chiffre);font-weight:400;
+  font-size:clamp(17px,2.6vw,21px);line-height:1.5;color:var(--texte);
+  max-width:64ch;border-left:2px solid var(--or);padding-left:16px;margin:4px 0 0}
 
 /* ---------- chiffres ---------- */
-.chiffres{display:grid;gap:26px;margin-bottom:34px}
-@media(min-width:720px){.chiffres{grid-template-columns:1fr 1fr;gap:26px 44px}}
-.bloc h2{font-size:13px;font-weight:600;color:var(--texte-doux);margin:0 0 6px;letter-spacing:.02em}
-.ligne{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
-  padding:9px 0;border-top:1px solid var(--trait)}
-.ligne .nom{font-size:15px}
-.ligne .droite{display:flex;align-items:baseline;gap:10px}
-.valeur{font-size:17px;font-weight:600;font-variant-numeric:tabular-nums}
-.delta{font-size:13px;font-variant-numeric:tabular-nums;min-width:62px;text-align:right}
-.delta.pos{color:var(--hausse)} .delta.neg{color:var(--baisse)}
-.delta.vide{color:var(--texte-doux)}
-.indispo{font-size:13px;color:var(--texte-doux);font-style:italic}
+.chiffres{display:grid;gap:30px 48px;padding:30px 0 6px}
+@media(min-width:760px){.chiffres{grid-template-columns:1fr 1fr}}
+@media(min-width:1040px){.chiffres{grid-template-columns:1fr 1fr 1fr}}
+.groupe-tete{display:flex;align-items:center;justify-content:space-between;
+  gap:12px;margin-bottom:4px;min-height:22px}
+.ligne{display:flex;align-items:baseline;justify-content:space-between;gap:14px;
+  padding:11px 0;border-top:1px solid var(--filet)}
+.ligne-nom{min-width:0}
+.ligne-nom .nom{display:block}
+.ligne-nom .note{display:block;font-size:11.5px;color:var(--tres-doux);margin-top:2px;max-width:34ch}
+.ligne-val{display:flex;align-items:center;gap:12px;flex-shrink:0;text-align:right}
+.courbe{width:52px;height:15px;fill:none;stroke-width:1;opacity:.75;flex-shrink:0}
+.alertes{border-left:2px solid var(--or);padding:2px 0 2px 16px;margin:0 0 26px}
+.alertes p{margin:0 0 4px;font-size:14px}
+.alertes .valeur{font-family:var(--chiffre);font-weight:500;letter-spacing:-.022em}
+.agenda{padding:30px 0 4px;border-top:1px solid var(--filet);margin-top:26px}
+.agenda .ligne-nom .nom{font-size:14.5px}
+.agenda .quand{font-size:12.5px;color:var(--doux);font-variant-numeric:tabular-nums;white-space:nowrap}
+.agenda .quand.proche{color:var(--or)}
+.reprises{font-size:12.5px;color:var(--tres-doux);margin:7px 0 0}
+.epingler{color:var(--tres-doux);border-bottom:1px solid transparent;font-size:12.5px;
+  display:inline-flex;align-items:center;gap:5px}
+.epingler svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.6}
+.epingler[aria-pressed="true"]{color:var(--or)}
+.epingler[aria-pressed="true"] svg{fill:var(--or);stroke:var(--or)}
+.archive{margin-top:26px;padding-top:18px;border-top:1px solid var(--filet)}
+.archive .ligne{padding:9px 0}
+.archive .ligne-nom .nom{font-size:14px}
+.lectures{padding:26px 0 4px;border-top:1px solid var(--filet);margin-top:26px}
+.lectures .barre{height:2px;background:var(--or);opacity:.55;margin-top:6px}
+.lectures .ligne{padding:9px 0;align-items:center}
+.muet{color:var(--tres-doux);font-size:12.5px}
+.reprises a{border-bottom:1px solid var(--filet)}
+.val{font-family:var(--chiffre);font-size:19px;font-weight:500;letter-spacing:-.022em;
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+.var{font-size:12.5px;font-variant-numeric:tabular-nums;min-width:58px;color:var(--tres-doux)}
+.var.pos{color:var(--hausse)} .var.neg{color:var(--baisse)}
+.ligne.vide{opacity:.42}
+.ligne.vide .val{font-family:var(--sans);font-size:12.5px;color:var(--doux)}
+.bascule-devise{display:flex;gap:2px;align-items:center}
+.bascule-devise button{font-size:11px;letter-spacing:.08em;color:var(--tres-doux);padding:3px 7px;border-radius:999px}
+.bascule-devise button[aria-pressed="true"]{color:#12100A;background:var(--or);font-weight:600}
 
 /* ---------- filtres ---------- */
-.filtres{position:sticky;top:0;z-index:5;background:var(--encre);
-  padding:10px 0 12px;border-bottom:1px solid var(--trait);margin-bottom:6px}
-.onglets{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.filtres{position:sticky;top:0;z-index:5;background:var(--noir);
+  padding:16px 0 12px;margin-top:36px;border-top:1px solid var(--filet)}
+.onglets{display:flex;gap:18px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
 .onglets::-webkit-scrollbar{display:none}
-.onglet{white-space:nowrap;padding:7px 13px;border-radius:999px;font-size:14px;
-  color:var(--texte-doux);border:1px solid var(--trait)}
-.onglet[aria-pressed="true"]{background:var(--surface-haute);color:var(--texte);border-color:var(--texte-doux)}
-.onglet .compteur{font-variant-numeric:tabular-nums;opacity:.65;margin-left:6px}
-.outils{display:flex;gap:10px;align-items:center;margin-top:10px}
-.recherche{flex:1;background:var(--surface);border:1px solid var(--trait);border-radius:8px;
-  padding:9px 12px;color:var(--texte);font-size:15px}
-.recherche::placeholder{color:var(--texte-doux)}
-.bascule{font-size:14px;color:var(--texte-doux);display:flex;align-items:center;gap:7px;white-space:nowrap}
-.bascule input{accent-color:var(--laiton);width:17px;height:17px}
+.onglet{white-space:nowrap;font-size:13.5px;color:var(--doux);padding:5px 0;
+  border-bottom:1px solid transparent}
+.onglet[aria-pressed="true"]{color:var(--texte);border-bottom-color:var(--or)}
+.onglet .n{font-size:11px;color:var(--or);margin-left:5px;font-variant-numeric:tabular-nums}
+.outils{display:flex;gap:16px;align-items:center;margin-top:12px}
+.recherche{flex:1;background:transparent;border:none;border-bottom:1px solid var(--filet);
+  padding:7px 0;color:var(--texte);font-size:14px}
+.recherche::placeholder{color:var(--tres-doux)}
+.recherche:focus{outline:none;border-bottom-color:var(--or-sombre)}
+.bascule{font-size:13px;color:var(--doux);display:flex;align-items:center;gap:8px;white-space:nowrap}
+.bascule input{accent-color:var(--or);width:16px;height:16px}
+
+/* ---------- ce que je lis vraiment ---------- */
+
+function compter(article){
+  const cle = article.source || "inconnu";
+  lectures[cle] = (lectures[cle] || 0) + 1;
+  stockage.ecrire(CLE_LECTURES, lectures);
+}
+
+function affinite(article){
+  return lectures[article.source] || 0;
+}
+
+function afficherLectures(){
+  const zone = document.getElementById("lectures");
+  if (!zone.hidden){ zone.hidden = true; return; }
+
+  const produits = {};
+  for (const a of donnees.articles){
+    produits[a.source] = (produits[a.source] || 0) + 1;
+    for (const o of (a.autres || [])) produits[o.source] = (produits[o.source] || 0) + 1;
+  }
+  const noms = [...new Set([...Object.keys(produits), ...Object.keys(lectures)])];
+  noms.sort((a,b) => (lectures[b]||0) - (lectures[a]||0) || (produits[b]||0) - (produits[a]||0));
+
+  const max = Math.max(1, ...noms.map(n => lectures[n] || 0));
+  zone.hidden = false;
+  zone.innerHTML = `<div class="groupe-tete"><span class="legende">Ce que je lis</span>
+      <button class="copier-tout" id="copier-lectures">Copier le relevé</button></div>
+    <p class="muet" style="margin:6px 0 10px">Ouvertures depuis ce navigateur, face au nombre de sujets produits.
+    Une source qui produit beaucoup et que tu n'ouvres jamais mérite d'être retirée de sources.yaml.</p>` +
+    noms.slice(0,25).map(nom => `<div class="ligne">
+        <span class="ligne-nom"><span class="nom">${nom}</span>
+          <span class="barre" style="width:${Math.round(((lectures[nom]||0)/max)*120)}px"></span></span>
+        <span class="ligne-val"><span class="val">${lectures[nom]||0}</span>
+          <span class="var">sur ${produits[nom]||0}</span></span>
+      </div>`).join("");
+
+  document.getElementById("copier-lectures").addEventListener("click", (e) => {
+    const texte = noms.map(n => `${n}\t${lectures[n]||0} ouvert\t${produits[n]||0} produit`).join("\n");
+    copier(texte, e.currentTarget, "Relevé copié");
+  });
+}
+
+/* ---------- archive ---------- */
+
+const moisCharges = {};
+let indexArchive = null;
+
+async function chargerMois(mois){
+  if (moisCharges[mois]) return moisCharges[mois];
+  try{
+    const reponse = await fetch(`data/archives/${mois}.json`, {cache:"no-store"});
+    moisCharges[mois] = (await reponse.json()).articles || [];
+  }catch{ moisCharges[mois] = []; }
+  return moisCharges[mois];
+}
+
+async function chercherArchive(terme){
+  const zone = document.getElementById("archive");
+  if (terme.length < 3){ zone.hidden = true; return; }
+
+  if (!indexArchive){
+    try{
+      const reponse = await fetch("data/archives/index.json", {cache:"no-store"});
+      indexArchive = (await reponse.json()).mois || [];
+    }catch{ indexArchive = []; }
+  }
+
+  const visibles = new Set(donnees.articles.map(a => a.id));
+  const trouves = [];
+  // Du mois le plus récent au plus ancien, on s'arrête dès qu'on a de quoi répondre.
+  for (const entree of indexArchive.slice(0, 18)){
+    for (const a of await chargerMois(entree.mois)){
+      if (!visibles.has(a.id) && a.titre.toLowerCase().includes(terme)) trouves.push(a);
+    }
+    if (trouves.length >= 12) break;
+  }
+  trouves.splice(12);
+
+  zone.hidden = trouves.length === 0;
+  if (!trouves.length) return;
+  zone.innerHTML = `<div class="groupe-tete"><span class="legende">Dans l'archive</span></div>` +
+    trouves.map(a => `<div class="ligne">
+      <span class="ligne-nom"><span class="nom"><a href="${a.url}" target="_blank" rel="noopener">${a.titre}</a></span>
+      <span class="note">${a.source}</span></span>
+      <span class="quand">${fr.date.format(new Date(a.publie_le))}</span></div>`).join("");
+}
+
+/* ---------- copie ---------- */
+
+const ICONE_COPIE = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>';
+const ICONE_EPINGLE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-2.8L7 19l1-6-4-4 5.5-.5z"/></svg>';
+
+function texteArticle(a){
+  const date = new Date(a.publie_le);
+  let texte = `${a.titre}\n${a.source} — ${fr.court.format(date)}\n${a.url}`;
+  if (a.autres && a.autres.length){
+    texte += "\nAussi chez " + a.autres.map(o => `${o.source} (${o.url})`).join(", ");
+  }
+  return texte;
+}
+
+async function copier(texte, bouton, confirmation){
+  const initial = bouton.dataset.initial || bouton.textContent.trim();
+  bouton.dataset.initial = initial;
+  let reussi = true;
+  try{
+    await navigator.clipboard.writeText(texte);
+  }catch{
+    const zone = document.createElement("textarea");
+    zone.value = texte;
+    zone.setAttribute("readonly","");
+    zone.style.position = "fixed";
+    zone.style.opacity = "0";
+    document.body.appendChild(zone);
+    zone.select();
+    try{ reussi = document.execCommand("copy"); }catch{ reussi = false; }
+    zone.remove();
+  }
+  const libelle = reussi ? confirmation : "Copie refusée";
+  bouton.dataset.fait = reussi ? "oui" : "non";
+  if (bouton.querySelector("span")) bouton.querySelector("span").textContent = libelle;
+  else bouton.textContent = libelle;
+  setTimeout(() => {
+    bouton.dataset.fait = "";
+    if (bouton.querySelector("span")) bouton.querySelector("span").textContent = initial;
+    else bouton.textContent = initial;
+  }, 1800);
+}
 
 /* ---------- flux ---------- */
-.jour{font-size:13px;color:var(--texte-doux);margin:26px 0 2px;font-variant-numeric:tabular-nums}
-.article{display:block;padding:15px 0 15px 14px;border-top:1px solid var(--trait);
-  border-left:2px solid transparent;text-decoration:none}
-.article:first-of-type{border-top:none}
-.article.marquant{border-left-color:var(--laiton)}
-.article.lu .titre{color:var(--texte-doux)}
-.titre{font-family:var(--serif);font-size:19px;line-height:1.32;margin:0 0 5px;font-weight:400;max-width:70ch}
-.meta{font-size:13px;color:var(--texte-doux);display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
-.pastille{width:6px;height:6px;border-radius:50%;background:var(--laiton);display:inline-block}
-.extrait{font-size:14px;color:var(--texte-doux);margin:6px 0 0;max-width:72ch;
+.jour{font-size:12px;color:var(--tres-doux);margin:28px 0 2px;font-variant-numeric:tabular-nums}
+.article{display:block;padding:16px 0 16px 14px;border-top:1px solid var(--filet);
+  border-left:2px solid transparent}
+.article.marquant{border-left-color:var(--or)}
+.article.lu{opacity:.42}
+.article{position:relative}
+.titre{display:block;font-family:var(--chiffre);font-weight:500;font-size:18px;
+  line-height:1.35;letter-spacing:-.022em;margin:0 0 6px;max-width:68ch}
+.meta{font-size:12.5px;color:var(--tres-doux);display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center}
+.puce{width:5px;height:5px;background:var(--or);display:inline-block}
+.signal{color:var(--or-sombre)}
+.extrait{font-size:13.5px;color:var(--doux);margin:7px 0 0;max-width:70ch;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.signal{font-size:12px;color:var(--laiton)}
 
 /* ---------- états ---------- */
-.etat{padding:48px 0;max-width:46ch}
-.etat p{margin:0 0 10px}
-.etat .titre-etat{font-family:var(--serif);font-size:21px;margin:0 0 8px}
-.lien-action{color:var(--focus);text-decoration:underline;text-underline-offset:3px}
-.pied{margin-top:44px;padding-top:16px;border-top:1px solid var(--trait);
-  font-size:13px;color:var(--texte-doux);display:flex;gap:16px;flex-wrap:wrap}
+.etat{padding:46px 0;max-width:44ch}
+.etat h2{font-family:var(--chiffre);font-weight:500;letter-spacing:-.022em;font-size:20px;margin:0 0 8px}
+.etat p{margin:0;color:var(--doux)}
+.pied{margin-top:46px;padding-top:18px;border-top:1px solid var(--filet);
+  display:flex;gap:22px;flex-wrap:wrap;font-size:12.5px;color:var(--tres-doux)}
+.pied button{color:var(--doux);border-bottom:1px solid var(--bordure);padding-bottom:1px}
+.pied .primaire{background:var(--or);color:#12100A;font-weight:600;font-size:13px;
+  padding:9px 18px;border-radius:13px;border-bottom:none}
+.copier{color:var(--doux);border-bottom:1px solid var(--bordure);padding-bottom:1px;
+  font-size:12.5px;display:inline-flex;align-items:center;gap:5px}
+.copier svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.6}
+.copier[data-fait="oui"]{color:var(--or);border-bottom-color:transparent}
+.copier-tout{color:var(--doux);font-size:13px;border-bottom:1px solid var(--bordure);
+  padding-bottom:1px;white-space:nowrap}
+.copier-tout[data-fait="oui"]{color:var(--or);border-bottom-color:transparent}
 @media (prefers-reduced-motion:no-preference){
-  .article{transition:border-left-color .15s ease}
+  .onglet,.pied button,.bascule-devise button{transition:color .15s ease}
 }
 </style>
 </head>
 <body>
-<div class="enveloppe">
+<div class="page">
 
   <header class="entete">
     <h1 class="marque">Veille</h1>
-    <div class="horodatage" id="horodatage">chargement…</div>
+    <span class="etat-maj" id="etat-maj">chargement</span>
   </header>
 
-  <p class="resume" id="resume" hidden></p>
+  <section class="hero" id="hero" aria-label="Chiffres clés"></section>
 
-  <section class="chiffres" id="chiffres" aria-label="Chiffres de référence"></section>
+  <section class="alertes" id="alertes" hidden aria-label="Alertes"></section>
+
+  <section class="chiffres" id="chiffres" aria-label="Tous les indicateurs"></section>
+
+  <section class="agenda" id="agenda" hidden aria-label="Prochains rendez-vous"></section>
 
   <nav class="filtres" aria-label="Filtres">
     <div class="onglets" id="onglets"></div>
     <div class="outils">
       <input class="recherche" id="recherche" type="search" placeholder="Chercher un mot" aria-label="Chercher dans les titres">
       <label class="bascule"><input type="checkbox" id="neufs"> Nouveaux</label>
+      <label class="bascule"><input type="checkbox" id="affinite"> Mes sources</label>
+      <button class="copier-tout" id="copier-tout">Copier la sélection</button>
     </div>
   </nav>
 
   <main id="flux"></main>
 
+  <section class="archive" id="archive" hidden aria-label="Archive"></section>
+  <section class="lectures" id="lectures" hidden aria-label="Ce que je lis"></section>
+
   <footer class="pied">
     <span id="etat-sources"></span>
-    <button class="lien-action" id="rafraichir">Recharger</button>
-    <button class="lien-action" id="tout-lu">Tout marquer comme lu</button>
+    <button class="primaire" id="rafraichir">Recharger</button>
+    <button id="tout-lu">Tout marquer comme lu</button>
+    <button id="voir-lectures">Mes lectures</button>
+    <button id="exporter">Sauvegarder mes gardés</button>
+    <button id="importer">Restaurer</button>
   </footer>
 </div>
 
 <script>
 const CLE_VISITE = "veille:derniere-visite";
 const CLE_LUS = "veille:lus";
+const CLE_DEVISE = "veille:devise";
+const CLE_EPINGLES = "veille:epingles";
+const CLE_LECTURES = "veille:lectures";
 
 const stockage = {
-  lire(cle, defaut) {
-    try { const v = localStorage.getItem(cle); return v === null ? defaut : JSON.parse(v); }
-    catch { return defaut; }
-  },
-  ecrire(cle, valeur) {
-    try { localStorage.setItem(cle, JSON.stringify(valeur)); } catch {}
-  }
+  lire(cle, defaut){ try{ const v=localStorage.getItem(cle); return v===null?defaut:JSON.parse(v);}catch{ return defaut; } },
+  ecrire(cle, valeur){ try{ localStorage.setItem(cle, JSON.stringify(valeur)); }catch{} }
 };
 
 let donnees = null;
 let categorieActive = "tout";
+let devise = stockage.lire(CLE_DEVISE, "EUR");
 let lus = new Set(stockage.lire(CLE_LUS, []));
+let epingles = stockage.lire(CLE_EPINGLES, []);
+let lectures = stockage.lire(CLE_LECTURES, {});
+let archive = null;
 const visitePrecedente = stockage.lire(CLE_VISITE, null);
 
 const fr = {
-  heure: new Intl.DateTimeFormat("fr-FR", { hour: "2-digit", minute: "2-digit" }),
-  jour: new Intl.DateTimeFormat("fr-FR", { weekday: "long", day: "numeric", month: "long" }),
-  court: new Intl.DateTimeFormat("fr-FR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })
+  heure: new Intl.DateTimeFormat("fr-FR",{hour:"2-digit",minute:"2-digit"}),
+  jour: new Intl.DateTimeFormat("fr-FR",{weekday:"long",day:"numeric",month:"long"}),
+  court: new Intl.DateTimeFormat("fr-FR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}),
+  date: new Intl.DateTimeFormat("fr-FR",{day:"numeric",month:"short",year:"numeric"})
 };
 
 const estNouveau = (a) => !visitePrecedente || a.premiere_vue > visitePrecedente;
+const parId = (id) => (donnees.indicateurs || []).find(i => i.id === id);
 
-function nombre(valeur, unite) {
-  if (valeur === null || valeur === undefined) return "—";
-  const decimales = unite === "%" ? 2 : (Math.abs(valeur) >= 1000 ? 0 : 2);
-  return valeur.toLocaleString("fr-FR", { minimumFractionDigits: decimales, maximumFractionDigits: decimales });
+/* ---------- mise en forme des valeurs ---------- */
+
+function valeurAffichee(ind){
+  const enDollar = devise === "USD" && ind.valeur_usd !== null && ind.valeur_usd !== undefined;
+  const brut = enDollar ? ind.valeur_usd : ind.valeur;
+  if (brut === null || brut === undefined) return "—";
+
+  let unite = ind.unite || "";
+  if (enDollar) unite = unite.replace("€","$");
+
+  let decimales = 2;
+  if (unite === "%" || unite === "pt") decimales = 2;
+  else if (Math.abs(brut) >= 1000) decimales = 0;
+  else if (unite === "/100") decimales = 0;
+
+  const nombre = brut.toLocaleString("fr-FR",{minimumFractionDigits:decimales,maximumFractionDigits:decimales});
+  if (!unite) return nombre;
+  if (unite === "%" || unite === "pt" || unite === "pts") return nombre + " " + unite;
+  if (unite === "/100") return nombre + unite;
+  return nombre + " " + unite;
 }
 
-function delta(ind) {
-  if (ind.variation_pct !== null && ind.variation_pct !== undefined) {
-    const signe = ind.variation_pct > 0 ? "+" : "";
-    return { texte: signe + ind.variation_pct.toFixed(2) + " %", classe: ind.variation_pct > 0 ? "pos" : ind.variation_pct < 0 ? "neg" : "vide" };
+function variation(ind){
+  if (ind.variation_pct !== null && ind.variation_pct !== undefined && ind.variation_pct !== 0){
+    const s = ind.variation_pct > 0 ? "+" : "";
+    return { texte:s+ind.variation_pct.toFixed(2)+" %", classe:ind.variation_pct>0?"pos":"neg" };
   }
-  if (ind.variation !== null && ind.variation !== undefined && ind.variation !== 0) {
-    const signe = ind.variation > 0 ? "+" : "";
-    return { texte: signe + ind.variation.toFixed(2) + " pt", classe: ind.variation > 0 ? "pos" : "neg" };
+  if (ind.variation !== null && ind.variation !== undefined && ind.variation !== 0){
+    const s = ind.variation > 0 ? "+" : "";
+    return { texte:s+ind.variation.toFixed(2), classe:ind.variation>0?"pos":"neg" };
   }
-  return { texte: "stable", classe: "vide" };
+  return { texte:"stable", classe:"" };
 }
 
-function afficherChiffres(indicateurs) {
-  const groupes = [
-    { id: "taux", titre: "Taux de référence" },
-    { id: "marches", titre: "Marchés" },
-    { id: "crypto", titre: "Crypto" }
-  ];
+/* ---------- hero ---------- */
+
+function afficherHero(){
+  const hero = document.getElementById("hero");
+  hero.innerHTML = "";
+
+  const principal = parId("bce_depot");
+  const secondaires = [parId("cac40"), parId("btc")].filter(Boolean);
+
+  if (principal && principal.statut === "ok"){
+    const bloc = document.createElement("div");
+    const v = variation(principal);
+    const inflation = parId("inflation_fr");
+    const pied = inflation && inflation.statut === "ok"
+      ? `Inflation France ${valeurAffichee(inflation)}`
+      : (principal.note || "");
+    bloc.innerHTML = `<p class="legende hero-nom">Taux de dépôt BCE</p>
+      <div class="hero-valeur">${valeurAffichee(principal)}</div>
+      <p class="hero-pied">${v.texte === "stable" ? "inchangé" : v.texte} ${pied ? "— " + pied : ""}</p>`;
+    hero.appendChild(bloc);
+  }
+
+  for (const ind of secondaires){
+    if (!ind || ind.statut !== "ok") continue;
+    const v = variation(ind);
+    const bloc = document.createElement("div");
+    bloc.className = "hero-sec";
+    bloc.innerHTML = `<p class="legende hero-nom">${ind.label}</p>
+      <div class="hero-valeur">${valeurAffichee(ind)}</div>
+      <p class="hero-pied"><span class="var ${v.classe}">${v.texte}</span></p>`;
+    hero.appendChild(bloc);
+  }
+
+  if (donnees.resume){
+    const p = document.createElement("p");
+    p.className = "resume";
+    p.textContent = donnees.resume;
+    hero.appendChild(p);
+  }
+}
+
+/* ---------- tous les chiffres ---------- */
+
+function afficherChiffres(){
   const cible = document.getElementById("chiffres");
   cible.innerHTML = "";
+  const groupes = donnees.groupes || [];
 
-  for (const groupe of groupes) {
-    const membres = indicateurs.filter(i => i.groupe === groupe.id);
+  for (const groupe of groupes){
+    const membres = (donnees.indicateurs || []).filter(i => i.groupe === groupe.id);
     if (!membres.length) continue;
-    const bloc = document.createElement("div");
-    bloc.className = "bloc";
-    bloc.innerHTML = `<h2>${groupe.titre}</h2>`;
-    for (const ind of membres) {
+
+    const bloc = document.createElement("section");
+    const tete = document.createElement("div");
+    tete.className = "groupe-tete";
+    tete.innerHTML = `<span class="legende">${groupe.label}</span>`;
+
+    if (membres.some(m => m.valeur_usd !== null && m.valeur_usd !== undefined)){
+      const bascule = document.createElement("div");
+      bascule.className = "bascule-devise";
+      for (const code of ["EUR","USD"]){
+        const b = document.createElement("button");
+        b.textContent = code === "EUR" ? "€" : "$";
+        b.setAttribute("aria-label", code === "EUR" ? "Afficher en euros" : "Afficher en dollars");
+        b.setAttribute("aria-pressed", String(devise === code));
+        b.addEventListener("click", () => {
+          devise = code;
+          stockage.ecrire(CLE_DEVISE, code);
+          afficherHero();
+          afficherChiffres();
+        });
+        bascule.appendChild(b);
+      }
+      tete.appendChild(bascule);
+    }
+    bloc.appendChild(tete);
+
+    for (const ind of membres){
       const ligne = document.createElement("div");
-      ligne.className = "ligne";
-      if (ind.statut !== "ok") {
-        ligne.innerHTML = `<span class="nom">${ind.label}</span><span class="indispo">indisponible</span>`;
+      const v = variation(ind);
+      if (ind.statut !== "ok"){
+        ligne.className = "ligne vide";
+        ligne.innerHTML = `<span class="ligne-nom"><span class="nom">${ind.label}</span></span>
+          <span class="ligne-val"><span class="val">indisponible</span></span>`;
       } else {
-        const d = delta(ind);
-        const unite = ind.unite === "%" ? " %" : ind.unite === "€" ? " €" : "";
-        ligne.innerHTML =
-          `<span class="nom">${ind.label}</span>
-           <span class="droite">
-             <span class="valeur">${nombre(ind.valeur, ind.unite)}${unite}</span>
-             <span class="delta ${d.classe}">${d.texte}</span>
-           </span>`;
+        ligne.className = "ligne";
+        ligne.innerHTML = `<span class="ligne-nom">
+            <span class="nom">${ind.label}</span>
+            ${ind.note ? `<span class="note">${ind.note}</span>` : ""}
+          </span>
+          <span class="ligne-val">
+            ${courbe(ind.id)}
+            <span class="val">${valeurAffichee(ind)}</span>
+            <span class="var ${v.classe}">${v.texte}</span>
+          </span>`;
+        const trente = ind.evolution_30j;
+        ligne.title = [
+          ind.source && ind.date ? `${ind.source} — ${ind.date}` : "",
+          (trente !== undefined && trente !== null)
+            ? `Sur 30 jours : ${trente > 0 ? "+" : ""}${trente}` : ""
+        ].filter(Boolean).join("\n");
       }
       bloc.appendChild(ligne);
     }
@@ -226,132 +551,216 @@ function afficherChiffres(indicateurs) {
   }
 }
 
-function articlesFiltres() {
+/* ---------- flux ---------- */
+
+function articlesFiltres(){
   const recherche = document.getElementById("recherche").value.trim().toLowerCase();
   const seulementNeufs = document.getElementById("neufs").checked;
-  return donnees.articles.filter(a => {
-    if (categorieActive !== "tout" && a.categorie !== categorieActive) return false;
+  const base = categorieActive === "gardes" ? epingles : donnees.articles;
+  const semaine = Date.now() - 7*24*3600*1000;
+  const liste = base.filter(a => {
+    if (categorieActive === "semaine" && new Date(a.publie_le).getTime() < semaine) return false;
+    if (!["tout","gardes","semaine"].includes(categorieActive) && a.categorie !== categorieActive) return false;
     if (seulementNeufs && !estNouveau(a)) return false;
     if (recherche && !(a.titre + " " + a.source).toLowerCase().includes(recherche)) return false;
     return true;
   });
+
+  if (document.getElementById("affinite").checked){
+    const classe = [...liste].sort((a,b) => affinite(b) - affinite(a) || b.publie_le.localeCompare(a.publie_le));
+    // Plancher de diversité : jamais plus de deux sujets d'affilée d'une même source.
+    const reste = [...classe], sortie = [];
+    while (reste.length){
+      const precedentes = sortie.slice(-2).map(x => x.source);
+      let index = reste.findIndex(x => !(precedentes.length === 2 && precedentes[0] === x.source && precedentes[1] === x.source));
+      if (index === -1) index = 0;
+      sortie.push(reste.splice(index,1)[0]);
+    }
+    return sortie;
+  }
+  return liste;
 }
 
-function afficherOnglets() {
+function afficherOnglets(){
   const barre = document.getElementById("onglets");
-  const neufsParCategorie = {};
-  for (const a of donnees.articles) {
-    if (estNouveau(a)) neufsParCategorie[a.categorie] = (neufsParCategorie[a.categorie] || 0) + 1;
-  }
-  const totalNeuf = Object.values(neufsParCategorie).reduce((s, n) => s + n, 0);
-  const onglets = [{ id: "tout", label: "Tout", n: totalNeuf }]
-    .concat(donnees.categories.map(c => ({ id: c.id, label: c.label, n: neufsParCategorie[c.id] || 0 })));
+  const neufs = {};
+  for (const a of donnees.articles) if (estNouveau(a)) neufs[a.categorie] = (neufs[a.categorie]||0)+1;
+  const total = Object.values(neufs).reduce((s,n)=>s+n,0);
+  const liste = [{id:"tout",label:"Tout",n:total}]
+    .concat(donnees.categories.map(c => ({id:c.id,label:c.label,n:neufs[c.id]||0})))
+    .concat([{id:"semaine",label:"La semaine",n:0}])
+    .concat(epingles.length ? [{id:"gardes",label:"Gardés",n:0}] : []);
 
   barre.innerHTML = "";
-  for (const o of onglets) {
-    const bouton = document.createElement("button");
-    bouton.className = "onglet";
-    bouton.setAttribute("aria-pressed", String(o.id === categorieActive));
-    bouton.innerHTML = o.label + (o.n ? `<span class="compteur">${o.n}</span>` : "");
-    bouton.addEventListener("click", () => {
-      categorieActive = o.id;
-      afficherOnglets();
-      afficherFlux();
-    });
-    barre.appendChild(bouton);
+  for (const o of liste){
+    const b = document.createElement("button");
+    b.className = "onglet";
+    b.setAttribute("aria-pressed", String(o.id === categorieActive));
+    b.innerHTML = o.label + (o.n ? `<span class="n">${o.n}</span>` : "");
+    b.addEventListener("click", () => { categorieActive = o.id; afficherOnglets(); afficherFlux(); });
+    barre.appendChild(b);
   }
 }
 
-function afficherFlux() {
+function afficherFlux(){
   const cible = document.getElementById("flux");
   const liste = articlesFiltres();
   cible.innerHTML = "";
 
-  if (!liste.length) {
+  if (!liste.length){
     const neufs = document.getElementById("neufs").checked;
     cible.innerHTML = `<div class="etat">
-      <p class="titre-etat">${neufs ? "Rien de neuf depuis ta dernière visite." : "Aucun article ne correspond."}</p>
-      <p>Le collecteur passe toutes les heures. ${neufs ? "Décoche « Nouveaux » pour relire les jours précédents." : "Élargis la recherche ou change de rubrique."}</p>
-    </div>`;
+      <h2>${neufs ? "Rien de neuf depuis ta dernière visite." : "Aucun article ne correspond."}</h2>
+      <p>${neufs ? "Le collecteur passe toutes les heures. Décoche « Nouveaux » pour relire les jours précédents."
+                 : "Élargis la recherche ou change de rubrique."}</p></div>`;
     return;
   }
 
+  if (categorieActive === "semaine"){
+    liste.sort((a,b) => b.score - a.score);
+    const bilan = document.createElement("div");
+    const bougeurs = (donnees.indicateurs||[]).map(i => {
+      const serie = (donnees.courbes||{})[i.id];
+      if (!serie || serie.length < 7 || i.statut !== "ok") return null;
+      const depart = serie[serie.length-7], arrivee = serie[serie.length-1];
+      if (!depart) return null;
+      return {label:i.label, ecart:((arrivee/depart)-1)*100, unite:i.unite, arrivee};
+    }).filter(Boolean).sort((a,b) => Math.abs(b.ecart) - Math.abs(a.ecart)).slice(0,5);
+
+    bilan.innerHTML = `<div class="groupe-tete"><span class="legende">Les sept derniers jours</span></div>
+      ${bougeurs.map(b => `<div class="ligne">
+        <span class="ligne-nom"><span class="nom">${b.label}</span></span>
+        <span class="ligne-val"><span class="val">${b.arrivee.toLocaleString("fr-FR")}</span>
+        <span class="var ${b.ecart>0?"pos":"neg"}">${b.ecart>0?"+":""}${b.ecart.toFixed(2)} %</span></span></div>`).join("")}
+      <p class="muet" style="margin:14px 0 0">${liste.length} sujets sur la semaine, les plus marquants d'abord.</p>`;
+    cible.appendChild(bilan);
+  }
+
   let jourCourant = null;
-  for (const a of liste) {
+  for (const a of liste){
+    if (categorieActive === "semaine") jourCourant = "—";
     const date = new Date(a.publie_le);
     const jour = fr.jour.format(date);
-    if (jour !== jourCourant) {
+    if (jour !== jourCourant){
       jourCourant = jour;
-      const titreJour = document.createElement("h2");
-      titreJour.className = "jour";
-      titreJour.textContent = jour;
-      cible.appendChild(titreJour);
+      const h = document.createElement("h2");
+      h.className = "jour";
+      h.textContent = jour;
+      cible.appendChild(h);
     }
+    const bloc = document.createElement("article");
+    bloc.className = "article" + (a.score >= 34 ? " marquant" : "") + (lus.has(a.id) ? " lu" : "");
+    const signaux = (a.signaux||[]).slice(0,2).map(s => `<span class="signal">${s}</span>`).join("");
+    bloc.innerHTML = `<a class="titre" href="${a.url}" target="_blank" rel="noopener">${a.titre}</a>
+      <p class="meta">
+        ${estNouveau(a) && !lus.has(a.id) ? '<span class="puce" title="Nouveau"></span>' : ""}
+        <span>${a.source}</span><span>${fr.heure.format(date)}</span>${signaux}
+        <button class="copier" type="button">${ICONE_COPIE}<span>Copier</span></button>
+        <button class="epingler" type="button" aria-pressed="${epingles.some(e => e.id === a.id)}">${ICONE_EPINGLE}<span>Garder</span></button>
+      </p>
+      ${a.resume ? `<p class="extrait">${a.resume}</p>` : ""}
+      ${(a.autres && a.autres.length) ? `<p class="reprises">Aussi chez ${
+        a.autres.slice(0,4).map(o => `<a href="${o.url}" target="_blank" rel="noopener">${o.source}</a>`).join(", ")
+      }${a.autres.length > 4 ? ` et ${a.autres.length - 4} autres` : ""}</p>` : ""}`;
 
-    const lien = document.createElement("a");
-    lien.className = "article" + (a.score >= 34 ? " marquant" : "") + (lus.has(a.id) ? " lu" : "");
-    lien.href = a.url;
-    lien.target = "_blank";
-    lien.rel = "noopener";
+    bloc.querySelector(".epingler").addEventListener("click", (e) => {
+      const bouton = e.currentTarget;
+      const deja = epingles.some(x => x.id === a.id);
+      epingles = deja ? epingles.filter(x => x.id !== a.id) : [{...a, epingle_le:new Date().toISOString()}, ...epingles].slice(0,200);
+      stockage.ecrire(CLE_EPINGLES, epingles);
+      bouton.setAttribute("aria-pressed", String(!deja));
+      afficherOnglets();
+    });
 
-    const signaux = (a.signaux || []).slice(0, 2).map(s => `<span class="signal">${s}</span>`).join("");
-    lien.innerHTML =
-      `<h3 class="titre">${a.titre}</h3>
-       <p class="meta">
-         ${estNouveau(a) && !lus.has(a.id) ? '<span class="pastille" title="Nouveau"></span>' : ""}
-         <span>${a.source}</span><span>${fr.heure.format(date)}</span>${signaux}
-       </p>
-       ${a.resume ? `<p class="extrait">${a.resume}</p>` : ""}`;
-
-    lien.addEventListener("click", () => {
+    bloc.querySelector(".titre").addEventListener("click", () => {
+      compter(a);
       lus.add(a.id);
       stockage.ecrire(CLE_LUS, [...lus].slice(-800));
-      lien.classList.add("lu");
-      lien.querySelector(".pastille")?.remove();
+      bloc.classList.add("lu");
+      bloc.querySelector(".puce")?.remove();
     });
-    cible.appendChild(lien);
+    const boutonCopie = bloc.querySelector(".copier");
+    boutonCopie.addEventListener("click", () => { compter(a); copier(texteArticle(a), boutonCopie, "Copié"); });
+    bloc.querySelectorAll(".reprises a").forEach(lien => {
+      lien.addEventListener("click", () => compter({source: lien.textContent}));
+    });
+    cible.appendChild(bloc);
   }
 }
 
-function afficherEntete() {
+/* ---------- pied et en-tête ---------- */
+
+function afficherContexte(){
   const genere = new Date(donnees.genere_le);
-  const ageHeures = (Date.now() - genere.getTime()) / 3600000;
-  const horodatage = document.getElementById("horodatage");
-  horodatage.textContent = "mis à jour " + fr.court.format(genere);
-  horodatage.classList.toggle("perime", ageHeures > 6);
-  if (ageHeures > 6) horodatage.title = "Le collecteur n'est pas passé depuis plus de 6 h.";
+  const age = (Date.now() - genere.getTime()) / 3600000;
+  const etat = document.getElementById("etat-maj");
+  etat.textContent = fr.court.format(genere);
+  etat.classList.toggle("perime", age > 6);
+  if (age > 6) etat.title = "Le collecteur n'est pas passé depuis plus de 6 h.";
 
-  if (donnees.resume) {
-    const bloc = document.getElementById("resume");
-    bloc.textContent = donnees.resume;
-    bloc.hidden = false;
-  }
-
-  const enEchec = (donnees.sources || []).filter(s => !s.ok).length;
-  document.getElementById("etat-sources").textContent =
-    enEchec ? `${enEchec} source(s) à corriger` : `${(donnees.sources || []).length} sources actives`;
+  const sources = donnees.sources || [];
+  const indispo = (donnees.indicateurs||[]).filter(i => i.statut !== "ok").length;
+  const morts = sources.filter(s => !s.ok).length;
+  const bouts = [`${sources.length - morts}/${sources.length} sources`];
+  if (indispo) bouts.push(`${indispo} chiffre(s) indisponible(s)`);
+  document.getElementById("etat-sources").textContent = bouts.join(", ");
 }
 
-async function charger() {
-  try {
-    const reponse = await fetch("data/feed.json?t=" + Date.now(), { cache: "no-store" });
+async function charger(){
+  try{
+    const reponse = await fetch("data/feed.json?t=" + Date.now(), {cache:"no-store"});
     if (!reponse.ok) throw new Error(reponse.status);
     donnees = await reponse.json();
-    afficherEntete();
-    afficherChiffres(donnees.indicateurs || []);
+    afficherContexte();
+    afficherAlertes();
+    afficherAgenda();
+    afficherHero();
+    afficherChiffres();
     afficherOnglets();
     afficherFlux();
-  } catch (e) {
+  }catch(e){
     document.getElementById("flux").innerHTML = `<div class="etat">
-      <p class="titre-etat">Les données ne se chargent pas.</p>
-      <p>Le fichier data/feed.json est absent ou invalide. Lance le collecteur une fois, ou vérifie que l'action GitHub est bien passée au vert.</p>
-    </div>`;
-    document.getElementById("horodatage").textContent = "hors ligne";
+      <h2>Les données ne se chargent pas.</h2>
+      <p>Le fichier data/feed.json est absent ou invalide. Lance le collecteur une fois, ou vérifie que l'action GitHub est passée au vert.</p></div>`;
+    document.getElementById("etat-maj").textContent = "hors ligne";
   }
 }
 
-document.getElementById("recherche").addEventListener("input", () => afficherFlux());
-document.getElementById("neufs").addEventListener("change", () => afficherFlux());
+document.getElementById("recherche").addEventListener("input", (e) => {
+  afficherFlux();
+  chercherArchive(e.target.value.trim().toLowerCase());
+});
+document.getElementById("affinite").addEventListener("change", afficherFlux);
+document.getElementById("voir-lectures").addEventListener("click", afficherLectures);
+
+document.getElementById("exporter").addEventListener("click", (e) => {
+  copier(JSON.stringify({epingles, lectures}), e.currentTarget, "Copié, colle-le ailleurs");
+});
+
+document.getElementById("importer").addEventListener("click", () => {
+  const brut = prompt("Colle ici la sauvegarde copiée depuis ton autre appareil :");
+  if (!brut) return;
+  try{
+    const donneesImportees = JSON.parse(brut);
+    const connus = new Set(epingles.map(x => x.id));
+    epingles = [...epingles, ...(donneesImportees.epingles || []).filter(x => !connus.has(x.id))].slice(0,200);
+    for (const [source, nombre] of Object.entries(donneesImportees.lectures || {})){
+      lectures[source] = (lectures[source] || 0) + nombre;
+    }
+    stockage.ecrire(CLE_EPINGLES, epingles);
+    stockage.ecrire(CLE_LECTURES, lectures);
+    afficherOnglets(); afficherFlux();
+  }catch{
+    alert("Sauvegarde illisible. Recopie-la en entier, sans rien couper.");
+  }
+});
+document.getElementById("neufs").addEventListener("change", afficherFlux);
+document.getElementById("copier-tout").addEventListener("click", (e) => {
+  if (!donnees) return;
+  const liste = articlesFiltres();
+  if (!liste.length){ copier("", e.currentTarget, "Rien à copier"); return; }
+  copier(liste.map(texteArticle).join("\n\n"), e.currentTarget, `${liste.length} copiés`);
+});
 document.getElementById("rafraichir").addEventListener("click", charger);
 document.getElementById("tout-lu").addEventListener("click", () => {
   if (!donnees) return;
@@ -362,12 +771,11 @@ document.getElementById("tout-lu").addEventListener("click", () => {
 });
 
 charger().then(() => {
-  // La visite courante ne devient la référence « déjà vu » qu'en quittant la page.
   addEventListener("pagehide", () => stockage.ecrire(CLE_VISITE, new Date().toISOString()));
 });
 
-if ("serviceWorker" in navigator) {
-  addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+if ("serviceWorker" in navigator){
+  addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(()=>{}));
 }
 </script>
 </body>

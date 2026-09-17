@@ -1,5 +1,5 @@
 // Cache minimal : l'interface reste lisible hors ligne, les données restent fraîches.
-const CACHE = "veille-v1";
+const CACHE = "veille-v3";
 const COQUILLE = ["./", "./index.html", "./manifest.json"];
 
 self.addEventListener("install", (e) => {

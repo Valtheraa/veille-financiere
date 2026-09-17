@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import os
 import html
 import json
 import re
@@ -26,8 +27,16 @@ import feedparser
 import requests
 import yaml
 
+import analyse
+
 RACINE = Path(__file__).resolve().parent.parent
 CONFIG = RACINE / "collector" / "sources.yaml"
+CONFIG_CHIFFRES = RACINE / "collector" / "indicateurs.yaml"
+CONFIG_AGENDA = RACINE / "collector" / "agenda.yaml"
+CONFIG_ALERTES = RACINE / "collector" / "alertes.yaml"
+HISTORIQUE = RACINE / "docs" / "data" / "historique.json"
+ALERTE_TEXTE = RACINE / "alerte.md"
+ARCHIVE = RACINE / "docs" / "data" / "archives"
 SORTIE = RACINE / "docs" / "data" / "feed.json"
 
 RETENTION_JOURS = 21
@@ -117,6 +126,7 @@ def construire_sources(config):
                     "url": f["url"],
                     "categorie": f["categorie"],
                     "poids": f.get("poids", 1),
+                    "conserver": f.get("conserver"),
                     "genre": "officiel",
                 }
             )
@@ -202,6 +212,7 @@ def collecter(config, verbeux=True):
                 vus.add(cle)
 
                 article = {
+                    "conserver": source.get("conserver", RETENTION_JOURS),
                     "id": empreinte(lien),
                     "titre": titre,
                     "url": lien,
@@ -243,13 +254,20 @@ def fusionner(nouveaux, anciens):
         n["premiere_vue"] = precedent["premiere_vue"] if precedent else horodatage
         fusion[n["id"]] = n
 
-    limite = maintenant() - timedelta(days=RETENTION_JOURS)
-    gardes = [
-        a for a in fusion.values()
-        if datetime.fromisoformat(a.get("premiere_vue", horodatage)) > limite
-    ]
+    gardes = []
+    for a in fusion.values():
+        jours = a.get("conserver") or RETENTION_JOURS
+        if datetime.fromisoformat(a.get("premiere_vue", horodatage)) > maintenant() - timedelta(days=jours):
+            gardes.append(a)
     gardes.sort(key=lambda a: (a["publie_le"], a["score"]), reverse=True)
     return gardes[:MAX_ARTICLES]
+
+
+def _charger(chemin: Path):
+    """Lit un fichier de configuration facultatif."""
+    if not chemin.exists():
+        return {}
+    return yaml.safe_load(chemin.read_text(encoding="utf-8")) or {}
 
 
 def charger_existant():
@@ -264,6 +282,34 @@ def charger_existant():
 # ---------------------------------------------------------------------
 # Résumé optionnel par Claude (facultatif, quelques centimes par mois)
 # ---------------------------------------------------------------------
+
+def arbitre_claude(cle_api):
+    """Rend une fonction qui dit, pour chaque paire de titres, s'il s'agit du même sujet."""
+    def trancher(paires):
+        if not paires:
+            return []
+        liste = "\n".join(f"{i+1}. A : {a}\n   B : {b}" for i, (a, b) in enumerate(paires[:15]))
+        invite = (
+            "Pour chaque paire de titres de presse, dis si A et B couvrent le même "
+            "événement précis (et pas seulement le même thème).\n\n"
+            f"{liste}\n\n"
+            "Réponds uniquement par un tableau JSON de booléens, un par paire, sans texte autour."
+        )
+        reponse = requests.post(
+            "https://api.anthropic.com/v1/messages",
+            headers={"x-api-key": cle_api, "anthropic-version": "2023-06-01",
+                     "content-type": "application/json"},
+            json={"model": "claude-sonnet-4-6", "max_tokens": 300,
+                  "messages": [{"role": "user", "content": invite}]},
+            timeout=60,
+        )
+        reponse.raise_for_status()
+        texte = "".join(b.get("text", "") for b in reponse.json().get("content", []))
+        texte = re.sub(r"```(json)?", "", texte).strip()
+        verdicts = json.loads(texte)
+        return [bool(v) for v in verdicts]
+    return trancher
+
 
 def resumer(articles, cle_api):
     tete = sorted(articles, key=lambda a: a["score"], reverse=True)[:25]
@@ -299,8 +345,23 @@ def resumer(articles, cle_api):
 def main():
     parseur = argparse.ArgumentParser(description="Collecteur de veille financière")
     parseur.add_argument("--check", action="store_true", help="tester les sources sans écrire")
-    parseur.add_argument("--resume", action="store_true", help="ajouter le résumé du jour")
+    parseur.add_argument("--ia", "--resume", dest="ia", action="store_true",
+                         help="faire rédiger le résumé et arbitrer les regroupements par Claude")
+    parseur.add_argument("--check-chiffres", action="store_true",
+                         help="tester chaque indicateur un par un, n'écrit rien")
     args = parseur.parse_args()
+
+    if args.check_chiffres:
+        from markets import tous_les_indicateurs
+
+        config_chiffres = yaml.safe_load(CONFIG_CHIFFRES.read_text(encoding="utf-8"))
+        print("Indicateurs :")
+        resultats = tous_les_indicateurs(config_chiffres)
+        casses = [i for i in resultats if i["statut"] != "ok"]
+        print(f"\n{len(resultats) - len(casses)}/{len(resultats)} indicateurs récupérés.")
+        for i in casses:
+            print(f"  à corriger : {i['label']} — {i['erreur']}")
+        return 1 if casses else 0
 
     config = yaml.safe_load(CONFIG.read_text(encoding="utf-8"))
 
@@ -320,28 +381,83 @@ def main():
     print("\nIndicateurs :")
     from markets import tous_les_indicateurs  # import tardif : le --check n'en a pas besoin
 
-    indicateurs = tous_les_indicateurs()
-    for i in indicateurs:
-        print(f"  {'ok   ' if i['statut'] == 'ok' else 'ÉCHEC'}  {i['label']:<30} {i['valeur']}")
+    config_chiffres = yaml.safe_load(CONFIG_CHIFFRES.read_text(encoding="utf-8"))
+    indicateurs = tous_les_indicateurs(config_chiffres)
+
+    # Historique, alertes et agenda
+    points = analyse.charger_historique(HISTORIQUE)
+    anomalies = analyse.verifier_coherence(indicateurs, points)
+    for a in anomalies:
+        print(f"  ! valeur écartée — {a['message']}")
+
+    # Toutes les recherches muettes d'un coup : c'est Google qui a changé,
+    # pas l'actualité qui s'est arrêtée.
+    recherches = [e for e in etats if e["genre"] == "recherche"]
+    muettes = [e for e in recherches if e["ok"] and e["nombre"] == 0]
+    if recherches and len(muettes) >= max(3, int(len(recherches) * 0.8)):
+        anomalies.append({
+            "id": "recherches",
+            "label": "Google Actualités",
+            "message": f"{len(muettes)} recherches sur {len(recherches)} ne renvoient rien : "
+                       "le flux Google Actualités a probablement changé",
+        })
+
+    alertes = analyse.evaluer_alertes(indicateurs, points, _charger(CONFIG_ALERTES).get("regles"))
+    points = analyse.mettre_a_jour_historique(points, indicateurs)
+    analyse.evolution(points, indicateurs)
+    HISTORIQUE.parent.mkdir(parents=True, exist_ok=True)
+    HISTORIQUE.write_text(
+        json.dumps({"points": points}, ensure_ascii=False, separators=(",", ":")),
+        encoding="utf-8",
+    )
+    rendez_vous = analyse.prochains_rendez_vous(_charger(CONFIG_AGENDA))
+
+    if alertes or anomalies:
+        print("\nAlertes :")
+        for a in alertes:
+            print(f"  ! {a['message']} — {a['valeur']}")
+        texte = analyse.alertes_en_texte(alertes)
+        if anomalies:
+            texte += ("\n\n**Anomalies techniques**\n"
+                      + "\n".join(f"- {a['message']}" for a in anomalies))
+        ALERTE_TEXTE.write_text(texte.strip() + "\n", encoding="utf-8")
+    elif ALERTE_TEXTE.exists():
+        ALERTE_TEXTE.unlink()
 
     articles = fusionner(articles, charger_existant())
+
+    cle_api = os.environ.get("ANTHROPIC_API_KEY")
+    avant_regroupement = len(articles)
+    articles = analyse.regrouper(
+        articles, arbitre=arbitre_claude(cle_api) if cle_api else None
+    )
+    print(f"\nRegroupement : {avant_regroupement} articles ramenés à {len(articles)} sujets.")
 
     donnees = {
         "genere_le": maintenant().isoformat(),
         "categories": config["categories"],
+        "groupes": config_chiffres["groupes"],
         "indicateurs": indicateurs,
+        "courbes": analyse.courbes(points, indicateurs),
+        "alertes": alertes,
+        "anomalies": anomalies,
+        "agenda": rendez_vous,
         "articles": articles,
         "sources": etats,
         "resume": None,
     }
 
-    import os
-
-    if args.resume and os.environ.get("ANTHROPIC_API_KEY"):
+    if args.ia and cle_api:
         try:
-            donnees["resume"] = resumer(articles, os.environ["ANTHROPIC_API_KEY"])
+            donnees["resume"] = resumer(articles, cle_api)
         except Exception as e:  # noqa: BLE001
-            print(f"  ! résumé indisponible : {e}")
+            print(f"  ! résumé par Claude indisponible : {e}")
+    if not donnees["resume"]:
+        donnees["resume"] = analyse.resume_automatique(indicateurs, alertes, articles)
+
+    # Archive : un fichier par mois, plus un index
+    index = analyse.repartir_archive(ARCHIVE, articles)
+    print(f"Archive : {sum(m['nombre'] for m in index)} titres sur {len(index)} mois.")
 
     SORTIE.parent.mkdir(parents=True, exist_ok=True)
     SORTIE.write_text(

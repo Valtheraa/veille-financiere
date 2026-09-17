@@ -1,0 +1,55 @@
+# =====================================================================
+#  Les rendez-vous à anticiper. Trois écritures possibles :
+#    date: 2026-12-18          une date unique
+#    recurrent: annuel  + jour: "01-02"   (jour-mois)
+#    recurrent: mensuel + jour: 15
+#  Le tableau de bord affiche les six prochains, avec le compte à rebours.
+# =====================================================================
+
+rendez_vous:
+  # --- rendez-vous structurels, dates fixées par la loi ou l'usage ---
+  - label: Révision du Livret A, du LDDS et du LEP
+    recurrent: annuel
+    jour: "01-02"
+    detail: nouveau taux applicable au 1er février
+
+  - label: Révision du Livret A, du LDDS et du LEP
+    recurrent: annuel
+    jour: "01-08"
+    detail: nouveau taux applicable au 1er août
+
+  - label: Ouverture de la déclaration de revenus
+    recurrent: annuel
+    jour: "10-04"
+
+  - label: Projet de loi de finances présenté en conseil des ministres
+    recurrent: annuel
+    jour: "01-10"
+    detail: le texte qui fixe la fiscalité de l'année suivante
+
+  - label: Adoption définitive de la loi de finances
+    recurrent: annuel
+    jour: "20-12"
+
+  - label: Inflation France, estimation provisoire (INSEE)
+    recurrent: mensuel
+    jour: dernier
+
+  - label: Indice des prix définitif (INSEE)
+    recurrent: mensuel
+    jour: 15
+
+  - label: Baromètres des taux de crédit immobilier des courtiers
+    recurrent: mensuel
+    jour: 3
+    detail: à reporter dans indicateurs.yaml
+
+  # --- à compléter une fois par an ---
+  # Les calendriers de la BCE et de la Fed sont publiés un an à l'avance.
+  # BCE : ecb.europa.eu, rubrique « Governing Council meeting calendar ».
+  # Fed : federalreserve.gov, rubrique « FOMC calendars ».
+  # Ajoute les dates ici, une ligne par réunion :
+  # - label: Réunion de politique monétaire de la BCE
+  #   date: 2026-12-17
+  # - label: Réunion du FOMC
+  #   date: 2026-12-09
