@@ -1,5 +1,5 @@
 // Cache minimal : l'interface reste lisible hors ligne, les données restent fraîches.
-const CACHE = "veille-v3";
+const CACHE = "veille-v4";
 const COQUILLE = ["./", "./index.html", "./manifest.json"];
 
 self.addEventListener("install", (e) => {
@@ -28,6 +28,17 @@ self.addEventListener("fetch", (e) => {
     return;
   }
 
-  // Interface : le cache d'abord.
+  // Page et script : le réseau d'abord, pour ne jamais servir une version
+  // périmée ; le cache ne sert que hors ligne.
+  if (e.request.mode === "navigate" || url.pathname.endsWith(".html") || url.pathname.endsWith("/")) {
+    e.respondWith(
+      fetch(e.request)
+        .then((r) => { const copie = r.clone(); caches.open(CACHE).then((c) => c.put(e.request, copie)); return r; })
+        .catch(() => caches.match(e.request))
+    );
+    return;
+  }
+
+  // Le reste : le cache d'abord.
   e.respondWith(caches.match(e.request).then((r) => r || fetch(e.request)));
 });

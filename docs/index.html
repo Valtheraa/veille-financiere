@@ -205,6 +205,19 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;pad
 </div>
 
 <script>
+function signalerErreur(origine, erreur){
+  const message = (erreur && (erreur.message || erreur)) + "";
+  const etat = document.getElementById("etat-maj");
+  if (etat) etat.textContent = "erreur";
+  const flux = document.getElementById("flux");
+  if (flux) flux.innerHTML = `<div class="etat">
+    <h2>Le tableau de bord n'a pas pu s'afficher.</h2>
+    <p>${origine} — ${message}</p>
+    <p class="muet" style="margin-top:10px">Recopie cette ligne, elle suffit à identifier la panne.</p></div>`;
+}
+addEventListener("error", (e) => signalerErreur("Erreur de script", e.error || e.message));
+addEventListener("unhandledrejection", (e) => signalerErreur("Promesse rejetée", e.reason));
+
 const CLE_VISITE = "veille:derniere-visite";
 const CLE_LUS = "veille:lus";
 const CLE_DEVISE = "veille:devise";
@@ -713,13 +726,12 @@ async function charger(){
     const reponse = await fetch("data/feed.json?t=" + Date.now(), {cache:"no-store"});
     if (!reponse.ok) throw new Error(reponse.status);
     donnees = await reponse.json();
-    afficherContexte();
-    afficherAlertes();
-    afficherAgenda();
-    afficherHero();
-    afficherChiffres();
-    afficherOnglets();
-    afficherFlux();
+    for (const [nom, rendu] of [["contexte",afficherContexte],["alertes",afficherAlertes],
+         ["agenda",afficherAgenda],["chiffres clés",afficherHero],["indicateurs",afficherChiffres],
+         ["onglets",afficherOnglets],["flux",afficherFlux]]){
+      try{ rendu(); }
+      catch(erreur){ signalerErreur(`Affichage « ${nom} »`, erreur); return; }
+    }
   }catch(e){
     document.getElementById("flux").innerHTML = `<div class="etat">
       <h2>Les données ne se chargent pas.</h2>
@@ -728,18 +740,24 @@ async function charger(){
   }
 }
 
+function brancher(id, evenement, action){
+  const element = document.getElementById(id);
+  if (!element){ console.warn("élément absent :", id); return; }
+  element.addEventListener(evenement, action);
+}
+
 document.getElementById("recherche").addEventListener("input", (e) => {
   afficherFlux();
   chercherArchive(e.target.value.trim().toLowerCase());
 });
-document.getElementById("affinite").addEventListener("change", afficherFlux);
-document.getElementById("voir-lectures").addEventListener("click", afficherLectures);
+brancher("affinite", "change", afficherFlux);
+brancher("voir-lectures", "click", afficherLectures);
 
-document.getElementById("exporter").addEventListener("click", (e) => {
+brancher("exporter", "click", (e) => {
   copier(JSON.stringify({epingles, lectures}), e.currentTarget, "Copié, colle-le ailleurs");
 });
 
-document.getElementById("importer").addEventListener("click", () => {
+brancher("importer", "click", () => {
   const brut = prompt("Colle ici la sauvegarde copiée depuis ton autre appareil :");
   if (!brut) return;
   try{
@@ -756,15 +774,15 @@ document.getElementById("importer").addEventListener("click", () => {
     alert("Sauvegarde illisible. Recopie-la en entier, sans rien couper.");
   }
 });
-document.getElementById("neufs").addEventListener("change", afficherFlux);
-document.getElementById("copier-tout").addEventListener("click", (e) => {
+brancher("neufs", "change", afficherFlux);
+brancher("copier-tout", "click", (e) => {
   if (!donnees) return;
   const liste = articlesFiltres();
   if (!liste.length){ copier("", e.currentTarget, "Rien à copier"); return; }
   copier(liste.map(texteArticle).join("\n\n"), e.currentTarget, `${liste.length} copiés`);
 });
-document.getElementById("rafraichir").addEventListener("click", charger);
-document.getElementById("tout-lu").addEventListener("click", () => {
+brancher("rafraichir", "click", charger);
+brancher("tout-lu", "click", () => {
   if (!donnees) return;
   donnees.articles.forEach(a => lus.add(a.id));
   stockage.ecrire(CLE_LUS, [...lus].slice(-800));
