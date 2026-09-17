@@ -41,7 +41,9 @@ SORTIE = RACINE / "docs" / "data" / "feed.json"
 
 RETENTION_JOURS = 21
 MAX_ARTICLES = 500
-UA = "veille-financiere/1.0 (usage personnel)"
+UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+      "(KHTML, like Gecko) Chrome/126.0 Safari/537.36")
+LIMITE_PAR_SOURCE = 30   # une seule requête ne doit pas noyer le flux
 
 
 # ---------------------------------------------------------------------
@@ -98,7 +100,11 @@ def url_google_actus(requete: str) -> str:
 def lire_flux(url: str):
     reponse = requests.get(
         url,
-        headers={"User-Agent": UA, "Accept": "application/rss+xml, application/xml, text/xml, */*"},
+        headers={
+            "User-Agent": UA,
+            "Accept": "application/rss+xml, application/xml, text/xml, application/atom+xml, */*",
+            "Accept-Language": "fr-FR,fr;q=0.9,en;q=0.8",
+        },
         timeout=25,
     )
     reponse.raise_for_status()
@@ -127,6 +133,7 @@ def construire_sources(config):
                     "categorie": f["categorie"],
                     "poids": f.get("poids", 1),
                     "conserver": f.get("conserver"),
+                    "secours_q": f.get("secours_q"),
                     "genre": "officiel",
                 }
             )
@@ -187,9 +194,21 @@ def collecter(config, verbeux=True):
     etats = []
 
     for source in sources:
-        etat = {"nom": source["nom"], "genre": source["genre"], "ok": False, "nombre": 0, "erreur": None}
+        etat = {"nom": source["nom"], "genre": source["genre"], "ok": False,
+                "nombre": 0, "erreur": None, "secours": False}
+        genre = source["genre"]
         try:
-            entrees = lire_flux(source["url"])
+            try:
+                entrees = lire_flux(source["url"])
+            except Exception as premiere:  # noqa: BLE001
+                if not source.get("secours_q"):
+                    raise
+                # Le site officiel ne répond plus : on passe par une recherche
+                # limitée à son domaine, ce qui couvre le même contenu.
+                entrees = lire_flux(url_google_actus(source["secours_q"]))
+                genre = "recherche"
+                etat["secours"] = True
+                etat["erreur"] = f"flux direct indisponible ({type(premiere).__name__}), repli en place"
             gardes = 0
             for entree in entrees:
                 titre_brut = nettoyer_html(entree.get("title", ""))
@@ -199,7 +218,7 @@ def collecter(config, verbeux=True):
                 if est_du_bruit(titre_brut, bruit):
                     continue
 
-                if source["genre"] == "recherche":
+                if genre == "recherche":
                     titre, editeur = separer_source_google(titre_brut, "Google Actualités")
                     resume = ""
                 else:
@@ -219,13 +238,15 @@ def collecter(config, verbeux=True):
                     "source": editeur,
                     "rubrique": source["nom"],
                     "categorie": source["categorie"],
-                    "genre": source["genre"],
+                    "genre": genre,
                     "publie_le": date_iso(entree),
                     "resume": resume,
                 }
                 article["score"], article["signaux"] = noter(article, signaux, source["poids"])
                 articles[article["id"]] = article
                 gardes += 1
+                if gardes >= LIMITE_PAR_SOURCE:
+                    break
 
             etat["ok"] = True
             etat["nombre"] = gardes
@@ -235,7 +256,9 @@ def collecter(config, verbeux=True):
         etats.append(etat)
         if verbeux:
             marque = "ok " if etat["ok"] else "ÉCHEC"
-            detail = etat["erreur"] or f"{etat['nombre']} articles"
+            detail = f"{etat['nombre']} articles" if etat["ok"] else etat["erreur"]
+            if etat["secours"]:
+                detail += " (par repli)"
             print(f"  {marque}  {source['nom']:<34} {detail}")
 
     return list(articles.values()), etats

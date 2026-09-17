@@ -54,50 +54,6 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;pad
 .etat-maj{font-size:12px;color:var(--tres-doux);font-variant-numeric:tabular-nums}
 .etat-maj.perime{color:var(--or)}
 
-/* ---------- micro-courbes ---------- */
-
-function courbe(id){
-  const serie = (donnees.courbes || {})[id];
-  if (!serie || serie.length < 4) return "";
-  const min = Math.min(...serie), max = Math.max(...serie);
-  const etendue = (max - min) || 1;
-  const L = 52, H = 15;
-  const points = serie.map((v,i) =>
-    `${(i/(serie.length-1)*L).toFixed(1)},${(H - ((v-min)/etendue)*H).toFixed(1)}`).join(" ");
-  const monte = serie[serie.length-1] >= serie[0];
-  return `<svg class="courbe" viewBox="0 0 ${L} ${H}" preserveAspectRatio="none" aria-hidden="true">
-    <polyline points="${points}" stroke="${monte ? "var(--hausse)" : "var(--baisse)"}"/></svg>`;
-}
-
-/* ---------- alertes et agenda ---------- */
-
-function afficherAlertes(){
-  const zone = document.getElementById("alertes");
-  const liste = donnees.alertes || [];
-  const anomalies = donnees.anomalies || [];
-  zone.hidden = liste.length === 0 && anomalies.length === 0;
-  zone.innerHTML = liste.map(a => {
-    const unite = a.unite ? ` ${a.unite}` : "";
-    return `<p>${a.message} — <span class="valeur">${a.valeur}${unite}</span></p>`;
-  }).join("") + anomalies.map(a => `<p class="muet">${a.message}</p>`).join("");
-}
-
-function afficherAgenda(){
-  const zone = document.getElementById("agenda");
-  const liste = donnees.agenda || [];
-  zone.hidden = liste.length === 0;
-  if (!liste.length) return;
-  zone.innerHTML = `<div class="groupe-tete"><span class="legende">Prochains rendez-vous</span></div>` +
-    liste.map(r => {
-      const quand = r.jours === 0 ? "aujourd'hui" : r.jours === 1 ? "demain" : `dans ${r.jours} jours`;
-      return `<div class="ligne">
-        <span class="ligne-nom"><span class="nom">${r.label}</span>
-        ${r.detail ? `<span class="note">${r.detail}</span>` : ""}</span>
-        <span class="quand${r.jours <= 3 ? " proche" : ""}">${fr.date.format(new Date(r.date))} — ${quand}</span>
-      </div>`;
-    }).join("");
-}
-
 /* ---------- hero ---------- */
 .hero{display:grid;gap:28px;padding:6px 0 34px;border-bottom:1px solid var(--filet)}
 @media(min-width:760px){.hero{grid-template-columns:1.4fr 1fr 1fr;align-items:end;gap:44px}}
@@ -170,136 +126,6 @@ function afficherAgenda(){
 .recherche:focus{outline:none;border-bottom-color:var(--or-sombre)}
 .bascule{font-size:13px;color:var(--doux);display:flex;align-items:center;gap:8px;white-space:nowrap}
 .bascule input{accent-color:var(--or);width:16px;height:16px}
-
-/* ---------- ce que je lis vraiment ---------- */
-
-function compter(article){
-  const cle = article.source || "inconnu";
-  lectures[cle] = (lectures[cle] || 0) + 1;
-  stockage.ecrire(CLE_LECTURES, lectures);
-}
-
-function affinite(article){
-  return lectures[article.source] || 0;
-}
-
-function afficherLectures(){
-  const zone = document.getElementById("lectures");
-  if (!zone.hidden){ zone.hidden = true; return; }
-
-  const produits = {};
-  for (const a of donnees.articles){
-    produits[a.source] = (produits[a.source] || 0) + 1;
-    for (const o of (a.autres || [])) produits[o.source] = (produits[o.source] || 0) + 1;
-  }
-  const noms = [...new Set([...Object.keys(produits), ...Object.keys(lectures)])];
-  noms.sort((a,b) => (lectures[b]||0) - (lectures[a]||0) || (produits[b]||0) - (produits[a]||0));
-
-  const max = Math.max(1, ...noms.map(n => lectures[n] || 0));
-  zone.hidden = false;
-  zone.innerHTML = `<div class="groupe-tete"><span class="legende">Ce que je lis</span>
-      <button class="copier-tout" id="copier-lectures">Copier le relevé</button></div>
-    <p class="muet" style="margin:6px 0 10px">Ouvertures depuis ce navigateur, face au nombre de sujets produits.
-    Une source qui produit beaucoup et que tu n'ouvres jamais mérite d'être retirée de sources.yaml.</p>` +
-    noms.slice(0,25).map(nom => `<div class="ligne">
-        <span class="ligne-nom"><span class="nom">${nom}</span>
-          <span class="barre" style="width:${Math.round(((lectures[nom]||0)/max)*120)}px"></span></span>
-        <span class="ligne-val"><span class="val">${lectures[nom]||0}</span>
-          <span class="var">sur ${produits[nom]||0}</span></span>
-      </div>`).join("");
-
-  document.getElementById("copier-lectures").addEventListener("click", (e) => {
-    const texte = noms.map(n => `${n}\t${lectures[n]||0} ouvert\t${produits[n]||0} produit`).join("\n");
-    copier(texte, e.currentTarget, "Relevé copié");
-  });
-}
-
-/* ---------- archive ---------- */
-
-const moisCharges = {};
-let indexArchive = null;
-
-async function chargerMois(mois){
-  if (moisCharges[mois]) return moisCharges[mois];
-  try{
-    const reponse = await fetch(`data/archives/${mois}.json`, {cache:"no-store"});
-    moisCharges[mois] = (await reponse.json()).articles || [];
-  }catch{ moisCharges[mois] = []; }
-  return moisCharges[mois];
-}
-
-async function chercherArchive(terme){
-  const zone = document.getElementById("archive");
-  if (terme.length < 3){ zone.hidden = true; return; }
-
-  if (!indexArchive){
-    try{
-      const reponse = await fetch("data/archives/index.json", {cache:"no-store"});
-      indexArchive = (await reponse.json()).mois || [];
-    }catch{ indexArchive = []; }
-  }
-
-  const visibles = new Set(donnees.articles.map(a => a.id));
-  const trouves = [];
-  // Du mois le plus récent au plus ancien, on s'arrête dès qu'on a de quoi répondre.
-  for (const entree of indexArchive.slice(0, 18)){
-    for (const a of await chargerMois(entree.mois)){
-      if (!visibles.has(a.id) && a.titre.toLowerCase().includes(terme)) trouves.push(a);
-    }
-    if (trouves.length >= 12) break;
-  }
-  trouves.splice(12);
-
-  zone.hidden = trouves.length === 0;
-  if (!trouves.length) return;
-  zone.innerHTML = `<div class="groupe-tete"><span class="legende">Dans l'archive</span></div>` +
-    trouves.map(a => `<div class="ligne">
-      <span class="ligne-nom"><span class="nom"><a href="${a.url}" target="_blank" rel="noopener">${a.titre}</a></span>
-      <span class="note">${a.source}</span></span>
-      <span class="quand">${fr.date.format(new Date(a.publie_le))}</span></div>`).join("");
-}
-
-/* ---------- copie ---------- */
-
-const ICONE_COPIE = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>';
-const ICONE_EPINGLE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-2.8L7 19l1-6-4-4 5.5-.5z"/></svg>';
-
-function texteArticle(a){
-  const date = new Date(a.publie_le);
-  let texte = `${a.titre}\n${a.source} — ${fr.court.format(date)}\n${a.url}`;
-  if (a.autres && a.autres.length){
-    texte += "\nAussi chez " + a.autres.map(o => `${o.source} (${o.url})`).join(", ");
-  }
-  return texte;
-}
-
-async function copier(texte, bouton, confirmation){
-  const initial = bouton.dataset.initial || bouton.textContent.trim();
-  bouton.dataset.initial = initial;
-  let reussi = true;
-  try{
-    await navigator.clipboard.writeText(texte);
-  }catch{
-    const zone = document.createElement("textarea");
-    zone.value = texte;
-    zone.setAttribute("readonly","");
-    zone.style.position = "fixed";
-    zone.style.opacity = "0";
-    document.body.appendChild(zone);
-    zone.select();
-    try{ reussi = document.execCommand("copy"); }catch{ reussi = false; }
-    zone.remove();
-  }
-  const libelle = reussi ? confirmation : "Copie refusée";
-  bouton.dataset.fait = reussi ? "oui" : "non";
-  if (bouton.querySelector("span")) bouton.querySelector("span").textContent = libelle;
-  else bouton.textContent = libelle;
-  setTimeout(() => {
-    bouton.dataset.fait = "";
-    if (bouton.querySelector("span")) bouton.querySelector("span").textContent = initial;
-    else bouton.textContent = initial;
-  }, 1800);
-}
 
 /* ---------- flux ---------- */
 .jour{font-size:12px;color:var(--tres-doux);margin:28px 0 2px;font-variant-numeric:tabular-nums}
@@ -443,6 +269,50 @@ function variation(ind){
   return { texte:"stable", classe:"" };
 }
 
+/* ---------- micro-courbes ---------- */
+
+function courbe(id){
+  const serie = (donnees.courbes || {})[id];
+  if (!serie || serie.length < 4) return "";
+  const min = Math.min(...serie), max = Math.max(...serie);
+  const etendue = (max - min) || 1;
+  const L = 52, H = 15;
+  const points = serie.map((v,i) =>
+    `${(i/(serie.length-1)*L).toFixed(1)},${(H - ((v-min)/etendue)*H).toFixed(1)}`).join(" ");
+  const monte = serie[serie.length-1] >= serie[0];
+  return `<svg class="courbe" viewBox="0 0 ${L} ${H}" preserveAspectRatio="none" aria-hidden="true">
+    <polyline points="${points}" stroke="${monte ? "var(--hausse)" : "var(--baisse)"}"/></svg>`;
+}
+
+/* ---------- alertes et agenda ---------- */
+
+function afficherAlertes(){
+  const zone = document.getElementById("alertes");
+  const liste = donnees.alertes || [];
+  const anomalies = donnees.anomalies || [];
+  zone.hidden = liste.length === 0 && anomalies.length === 0;
+  zone.innerHTML = liste.map(a => {
+    const unite = a.unite ? ` ${a.unite}` : "";
+    return `<p>${a.message} — <span class="valeur">${a.valeur}${unite}</span></p>`;
+  }).join("") + anomalies.map(a => `<p class="muet">${a.message}</p>`).join("");
+}
+
+function afficherAgenda(){
+  const zone = document.getElementById("agenda");
+  const liste = donnees.agenda || [];
+  zone.hidden = liste.length === 0;
+  if (!liste.length) return;
+  zone.innerHTML = `<div class="groupe-tete"><span class="legende">Prochains rendez-vous</span></div>` +
+    liste.map(r => {
+      const quand = r.jours === 0 ? "aujourd'hui" : r.jours === 1 ? "demain" : `dans ${r.jours} jours`;
+      return `<div class="ligne">
+        <span class="ligne-nom"><span class="nom">${r.label}</span>
+        ${r.detail ? `<span class="note">${r.detail}</span>` : ""}</span>
+        <span class="quand${r.jours <= 3 ? " proche" : ""}">${fr.date.format(new Date(r.date))} — ${quand}</span>
+      </div>`;
+    }).join("");
+}
+
 /* ---------- hero ---------- */
 
 function afficherHero(){
@@ -549,6 +419,136 @@ function afficherChiffres(){
     }
     cible.appendChild(bloc);
   }
+}
+
+/* ---------- ce que je lis vraiment ---------- */
+
+function compter(article){
+  const cle = article.source || "inconnu";
+  lectures[cle] = (lectures[cle] || 0) + 1;
+  stockage.ecrire(CLE_LECTURES, lectures);
+}
+
+function affinite(article){
+  return lectures[article.source] || 0;
+}
+
+function afficherLectures(){
+  const zone = document.getElementById("lectures");
+  if (!zone.hidden){ zone.hidden = true; return; }
+
+  const produits = {};
+  for (const a of donnees.articles){
+    produits[a.source] = (produits[a.source] || 0) + 1;
+    for (const o of (a.autres || [])) produits[o.source] = (produits[o.source] || 0) + 1;
+  }
+  const noms = [...new Set([...Object.keys(produits), ...Object.keys(lectures)])];
+  noms.sort((a,b) => (lectures[b]||0) - (lectures[a]||0) || (produits[b]||0) - (produits[a]||0));
+
+  const max = Math.max(1, ...noms.map(n => lectures[n] || 0));
+  zone.hidden = false;
+  zone.innerHTML = `<div class="groupe-tete"><span class="legende">Ce que je lis</span>
+      <button class="copier-tout" id="copier-lectures">Copier le relevé</button></div>
+    <p class="muet" style="margin:6px 0 10px">Ouvertures depuis ce navigateur, face au nombre de sujets produits.
+    Une source qui produit beaucoup et que tu n'ouvres jamais mérite d'être retirée de sources.yaml.</p>` +
+    noms.slice(0,25).map(nom => `<div class="ligne">
+        <span class="ligne-nom"><span class="nom">${nom}</span>
+          <span class="barre" style="width:${Math.round(((lectures[nom]||0)/max)*120)}px"></span></span>
+        <span class="ligne-val"><span class="val">${lectures[nom]||0}</span>
+          <span class="var">sur ${produits[nom]||0}</span></span>
+      </div>`).join("");
+
+  document.getElementById("copier-lectures").addEventListener("click", (e) => {
+    const texte = noms.map(n => `${n}\t${lectures[n]||0} ouvert\t${produits[n]||0} produit`).join("\n");
+    copier(texte, e.currentTarget, "Relevé copié");
+  });
+}
+
+/* ---------- archive ---------- */
+
+const moisCharges = {};
+let indexArchive = null;
+
+async function chargerMois(mois){
+  if (moisCharges[mois]) return moisCharges[mois];
+  try{
+    const reponse = await fetch(`data/archives/${mois}.json`, {cache:"no-store"});
+    moisCharges[mois] = (await reponse.json()).articles || [];
+  }catch{ moisCharges[mois] = []; }
+  return moisCharges[mois];
+}
+
+async function chercherArchive(terme){
+  const zone = document.getElementById("archive");
+  if (terme.length < 3){ zone.hidden = true; return; }
+
+  if (!indexArchive){
+    try{
+      const reponse = await fetch("data/archives/index.json", {cache:"no-store"});
+      indexArchive = (await reponse.json()).mois || [];
+    }catch{ indexArchive = []; }
+  }
+
+  const visibles = new Set(donnees.articles.map(a => a.id));
+  const trouves = [];
+  // Du mois le plus récent au plus ancien, on s'arrête dès qu'on a de quoi répondre.
+  for (const entree of indexArchive.slice(0, 18)){
+    for (const a of await chargerMois(entree.mois)){
+      if (!visibles.has(a.id) && a.titre.toLowerCase().includes(terme)) trouves.push(a);
+    }
+    if (trouves.length >= 12) break;
+  }
+  trouves.splice(12);
+
+  zone.hidden = trouves.length === 0;
+  if (!trouves.length) return;
+  zone.innerHTML = `<div class="groupe-tete"><span class="legende">Dans l'archive</span></div>` +
+    trouves.map(a => `<div class="ligne">
+      <span class="ligne-nom"><span class="nom"><a href="${a.url}" target="_blank" rel="noopener">${a.titre}</a></span>
+      <span class="note">${a.source}</span></span>
+      <span class="quand">${fr.date.format(new Date(a.publie_le))}</span></div>`).join("");
+}
+
+/* ---------- copie ---------- */
+
+const ICONE_COPIE = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>';
+const ICONE_EPINGLE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-2.8L7 19l1-6-4-4 5.5-.5z"/></svg>';
+
+function texteArticle(a){
+  const date = new Date(a.publie_le);
+  let texte = `${a.titre}\n${a.source} — ${fr.court.format(date)}\n${a.url}`;
+  if (a.autres && a.autres.length){
+    texte += "\nAussi chez " + a.autres.map(o => `${o.source} (${o.url})`).join(", ");
+  }
+  return texte;
+}
+
+async function copier(texte, bouton, confirmation){
+  const initial = bouton.dataset.initial || bouton.textContent.trim();
+  bouton.dataset.initial = initial;
+  let reussi = true;
+  try{
+    await navigator.clipboard.writeText(texte);
+  }catch{
+    const zone = document.createElement("textarea");
+    zone.value = texte;
+    zone.setAttribute("readonly","");
+    zone.style.position = "fixed";
+    zone.style.opacity = "0";
+    document.body.appendChild(zone);
+    zone.select();
+    try{ reussi = document.execCommand("copy"); }catch{ reussi = false; }
+    zone.remove();
+  }
+  const libelle = reussi ? confirmation : "Copie refusée";
+  bouton.dataset.fait = reussi ? "oui" : "non";
+  if (bouton.querySelector("span")) bouton.querySelector("span").textContent = libelle;
+  else bouton.textContent = libelle;
+  setTimeout(() => {
+    bouton.dataset.fait = "";
+    if (bouton.querySelector("span")) bouton.querySelector("span").textContent = initial;
+    else bouton.textContent = initial;
+  }, 1800);
 }
 
 /* ---------- flux ---------- */
@@ -701,7 +701,9 @@ function afficherContexte(){
   const sources = donnees.sources || [];
   const indispo = (donnees.indicateurs||[]).filter(i => i.statut !== "ok").length;
   const morts = sources.filter(s => !s.ok).length;
+  const replis = sources.filter(s => s.secours).length;
   const bouts = [`${sources.length - morts}/${sources.length} sources`];
+  if (replis) bouts.push(`${replis} en repli`);
   if (indispo) bouts.push(`${indispo} chiffre(s) indisponible(s)`);
   document.getElementById("etat-sources").textContent = bouts.join(", ");
 }

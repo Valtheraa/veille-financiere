@@ -186,13 +186,17 @@ bascule € / $ en tête du groupe change l'affichage sans recharger.
 
 Tout est dans `collector/sources.yaml`, en français, sans code.
 
-- `flux` : les RSS officiels. Une source qui meurt se désactive avec
-  `actif: false`.
+- `flux` : les RSS officiels. Chacun porte un `secours_q` : si le site refuse
+  le robot ou refait ses URL, le collecteur bascule tout seul sur une recherche
+  ciblée sur le même sujet, et le pied de page indique « en repli ». Une source
+  se désactive avec `actif: false`.
 - `recherches` : des requêtes de mots-clés transformées en flux Google
   Actualités. C'est le levier principal : ajoute un bloc avec un `q` et tu
   suis un nouveau sujet. La syntaxe Google marche (`"guillemets"`, `OR`,
   `-exclusion`, `site:lesechos.fr`).
 - `poids` : de 1 à 3, fait remonter la source dans le classement.
+- chaque source est plafonnée à 30 articles par collecte : une requête large ne
+  peut plus noyer les autres.
 - `signaux_forts` : les mots qui font passer un article en tête et lui
   donnent son liseré doré.
 - `bruit` : les titres à jeter.

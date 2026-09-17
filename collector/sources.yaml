@@ -6,6 +6,9 @@
 # =====================================================================
 
 # `conserver: N` garde les articles d'une source N jours au lieu de 21.
+# `secours_q: '…'` : si le flux direct tombe (404, 403, site refait), le
+# collecteur bascule tout seul sur une recherche limitée au même sujet.
+# Chaque source est plafonnée à 30 articles par collecte.
 # Catégories affichées dans le tableau de bord, dans cet ordre.
 categories:
   - id: taux
@@ -28,18 +31,22 @@ flux:
     categorie: macro
     poids: 3
     actif: true
+    secours_q: 'BCE OR "Banque centrale européenne"'
 
+  # Ce flux a disparu du site de la BCE ; les décisions passent de toute façon
+  # par le flux « press » ci-dessus.
   - nom: BCE — décisions de politique monétaire
     url: https://www.ecb.europa.eu/rss/pressconf.html
     categorie: taux
     poids: 3
-    actif: true
+    actif: false
 
   - nom: Réserve fédérale américaine
     url: https://www.federalreserve.gov/feeds/press_monetary.xml
     categorie: macro
     poids: 3
     actif: true
+    secours_q: '"Federal Reserve" (rates OR FOMC OR inflation)'
 
   - nom: Banque de France
     url: https://www.banque-france.fr/rss.xml
@@ -47,6 +54,7 @@ flux:
     poids: 2
     actif: true
     conserver: 180   # publications de fond : gardées six mois
+    secours_q: '"Banque de France" (taux OR épargne OR crédit OR conjoncture)'
 
   - nom: AMF
     url: https://www.amf-france.org/fr/rss.xml
@@ -54,6 +62,7 @@ flux:
     poids: 3
     actif: true
     conserver: 180   # publications de fond : gardées six mois
+    secours_q: 'site:amf-france.org OR ("AMF" (épargnants OR agrément OR sanction OR mise en garde))'
 
   - nom: INSEE — informations rapides
     url: https://www.insee.fr/fr/information/rss/1
@@ -61,6 +70,7 @@ flux:
     poids: 2
     actif: true
     conserver: 180   # publications de fond : gardées six mois
+    secours_q: 'site:insee.fr OR (Insee (inflation OR chômage OR croissance OR "informations rapides"))'
 
   - nom: BOFiP — actualités fiscales
     url: https://bofip.impots.gouv.fr/rss/actualites
@@ -68,6 +78,7 @@ flux:
     poids: 3
     actif: true
     conserver: 180   # publications de fond : gardées six mois
+    secours_q: 'BOFiP OR site:impots.gouv.fr OR ("administration fiscale" doctrine)'
 
   - nom: ACPR
     url: https://acpr.banque-france.fr/rss.xml
@@ -75,6 +86,7 @@ flux:
     poids: 2
     actif: true
     conserver: 180   # publications de fond : gardées six mois
+    secours_q: 'ACPR OR ("Autorité de contrôle prudentiel")'
 
   - nom: ESMA
     url: https://www.esma.europa.eu/rss.xml
@@ -82,6 +94,7 @@ flux:
     poids: 1
     actif: true
     conserver: 180   # publications de fond : gardées six mois
+    secours_q: 'ESMA OR ("European Securities and Markets Authority")'
 
   - nom: Direction générale du Trésor
     url: https://www.tresor.economie.gouv.fr/rss
@@ -89,6 +102,7 @@ flux:
     poids: 1
     actif: true
     conserver: 180   # publications de fond : gardées six mois
+    secours_q: 'site:tresor.economie.gouv.fr OR ("direction générale du Trésor")'
 
   - nom: Autorité bancaire européenne
     url: https://www.eba.europa.eu/rss.xml
