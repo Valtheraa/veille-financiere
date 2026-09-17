@@ -1,0 +1,156 @@
+# =====================================================================
+#  Sources de la veille. Tout est gratuit et sans clé d'API.
+#  Pour ajouter une source : copie un bloc, change l'URL.
+#  Pour en retirer une : mets `actif: false` (plus lisible que supprimer).
+#  Vérifie l'état de tout : python collector/fetch.py --check
+# =====================================================================
+
+# Catégories affichées dans le tableau de bord, dans cet ordre.
+categories:
+  - id: taux
+    label: Taux & crédit
+  - id: marches
+    label: Marchés & ETF
+  - id: crypto
+    label: Crypto
+  - id: macro
+    label: Macro & régulation
+  - id: geo
+    label: Géopolitique
+
+# ---------------------------------------------------------------------
+# Flux RSS officiels : la source la plus fiable, publiée par l'émetteur.
+# ---------------------------------------------------------------------
+flux:
+  - nom: Banque centrale européenne
+    url: https://www.ecb.europa.eu/rss/press.html
+    categorie: macro
+    poids: 3
+    actif: true
+
+  - nom: BCE — décisions de politique monétaire
+    url: https://www.ecb.europa.eu/rss/pressconf.html
+    categorie: taux
+    poids: 3
+    actif: true
+
+  - nom: Réserve fédérale américaine
+    url: https://www.federalreserve.gov/feeds/press_monetary.xml
+    categorie: macro
+    poids: 3
+    actif: true
+
+  - nom: Banque de France
+    url: https://www.banque-france.fr/rss.xml
+    categorie: macro
+    poids: 2
+    actif: true
+
+  - nom: AMF
+    url: https://www.amf-france.org/fr/rss.xml
+    categorie: macro
+    poids: 3
+    actif: true
+
+  - nom: INSEE — informations rapides
+    url: https://www.insee.fr/fr/information/rss/1
+    categorie: macro
+    poids: 2
+    actif: true
+
+  - nom: Autorité bancaire européenne
+    url: https://www.eba.europa.eu/rss.xml
+    categorie: macro
+    poids: 1
+    actif: false
+
+# ---------------------------------------------------------------------
+# Requêtes Google Actualités : un flux RSS gratuit et illimité construit
+# à partir de mots-clés. C'est ce qui couvre la presse française, dont
+# les flux maison meurent ou changent d'adresse tout le temps.
+# `q` accepte la syntaxe Google : guillemets, OR, -exclusion, site:.
+# ---------------------------------------------------------------------
+recherches:
+  - nom: Crédit immobilier
+    q: '"taux crédit immobilier" OR "baromètre des taux" OR "taux d''usure"'
+    categorie: taux
+    poids: 3
+    actif: true
+
+  - nom: Épargne réglementée
+    q: '"livret A" OR "LEP" OR "taux du livret" OR "assurance vie" rendement'
+    categorie: taux
+    poids: 2
+    actif: true
+
+  - nom: Marchés actions
+    q: 'CAC 40 OR "marchés actions" OR "Wall Street" séance'
+    categorie: marches
+    poids: 2
+    actif: true
+
+  - nom: ETF et PEA
+    q: 'ETF OR "gestion passive" OR PEA OR "plan d''épargne en actions"'
+    categorie: marches
+    poids: 2
+    actif: true
+
+  - nom: Crypto
+    q: 'bitcoin OR ethereum OR "crypto-actifs" OR MiCA'
+    categorie: crypto
+    poids: 2
+    actif: true
+
+  - nom: Fiscalité crypto France
+    q: '"fiscalité des cryptomonnaies" OR "déclaration crypto" OR "3916-bis"'
+    categorie: crypto
+    poids: 3
+    actif: true
+
+  - nom: Banque de détail et courtage
+    q: 'courtier OR "conseiller en gestion de patrimoine" OR "banque de détail" France'
+    categorie: macro
+    poids: 1
+    actif: true
+
+  - nom: Géopolitique à effet marché
+    q: '(pétrole OR OPEP OR "droits de douane" OR sanctions OR "chaîne d''approvisionnement") (marchés OR bourse OR inflation)'
+    categorie: geo
+    poids: 2
+    actif: true
+
+  - nom: Tensions et énergie
+    q: '(Moyen-Orient OR Taïwan OR Ukraine OR "mer Rouge") (énergie OR économie OR marchés)'
+    categorie: geo
+    poids: 1
+    actif: true
+
+# ---------------------------------------------------------------------
+# Mots-clés qui font remonter un article en tête de liste.
+# ---------------------------------------------------------------------
+signaux_forts:
+  - taux directeur
+  - baisse des taux
+  - hausse des taux
+  - inflation
+  - récession
+  - krach
+  - sanction
+  - AMF
+  - fraude
+  - arnaque
+  - livret A
+  - taux d'usure
+  - plafond
+  - fiscalité
+  - loi de finances
+  - prélèvement forfaitaire
+
+# ---------------------------------------------------------------------
+# Bruit à écarter : titres qui contiennent un de ces termes sont ignorés.
+# ---------------------------------------------------------------------
+bruit:
+  - horoscope
+  - people
+  - prix nobel de littérature
+  - loterie

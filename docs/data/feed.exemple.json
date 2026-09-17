@@ -1,0 +1,261 @@
+{
+ "genere_le": "2026-09-17T17:37:21.289070+00:00",
+ "categories": [
+  {
+   "id": "taux",
+   "label": "Taux & crédit"
+  },
+  {
+   "id": "marches",
+   "label": "Marchés & ETF"
+  },
+  {
+   "id": "crypto",
+   "label": "Crypto"
+  },
+  {
+   "id": "macro",
+   "label": "Macro & régulation"
+  },
+  {
+   "id": "geo",
+   "label": "Géopolitique"
+  }
+ ],
+ "indicateurs": [
+  {
+   "id": "bce_depot",
+   "label": "Taux de dépôt BCE",
+   "unite": "%",
+   "groupe": "taux",
+   "valeur": 2.0,
+   "variation": 0.0,
+   "variation_pct": null,
+   "date": "2026-09-17",
+   "source": "exemple",
+   "statut": "ok",
+   "erreur": null
+  },
+  {
+   "id": "bce_refi",
+   "label": "Taux de refinancement BCE",
+   "unite": "%",
+   "groupe": "taux",
+   "valeur": 2.15,
+   "variation": 0.0,
+   "variation_pct": null,
+   "date": "2026-09-17",
+   "source": "exemple",
+   "statut": "ok",
+   "erreur": null
+  },
+  {
+   "id": "euribor_3m",
+   "label": "Euribor 3 mois",
+   "unite": "%",
+   "groupe": "taux",
+   "valeur": 2.08,
+   "variation": -0.02,
+   "variation_pct": null,
+   "date": "2026-09-17",
+   "source": "exemple",
+   "statut": "ok",
+   "erreur": null
+  },
+  {
+   "id": "oat_10a",
+   "label": "Taux long France 10 ans",
+   "unite": "%",
+   "groupe": "taux",
+   "valeur": 3.24,
+   "variation": 0.06,
+   "variation_pct": null,
+   "date": "2026-09-17",
+   "source": "exemple",
+   "statut": "ok",
+   "erreur": null
+  },
+  {
+   "id": "cac40",
+   "label": "CAC 40",
+   "unite": "pts",
+   "groupe": "marches",
+   "valeur": 7850.0,
+   "variation": null,
+   "variation_pct": -0.42,
+   "date": "2026-09-17",
+   "source": "exemple",
+   "statut": "ok",
+   "erreur": null
+  },
+  {
+   "id": "sp500",
+   "label": "S&P 500",
+   "unite": "pts",
+   "groupe": "marches",
+   "valeur": 5620.0,
+   "variation": null,
+   "variation_pct": 0.31,
+   "date": "2026-09-17",
+   "source": "exemple",
+   "statut": "ok",
+   "erreur": null
+  },
+  {
+   "id": "nasdaq",
+   "label": "Nasdaq 100",
+   "unite": "pts",
+   "groupe": "marches",
+   "valeur": null,
+   "variation": null,
+   "variation_pct": null,
+   "date": null,
+   "source": null,
+   "statut": "indisponible",
+   "erreur": "exemple"
+  },
+  {
+   "id": "eurusd",
+   "label": "EUR / USD",
+   "unite": "$",
+   "groupe": "marches",
+   "valeur": 1.0842,
+   "variation": null,
+   "variation_pct": null,
+   "date": "2026-09-17",
+   "source": "exemple",
+   "statut": "ok",
+   "erreur": null
+  },
+  {
+   "id": "btc",
+   "label": "Bitcoin",
+   "unite": "€",
+   "groupe": "crypto",
+   "valeur": 58400.0,
+   "variation": null,
+   "variation_pct": 1.8,
+   "date": "2026-09-17",
+   "source": "exemple",
+   "statut": "ok",
+   "erreur": null
+  },
+  {
+   "id": "eth",
+   "label": "Ethereum",
+   "unite": "€",
+   "groupe": "crypto",
+   "valeur": 2310.0,
+   "variation": null,
+   "variation_pct": -0.9,
+   "date": "2026-09-17",
+   "source": "exemple",
+   "statut": "ok",
+   "erreur": null
+  }
+ ],
+ "articles": [
+  {
+   "id": "demo0",
+   "titre": "Exemple — décision de politique monétaire de la BCE",
+   "url": "https://example.org",
+   "source": "Banque centrale européenne",
+   "rubrique": "exemple",
+   "categorie": "macro",
+   "genre": "officiel",
+   "publie_le": "2026-09-17T15:37:21.289070+00:00",
+   "resume": "Fichier d'exemple : remplacé dès la première collecte réelle.",
+   "score": 46,
+   "signaux": [
+    "taux directeur"
+   ],
+   "premiere_vue": "2026-09-17T15:37:21.289070+00:00"
+  },
+  {
+   "id": "demo1",
+   "titre": "Exemple — le baromètre des taux de crédit immobilier du mois",
+   "url": "https://example.org",
+   "source": "MoneyVox",
+   "rubrique": "exemple",
+   "categorie": "taux",
+   "genre": "officiel",
+   "publie_le": "2026-09-17T12:37:21.289070+00:00",
+   "resume": "Fichier d'exemple : remplacé dès la première collecte réelle.",
+   "score": 38,
+   "signaux": [
+    "taux d'usure"
+   ],
+   "premiere_vue": "2026-09-17T12:37:21.289070+00:00"
+  },
+  {
+   "id": "demo2",
+   "titre": "Exemple — séance de baisse sur les marchés européens",
+   "url": "https://example.org",
+   "source": "Les Echos",
+   "rubrique": "exemple",
+   "categorie": "marches",
+   "genre": "officiel",
+   "publie_le": "2026-09-17T10:37:21.289070+00:00",
+   "resume": "Fichier d'exemple : remplacé dès la première collecte réelle.",
+   "score": 26,
+   "signaux": [],
+   "premiere_vue": "2026-09-17T10:37:21.289070+00:00"
+  },
+  {
+   "id": "demo3",
+   "titre": "Exemple — nouvelle étape du règlement MiCA",
+   "url": "https://example.org",
+   "source": "AMF",
+   "rubrique": "exemple",
+   "categorie": "crypto",
+   "genre": "officiel",
+   "publie_le": "2026-09-16T21:37:21.289070+00:00",
+   "resume": "Fichier d'exemple : remplacé dès la première collecte réelle.",
+   "score": 40,
+   "signaux": [
+    "AMF"
+   ],
+   "premiere_vue": "2026-09-16T21:37:21.289070+00:00"
+  },
+  {
+   "id": "demo4",
+   "titre": "Exemple — tensions sur l'approvisionnement en pétrole",
+   "url": "https://example.org",
+   "source": "Reuters",
+   "rubrique": "exemple",
+   "categorie": "geo",
+   "genre": "officiel",
+   "publie_le": "2026-09-16T11:37:21.289070+00:00",
+   "resume": "Fichier d'exemple : remplacé dès la première collecte réelle.",
+   "score": 24,
+   "signaux": [],
+   "premiere_vue": "2026-09-16T11:37:21.289070+00:00"
+  },
+  {
+   "id": "demo5",
+   "titre": "Exemple — publication de l'indice des prix à la consommation",
+   "url": "https://example.org",
+   "source": "INSEE",
+   "rubrique": "exemple",
+   "categorie": "macro",
+   "genre": "officiel",
+   "publie_le": "2026-09-15T15:37:21.289070+00:00",
+   "resume": "Fichier d'exemple : remplacé dès la première collecte réelle.",
+   "score": 30,
+   "signaux": [
+    "inflation"
+   ],
+   "premiere_vue": "2026-09-15T15:37:21.289070+00:00"
+  }
+ ],
+ "sources": [
+  {
+   "nom": "exemple",
+   "genre": "officiel",
+   "ok": true,
+   "nombre": 6,
+   "erreur": null
+  }
+ ],
+ "resume": "Fichier d'exemple pour voir l'interface avant la première collecte. Les chiffres et les titres ci-dessous sont fictifs."
+}
