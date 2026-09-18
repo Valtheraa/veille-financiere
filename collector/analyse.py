@@ -66,6 +66,45 @@ def verifier_coherence(indicateurs, points, ecart_pct=25.0, ecart_pt=1.5):
     return anomalies
 
 
+def verifier_fraicheur(indicateurs):
+    """
+    Une valeur saisie à la main vieillit en silence. Dès qu'une date de révision
+    est passée sans que la valeur ait bougé, on le signale : c'est le seul
+    garde-fou contre un Livret A affiché à l'ancien taux pendant six mois.
+    """
+    aujourdhui = datetime.now(timezone.utc).date()
+    anomalies = []
+    for ind in indicateurs:
+        if not (ind.get("repli") or ind.get("source") == "saisi à la main"):
+            continue
+        if not ind.get("date"):
+            continue
+        try:
+            saisie = date.fromisoformat(str(ind["date"])[:10])
+        except ValueError:
+            continue
+
+        if ind.get("theme") == "epargne":
+            revisions = [date(a, m, 1) for a in (saisie.year, saisie.year + 1) for m in (2, 8)]
+            echue = max((r for r in revisions if saisie < r <= aujourdhui), default=None)
+            quand = "la révision du 1er février" if echue and echue.month == 2 else "la révision du 1er août"
+        elif ind.get("theme") == "credit":
+            echue = saisie if (aujourdhui - saisie).days > 45 else None
+            quand = "le baromètre mensuel des courtiers"
+        else:
+            echue = saisie if (aujourdhui - saisie).days > 200 else None
+            quand = "la dernière publication"
+
+        if echue:
+            anomalies.append({
+                "id": ind["id"],
+                "label": ind["label"],
+                "message": f"{ind['label']} n'a pas été mis à jour depuis {quand} "
+                           f"— valeur saisie le {ind['date']}",
+            })
+    return anomalies
+
+
 def mettre_a_jour_historique(points, indicateurs):
     """Un point par jour. Une nouvelle collecte du jour écrase la précédente."""
     aujourdhui = datetime.now(timezone.utc).date().isoformat()
@@ -187,6 +226,18 @@ def _prochaine_date(entree, aujourdhui):
                 return candidat
     elif recurrence == "mensuel":
         demande = entree["jour"]
+        # « 1er vendredi » : l'emploi américain tombe ce jour-là chaque mois.
+        rang_jour = re.match(r"(\d)(?:er|e)?\s+(\w+)", str(demande).lower())
+        if rang_jour:
+            jours = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"]
+            if rang_jour.group(2) in jours:
+                cible = jours.index(rang_jour.group(2))
+                rang = int(rang_jour.group(1))
+                for decalage in range(0, 70):
+                    candidat = aujourdhui + timedelta(days=decalage)
+                    if candidat.weekday() == cible and (candidat.day - 1) // 7 + 1 == rang:
+                        return candidat
+                return None
         for decalage in range(0, 70):
             candidat = aujourdhui + timedelta(days=decalage)
             dernier = (candidat.replace(day=28) + timedelta(days=4)).replace(day=1) - timedelta(days=1)
@@ -198,7 +249,7 @@ def _prochaine_date(entree, aujourdhui):
     return None
 
 
-def prochains_rendez_vous(agenda, combien=6):
+def prochains_rendez_vous(agenda, combien=24):
     aujourdhui = datetime.now(timezone.utc).date()
     sortie = []
     for entree in (agenda or {}).get("rendez_vous", []):
@@ -413,7 +464,7 @@ def resume_automatique(indicateurs, alertes, articles):
     bougeurs = [
         i for i in indicateurs
         if i["statut"] == "ok" and i.get("variation_pct") not in (None, 0)
-        and i["groupe"] in ("indices", "crypto", "matieres")
+        and i.get("theme") in ("marches", "crypto", "matieres")
     ]
     bougeurs.sort(key=lambda i: abs(i["variation_pct"]), reverse=True)
     if bougeurs:

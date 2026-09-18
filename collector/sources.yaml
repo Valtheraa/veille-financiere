@@ -122,49 +122,57 @@ recherches:
     categorie: taux
     poids: 3
     actif: true
+    exiger: [taux, crédit, prêt, emprunt, immobilier, courtier, banque, usure, barème]
 
   - nom: Épargne réglementée
     q: '"livret A" OR "LEP" OR "taux du livret" OR "assurance vie" rendement'
     categorie: taux
     poids: 2
     actif: true
+    exiger: [livret, épargne, lep, ldds, assurance vie, rendement, taux, plafond, placement]
 
   - nom: Marchés actions
     q: 'CAC 40 OR "marchés actions" OR "Wall Street" séance'
     categorie: marches
     poids: 2
     actif: true
+    exiger: [bourse, cac, action, indice, marché, séance, wall street, clôture, cotation]
 
   - nom: ETF et PEA
     q: 'ETF OR "gestion passive" OR PEA OR "plan d''épargne en actions"'
     categorie: marches
     poids: 2
     actif: true
+    exiger: [etf, pea, fonds, indiciel, gestion, collecte, épargne, investir, placement, msci]
 
   - nom: Crypto
     q: 'bitcoin OR ethereum OR "crypto-actifs" OR MiCA'
     categorie: crypto
     poids: 2
     actif: true
+    exiger: [bitcoin, crypto, ethereum, btc, eth, blockchain, mica, stablecoin, token]
 
   - nom: Fiscalité crypto France
     q: '"fiscalité des cryptomonnaies" OR "déclaration crypto" OR "3916-bis"'
     categorie: crypto
     poids: 3
     actif: true
+    exiger: [fiscalité, impôt, déclaration, plus-value, crypto, bitcoin, fisc]
 
   - nom: Banque de détail et courtage
     q: '"courtier en crédit" OR "conseiller en gestion de patrimoine" OR "courtage en assurance" OR "banque de détail"'
     categorie: macro
     poids: 1
     actif: true
+    exiger: [banque, courtier, courtage, patrimoine, cgp, conseiller, client, assurance, crédit]
 
   - nom: Fiscalité et loi de finances
     q: '("loi de finances" OR "prélèvement forfaitaire" OR "flat tax" OR BOFiP OR "abattement fiscal") (France OR Bercy OR gouvernement OR Assemblée)'
     categorie: macro
     poids: 3
     actif: true
-    exiger: [france, bercy, gouvernement, assemblée, sénat, budget, impôt, fiscal, épargne, retrait]
+    exiger: [bercy, gouvernement, assemblée nationale, sénat, budget, impôt, fiscal,
+             épargne, loi de finances, prélèvement, taxe, contribuable, déficit]
 
   - nom: Journal officiel et textes réglementaires
     q: '"Journal officiel" (épargne OR livret OR crédit OR banque OR "taux d''usure" OR assurance)'
@@ -256,6 +264,24 @@ exclure_partout:
   - synagogue
   - terroriste
   - viol
+  - arrestation
+  - braquage
+  - cambriolage
+  - accident
+  - procès
+  - prison
+  - trafic de
+  - stupéfiants
+  - refus d'obtempérer
+  - permis de conduire
+  - automobiliste
+  - est mort
+  - est morte
+  - tué
+  - tuée
+  - victime
+  - disparition
+  - faits divers
 
 bruit:
   - horoscope

@@ -1,413 +1,809 @@
 # =====================================================================
 #  Les chiffres du tableau de bord.
-#  Chaque ligne = un indicateur. Pour en retirer un : actif: false.
-#  Sources disponibles, toutes gratuites et sans clé :
-#    bce      série du portail de données BCE (data-api.ecb.europa.eu)
-#    fed      taux de référence de la Fed de New York
-#    boe      Banque d'Angleterre
-#    marche   Yahoo Finance, avec Stooq en secours (indices, matières, devises)
-#    change   Frankfurter, alimenté par les taux de référence BCE
-#    crypto   CoinGecko (valeur renvoyée en euro ET en dollar)
-#    global   CoinGecko, données agrégées du marché crypto
-#    peur     indice Fear & Greed crypto
-#    manuel   valeur que tu saisis ici à la main
-#    calcule  dérivé d'autres indicateurs (voir `formule`)
+#  Deux axes, comme Trading Economics : un PAYS, un THÈME.
+#  Les noms sont ceux qu'on emploie en parlant, pas ceux des économistes.
+#
+#  Sources, toutes gratuites :
+#    bce       portail de données BCE — zone euro, France, pays membres
+#    fed       taux de référence de la Fed de New York
+#    boe       Banque d'Angleterre
+#    tresor_us courbe des taux du Trésor américain
+#    bls       statistiques du travail américaines (25 appels par jour, sans clé)
+#    fred      base de la Fed de Saint-Louis — clé gratuite, secret FRED_API_KEY
+#    marche    Yahoo Finance, Stooq en secours
+#    change    Frankfurter (taux BCE)
+#    crypto / global / peur   CoinGecko et Fear & Greed
+#    manuel    valeur saisie ici
+#    calcule   dérivé d'autres lignes
+#
+#  Sans clé FRED, les lignes américaines marquées `source: fred` restent
+#  indisponibles ; chômage et inflation US passent par le BLS et fonctionnent.
 # =====================================================================
 
-groupes:
-  - id: banques_centrales
-    label: Banques centrales
+pays:
+  - id: fr
+    label: France
+  - id: ze
+    label: Zone euro
+  - id: us
+    label: États-Unis
+  - id: gb
+    label: Royaume-Uni
+  - id: de
+    label: Allemagne
+  - id: it
+    label: Italie
+  - id: jp
+    label: Japon
+  - id: monde
+    label: Monde
+
+# Les trois chiffres affichés en haut de page suivent le pays choisi : sur
+# l'onglet États-Unis, on ne veut pas lire le taux de la BCE.
+heros:
+  fr: [oat_10a, cac40, inflation_fr]
+  ze: [bce_depot, stoxx600, inflation_ze]
+  us: [fed_directeur, sp500, inflation_us]
+  gb: [boe_directeur, ftse, inflation_gb]
+  de: [bund_10a, dax, inflation_de]
+  it: [btp_10a, inflation_it, chomage_it]
+  jp: [nikkei, inflation_jp, eurjpy]
+  monde: [btc, or, brent]
+
+themes:
+  - id: politique_monetaire
+    label: Politique monétaire
   - id: taux_marche
     label: Taux de marché
-  - id: obligations
-    label: Dette souveraine 10 ans
+  - id: dette
+    label: Dette et taux longs
+  - id: inflation
+    label: Inflation
+  - id: emploi
+    label: Emploi
+  - id: croissance
+    label: Croissance
+  - id: activite
+    label: Activité et commerce
+  - id: finances_publiques
+    label: Finances publiques
   - id: epargne
     label: Épargne réglementée
-  - id: credit_immo
-    label: Crédit immobilier
-  - id: indices
-    label: Indices actions
+  - id: credit
+    label: Immobilier
+  - id: marches
+    label: Marchés actions
   - id: devises
     label: Devises
   - id: matieres
     label: Matières premières
   - id: crypto
     label: Crypto
-  - id: economie
-    label: Économie réelle
 
 indicateurs:
 
-  # ---------------- Banques centrales ----------------
+  # ============ ZONE EURO ============
   - id: bce_depot
-    label: BCE — facilité de dépôt
-    groupe: banques_centrales
+    label: Taux directeur BCE
+    pays: ze
+    theme: politique_monetaire
     unite: "%"
     source: bce
     cle: FM/D.U2.EUR.4F.KR.DFR.LEV
-    note: le taux qui pilote vraiment la rémunération de l'épargne en zone euro
+    note: taux de la facilité de dépôt, celui qui pilote la rémunération de l'épargne
+    mots: BCE
 
   - id: bce_refi
-    label: BCE — refinancement
-    groupe: banques_centrales
+    label: Taux des prêts aux banques
+    note: taux auquel la BCE refinance les banques commerciales
+    pays: ze
+    theme: politique_monetaire
     unite: "%"
     source: bce
     cle: FM/D.U2.EUR.4F.KR.MRR_FR.LEV
+    mots: BCE
 
   - id: bce_marginal
-    label: BCE — prêt marginal
-    groupe: banques_centrales
+    label: Taux du prêt marginal BCE
+    pays: ze
+    theme: politique_monetaire
     unite: "%"
     source: bce
     cle: FM/D.U2.EUR.4F.KR.MLFR.LEV
+    actif: false
 
-  - id: fed_effr
-    label: Fed — taux effectif
-    groupe: banques_centrales
-    unite: "%"
-    source: fed
-    cle: unsecured/effr
-
-  - id: fed_sofr
-    label: Fed — SOFR
-    groupe: banques_centrales
-    unite: "%"
-    source: fed
-    cle: secured/sofr
-
-  - id: boe_bank_rate
-    label: Banque d'Angleterre
-    groupe: banques_centrales
-    unite: "%"
-    source: boe
-    cle: IUDBEDR
-
-  # ---------------- Taux de marché ----------------
   - id: ester
-    label: "€STR (taux au jour le jour)"
-    groupe: taux_marche
+    label: Taux interbancaire zone euro
+    note: "€STR : ce que les banques se prêtent entre elles au jour le jour"
+    pays: ze
+    theme: taux_marche
     unite: "%"
     source: bce
     cle: EST/B.EU000A2X2A25.WT
+    mots: €STR
 
   - id: euribor_3m
     label: Euribor 3 mois
-    groupe: taux_marche
+    pays: ze
+    theme: taux_marche
     unite: "%"
     source: bce
     cle: FM/M.U2.EUR.RT.MM.EURIBOR3MD_.HSTA
     note: la référence des crédits à taux variable
+    mots: Euribor
 
   - id: euribor_12m
     label: Euribor 12 mois
-    groupe: taux_marche
+    pays: ze
+    theme: taux_marche
     unite: "%"
     source: bce
     cle: FM/M.U2.EUR.RT.MM.EURIBOR1YD_.HSTA
+    mots: Euribor
 
-  # ---------------- Obligations ----------------
-  - id: oat_10a
-    label: France (OAT)
-    groupe: obligations
+  - id: inflation_ze
+    label: Inflation zone euro
+    pays: ze
+    theme: inflation
     unite: "%"
     source: bce
-    cle: IRS/M.FR.L.L40.CI.0000.EUR.N.Z
+    cle: ICP/M.U2.N.000000.4.ANR
+    mots: inflation
 
-  - id: bund_10a
-    label: Allemagne (Bund)
-    groupe: obligations
+  - id: inflation_sousjacente_ze
+    label: Inflation hors énergie et alimentation
+    pays: ze
+    theme: inflation
     unite: "%"
     source: bce
-    cle: IRS/M.DE.L.L40.CI.0000.EUR.N.Z
+    cle: ICP/M.U2.N.XEF000.4.ANR
 
-  - id: btp_10a
-    label: Italie (BTP)
-    groupe: obligations
+  - id: chomage_ze
+    label: Chômage zone euro
+    pays: ze
+    theme: emploi
     unite: "%"
     source: bce
-    cle: IRS/M.IT.L.L40.CI.0000.EUR.N.Z
+    cle: LFSI/M.I9.S.UNEHRT.TOTAL0.15_74.T
+    mots: chômage
 
-  - id: spread_oat_bund
-    label: Écart France / Allemagne
-    groupe: obligations
-    unite: pt
-    source: calcule
-    formule: oat_10a - bund_10a
-    note: le thermomètre du risque politique français
-
-  # ---------------- Épargne réglementée ----------------
-  # Fixés par arrêté, aucune API : à mettre à jour deux fois par an
-  # (révisions au 1er février et au 1er août).
-  - id: livret_a
-    label: Livret A
-    groupe: epargne
+  - id: pib_ze
+    label: Croissance du PIB zone euro
+    pays: ze
+    theme: croissance
     unite: "%"
-    source: manuel
-    valeur: 1.70
-    date: 2026-08-01
-
-  - id: ldds
-    label: LDDS
-    groupe: epargne
-    unite: "%"
-    source: manuel
-    valeur: 1.70
-    date: 2026-08-01
-
-  - id: lep
-    label: LEP
-    groupe: epargne
-    unite: "%"
-    source: manuel
-    valeur: 2.50
-    date: 2026-08-01
-
-  - id: pel
-    label: PEL (nouveaux plans)
-    groupe: epargne
-    unite: "%"
-    source: manuel
-    valeur: 2.00
-    date: 2026-01-01
-    note: brut, avant flat tax
-
-  # ---------------- Crédit immobilier ----------------
-  # Aucun baromètre de courtier n'a d'API : relevé à la main une fois par
-  # mois, quand les courtiers publient (autour du 3). Moyennes hors assurance.
-  - id: immo_15
-    label: Sur 15 ans
-    groupe: credit_immo
-    unite: "%"
-    source: manuel
-    valeur: 3.28
-    date: 2026-09-01
-
-  - id: immo_20
-    label: Sur 20 ans
-    groupe: credit_immo
-    unite: "%"
-    source: manuel
-    valeur: 3.43
-    date: 2026-09-01
-
-  - id: immo_25
-    label: Sur 25 ans
-    groupe: credit_immo
-    unite: "%"
-    source: manuel
-    valeur: 3.53
-    date: 2026-09-01
-    note: relevé Meilleurtaux et CAFPI, septembre 2026
-
-  # ---------------- Indices ----------------
-  - id: cac40
-    label: CAC 40
-    groupe: indices
-    unite: pts
-    source: marche
-    cle: "^FCHI"
-    secours: "^cac"
+    source: bce
+    cle: MNA/Q.Y.I9.W2.S1.S1.B.B1GQ._Z._Z._Z.EUR.LR.GY
+    note: sur un an
+    mots: croissance
 
   - id: stoxx600
     label: Stoxx Europe 600
-    groupe: indices
+    pays: ze
+    theme: marches
     unite: pts
     source: marche
     cle: "^STOXX"
 
-  - id: dax
-    label: DAX
-    groupe: indices
-    unite: pts
-    source: marche
-    cle: "^GDAXI"
-    secours: "^dax"
+  # ============ FRANCE ============
+  - id: oat_10a
+    label: Taux 10 ans France
+    pays: fr
+    theme: dette
+    unite: "%"
+    source: bce
+    cle: IRS/M.FR.L.L40.CI.0000.EUR.N.Z
+    note: ce que l'État paie pour emprunter à dix ans
+    mots: OAT
 
-  - id: ftse
-    label: FTSE 100
-    groupe: indices
+  - id: spread_oat_bund
+    label: Écart France / Allemagne
+    pays: fr
+    theme: dette
+    unite: pt
+    source: calcule
+    formule: oat_10a - bund_10a
+    note: le thermomètre du risque politique français
+    mots: écart de taux
+
+  - id: dette_fr
+    label: Dette publique France
+    pays: fr
+    theme: finances_publiques
+    unite: "% du PIB"
+    source: bce
+    cle: GFS/A.N.FR.W0.S13.S1.C.L.LE.GD.T._Z.XDC_R_B1GQ._T.F.V.N._T
+    mots: dette
+
+  - id: deficit_fr
+    label: Déficit public France
+    pays: fr
+    theme: finances_publiques
+    unite: "% du PIB"
+    source: bce
+    cle: GFS/A.N.FR.W0.S13.S1.C.B.B9._Z._Z._Z.XDC_R_B1GQ._T.F.V.N._T
+    mots: déficit
+
+  - id: inflation_fr
+    label: Inflation France
+    pays: fr
+    theme: inflation
+    unite: "%"
+    source: bce
+    cle: ICP/M.FR.N.000000.4.ANR
+    note: sur un an
+    mots: inflation
+
+  - id: chomage_fr
+    label: Chômage France
+    pays: fr
+    theme: emploi
+    unite: "%"
+    source: bce
+    cle: LFSI/M.FR.S.UNEHRT.TOTAL0.15_74.T
+    mots: chômage
+
+  - id: pib_fr
+    label: Croissance du PIB France
+    pays: fr
+    theme: croissance
+    unite: "%"
+    source: bce
+    cle: MNA/Q.Y.FR.W2.S1.S1.B.B1GQ._Z._Z._Z.EUR.LR.GY
+    note: sur un an
+    mots: croissance
+
+  - id: production_fr
+    label: Production industrielle France
+    pays: fr
+    theme: activite
+    unite: "%"
+    source: bce
+    cle: STS/M.FR.Y.PROD.NS0020.4.000
+    note: sur un an
+
+  - id: livret_a
+    label: Livret A
+    pays: fr
+    theme: epargne
+    unite: "%"
+    source: epargne_fr
+    webstat_termes: [livret A, épargne réglementée]
+    webstat_motif: search(*, "livret A")
+    valeur: 1.70          # repli si Webstat ne répond pas
+    date: 2026-08-01
+    mots: livret A
+
+  - id: ldds
+    label: LDDS
+    pays: fr
+    theme: epargne
+    unite: "%"
+    source: calcule
+    formule: livret_a - zero
+    note: toujours égal au Livret A, par la loi
+    mots: LDDS
+
+  - id: lep
+    label: LEP
+    pays: fr
+    theme: epargne
+    unite: "%"
+    source: epargne_fr
+    webstat_termes: [LEP, épargne populaire, épargne réglementée]
+    webstat_motif: search(*, "populaire")
+    valeur: 2.50          # repli si Webstat ne répond pas
+    date: 2026-08-01
+    mots: LEP
+
+  - id: pel
+    label: PEL ouvert en 2026
+    pays: fr
+    theme: epargne
+    unite: "%"
+    source: epargne_fr
+    webstat_termes: [plan d'épargne logement, épargne logement]
+    webstat_motif: search(*, "logement")
+    valeur: 2.00          # repli si Webstat ne répond pas
+    date: 2026-01-01
+    note: taux brut, avant impôt
+    mots: PEL
+
+  - id: zero
+    label: Zéro
+    pays: fr
+    theme: epargne
+    source: manuel
+    valeur: 0
+    actif: false
+
+  - id: livret_a_reel
+    label: Livret A net d'inflation
+    pays: fr
+    theme: epargne
+    unite: pt
+    source: calcule
+    formule: livret_a - inflation_fr
+    note: ce que ton épargne gagne ou perd vraiment
+
+
+
+
+  - id: cac40
+    label: CAC 40
+    pays: fr
+    theme: marches
     unite: pts
     source: marche
-    cle: "^FTSE"
-    secours: "^ukx"
+    cle: "^FCHI"
+    secours: "^cac"
+    mots: CAC 40
+
+  # ============ ÉTATS-UNIS ============
+  - id: fed_directeur
+    label: Taux directeur Fed
+    pays: us
+    theme: politique_monetaire
+    unite: "%"
+    source: fed
+    cle: unsecured/effr
+    note: taux effectif des fonds fédéraux
+    mots: Fed
+
+  - id: fed_sofr
+    label: Taux interbancaire États-Unis
+    note: "SOFR : l'équivalent américain du taux au jour le jour"
+    pays: us
+    theme: taux_marche
+    unite: "%"
+    source: fed
+    cle: secured/sofr
+
+  - id: treasury_10a
+    label: Taux 10 ans États-Unis
+    pays: us
+    theme: dette
+    unite: "%"
+    source: tresor_us
+    cle: "10 Yr"
+    note: le taux qui commande tous les marchés mondiaux
+    mots: taux américain
+
+  - id: treasury_2a
+    label: Taux 2 ans États-Unis
+    pays: us
+    theme: dette
+    unite: "%"
+    source: tresor_us
+    cle: "2 Yr"
+
+  - id: chomage_us
+    label: Chômage États-Unis
+    pays: us
+    theme: emploi
+    unite: "%"
+    source: bls
+    cle: LNS14000000
+    mots: chômage
+
+  - id: inflation_us
+    label: Inflation États-Unis
+    pays: us
+    theme: inflation
+    unite: "%"
+    source: bls
+    cle: CUUR0000SA0
+    calcul: variation_annuelle
+    note: sur un an
+    mots: inflation
+
+  - id: emplois_us
+    label: Créations d'emplois États-Unis
+    pays: us
+    theme: emploi
+    unite: milliers
+    source: fred
+    cle: PAYEMS
+    transformation: chg
+    note: sur un mois, hors agriculture — nécessite la clé FRED
+    mots: emploi américain
+
+  - id: pib_us
+    label: Croissance du PIB États-Unis
+    pays: us
+    theme: croissance
+    unite: "%"
+    source: fred
+    cle: A191RL1Q225SBEA
+    note: rythme annualisé du trimestre — nécessite la clé FRED
+    mots: croissance
 
   - id: sp500
     label: S&P 500
-    groupe: indices
+    pays: us
+    theme: marches
     unite: pts
     source: marche
     cle: "^GSPC"
     secours: "^spx"
+    mots: Wall Street
 
   - id: nasdaq
     label: Nasdaq 100
-    groupe: indices
+    pays: us
+    theme: marches
     unite: pts
     source: marche
     cle: "^NDX"
     secours: "^ndx"
-
-  - id: nikkei
-    label: Nikkei 225
-    groupe: indices
-    unite: pts
-    source: marche
-    cle: "^N225"
-    secours: "^nkx"
+    mots: Nasdaq
 
   - id: vix
-    label: VIX (volatilité)
-    groupe: indices
+    label: Indice de volatilité (VIX)
+    pays: us
+    theme: marches
     unite: pts
     source: marche
     cle: "^VIX"
     secours: "^vix"
     note: au-dessus de 25, les marchés ont peur
+    mots: volatilité
 
-  # Ajoute ici tes propres lignes : un ETF, une action, ce que tu suis.
-  # Le code est celui de Yahoo Finance (CW8.PA, ESE.PA, AAPL…).
+  # ============ ROYAUME-UNI ============
+  - id: boe_directeur
+    label: Taux directeur Banque d'Angleterre
+    pays: gb
+    theme: politique_monetaire
+    unite: "%"
+    source: boe
+    cle: IUDBEDR
+
+  - id: ftse
+    label: FTSE 100
+    pays: gb
+    theme: marches
+    unite: pts
+    source: marche
+    cle: "^FTSE"
+    secours: "^ukx"
+    mots: FTSE
+
+  # ============ ALLEMAGNE ============
+  - id: bund_10a
+    label: Taux 10 ans Allemagne
+    pays: de
+    theme: dette
+    unite: "%"
+    source: bce
+    cle: IRS/M.DE.L.L40.CI.0000.EUR.N.Z
+    note: la référence sans risque de la zone euro
+    mots: Bund
+
+  - id: btp_10a
+    label: Taux 10 ans Italie
+    pays: it
+    theme: dette
+    unite: "%"
+    source: bce
+    cle: IRS/M.IT.L.L40.CI.0000.EUR.N.Z
+    actif: true
+    mots: Italie
+
+  - id: dax
+    label: DAX
+    pays: de
+    theme: marches
+    unite: pts
+    source: marche
+    cle: "^GDAXI"
+    secours: "^dax"
+    mots: DAX
+
+  # ============ MONDE ============
   - id: msci_world
-    label: MSCI World (CW8)
-    groupe: indices
+    label: MSCI World
+    note: suivi via l'ETF CW8, en euros
+    pays: monde
+    theme: marches
     unite: "€"
     source: marche
     cle: CW8.PA
-    actif: true
+    mots: ETF
 
-  # ---------------- Devises ----------------
+  - id: nikkei
+    label: Nikkei 225
+    pays: jp
+    theme: marches
+    unite: pts
+    source: marche
+    cle: "^N225"
+    secours: "^nkx"
+    mots: Nikkei
+
   - id: eurusd
-    label: EUR / USD
-    groupe: devises
+    label: Euro / dollar
+    pays: monde
+    theme: devises
     unite: "$"
     source: change
     cle: USD
+    mots: euro dollar
 
   - id: eurgbp
-    label: EUR / GBP
-    groupe: devises
+    label: Euro / livre
+    pays: monde
+    theme: devises
     unite: "£"
     source: change
     cle: GBP
 
   - id: eurchf
-    label: EUR / CHF
-    groupe: devises
+    label: Euro / franc suisse
+    pays: monde
+    theme: devises
     unite: CHF
     source: change
     cle: CHF
 
   - id: eurjpy
-    label: EUR / JPY
-    groupe: devises
+    label: Euro / yen
+    pays: monde
+    theme: devises
     unite: "¥"
     source: change
     cle: JPY
 
-  # ---------------- Matières premières ----------------
   - id: brent
     label: Pétrole Brent
-    groupe: matieres
+    pays: monde
+    theme: matieres
     unite: "$"
     source: marche
     cle: BZ=F
     secours: cb.f
     note: le premier canal par lequel la géopolitique touche l'inflation
+    mots: pétrole
 
   - id: or
     label: Or
-    groupe: matieres
+    pays: monde
+    theme: matieres
     unite: "$"
     source: marche
     cle: GC=F
     secours: xauusd
+    mots: or
 
-  - id: gaz_europe
-    label: Gaz naturel (TTF)
-    groupe: matieres
-    unite: "$"
-    source: marche
-    cle: TTF=F
-    actif: false
-
-  # ---------------- Crypto ----------------
   - id: btc
     label: Bitcoin
-    groupe: crypto
+    pays: monde
+    theme: crypto
     source: crypto
     cle: bitcoin
+    mots: bitcoin
 
   - id: eth
     label: Ethereum
-    groupe: crypto
+    pays: monde
+    theme: crypto
     source: crypto
     cle: ethereum
+    mots: ethereum
 
   - id: sol
     label: Solana
-    groupe: crypto
+    pays: monde
+    theme: crypto
     source: crypto
     cle: solana
+    mots: solana
 
   - id: cap_crypto
-    label: Capitalisation totale
-    groupe: crypto
+    label: Capitalisation crypto totale
+    pays: monde
+    theme: crypto
     source: global
     cle: market_cap
 
   - id: dominance_btc
-    label: Dominance Bitcoin
-    groupe: crypto
+    label: Part du Bitcoin dans le marché
+    pays: monde
+    theme: crypto
     unite: "%"
     source: global
     cle: dominance
 
   - id: fear_greed
-    label: Peur & avidité
-    groupe: crypto
+    label: Indice peur / avidité crypto
+    pays: monde
+    theme: crypto
     unite: /100
     source: peur
+    mots: crypto
 
-  # ---------------- Économie réelle ----------------
-  - id: inflation_fr
-    label: Inflation France
-    groupe: economie
+  # ============ COMPLÉMENTS PAYS ============
+  # Séries BCE ajoutées d'un bloc : à vérifier avec --check-chiffres après la
+  # première collecte, les identifiants n'ont pas été testés contre le serveur.
+
+  - id: inflation_de
+    label: Inflation Allemagne
+    pays: de
+    theme: inflation
     unite: "%"
     source: bce
-    cle: ICP/M.FR.N.000000.4.ANR
+    cle: ICP/M.DE.N.000000.4.ANR
+    mots: inflation allemande
+
+  - id: chomage_de
+    label: Chômage Allemagne
+    pays: de
+    theme: emploi
+    unite: "%"
+    source: bce
+    cle: LFSI/M.DE.S.UNEHRT.TOTAL0.15_74.T
+
+  - id: pib_de
+    label: Croissance du PIB Allemagne
+    pays: de
+    theme: croissance
+    unite: "%"
+    source: bce
+    cle: MNA/Q.Y.DE.W2.S1.S1.B.B1GQ._Z._Z._Z.EUR.LR.GY
+
+  - id: inflation_it
+    label: Inflation Italie
+    pays: it
+    theme: inflation
+    unite: "%"
+    source: bce
+    cle: ICP/M.IT.N.000000.4.ANR
+
+  - id: chomage_it
+    label: Chômage Italie
+    pays: it
+    theme: emploi
+    unite: "%"
+    source: bce
+    cle: LFSI/M.IT.S.UNEHRT.TOTAL0.15_74.T
+
+  - id: ftse_mib
+    label: FTSE MIB
+    pays: it
+    theme: marches
+    unite: pts
+    source: marche
+    cle: FTSEMIB.MI
+
+  - id: inflation_gb
+    label: Inflation Royaume-Uni
+    pays: gb
+    theme: inflation
+    unite: "%"
+    source: bce
+    cle: ICP/M.GB.N.000000.4.ANR
+    mots: inflation britannique
+
+  - id: chomage_gb
+    label: Chômage Royaume-Uni
+    pays: gb
+    theme: emploi
+    unite: "%"
+    source: bce
+    cle: LFSI/M.GB.S.UNEHRT.TOTAL0.15_74.T
+
+  - id: gilt_10a
+    label: Taux 10 ans Royaume-Uni
+    pays: gb
+    theme: dette
+    unite: "%"
+    source: bce
+    cle: IRS/M.GB.L.L40.CI.0000.GBP.N.Z
+
+  - id: inflation_jp
+    label: Inflation Japon
+    pays: jp
+    theme: inflation
+    unite: "%"
+    source: fred
+    cle: JPNCPIALLMINMEI
+    transformation: pc1
+    note: nécessite la clé FRED
+
+  # ============ COMPLÉMENTS FRANCE ET ZONE EURO ============
+
+  - id: confiance_fr
+    label: Confiance des ménages France
+    pays: fr
+    theme: activite
+    unite: pts
+    source: bce
+    cle: RTD/M.FR.S.CCI.C.A
+    note: au-dessus de 100, les ménages sont optimistes
+    mots: confiance des ménages
+
+  - id: prix_logements_fr
+    label: Prix des logements France
+    pays: fr
+    theme: credit
+    unite: "%"
+    source: bce
+    cle: RPP/Q.N.FR._T.N.GY
     note: sur un an
+    mots: prix immobilier
 
-  - id: inflation_ze
-    label: Inflation zone euro
-    groupe: economie
+  - id: permis_fr
+    label: Mises en chantier France
+    pays: fr
+    theme: croissance
     unite: "%"
     source: bce
-    cle: ICP/M.U2.N.000000.4.ANR
+    cle: STS/M.FR.Y.BPRM.NS0020.4.000
+    note: sur un an
+    actif: false
 
-  - id: inflation_sousjacente
-    label: Inflation sous-jacente zone euro
-    groupe: economie
-    unite: "%"
+  - id: balance_ze
+    label: Balance commerciale zone euro
+    pays: ze
+    theme: activite
+    unite: Md €
     source: bce
-    cle: ICP/M.U2.N.XEF000.4.ANR
+    cle: BOP/M.N.I9.W1.S1.S1.T.B.G._Z._Z._Z.EUR._T._X.N
 
-  - id: chomage_fr
-    label: Chômage France
-    groupe: economie
-    unite: "%"
-    source: bce
-    cle: LFSI/M.FR.S.UNEHRT.TOTAL0.15_74.T
+  # Fixés par arrêté ou par les assureurs, aucune API : à saisir à la main.
+  # Taux d'usure : publié chaque trimestre par la Banque de France.
+  # Fonds euros : moyenne du marché, publiée en janvier pour l'année écoulée.
 
-  - id: chomage_ze
-    label: Chômage zone euro
-    groupe: economie
-    unite: "%"
-    source: bce
-    cle: LFSI/M.I9.S.UNEHRT.TOTAL0.15_74.T
 
-  - id: taux_reel_livret_a
-    label: Livret A, inflation déduite
-    groupe: economie
-    unite: pt
-    source: calcule
-    formule: livret_a - inflation_fr
-    note: ce que ton épargne gagne ou perd vraiment
+  - id: dette_us
+    label: Dette publique États-Unis
+    pays: us
+    theme: finances_publiques
+    unite: "% du PIB"
+    source: fred
+    cle: GFDEGDQ188S
+    note: nécessite la clé FRED
+
+  - id: deficit_us
+    label: Déficit public États-Unis
+    pays: us
+    theme: finances_publiques
+    unite: "% du PIB"
+    source: fred
+    cle: FYFSGDA188S
+    note: nécessite la clé FRED
+
+  # ============ MATIÈRES PREMIÈRES ============
+
+  - id: gaz_us
+    label: Gaz naturel
+    pays: monde
+    theme: matieres
+    unite: "$"
+    source: marche
+    cle: NG=F
+    mots: gaz
+
+  - id: argent
+    label: Argent
+    pays: monde
+    theme: matieres
+    unite: "$"
+    source: marche
+    cle: SI=F
+
+  - id: cuivre
+    label: Cuivre
+    pays: monde
+    theme: matieres
+    unite: "$"
+    source: marche
+    cle: HG=F
+    note: le baromètre de l'industrie mondiale
+
+  - id: ble
+    label: Blé
+    pays: monde
+    theme: matieres
+    unite: "$"
+    source: marche
+    cle: ZW=F

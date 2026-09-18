@@ -11,7 +11,7 @@ regles:
     condition: change
     message: La BCE a bougé son taux de dépôt
 
-  - indicateur: fed_effr
+  - indicateur: fed_directeur
     condition: change
     message: Le taux effectif de la Fed a changé
 
@@ -47,3 +47,21 @@ regles:
   - indicateur: inflation_fr
     condition: change
     message: Nouveau chiffre d'inflation en France
+
+  - indicateur: inflation_us
+    condition: change
+    message: Nouveau chiffre d'inflation aux États-Unis
+
+  - indicateur: chomage_fr
+    condition: change
+    message: Nouveau chiffre du chômage en France
+
+  - indicateur: treasury_10a
+    condition: sup
+    seuil: 5.0
+    message: Le taux 10 ans américain dépasse 5 %
+
+  - indicateur: eurusd
+    condition: inf
+    seuil: 1.05
+    message: L'euro passe sous 1,05 dollar

@@ -22,6 +22,7 @@ from __future__ import annotations
 import csv
 import io
 import json
+import os
 import re
 from datetime import datetime, timedelta, timezone
 
@@ -44,7 +45,9 @@ def _neuf(conf):
     return {
         "id": conf["id"],
         "label": conf["label"],
-        "groupe": conf["groupe"],
+        "pays": conf["pays"],
+        "theme": conf["theme"],
+        "mots": conf.get("mots"),
         "unite": conf.get("unite"),
         "note": conf.get("note"),
         "valeur": None,
@@ -54,6 +57,7 @@ def _neuf(conf):
         "date": None,
         "source": None,
         "statut": "indisponible",
+        "repli": False,
         "erreur": None,
     }
 
@@ -280,8 +284,168 @@ def _manuel(conf, ind):
     ind["source"] = "saisi à la main"
 
 
+# ---------------------------------------------------------------------
+# Épargne réglementée française
+# ---------------------------------------------------------------------
+
+WEBSTAT = "https://webstat.banque-france.fr/api/explore/v2.1"
+
+
+def _chercher_jeu_webstat(termes):
+    """Retrouve le jeu de données Webstat qui parle de ces termes."""
+    condition = " or ".join(f'search(title, "{t}")' for t in termes)
+    url = f"{WEBSTAT}/catalog/datasets?where={requests.utils.quote(condition)}&limit=10"
+    for jeu in _get(url).json().get("results", []):
+        identifiant = jeu.get("dataset_id") or jeu.get("datasetid")
+        if identifiant:
+            yield identifiant
+
+
+def _derniere_valeur_webstat(dataset, motif):
+    """Dernière observation numérique d'un jeu Webstat dont le libellé colle au motif."""
+    url = (f"{WEBSTAT}/catalog/datasets/{dataset}/records"
+           f"?where={requests.utils.quote(motif)}&order_by=-date&limit=1")
+    resultats = _get(url).json().get("results", [])
+    if not resultats:
+        raise ValueError("aucune observation")
+    ligne = resultats[0]
+    valeur = next((v for c, v in ligne.items()
+                   if isinstance(v, (int, float)) and "valeur" in c.lower() or c.lower() in ("obs_value", "value")),
+                  None)
+    if valeur is None:
+        valeur = next((v for v in ligne.values() if isinstance(v, (int, float))), None)
+    if valeur is None:
+        raise ValueError("pas de valeur numérique dans la réponse")
+    date = next((v for c, v in ligne.items() if "date" in c.lower() and isinstance(v, str)), None)
+    return float(valeur), date
+
+
+def _epargne_fr(conf, ind):
+    """
+    Taux réglementés. On tente Webstat, qui est ouvert et sans clé ; à défaut,
+    on retombe sur la valeur écrite dans la configuration — jamais sur rien.
+    """
+    erreurs = []
+    for termes in (conf.get("webstat_termes") or [conf["label"]],):
+        try:
+            for dataset in _chercher_jeu_webstat(termes):
+                for motif in (conf.get("webstat_motif", ""), ""):
+                    try:
+                        valeur, date = _derniere_valeur_webstat(dataset, motif)
+                        ind["valeur"] = round(valeur, 3)
+                        ind["date"] = (date or "")[:10] or None
+                        ind["source"] = "Banque de France (Webstat)"
+                        return
+                    except Exception as e:  # noqa: BLE001
+                        erreurs.append(f"{dataset}: {type(e).__name__}")
+        except Exception as e:  # noqa: BLE001
+            erreurs.append(f"catalogue: {type(e).__name__}")
+
+    if conf.get("valeur") is None:
+        raise ValueError("Webstat injoignable et aucune valeur de repli : " + " / ".join(erreurs[:3]))
+
+    date = conf.get("date")
+    ind["valeur"] = float(conf["valeur"])
+    ind["date"] = date.isoformat() if hasattr(date, "isoformat") else date
+    ind["source"] = "saisi à la main"
+    ind["repli"] = True
+
+
+# ---------------------------------------------------------------------
+# États-Unis
+# ---------------------------------------------------------------------
+
+def _tresor_us(conf, ind):
+    """Courbe des taux du Trésor américain, publiée en CSV, sans clé."""
+    annee = datetime.now(timezone.utc).year
+    url = ("https://home.treasury.gov/resource-center/data-chart-center/interest-rates/"
+           f"daily-treasury-rates.csv/{annee}/all"
+           "?type=daily_treasury_yield_curve&field_tdr_date_value=all&page&_format=csv")
+    lignes = list(csv.DictReader(io.StringIO(_get(url).text)))
+    colonne = next((c for c in (lignes[0] if lignes else {}) if c.strip() == conf["cle"]), None)
+    if not colonne:
+        raise ValueError(f"colonne « {conf['cle']} » absente")
+    points = [(l["Date"], float(l[colonne])) for l in lignes if l.get(colonne) not in (None, "", "N/A")]
+    if not points:
+        raise ValueError("aucune observation")
+    # Le fichier est classé du plus récent au plus ancien.
+    ind["valeur"] = round(points[0][1], 3)
+    ind["date"] = points[0][0]
+    ind["source"] = "Trésor américain"
+    if len(points) > 1:
+        ind["variation"] = round(points[0][1] - points[1][1], 3)
+
+
+def _bls(conf, ind):
+    """
+    Statistiques du travail américaines. L'accès sans clé est plafonné à
+    25 appels par jour, largement suffisant pour deux séries mensuelles.
+    """
+    annee = datetime.now(timezone.utc).year
+    url = f"https://api.bls.gov/publicAPI/v1/timeseries/data/{conf['cle']}"
+    reponse = _get(f"{url}?startyear={annee - 2}&endyear={annee}")
+    series = reponse.json().get("Results", {}).get("series", [])
+    donnees = series[0].get("data", []) if series else []
+    if not donnees:
+        raise ValueError("série vide (quota BLS dépassé ?)")
+
+    points = []
+    for observation in donnees:
+        try:
+            points.append((f"{observation['year']}-{observation['period'][1:]}-01",
+                           float(observation["value"])))
+        except (KeyError, ValueError):
+            continue
+    points.sort(key=lambda p: p[0])
+    if not points:
+        raise ValueError("aucune valeur exploitable")
+
+    if conf.get("calcul") == "variation_annuelle":
+        # Un indice de prix ne dit rien seul : c'est sa variation sur douze mois
+        # qui est « l'inflation ».
+        if len(points) < 13:
+            raise ValueError("historique trop court pour une variation annuelle")
+        recent, il_y_a_un_an = points[-1][1], points[-13][1]
+        ind["valeur"] = round((recent / il_y_a_un_an - 1) * 100, 2)
+        if len(points) >= 14:
+            precedent = (points[-2][1] / points[-14][1] - 1) * 100
+            ind["variation"] = round(ind["valeur"] - precedent, 2)
+    else:
+        ind["valeur"] = round(points[-1][1], 2)
+        if len(points) > 1:
+            ind["variation"] = round(points[-1][1] - points[-2][1], 2)
+
+    ind["date"] = points[-1][0]
+    ind["source"] = "Bureau of Labor Statistics"
+
+
+def _fred(conf, ind):
+    """Base de la Fed de Saint-Louis. Nécessite une clé gratuite (FRED_API_KEY)."""
+    cle_api = os.environ.get("FRED_API_KEY")
+    if not cle_api:
+        raise ValueError("clé FRED absente — ajoute le secret FRED_API_KEY")
+    url = ("https://api.stlouisfed.org/fred/series/observations"
+           f"?series_id={conf['cle']}&api_key={cle_api}&file_type=json"
+           "&sort_order=desc&limit=14")
+    if conf.get("transformation"):
+        url += f"&units={conf['transformation']}"
+    observations = _get(url).json().get("observations", [])
+    points = [(o["date"], float(o["value"])) for o in observations if o.get("value") not in (".", "", None)]
+    if not points:
+        raise ValueError("série vide")
+    ind["valeur"] = round(points[0][1], 2)
+    ind["date"] = points[0][0]
+    ind["source"] = "FRED"
+    if len(points) > 1:
+        ind["variation"] = round(points[0][1] - points[1][1], 2)
+
+
 RECUPERATEURS = {
     "bce": _bce,
+    "epargne_fr": _epargne_fr,
+    "tresor_us": _tresor_us,
+    "bls": _bls,
+    "fred": _fred,
     "fed": _fed,
     "boe": _boe,
     "marche": _marche,
@@ -313,7 +477,8 @@ def inspecter(conf):
     vérifier qu'un chiffre mesure bien ce qu'on croit.
     """
     print(f"Indicateur : {conf['id']} — {conf['label']}")
-    print(f"Source : {conf['source']}  |  clé : {conf.get('cle')}\n")
+    print(f"Source : {conf['source']}  |  clé : {conf.get('cle')}")
+    print(f"Pays : {conf['pays']}  |  thème : {conf['theme']}\n")
 
     if conf["source"] != "bce":
         ind = _neuf(conf)
@@ -337,8 +502,32 @@ def inspecter(conf):
         print(f"  {l.get('TIME_PERIOD')}  {l.get('OBS_VALUE')}")
 
 
+def _periode(ind):
+    if ind.get("date") in (None, ""):
+        return None
+    for format_ in ("%Y-%m-%d", "%m/%d/%Y", "%Y-%m", "%Y"):
+        try:
+            observee = datetime.strptime(str(ind["date"])[:10], format_)
+            break
+        except ValueError:
+            observee = None
+    if not observee:
+        return None
+    jours = (datetime.now(timezone.utc).replace(tzinfo=None) - observee).days
+    if jours <= 5:
+        return "24 h"
+    if jours <= 45:
+        return "un mois"
+    if jours <= 130:
+        return "un trimestre"
+    return "un an"
+
+
 def tous_les_indicateurs(config, verbeux=True):
     actifs = [i for i in config["indicateurs"] if i.get("actif", True)]
+    # Les constantes désactivées servent aux formules sans s'afficher.
+    supports = [i for i in config["indicateurs"]
+                if not i.get("actif", True) and i["source"] == "manuel"]
 
     identifiants = [i["cle"] for i in actifs if i["source"] == "crypto"]
     if identifiants:
@@ -349,7 +538,7 @@ def tous_les_indicateurs(config, verbeux=True):
                 print(f"  ! CoinGecko injoignable : {e}")
 
     resultats = {}
-    ordre = [i for i in actifs if i["source"] != "calcule"]
+    ordre = [i for i in actifs + supports if i["source"] != "calcule"]
     ordre += [i for i in actifs if i["source"] == "calcule"]
 
     for conf in ordre:
@@ -362,8 +551,11 @@ def tous_les_indicateurs(config, verbeux=True):
             ind["statut"] = "ok"
         except Exception as e:  # noqa: BLE001
             ind["erreur"] = f"{type(e).__name__}: {e}"
+        # « +0,15 » ne veut rien dire sans sa période : une série quotidienne
+        # compare deux jours, une série mensuelle deux mois.
+        ind["periode"] = _periode(ind)
         resultats[conf["id"]] = ind
-        if verbeux:
+        if verbeux and conf.get("actif", True):
             marque = "ok   " if ind["statut"] == "ok" else "ÉCHEC"
             detail = ind["valeur"] if ind["statut"] == "ok" else ind["erreur"][:70]
             print(f"  {marque}  {conf['label']:<36} {detail}")

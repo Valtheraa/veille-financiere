@@ -56,7 +56,8 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;pad
 
 /* ---------- hero ---------- */
 .hero{display:grid;gap:28px;padding:6px 0 34px;border-bottom:1px solid var(--filet)}
-@media(min-width:760px){.hero{grid-template-columns:1.4fr 1fr 1fr;align-items:end;gap:44px}}
+.hero-secondaires{display:flex;gap:34px;flex-wrap:wrap}
+@media(min-width:760px){.hero{grid-template-columns:1.5fr 1fr;align-items:end;gap:44px}}
 .hero-nom{margin:0 0 10px}
 .hero-valeur{font-family:var(--chiffre);font-weight:500;line-height:.94;
   font-size:clamp(52px,12vw,76px);letter-spacing:-.022em;font-variant-numeric:tabular-nums}
@@ -106,7 +107,14 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;pad
   font-variant-numeric:tabular-nums;white-space:nowrap}
 .var{font-size:12.5px;font-variant-numeric:tabular-nums;min-width:58px;color:var(--tres-doux)}
 .var.pos{color:var(--hausse)} .var.neg{color:var(--baisse)}
+.var.neutre{color:var(--tres-doux)}
+.recherche-chiffres{flex:1;min-width:140px;max-width:280px;font-size:13px;padding:4px 0;
+  border:none;border-bottom:1px solid var(--filet);background:transparent}
+.familles{align-items:center}
 .ligne.vide{opacity:.42}
+.ligne.cliquable{cursor:pointer}
+.ligne.cliquable:hover .nom{color:var(--or)}
+.ligne.vide .note{color:var(--or-sombre)}
 .ligne.vide .val{font-family:var(--sans);font-size:12.5px;color:var(--doux)}
 .bascule-devise{display:flex;gap:2px;align-items:center}
 .bascule-devise button{font-size:11px;letter-spacing:.08em;color:var(--tres-doux);padding:3px 7px;border-radius:999px}
@@ -257,7 +265,7 @@ const CLE_LUS = "veille:lus";
 const CLE_DEVISE = "veille:devise";
 const CLE_EPINGLES = "veille:epingles";
 const CLE_VUE = "veille:vue";
-const CLE_FAMILLE = "veille:famille";
+const CLE_PAYS = "veille:pays";
 const CLE_LECTURES = "veille:lectures";
 
 const stockage = {
@@ -303,7 +311,7 @@ function valeurAffichee(ind){
 
   let decimales = 2;
   if (unite === "%" || unite === "pt") decimales = 2;
-  else if (ind.groupe === "devises") decimales = 4;
+  else if (ind.theme === "devises") decimales = 4;
   else if (Math.abs(brut) >= 1000) decimales = 0;
   else if (unite === "/100") decimales = 0;
 
@@ -329,7 +337,7 @@ function variation(ind){
     const unite = (ind.unite === "%" || ind.unite === "pt") ? " pt" : "";
     return { texte: signe(ind.variation, 2) + unite, classe: ind.variation > 0 ? "pos" : "neg" };
   }
-  return { texte:"stable", classe:"" };
+  return { texte:"—", classe:"neutre" };
 }
 
 // Les séries mensuelles (inflation, chômage) décrivent un mois passé :
@@ -354,17 +362,12 @@ const VUES = [
   { id:"agenda",   label:"Agenda" },
 ];
 
-// Les dix groupes d'indicateurs sont rassemblés en quatre familles : un écran
-// de quarante-sept lignes ne se lit pas, quatre écrans courts se parcourent.
-const FAMILLES = [
-  { id:"taux",     label:"Taux & épargne", groupes:["banques_centrales","taux_marche","obligations","epargne","credit_immo"] },
-  { id:"marches",  label:"Marchés",        groupes:["indices","devises","matieres"] },
-  { id:"crypto",   label:"Crypto",         groupes:["crypto"] },
-  { id:"economie", label:"Économie",       groupes:["economie"] },
-];
+// Deux axes, comme Trading Economics : on choisit un pays, on lit ses thèmes.
+// « Le chômage en France » se trouve alors là où on le cherche.
 
 let vueActive = stockage.lire(CLE_VUE, "actus");
-let familleActive = stockage.lire(CLE_FAMILLE, "taux");
+let paysActif = stockage.lire(CLE_PAYS, "fr");
+let filtreChiffres = "";
 
 function afficherVues(){
   const barre = document.getElementById("vues");
@@ -386,6 +389,17 @@ function afficherVues(){
     });
     barre.appendChild(bouton);
   }
+  // Le bouton doré porte l'action principale de la vue affichée, jamais autre chose.
+  const dore = document.getElementById("rafraichir");
+  const autre = document.getElementById("tout-lu");
+  if (vueActive === "actus"){
+    dore.textContent = "Tout marquer comme lu"; dore.onclick = marquerToutLu;
+    autre.textContent = "Recharger"; autre.onclick = charger;
+  } else {
+    dore.textContent = "Recharger"; dore.onclick = charger;
+    autre.textContent = "Tout marquer comme lu"; autre.onclick = marquerToutLu;
+  }
+
   document.getElementById("bloc-chiffres").hidden = vueActive !== "chiffres";
   document.getElementById("bloc-agenda").hidden = vueActive !== "agenda";
   document.getElementById("bloc-actus").hidden = vueActive !== "actus";
@@ -395,21 +409,30 @@ function afficherVues(){
 function afficherFamilles(){
   const barre = document.getElementById("familles");
   barre.innerHTML = "";
-  for (const famille of FAMILLES){
-    const presente = (donnees.groupes || []).some(g => famille.groupes.includes(g.id));
-    if (!presente) continue;
+  for (const pays of donnees.pays || []){
+    if (!(donnees.indicateurs || []).some(i => i.pays === pays.id)) continue;
     const bouton = document.createElement("button");
     bouton.className = "famille";
-    bouton.setAttribute("aria-pressed", String(famille.id === familleActive));
-    bouton.textContent = famille.label;
+    bouton.setAttribute("aria-pressed", String(pays.id === paysActif));
+    bouton.textContent = pays.label;
     bouton.addEventListener("click", () => {
-      familleActive = famille.id;
-      stockage.ecrire(CLE_FAMILLE, famille.id);
+      paysActif = pays.id;
+      stockage.ecrire(CLE_PAYS, pays.id);
       afficherFamilles();
-      afficherChiffres();
+      afficherHero();
     });
     barre.appendChild(bouton);
   }
+
+  const recherche = document.createElement("input");
+  recherche.type = "search";
+  recherche.className = "recherche recherche-chiffres";
+  recherche.placeholder = "Chercher un indicateur";
+  recherche.setAttribute("aria-label", "Chercher un indicateur dans tous les pays");
+  recherche.value = filtreChiffres;
+  recherche.addEventListener("input", (e) => { filtreChiffres = e.target.value.trim().toLowerCase(); afficherChiffres(); });
+  barre.appendChild(recherche);
+
   afficherChiffres();
 }
 
@@ -466,32 +489,36 @@ function afficherHero(){
   const hero = document.getElementById("hero");
   hero.innerHTML = "";
 
-  const principal = parId("bce_depot");
-  const secondaires = [parId("cac40"), parId("btc")].filter(Boolean);
+  const choix = (donnees.heros || {})[paysActif] || ["bce_depot", "cac40", "btc"];
+  const disponibles = choix.map(parId).filter(i => i && i.statut === "ok");
+  const principal = disponibles[0];
+  const secondaires = disponibles.slice(1, 3);
+  const nomPaysActif = (donnees.pays || []).find(p => p.id === paysActif);
 
-  if (principal && principal.statut === "ok"){
+  if (principal){
     const bloc = document.createElement("div");
     const v = variation(principal);
-    const inflation = parId("inflation_fr");
-    const pied = inflation && inflation.statut === "ok"
-      ? `Inflation France ${valeurAffichee(inflation)}`
-      : (principal.note || "");
-    bloc.innerHTML = `<p class="legende hero-nom">Taux de dépôt BCE</p>
+    const periode = principal.periode ? ` sur ${principal.periode}` : "";
+    bloc.innerHTML = `<p class="legende hero-nom">${ech(principal.label)}</p>
       <div class="hero-valeur">${valeurAffichee(principal)}</div>
-      <p class="hero-pied">${v.texte === "stable" ? "inchangé" : v.texte} ${pied ? "— " + pied : ""}</p>`;
+      <p class="hero-pied">${v.texte === "—" ? "inchangé" : ech(v.texte) + ech(periode)}${
+        nomPaysActif ? " — " + ech(nomPaysActif.label) : ""}</p>`;
     hero.appendChild(bloc);
   }
 
+  const rangee = document.createElement("div");
+  rangee.className = "hero-secondaires";
   for (const ind of secondaires){
     if (!ind || ind.statut !== "ok") continue;
     const v = variation(ind);
     const bloc = document.createElement("div");
     bloc.className = "hero-sec";
-    bloc.innerHTML = `<p class="legende hero-nom">${ind.label}</p>
+    bloc.innerHTML = `<p class="legende hero-nom">${ech(ind.label)}</p>
       <div class="hero-valeur">${valeurAffichee(ind)}</div>
       <p class="hero-pied"><span class="var ${v.classe}">${v.texte}</span></p>`;
-    hero.appendChild(bloc);
+    rangee.appendChild(bloc);
   }
+  if (rangee.children.length) hero.appendChild(rangee);
 
   if (donnees.resume){
     const p = document.createElement("p");
@@ -506,17 +533,38 @@ function afficherHero(){
 function afficherChiffres(){
   const cible = document.getElementById("chiffres");
   cible.innerHTML = "";
-  const famille = FAMILLES.find(f => f.id === familleActive) || FAMILLES[0];
-  const groupes = (donnees.groupes || []).filter(g => famille.groupes.includes(g.id));
+  const tous = donnees.indicateurs || [];
+  const nomPays = Object.fromEntries((donnees.pays || []).map(p => [p.id, p.label]));
+
+  // Une recherche traverse tous les pays ; sinon on reste sur le pays choisi.
+  const retenus = filtreChiffres
+    ? tous.filter(i => (i.label + " " + (nomPays[i.pays] || "")).toLowerCase().includes(filtreChiffres))
+    : tous.filter(i => i.pays === paysActif);
+
+  if (!retenus.length){
+    cible.innerHTML = `<p class="vide-vue">Aucun indicateur ne correspond.</p>`;
+    return;
+  }
+
+  const groupes = (donnees.themes || []).filter(t => retenus.some(i => i.theme === t.id));
 
   for (const groupe of groupes){
-    const membres = (donnees.indicateurs || []).filter(i => i.groupe === groupe.id);
+    const membres = retenus.filter(i => i.theme === groupe.id);
     if (!membres.length) continue;
 
     const bloc = document.createElement("section");
     const tete = document.createElement("div");
     tete.className = "groupe-tete";
-    tete.innerHTML = `<span class="legende">${groupe.label}</span>`;
+    const periodes = [...new Set(membres.map(m => m.periode).filter(Boolean))];
+    const periodeCommune = periodes.length === 1 ? `variations sur ${periodes[0]}` : "";
+    const mois = [...new Set(membres.map(reference).filter(Boolean))];
+    const moisCommun = (mois.length === 1 && mois.length === membres.filter(m => reference(m)).length) ? mois[0] : "";
+    tete.innerHTML = `<span class="legende">${ech(groupe.label)}${
+      filtreChiffres ? "" : ""}</span>` +
+      ((moisCommun || periodeCommune)
+        ? `<span class="muet">${ech([moisCommun, periodeCommune].filter(Boolean).join(" — "))}</span>`
+        : "");
+    groupe._moisCommun = moisCommun;
 
     if (membres.some(m => m.valeur_usd !== null && m.valeur_usd !== undefined)){
       const bascule = document.createElement("div");
@@ -543,11 +591,15 @@ function afficherChiffres(){
       const v = variation(ind);
       if (ind.statut !== "ok"){
         ligne.className = "ligne vide";
-        ligne.innerHTML = `<span class="ligne-nom"><span class="nom">${ech(ind.label)}</span></span>
+        const raison = /FRED/.test(`${ind.note || ""} ${ind.erreur || ""}`) ? "clé FRED manquante" : "";
+        ligne.innerHTML = `<span class="ligne-nom"><span class="nom">${ech(ind.label)}</span>
+            ${raison ? `<span class="note">${ech(raison)}</span>` : ""}</span>
           <span class="ligne-val"><span class="val">indisponible</span></span>`;
       } else {
         ligne.className = "ligne";
-        const note = [PEUR[ind.note] || ind.note, reference(ind)].filter(Boolean).join(" — ");
+        const moisLigne = groupe._moisCommun ? "" : reference(ind);
+        const paysLigne = filtreChiffres ? nomPays[ind.pays] : "";
+        const note = [paysLigne, PEUR[ind.note] || ind.note, moisLigne].filter(Boolean).join(" — ");
         ligne.innerHTML = `<span class="ligne-nom">
             <span class="nom">${ech(ind.label)}</span>
             ${note ? `<span class="note">${ech(note)}</span>` : ""}
@@ -563,6 +615,27 @@ function afficherChiffres(){
           (trente !== undefined && trente !== null)
             ? `Sur 30 jours : ${trente > 0 ? "+" : ""}${trente}` : ""
         ].filter(Boolean).join("\n");
+
+        // Un chiffre doit mener aux articles qui en parlent.
+        if (ind.mots){
+          ligne.classList.add("cliquable");
+          ligne.setAttribute("role", "button");
+          ligne.setAttribute("tabindex", "0");
+          ligne.title += `\nVoir les articles sur « ${ind.mots} »`;
+          const ouvrir = () => {
+            document.getElementById("recherche").value = ind.mots;
+            categorieActive = "tout";
+            combienAffiches = PAS_AFFICHAGE;
+            vueActive = "actus";
+            stockage.ecrire(CLE_VUE, "actus");
+            afficherVues(); afficherOnglets(); afficherFlux();
+            chercherArchive(ind.mots.toLowerCase());
+          };
+          ligne.addEventListener("click", ouvrir);
+          ligne.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " "){ e.preventDefault(); ouvrir(); }
+          });
+        }
       }
       bloc.appendChild(ligne);
     }
@@ -895,6 +968,7 @@ function brancher(id, evenement, action){
 }
 
 document.getElementById("recherche").addEventListener("input", (e) => {
+  combienAffiches = PAS_AFFICHAGE;
   afficherFlux();
   chercherArchive(e.target.value.trim().toLowerCase());
 });
@@ -929,14 +1003,13 @@ brancher("copier-tout", "click", (e) => {
   if (!liste.length){ copier("", e.currentTarget, "Rien à copier"); return; }
   copier(liste.map(texteArticle).join("\n\n"), e.currentTarget, `${liste.length} copiés`);
 });
-brancher("rafraichir", "click", charger);
-brancher("tout-lu", "click", () => {
+function marquerToutLu(){
   if (!donnees) return;
   donnees.articles.forEach(a => lus.add(a.id));
   stockage.ecrire(CLE_LUS, [...lus].slice(-800));
   stockage.ecrire(CLE_VISITE, new Date().toISOString());
   location.reload();
-});
+}
 
 charger().then(() => {
   addEventListener("pagehide", () => stockage.ecrire(CLE_VISITE, new Date().toISOString()));

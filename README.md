@@ -38,8 +38,14 @@ En dessous, trois vues qui ne se mélangent pas :
 - **Actualités** — le flux, ses rubriques, la recherche, les sujets gardés et
   la vue hebdomadaire. Le compteur doré indique ce qui est arrivé depuis ta
   dernière visite.
-- **Chiffres** — les 47 indicateurs, répartis en quatre familles : taux et
-  épargne, marchés, crypto, économie. Quatre écrans courts au lieu d'un mur.
+- **Chiffres** — 76 indicateurs rangés comme chez Trading Economics : on
+  choisit un pays (France, zone euro, États-Unis, Royaume-Uni, Allemagne,
+  Italie, Japon, Monde), on lit ses thèmes. Une recherche traverse tous les
+  pays d'un coup. Cliquer sur un chiffre ouvre les articles qui en parlent.
+
+Les trois chiffres du haut suivent le pays choisi : sur l'onglet États-Unis,
+c'est le taux de la Fed qui domine, pas celui de la BCE. Ce choix se règle dans
+la section `heros:` de `collector/indicateurs.yaml`.
 - **Agenda** — les prochains rendez-vous, avec un compteur doré pour ceux qui
   tombent dans les sept jours.
 
@@ -69,6 +75,17 @@ Ensuite, plus rien à faire : le collecteur passe toutes les heures entre 7 h et
 Un résumé factuel est calculé à chaque collecte sans aucune clé : alertes du
 moment, plus fortes variations sur 24 heures, volume de sujets et rubrique
 dominante.
+
+### Données américaines complètes (facultatif)
+
+Chômage, inflation, taux 10 ans et 2 ans américains fonctionnent sans rien
+configurer : ils viennent du Bureau of Labor Statistics et du Trésor.
+
+Les créations d'emplois et le PIB américain passent par FRED, la base de la Fed
+de Saint-Louis, qui demande une clé. Elle est gratuite et immédiate :
+crée un compte sur fredaccount.stlouisfed.org, demande une clé API, puis
+ajoute-la en secret GitHub sous le nom `FRED_API_KEY`. Sans elle, ces deux
+lignes affichent « indisponible » et le reste fonctionne normalement.
 
 ### Résumé rédigé par Claude (facultatif)
 
@@ -112,9 +129,13 @@ elle se tait.
 `recurrent: mensuel` avec un jour. Les échéances structurelles sont déjà là
 (révisions du Livret A, loi de finances, publications INSEE).
 
-Les calendriers de la BCE et de la Fed sont publiés un an à l'avance mais
-n'ont pas de flux exploitable : le fichier contient l'emplacement et le mode
-d'emploi pour les coller, une fois par an.
+Les dates de décision de la BCE et de la Fed sont déjà dedans jusqu'à
+septembre 2027, ainsi que les publications récurrentes : emploi américain le
+premier vendredi du mois, inflation américaine vers le 12, inflation française
+le dernier jour du mois, inflation et chômage de la zone euro en début de mois.
+Ces calendriers sont publiés un an à l'avance : à recompléter chaque automne
+depuis ecb.europa.eu et federalreserve.gov. La vue Agenda affiche les
+vingt-quatre prochaines échéances.
 
 ## La mémoire longue
 
@@ -196,9 +217,14 @@ porte un `source` (`bce`, `fed`, `boe`, `marche`, `change`, `crypto`, `global`,
 - pour suivre un ETF ou une action, copie un bloc du groupe `indices` et mets le
   code Yahoo Finance dans `cle` (`CW8.PA`, `ESE.PA`, `AAPL`…)
 - pour masquer une ligne, `actif: false`
-- les taux de l'épargne réglementée (Livret A, LDDS, LEP, PEL) sont fixés par
-  arrêté et n'ont aucune API : ils sont écrits à la main dans le fichier, à
-  corriger aux révisions du 1er février et du 1er août
+- les taux de l'épargne réglementée sont récupérés automatiquement sur le
+  portail Webstat de la Banque de France, qui est ouvert et sans clé. Le LDDS
+  est déduit du Livret A, auquel la loi l'égalise. Si Webstat ne répond pas, la
+  valeur écrite dans le fichier prend le relais et le tableau de bord signale
+  qu'il fonctionne sur un repli
+- plus aucune valeur n'est saisie à la main : tout vient d'une source qui se
+  met à jour seule. Les taux de crédit immobilier ont été retirés faute d'API
+  fiable — ils restent suivis par l'actualité, dans la rubrique Taux & crédit
 - `calcule` fait une soustraction entre deux indicateurs : c'est ainsi que sont
   obtenus l'écart France / Allemagne et le rendement réel du Livret A
 

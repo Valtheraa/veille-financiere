@@ -313,6 +313,22 @@ def collecter(config, verbeux=True):
     return list(articles.values()), etats
 
 
+def nettoyer(articles, config):
+    """
+    Applique les exclusions aux articles déjà collectés. Sans ça, durcir un
+    filtre ne nettoie que l'avenir : le bruit d'hier resterait affiché trois
+    semaines de plus.
+    """
+    exclusions = config.get("exclure_partout", [])
+    bruit = config.get("bruit", [])
+    gardes = [a for a in articles
+              if not est_du_bruit(a["titre"], bruit) and not _contient(a["titre"], exclusions)]
+    retires = len(articles) - len(gardes)
+    if retires:
+        print(f"Purge de l'historique : {retires} articles écartés par les filtres actuels.")
+    return gardes
+
+
 def fusionner(nouveaux, anciens):
     """Garde la date de première apparition pour signaler ce qui est neuf."""
     index = {a["id"]: a for a in anciens}
@@ -472,6 +488,7 @@ def main():
     # Historique, alertes et agenda
     points = analyse.charger_historique(HISTORIQUE)
     anomalies = analyse.verifier_coherence(indicateurs, points)
+    anomalies += analyse.verifier_fraicheur(indicateurs)
     for a in anomalies:
         print(f"  ! valeur écartée — {a['message']}")
 
@@ -509,7 +526,7 @@ def main():
     elif ALERTE_TEXTE.exists():
         ALERTE_TEXTE.unlink()
 
-    articles = fusionner(articles, charger_existant())
+    articles = fusionner(articles, nettoyer(charger_existant(), config))
 
     cle_api = os.environ.get("ANTHROPIC_API_KEY")
     avant_regroupement = len(articles)
@@ -522,7 +539,9 @@ def main():
     donnees = {
         "genere_le": maintenant().isoformat(),
         "categories": config["categories"],
-        "groupes": config_chiffres["groupes"],
+        "pays": config_chiffres["pays"],
+        "heros": config_chiffres.get("heros", {}),
+        "themes": config_chiffres["themes"],
         "indicateurs": indicateurs,
         "courbes": analyse.courbes(points, indicateurs),
         "alertes": alertes,
