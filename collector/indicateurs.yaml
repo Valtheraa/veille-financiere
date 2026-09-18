@@ -51,7 +51,7 @@ heros:
   gb: [boe_directeur, ftse]
   de: [bund_10a, dax, inflation_de]
   it: [btp_10a, inflation_it, chomage_it]
-  jp: [boj_directeur, nikkei, inflation_jp]
+  jp: [boj_directeur, nikkei, eurjpy]
   ch: [snb_directeur, eurchf]
   ca: [boc_directeur, eurcad]
   monde: [btc, or, brent]
@@ -154,7 +154,11 @@ indicateurs:
     unite: "%"
     source: eurostat
     cle: prc_hicp_manr
-    filtres: geo=EA&coicop=CP00&unit=RCH_A
+    variantes:
+      - {cle: prc_hicp_manr, filtres: "geo=EA&coicop=CP00&unit=RCH_A"}
+      - {cle: prc_hicp_manr, filtres: "geo=EA20&coicop=CP00&unit=RCH_A"}
+      - {cle: ei_cphi_m, filtres: "geo=EA20&indic=CP-HI00&unit=RCH_A&s_adj=NSA"}
+      - {cle: prc_hicp_manr, filtres: "geo=EA&coicop=CP00"}
     mots: inflation
 
   - id: inflation_sousjacente_ze
@@ -164,7 +168,10 @@ indicateurs:
     unite: "%"
     source: eurostat
     cle: prc_hicp_manr
-    filtres: geo=EA&coicop=TOT_X_NRG_FOOD&unit=RCH_A
+    variantes:
+      - {cle: prc_hicp_manr, filtres: "geo=EA&coicop=TOT_X_NRG_FOOD&unit=RCH_A"}
+      - {cle: prc_hicp_manr, filtres: "geo=EA20&coicop=TOT_X_NRG_FOOD&unit=RCH_A"}
+      - {cle: ei_cphi_m, filtres: "geo=EA20&indic=CP-HIX&unit=RCH_A&s_adj=NSA"}
 
   - id: chomage_ze
     label: Chômage zone euro
@@ -173,7 +180,10 @@ indicateurs:
     unite: "%"
     source: eurostat
     cle: une_rt_m
-    filtres: geo=EA20&sex=T&age=TOTAL&unit=PC_ACT&s_adj=SA
+    variantes:
+      - {cle: une_rt_m, filtres: "geo=EA20&sex=T&age=TOTAL&unit=PC_ACT&s_adj=SA"}
+      - {cle: une_rt_m, filtres: "geo=EA&sex=T&age=TOTAL&unit=PC_ACT&s_adj=SA"}
+      - {cle: une_rt_m, filtres: "geo=EA19&sex=T&age=TOTAL&unit=PC_ACT&s_adj=SA"}
     mots: chômage
 
   - id: pib_ze
@@ -243,7 +253,10 @@ indicateurs:
     unite: "%"
     source: eurostat
     cle: prc_hicp_manr
-    filtres: geo=FR&coicop=CP00&unit=RCH_A
+    variantes:
+      - {cle: prc_hicp_manr, filtres: "geo=FR&coicop=CP00&unit=RCH_A"}
+      - {cle: ei_cphi_m, filtres: "geo=FR&indic=CP-HI00&unit=RCH_A&s_adj=NSA"}
+      - {cle: prc_hicp_manr, filtres: "geo=FR&coicop=CP00"}
     note: sur un an
     mots: inflation
 
@@ -649,7 +662,9 @@ indicateurs:
     unite: "%"
     source: eurostat
     cle: prc_hicp_manr
-    filtres: geo=DE&coicop=CP00&unit=RCH_A
+    variantes:
+      - {cle: prc_hicp_manr, filtres: "geo=DE&coicop=CP00&unit=RCH_A"}
+      - {cle: ei_cphi_m, filtres: "geo=DE&indic=CP-HI00&unit=RCH_A&s_adj=NSA"}
     mots: inflation allemande
 
   - id: chomage_de
@@ -677,7 +692,9 @@ indicateurs:
     unite: "%"
     source: eurostat
     cle: prc_hicp_manr
-    filtres: geo=IT&coicop=CP00&unit=RCH_A
+    variantes:
+      - {cle: prc_hicp_manr, filtres: "geo=IT&coicop=CP00&unit=RCH_A"}
+      - {cle: ei_cphi_m, filtres: "geo=IT&indic=CP-HI00&unit=RCH_A&s_adj=NSA"}
 
   - id: chomage_it
     label: Chômage Italie
@@ -733,6 +750,7 @@ indicateurs:
     cle: JPNCPIALLMINMEI
     transformation: pc1
     note: nécessite la clé FRED
+    actif: false   # série OCDE arrêtée en 2021, aucune remplaçante gratuite
 
   # ============ COMPLÉMENTS FRANCE ET ZONE EURO ============
 
@@ -754,7 +772,10 @@ indicateurs:
     unite: "%"
     source: eurostat
     cle: prc_hpi_q
-    filtres: geo=FR&purchase=TOTAL&unit=RCH_A_AVG
+    variantes:
+      - {cle: prc_hpi_q, filtres: "geo=FR&purchase=TOTAL&unit=RCH_A_AVG"}
+      - {cle: prc_hpi_q, filtres: "geo=FR&purchase=TOTAL&unit=RCH_A"}
+      - {cle: prc_hpi_q, filtres: "geo=FR&unit=RCH_A_AVG"}
     note: sur un an
     mots: prix immobilier
 

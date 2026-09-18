@@ -80,7 +80,11 @@ dominante.
 
 L'inflation, le chômage, le PIB, la dette, le déficit, la production
 industrielle, la confiance des ménages et les prix des logements viennent
-d'**Eurostat**, gratuit et sans clé. Les séries équivalentes de la BCE se sont
+d'**Eurostat**, gratuit et sans clé. Les codes de jeux de données et les noms
+de filtres changent au fil des ans : les indicateurs sensibles portent plusieurs
+formulations dans `variantes:`, essayées l'une après l'autre jusqu'à ce qu'une
+réponde avec une observation récente. Le journal indique celles qui ont été
+écartées. Les séries équivalentes de la BCE se sont
 révélées arrêtées fin 2025 ou introuvables : la BCE ne sert plus que pour ce
 qu'elle publie le mieux, les taux directeurs, l'Euribor et les taux souverains.
 

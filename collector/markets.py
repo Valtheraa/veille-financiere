@@ -165,22 +165,14 @@ def _boe(conf, ind):
 # Eurostat
 # ---------------------------------------------------------------------
 
-def _eurostat(conf, ind):
-    """
-    Eurostat publie l'inflation, le chômage, le PIB et la dette de tous les pays
-    européens, gratuitement et sans clé. C'est la source de référence : les
-    séries équivalentes de la BCE se sont révélées arrêtées ou introuvables.
-    Le format renvoyé est du JSON-stat : les valeurs sont indexées par position.
-    """
+def _lire_eurostat(cle, filtres):
     url = ("https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/"
-           f"{conf['cle']}?format=JSON&lang=FR&lastTimePeriod=3&{conf.get('filtres', '')}")
+           f"{cle}?format=JSON&lang=FR&lastTimePeriod=3&{filtres}")
     data = _get(url).json()
-
     periodes = data.get("dimension", {}).get("time", {}).get("category", {}).get("index", {})
     valeurs = data.get("value", {})
     if not periodes or not valeurs:
         raise ValueError("réponse sans observation (filtres trop larges ou trop stricts ?)")
-
     points = []
     for periode, position in periodes.items():
         valeur = valeurs.get(str(position), valeurs.get(position))
@@ -188,14 +180,54 @@ def _eurostat(conf, ind):
             points.append((periode, float(valeur)))
     if not points:
         raise ValueError("aucune valeur exploitable")
-
     points.sort(key=lambda p: p[0])
-    ind["valeur"] = round(points[-1][1], 3)
-    ind["date"] = points[-1][0]
+    return points
+
+
+def _eurostat(conf, ind):
+    """
+    Eurostat publie l'inflation, le chômage, le PIB et la dette de tous les pays
+    européens, gratuitement et sans clé. Le format est du JSON-stat : les
+    valeurs sont indexées par position dans le temps.
+
+    Les codes de jeux de données changent au fil des ans et les libellés de
+    filtres varient d'un domaine à l'autre. Plutôt que de parier sur une seule
+    formulation, on en essaie plusieurs et on garde la première qui renvoie une
+    observation récente.
+    """
+    essais = conf.get("variantes") or [{"cle": conf["cle"], "filtres": conf.get("filtres", "")}]
+    erreurs, repli = [], None
+
+    for essai in essais:
+        try:
+            points = _lire_eurostat(essai["cle"], essai.get("filtres", ""))
+        except Exception as e:  # noqa: BLE001
+            erreurs.append(f"{essai['cle']}: {type(e).__name__}")
+            continue
+
+        candidat = {
+            "valeur": round(points[-1][1], 3),
+            "date": points[-1][0],
+            "ecart": _ecart_en_jours(points[-2][0], points[-1][0]) if len(points) > 1 else None,
+            "variation": round(points[-1][1] - points[-2][1], 3) if len(points) > 1 else None,
+        }
+        temoin = {"date": candidat["date"], "ecart_jours": candidat["ecart"]}
+        if not _est_perime(temoin):
+            repli = candidat
+            break
+        erreurs.append(f"{essai['cle']}: arrêtée en {candidat['date']}")
+        repli = repli or candidat
+
+    if repli is None:
+        raise ValueError(" / ".join(erreurs[:3]) or "aucune variante exploitable")
+
+    ind["valeur"] = repli["valeur"]
+    ind["date"] = repli["date"]
+    ind["variation"] = repli["variation"]
+    ind["ecart_jours"] = repli["ecart"]
     ind["source"] = "Eurostat"
-    if len(points) > 1:
-        ind["variation"] = round(points[-1][1] - points[-2][1], 3)
-        ind["ecart_jours"] = _ecart_en_jours(points[-2][0], points[-1][0])
+    if len(essais) > 1 and erreurs:
+        ind["note_technique"] = f"{len(erreurs)} formulation(s) écartée(s) : " + " / ".join(erreurs[:2])
 
 
 # ---------------------------------------------------------------------
@@ -488,6 +520,7 @@ def _tresor_us(conf, ind):
     ind["source"] = "Trésor américain"
     if len(points) > 1:
         ind["variation"] = round(points[0][1] - points[1][1], 3)
+        ind["ecart_jours"] = _ecart_en_jours(points[1][0], points[0][0])
 
 
 def _bls(conf, ind):
@@ -531,6 +564,8 @@ def _bls(conf, ind):
 
     ind["date"] = points[-1][0]
     ind["source"] = "Bureau of Labor Statistics"
+    if len(points) > 1:
+        ind["ecart_jours"] = _ecart_en_jours(points[-2][0], points[-1][0])
 
 
 def _fred(conf, ind):
@@ -552,6 +587,7 @@ def _fred(conf, ind):
     ind["source"] = "FRED"
     if len(points) > 1:
         ind["variation"] = round(points[0][1] - points[1][1], 2)
+        ind["ecart_jours"] = _ecart_en_jours(points[1][0], points[0][0])
 
 
 RECUPERATEURS = {
@@ -673,7 +709,8 @@ def _est_perime(ind):
         return False
     age = (datetime.now(timezone.utc).replace(tzinfo=None) - observee).days
     attendu = ind.get("ecart_jours") or 31
-    return age > max(3 * attendu, 120)
+    marge = 2 if attendu >= 200 else 3      # annuel : deux ans ; sinon trois périodes
+    return age > max(marge * attendu, 120)
 
 
 def tous_les_indicateurs(config, verbeux=True):
@@ -715,6 +752,8 @@ def tous_les_indicateurs(config, verbeux=True):
             marque = "ok   " if ind["statut"] == "ok" else "ÉCHEC"
             detail = ind["valeur"] if ind["statut"] == "ok" else ind["erreur"][:70]
             print(f"  {marque}  {conf['label']:<36} {detail}")
+            if ind.get("note_technique"):
+                print(f"           {ind['note_technique'][:90]}")
 
     return [resultats[i["id"]] for i in actifs]
 
