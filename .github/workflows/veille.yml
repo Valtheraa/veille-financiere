@@ -31,6 +31,7 @@ jobs:
         env:
           # Facultatif : ajoute le secret ANTHROPIC_API_KEY pour le résumé du jour.
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+                    FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
         run: python collector/fetch.py --resume
 
       - name: Publier si quelque chose a changé
