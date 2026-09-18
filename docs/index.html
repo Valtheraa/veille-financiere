@@ -406,9 +406,27 @@ function afficherVues(){
   if (vueActive === "chiffres") afficherFamilles();
 }
 
+// Le collecteur et la page se déploient séparément : pendant le temps qui les
+// sépare, la page peut recevoir des données d'une version antérieure. Elle
+// doit rester lisible et le dire, jamais afficher un écran vide.
+function donneesAnciennes(){
+  return !(donnees.pays || []).length || !(donnees.indicateurs || []).some(i => i.pays);
+}
+
 function afficherFamilles(){
   const barre = document.getElementById("familles");
   barre.innerHTML = "";
+
+  if (donneesAnciennes()){
+    const avis = document.createElement("p");
+    avis.className = "muet";
+    avis.textContent = "Données produites par une version précédente du collecteur. "
+      + "Relance une collecte pour retrouver le classement par pays.";
+    barre.appendChild(avis);
+    afficherChiffres();
+    return;
+  }
+
   for (const pays of donnees.pays || []){
     if (!(donnees.indicateurs || []).some(i => i.pays === pays.id)) continue;
     const bouton = document.createElement("button");
@@ -489,7 +507,9 @@ function afficherHero(){
   const hero = document.getElementById("hero");
   hero.innerHTML = "";
 
-  const choix = (donnees.heros || {})[paysActif] || ["bce_depot", "cac40", "btc"];
+  const choix = (donnees.heros || {})[paysActif]
+    || (donneesAnciennes() ? ["bce_depot", "cac40", "btc"] : (donnees.heros || {}).fr)
+    || ["bce_depot", "cac40", "btc"];
   const disponibles = choix.map(parId).filter(i => i && i.statut === "ok");
   const principal = disponibles[0];
   const secondaires = disponibles.slice(1, 3);
@@ -539,17 +559,20 @@ function afficherChiffres(){
   // Une recherche traverse tous les pays ; sinon on reste sur le pays choisi.
   const retenus = filtreChiffres
     ? tous.filter(i => (i.label + " " + (nomPays[i.pays] || "")).toLowerCase().includes(filtreChiffres))
-    : tous.filter(i => i.pays === paysActif);
+    : donneesAnciennes() ? tous : tous.filter(i => i.pays === paysActif);
 
   if (!retenus.length){
     cible.innerHTML = `<p class="vide-vue">Aucun indicateur ne correspond.</p>`;
     return;
   }
 
-  const groupes = (donnees.themes || []).filter(t => retenus.some(i => i.theme === t.id));
+  // `themes` aujourd'hui, `groupes` dans l'ancien format.
+  const rubriques = (donnees.themes || donnees.groupes || []);
+  const cle = donnees.themes ? "theme" : "groupe";
+  const groupes = rubriques.filter(t => retenus.some(i => i[cle] === t.id));
 
   for (const groupe of groupes){
-    const membres = retenus.filter(i => i.theme === groupe.id);
+    const membres = retenus.filter(i => i[cle] === groupe.id);
     if (!membres.length) continue;
 
     const bloc = document.createElement("section");
