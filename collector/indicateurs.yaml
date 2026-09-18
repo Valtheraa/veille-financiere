@@ -152,8 +152,9 @@ indicateurs:
     pays: ze
     theme: inflation
     unite: "%"
-    source: bce
-    cle: ICP/M.U2.N.000000.4.ANR
+    source: eurostat
+    cle: prc_hicp_manr
+    filtres: geo=EA&coicop=CP00&unit=RCH_A
     mots: inflation
 
   - id: inflation_sousjacente_ze
@@ -161,16 +162,18 @@ indicateurs:
     pays: ze
     theme: inflation
     unite: "%"
-    source: bce
-    cle: ICP/M.U2.N.XEF000.4.ANR
+    source: eurostat
+    cle: prc_hicp_manr
+    filtres: geo=EA&coicop=TOT_X_NRG_FOOD&unit=RCH_A
 
   - id: chomage_ze
     label: Chômage zone euro
     pays: ze
     theme: emploi
     unite: "%"
-    source: bce
-    cle: LFSI/M.I9.S.UNEHRT.TOTAL0.15_74.T
+    source: eurostat
+    cle: une_rt_m
+    filtres: geo=EA20&sex=T&age=TOTAL&unit=PC_ACT&s_adj=SA
     mots: chômage
 
   - id: pib_ze
@@ -178,8 +181,9 @@ indicateurs:
     pays: ze
     theme: croissance
     unite: "%"
-    source: bce
-    cle: MNA/Q.Y.I9.W2.S1.S1.B.B1GQ._Z._Z._Z.EUR.LR.GY
+    source: eurostat
+    cle: namq_10_gdp
+    filtres: geo=EA20&na_item=B1GQ&unit=CLV_PCH_SM&s_adj=SCA
     note: sur un an
     mots: croissance
 
@@ -217,8 +221,9 @@ indicateurs:
     pays: fr
     theme: finances_publiques
     unite: "% du PIB"
-    source: bce
-    cle: GFS/A.N.FR.W0.S13.S1.C.L.LE.GD.T._Z.XDC_R_B1GQ._T.F.V.N._T
+    source: eurostat
+    cle: gov_10q_ggdebt
+    filtres: geo=FR&sector=S13&na_item=GD&unit=PC_GDP
     mots: dette
 
   - id: deficit_fr
@@ -226,8 +231,9 @@ indicateurs:
     pays: fr
     theme: finances_publiques
     unite: "% du PIB"
-    source: bce
-    cle: GFS/A.N.FR.W0.S13.S1.C.B.B9._Z._Z._Z.XDC_R_B1GQ._T.F.V.N._T
+    source: eurostat
+    cle: gov_10dd_edpt1
+    filtres: geo=FR&sector=S13&na_item=B9&unit=PC_GDP
     mots: déficit
 
   - id: inflation_fr
@@ -235,8 +241,9 @@ indicateurs:
     pays: fr
     theme: inflation
     unite: "%"
-    source: bce
-    cle: ICP/M.FR.N.000000.4.ANR
+    source: eurostat
+    cle: prc_hicp_manr
+    filtres: geo=FR&coicop=CP00&unit=RCH_A
     note: sur un an
     mots: inflation
 
@@ -245,8 +252,9 @@ indicateurs:
     pays: fr
     theme: emploi
     unite: "%"
-    source: bce
-    cle: LFSI/M.FR.S.UNEHRT.TOTAL0.15_74.T
+    source: eurostat
+    cle: une_rt_m
+    filtres: geo=FR&sex=T&age=TOTAL&unit=PC_ACT&s_adj=SA
     mots: chômage
 
   - id: pib_fr
@@ -254,8 +262,9 @@ indicateurs:
     pays: fr
     theme: croissance
     unite: "%"
-    source: bce
-    cle: MNA/Q.Y.FR.W2.S1.S1.B.B1GQ._Z._Z._Z.EUR.LR.GY
+    source: eurostat
+    cle: namq_10_gdp
+    filtres: geo=FR&na_item=B1GQ&unit=CLV_PCH_SM&s_adj=SCA
     note: sur un an
     mots: croissance
 
@@ -264,8 +273,9 @@ indicateurs:
     pays: fr
     theme: activite
     unite: "%"
-    source: bce
-    cle: STS/M.FR.Y.PROD.NS0020.4.000
+    source: eurostat
+    cle: sts_inpr_m
+    filtres: geo=FR&nace_r2=B-D&unit=PCH_SM&s_adj=CA
     note: sur un an
 
   - id: livret_a
@@ -637,8 +647,9 @@ indicateurs:
     pays: de
     theme: inflation
     unite: "%"
-    source: bce
-    cle: ICP/M.DE.N.000000.4.ANR
+    source: eurostat
+    cle: prc_hicp_manr
+    filtres: geo=DE&coicop=CP00&unit=RCH_A
     mots: inflation allemande
 
   - id: chomage_de
@@ -646,32 +657,36 @@ indicateurs:
     pays: de
     theme: emploi
     unite: "%"
-    source: bce
-    cle: LFSI/M.DE.S.UNEHRT.TOTAL0.15_74.T
+    source: eurostat
+    cle: une_rt_m
+    filtres: geo=DE&sex=T&age=TOTAL&unit=PC_ACT&s_adj=SA
 
   - id: pib_de
     label: Croissance du PIB Allemagne
     pays: de
     theme: croissance
     unite: "%"
-    source: bce
-    cle: MNA/Q.Y.DE.W2.S1.S1.B.B1GQ._Z._Z._Z.EUR.LR.GY
+    source: eurostat
+    cle: namq_10_gdp
+    filtres: geo=DE&na_item=B1GQ&unit=CLV_PCH_SM&s_adj=SCA
 
   - id: inflation_it
     label: Inflation Italie
     pays: it
     theme: inflation
     unite: "%"
-    source: bce
-    cle: ICP/M.IT.N.000000.4.ANR
+    source: eurostat
+    cle: prc_hicp_manr
+    filtres: geo=IT&coicop=CP00&unit=RCH_A
 
   - id: chomage_it
     label: Chômage Italie
     pays: it
     theme: emploi
     unite: "%"
-    source: bce
-    cle: LFSI/M.IT.S.UNEHRT.TOTAL0.15_74.T
+    source: eurostat
+    cle: une_rt_m
+    filtres: geo=IT&sex=T&age=TOTAL&unit=PC_ACT&s_adj=SA
 
   - id: ftse_mib
     label: FTSE MIB
@@ -726,8 +741,9 @@ indicateurs:
     pays: fr
     theme: activite
     unite: pts
-    source: bce
-    cle: RTD/M.FR.S.CCI.C.A
+    source: eurostat
+    cle: ei_bsco_m
+    filtres: geo=FR&indic=BS-CSMCI&s_adj=SA&unit=BAL
     note: au-dessus de 100, les ménages sont optimistes
     mots: confiance des ménages
 
@@ -736,8 +752,9 @@ indicateurs:
     pays: fr
     theme: credit
     unite: "%"
-    source: bce
-    cle: RPP/Q.N.FR._T.N.GY
+    source: eurostat
+    cle: prc_hpi_q
+    filtres: geo=FR&purchase=TOTAL&unit=RCH_A_AVG
     note: sur un an
     mots: prix immobilier
 
@@ -750,18 +767,6 @@ indicateurs:
     cle: STS/M.FR.Y.BPRM.NS0020.4.000
     note: sur un an
     actif: false
-
-  - id: balance_ze
-    label: Balance commerciale zone euro
-    pays: ze
-    theme: activite
-    unite: Md €
-    source: bce
-    cle: BOP/M.N.I9.W1.S1.S1.T.B.G._Z._Z._Z.EUR._T._X.N
-
-  # Fixés par arrêté ou par les assureurs, aucune API : à saisir à la main.
-  # Taux d'usure : publié chaque trimestre par la Banque de France.
-  # Fonds euros : moyenne du marché, publiée en janvier pour l'année écoulée.
 
 
   - id: dette_us

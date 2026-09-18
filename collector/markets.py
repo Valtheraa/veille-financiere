@@ -162,6 +162,43 @@ def _boe(conf, ind):
 
 
 # ---------------------------------------------------------------------
+# Eurostat
+# ---------------------------------------------------------------------
+
+def _eurostat(conf, ind):
+    """
+    Eurostat publie l'inflation, le chômage, le PIB et la dette de tous les pays
+    européens, gratuitement et sans clé. C'est la source de référence : les
+    séries équivalentes de la BCE se sont révélées arrêtées ou introuvables.
+    Le format renvoyé est du JSON-stat : les valeurs sont indexées par position.
+    """
+    url = ("https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/"
+           f"{conf['cle']}?format=JSON&lang=FR&lastTimePeriod=3&{conf.get('filtres', '')}")
+    data = _get(url).json()
+
+    periodes = data.get("dimension", {}).get("time", {}).get("category", {}).get("index", {})
+    valeurs = data.get("value", {})
+    if not periodes or not valeurs:
+        raise ValueError("réponse sans observation (filtres trop larges ou trop stricts ?)")
+
+    points = []
+    for periode, position in periodes.items():
+        valeur = valeurs.get(str(position), valeurs.get(position))
+        if valeur is not None:
+            points.append((periode, float(valeur)))
+    if not points:
+        raise ValueError("aucune valeur exploitable")
+
+    points.sort(key=lambda p: p[0])
+    ind["valeur"] = round(points[-1][1], 3)
+    ind["date"] = points[-1][0]
+    ind["source"] = "Eurostat"
+    if len(points) > 1:
+        ind["variation"] = round(points[-1][1] - points[-2][1], 3)
+        ind["ecart_jours"] = _ecart_en_jours(points[-2][0], points[-1][0])
+
+
+# ---------------------------------------------------------------------
 # Autres banques centrales
 # ---------------------------------------------------------------------
 
@@ -188,19 +225,18 @@ def _boc(conf, ind):
 def _snb(conf, ind):
     """Banque nationale suisse. Portail de données ouvert, format CSV à points-virgules."""
     url = f"https://data.snb.ch/api/cube/{conf['cle']}/data/csv/fr"
-    lignes = [l for l in _get(url).text.splitlines() if ";" in l]
     points = []
-    for ligne in lignes:
-        morceaux = ligne.split(";")
-        if len(morceaux) < 2:
+    for ligne in _get(url).text.splitlines():
+        morceaux = [m.strip().strip('"') for m in re.split(r"[;,\t]", ligne)]
+        date = next((m for m in morceaux if re.match(r"^\d{4}(-\d{2}){0,2}$", m)), None)
+        if not date:
             continue
-        date, valeur = morceaux[0].strip(), morceaux[-1].strip()
-        if not re.match(r"^\d{4}(-\d{2}){0,2}$", date):
-            continue
-        try:
-            points.append((date, float(valeur.replace(",", "."))))
-        except ValueError:
-            continue
+        for candidat in reversed(morceaux):
+            try:
+                points.append((date, float(candidat.replace(",", "."))))
+                break
+            except ValueError:
+                continue
     if not points:
         raise ValueError("aucune observation exploitable")
     points.sort(key=lambda p: p[0])
@@ -523,6 +559,7 @@ RECUPERATEURS = {
     "epargne_fr": _epargne_fr,
     "tresor_us": _tresor_us,
     "boc": _boc,
+    "eurostat": _eurostat,
     "snb": _snb,
     "bls": _bls,
     "fred": _fred,
@@ -543,8 +580,9 @@ def _calculer(conf, resultats, ind):
         raise ValueError("formule non reconnue")
     a, b = correspondance.group(1), correspondance.group(2)
     gauche, droite = resultats.get(a), resultats.get(b)
-    if not gauche or not droite or gauche["valeur"] is None or droite["valeur"] is None:
-        raise ValueError(f"{a} ou {b} indisponible")
+    for nom, source in ((a, gauche), (b, droite)):
+        if not source or source["valeur"] is None or source["statut"] not in ("ok", None):
+            raise ValueError(f"{nom} indisponible ou périmé")
     ind["valeur"] = round(gauche["valeur"] - droite["valeur"], 2)
     ind["date"] = gauche["date"]
     ind["source"] = "calculé"

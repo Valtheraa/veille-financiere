@@ -112,8 +112,11 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;pad
   border:none;border-bottom:1px solid var(--filet);background:transparent}
 .familles{align-items:center}
 .ligne.vide{opacity:.42}
-.ligne.cliquable{cursor:pointer}
-.ligne.cliquable:hover .nom{color:var(--or)}
+.vers-articles{display:block;margin-top:3px;font-size:11.5px;color:var(--tres-doux);
+  border-bottom:1px solid var(--filet);padding-bottom:1px;opacity:.42}
+.ligne:hover .vers-articles,.ligne:focus-within .vers-articles{opacity:1}
+.vers-articles:hover{color:var(--or);border-bottom-color:var(--or-sombre)}
+@media (hover:none){.vers-articles{opacity:.62}}
 .ligne.vide .note{color:var(--or-sombre)}
 .ligne.vide .val{font-family:var(--sans);font-size:12.5px;color:var(--doux)}
 .bascule-devise{display:flex;gap:2px;align-items:center}
@@ -660,12 +663,16 @@ function afficherChiffres(){
             ? `Sur 30 jours : ${trente > 0 ? "+" : ""}${trente}` : ""
         ].filter(Boolean).join("\n");
 
-        // Un chiffre doit mener aux articles qui en parlent.
+        // Un chiffre mène aux articles qui en parlent, mais seulement par un
+        // lien explicite : rendre toute la ligne cliquable faisait sauter la
+        // page au moindre contact.
         if (ind.mots){
-          ligne.classList.add("cliquable");
-          ligne.setAttribute("role", "button");
-          ligne.setAttribute("tabindex", "0");
-          ligne.title += `\nVoir les articles sur « ${ind.mots} »`;
+          const lien = document.createElement("button");
+          lien.type = "button";
+          lien.className = "vers-articles";
+          lien.textContent = "articles";
+          lien.title = `Voir les articles sur « ${ind.mots} »`;
+          ligne.querySelector(".ligne-nom").appendChild(lien);
           const ouvrir = () => {
             document.getElementById("recherche").value = ind.mots;
             categorieActive = "tout";
@@ -675,10 +682,7 @@ function afficherChiffres(){
             afficherVues(); afficherOnglets(); afficherFlux();
             chercherArchive(ind.mots.toLowerCase());
           };
-          ligne.addEventListener("click", ouvrir);
-          ligne.addEventListener("keydown", (e) => {
-            if (e.key === "Enter" || e.key === " "){ e.preventDefault(); ouvrir(); }
-          });
+          lien.addEventListener("click", ouvrir);
         }
       }
       bloc.appendChild(ligne);

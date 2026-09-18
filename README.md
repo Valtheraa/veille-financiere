@@ -76,6 +76,14 @@ Un résumé factuel est calculé à chaque collecte sans aucune clé : alertes d
 moment, plus fortes variations sur 24 heures, volume de sujets et rubrique
 dominante.
 
+### Les sources de la macro européenne
+
+L'inflation, le chômage, le PIB, la dette, le déficit, la production
+industrielle, la confiance des ménages et les prix des logements viennent
+d'**Eurostat**, gratuit et sans clé. Les séries équivalentes de la BCE se sont
+révélées arrêtées fin 2025 ou introuvables : la BCE ne sert plus que pour ce
+qu'elle publie le mieux, les taux directeurs, l'Euribor et les taux souverains.
+
 ### Données américaines complètes (facultatif)
 
 Chômage, inflation, taux 10 ans et 2 ans américains fonctionnent sans rien
