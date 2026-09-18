@@ -35,6 +35,10 @@ pays:
     label: Italie
   - id: jp
     label: Japon
+  - id: ch
+    label: Suisse
+  - id: ca
+    label: Canada
   - id: monde
     label: Monde
 
@@ -43,11 +47,13 @@ pays:
 heros:
   fr: [oat_10a, cac40, inflation_fr]
   ze: [bce_depot, stoxx600, inflation_ze]
-  us: [fed_directeur, sp500, inflation_us]
-  gb: [boe_directeur, ftse, inflation_gb]
+  us: [fed_directeur, fed_effectif, sp500, inflation_us]
+  gb: [boe_directeur, ftse]
   de: [bund_10a, dax, inflation_de]
   it: [btp_10a, inflation_it, chomage_it]
-  jp: [nikkei, inflation_jp, eurjpy]
+  jp: [boj_directeur, nikkei, inflation_jp]
+  ch: [snb_directeur, eurchf]
+  ca: [boc_directeur, eurcad]
   monde: [btc, or, brent]
 
 themes:
@@ -263,7 +269,8 @@ indicateurs:
     note: sur un an
 
   - id: livret_a
-    label: Livret A
+    label: Livret A et LDDS
+    revision: semestriel
     pays: fr
     theme: epargne
     unite: "%"
@@ -274,18 +281,10 @@ indicateurs:
     date: 2026-08-01
     mots: livret A
 
-  - id: ldds
-    label: LDDS
-    pays: fr
-    theme: epargne
-    unite: "%"
-    source: calcule
-    formule: livret_a - zero
-    note: toujours égal au Livret A, par la loi
-    mots: LDDS
 
   - id: lep
     label: LEP
+    revision: semestriel
     pays: fr
     theme: epargne
     unite: "%"
@@ -298,6 +297,7 @@ indicateurs:
 
   - id: pel
     label: PEL ouvert en 2026
+    revision: annuel
     pays: fr
     theme: epargne
     unite: "%"
@@ -309,22 +309,15 @@ indicateurs:
     note: taux brut, avant impôt
     mots: PEL
 
-  - id: zero
-    label: Zéro
-    pays: fr
-    theme: epargne
-    source: manuel
-    valeur: 0
-    actif: false
 
   - id: livret_a_reel
-    label: Livret A net d'inflation
+    label: Ce que rapporte vraiment le Livret A
     pays: fr
     theme: epargne
     unite: pt
     source: calcule
     formule: livret_a - inflation_fr
-    note: ce que ton épargne gagne ou perd vraiment
+    note: taux du Livret A moins l'inflation ; négatif, ton épargne perd du pouvoir d'achat
 
 
 
@@ -340,14 +333,28 @@ indicateurs:
     mots: CAC 40
 
   # ============ ÉTATS-UNIS ============
+  # Ce que tout le monde appelle « le taux directeur » : la cible annoncée par
+  # la Fed. Elle ne bouge qu'à chaque décision, contrairement au taux constaté.
   - id: fed_directeur
     label: Taux directeur Fed
     pays: us
     theme: politique_monetaire
     unite: "%"
+    source: fred
+    cle: DFEDTARU
+    note: cible annoncée par la Fed, haut de la fourchette — nécessite la clé FRED
+    mots: Fed
+
+  # Le taux réellement pratiqué entre banques. Il suit la cible avec un jour de
+  # décalage : le jour d'une décision, les deux diffèrent forcément.
+  - id: fed_effectif
+    label: Taux effectif Fed
+    pays: us
+    theme: politique_monetaire
+    unite: "%"
     source: fed
     cle: unsecured/effr
-    note: taux effectif des fonds fédéraux
+    note: constaté sur le marché, publié avec un jour de retard sur la décision
     mots: Fed
 
   - id: fed_sofr
@@ -682,6 +689,7 @@ indicateurs:
     source: bce
     cle: ICP/M.GB.N.000000.4.ANR
     mots: inflation britannique
+    actif: false   # la BCE a cessé de publier les séries britanniques
 
   - id: chomage_gb
     label: Chômage Royaume-Uni
@@ -690,6 +698,7 @@ indicateurs:
     unite: "%"
     source: bce
     cle: LFSI/M.GB.S.UNEHRT.TOTAL0.15_74.T
+    actif: false   # la BCE a cessé de publier les séries britanniques
 
   - id: gilt_10a
     label: Taux 10 ans Royaume-Uni
@@ -698,6 +707,7 @@ indicateurs:
     unite: "%"
     source: bce
     cle: IRS/M.GB.L.L40.CI.0000.GBP.N.Z
+    actif: false   # la BCE a cessé de publier les séries britanniques
 
   - id: inflation_jp
     label: Inflation Japon
@@ -807,3 +817,41 @@ indicateurs:
     unite: "$"
     source: marche
     cle: ZW=F
+
+  # ============ AUTRES BANQUES CENTRALES ============
+
+  - id: boj_directeur
+    label: Taux directeur Banque du Japon
+    pays: jp
+    theme: politique_monetaire
+    unite: "%"
+    source: fred
+    cle: IRSTCI01JPM156N
+    note: nécessite la clé FRED
+    mots: Banque du Japon
+
+  - id: snb_directeur
+    label: Taux directeur Banque nationale suisse
+    pays: ch
+    theme: politique_monetaire
+    unite: "%"
+    source: snb
+    cle: zirepo
+    mots: banque nationale suisse
+
+  - id: boc_directeur
+    label: Taux directeur Banque du Canada
+    pays: ca
+    theme: politique_monetaire
+    unite: "%"
+    source: boc
+    cle: V39079
+    mots: Banque du Canada
+
+  - id: eurcad
+    label: Euro / dollar canadien
+    pays: monde
+    theme: devises
+    unite: CAD
+    source: change
+    cle: CAD

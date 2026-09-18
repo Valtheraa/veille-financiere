@@ -427,8 +427,11 @@ function afficherFamilles(){
     return;
   }
 
-  for (const pays of donnees.pays || []){
-    if (!(donnees.indicateurs || []).some(i => i.pays === pays.id)) continue;
+  const entrees = [{ id: "banques", label: "Banques centrales" },
+                   { id: "cours", label: "Cours" }].concat(donnees.pays || []);
+  for (const pays of entrees){
+    const transversal = pays.id === "cours" || pays.id === "banques";
+    if (!transversal && !(donnees.indicateurs || []).some(i => i.pays === pays.id)) continue;
     const bouton = document.createElement("button");
     bouton.className = "famille";
     bouton.setAttribute("aria-pressed", String(pays.id === paysActif));
@@ -511,6 +514,10 @@ function afficherHero(){
     || (donneesAnciennes() ? ["bce_depot", "cac40", "btc"] : (donnees.heros || {}).fr)
     || ["bce_depot", "cac40", "btc"];
   const disponibles = choix.map(parId).filter(i => i && i.statut === "ok");
+  if (!disponibles.length){
+    const secours = (donnees.indicateurs || []).filter(i => i.pays === paysActif && i.statut === "ok");
+    disponibles.push(...secours.slice(0, 3));
+  }
   const principal = disponibles[0];
   const secondaires = disponibles.slice(1, 3);
   const nomPaysActif = (donnees.pays || []).find(p => p.id === paysActif);
@@ -557,9 +564,14 @@ function afficherChiffres(){
   const nomPays = Object.fromEntries((donnees.pays || []).map(p => [p.id, p.label]));
 
   // Une recherche traverse tous les pays ; sinon on reste sur le pays choisi.
+  // « Cours » traverse les pays : indices, crypto, devises et matières ensemble.
+  const THEMES_COURS = ["marches", "crypto", "devises", "matieres"];
   const retenus = filtreChiffres
     ? tous.filter(i => (i.label + " " + (nomPays[i.pays] || "")).toLowerCase().includes(filtreChiffres))
-    : donneesAnciennes() ? tous : tous.filter(i => i.pays === paysActif);
+    : donneesAnciennes() ? tous
+    : paysActif === "cours" ? tous.filter(i => THEMES_COURS.includes(i.theme))
+    : paysActif === "banques" ? tous.filter(i => i.theme === "politique_monetaire")
+    : tous.filter(i => i.pays === paysActif);
 
   if (!retenus.length){
     cible.innerHTML = `<p class="vide-vue">Aucun indicateur ne correspond.</p>`;
@@ -614,6 +626,14 @@ function afficherChiffres(){
       const v = variation(ind);
       if (ind.statut !== "ok"){
         ligne.className = "ligne vide";
+        if (ind.statut === "perime"){
+          ligne.innerHTML = `<span class="ligne-nom"><span class="nom">${ech(ind.label)}</span>
+              <span class="note">série arrêtée par la source</span></span>
+            <span class="ligne-val"><span class="val">${valeurAffichee(ind)}</span>
+              <span class="var neutre">${ech(reference(ind) || ind.date || "")}</span></span>`;
+          bloc.appendChild(ligne);
+          continue;
+        }
         const raison = /FRED/.test(`${ind.note || ""} ${ind.erreur || ""}`) ? "clé FRED manquante" : "";
         ligne.innerHTML = `<span class="ligne-nom"><span class="nom">${ech(ind.label)}</span>
             ${raison ? `<span class="note">${ech(raison)}</span>` : ""}</span>
@@ -621,7 +641,8 @@ function afficherChiffres(){
       } else {
         ligne.className = "ligne";
         const moisLigne = groupe._moisCommun ? "" : reference(ind);
-        const paysLigne = filtreChiffres ? nomPays[ind.pays] : "";
+        const transversal = filtreChiffres || paysActif === "cours" || paysActif === "banques";
+        const paysLigne = transversal ? nomPays[ind.pays] : "";
         const note = [paysLigne, PEUR[ind.note] || ind.note, moisLigne].filter(Boolean).join(" — ");
         ligne.innerHTML = `<span class="ligne-nom">
             <span class="nom">${ech(ind.label)}</span>

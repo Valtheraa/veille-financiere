@@ -13,7 +13,11 @@ regles:
 
   - indicateur: fed_directeur
     condition: change
-    message: Le taux effectif de la Fed a changé
+    message: La Fed a changé son taux directeur
+
+  - indicateur: fed_effectif
+    condition: change
+    message: Le taux effectif de la Fed a bougé
 
   - indicateur: livret_a
     condition: change

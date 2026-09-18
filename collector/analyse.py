@@ -84,10 +84,15 @@ def verifier_fraicheur(indicateurs):
         except ValueError:
             continue
 
-        if ind.get("theme") == "epargne":
+        rythme = ind.get("revision")
+        if rythme == "semestriel":
             revisions = [date(a, m, 1) for a in (saisie.year, saisie.year + 1) for m in (2, 8)]
             echue = max((r for r in revisions if saisie < r <= aujourdhui), default=None)
             quand = "la révision du 1er février" if echue and echue.month == 2 else "la révision du 1er août"
+        elif rythme == "annuel":
+            revisions = [date(a, 1, 1) for a in (saisie.year, saisie.year + 1)]
+            echue = max((r for r in revisions if saisie < r <= aujourdhui), default=None)
+            quand = "la révision annuelle du 1er janvier"
         elif ind.get("theme") == "credit":
             echue = saisie if (aujourdhui - saisie).days > 45 else None
             quand = "le baromètre mensuel des courtiers"

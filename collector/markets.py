@@ -48,6 +48,7 @@ def _neuf(conf):
         "pays": conf["pays"],
         "theme": conf["theme"],
         "mots": conf.get("mots"),
+        "revision": conf.get("revision"),
         "unite": conf.get("unite"),
         "note": conf.get("note"),
         "valeur": None,
@@ -58,6 +59,8 @@ def _neuf(conf):
         "source": None,
         "statut": "indisponible",
         "repli": False,
+        "ecart_jours": None,
+        "ambigu": None,
         "erreur": None,
     }
 
@@ -67,24 +70,48 @@ def _neuf(conf):
 # ---------------------------------------------------------------------
 
 def _bce(conf, ind):
+    """
+    Une clé BCE peut désigner plusieurs séries à la fois (corrigée ou non des
+    variations saisonnières, par exemple). Le format CSV les renvoie toutes à
+    la suite : il faut les séparer avant de lire la dernière valeur, sinon on
+    mélange deux séries et on affiche une observation vieille de neuf mois.
+    """
     url = (
         f"https://data-api.ecb.europa.eu/service/data/{conf['cle']}"
-        "?lastNObservations=2&format=csvdata"
+        "?lastNObservations=3&format=csvdata"
     )
     lignes = list(csv.DictReader(io.StringIO(_get(url).text)))
-    points = [
-        (l["TIME_PERIOD"], float(l["OBS_VALUE"]))
-        for l in lignes
-        if l.get("OBS_VALUE") not in (None, "", "NaN")
-    ]
-    if not points:
+    if not lignes:
+        raise ValueError("réponse vide")
+
+    colonne_serie = next((c for c in lignes[0] if c in ("KEY", "SERIES_KEY", "SERIES")), None)
+    series = {}
+    for l in lignes:
+        if l.get("OBS_VALUE") in (None, "", "NaN"):
+            continue
+        identifiant = l.get(colonne_serie) if colonne_serie else "unique"
+        series.setdefault(identifiant, []).append((l["TIME_PERIOD"], float(l["OBS_VALUE"])))
+    if not series:
         raise ValueError("série vide")
-    points.sort(key=lambda p: p[0])
+
+    # La clé demandée, écrite comme la BCE l'écrit dans ses réponses.
+    demandee = conf["cle"].replace("/", ".")
+    exacte = next((k for k in series if k and k.upper() == demandee.upper()), None)
+    if exacte:
+        points = sorted(series[exacte])
+    else:
+        # Pas de correspondance exacte : on prend la plus fraîche et on le signale,
+        # car c'est le signe d'une clé trop large qu'il faudra préciser.
+        points = sorted(max(series.values(), key=lambda pts: max(p[0] for p in pts)))
+        if len(series) > 1:
+            ind["ambigu"] = len(series)
+
     ind["valeur"] = round(points[-1][1], 3)
     ind["date"] = points[-1][0]
     ind["source"] = "BCE"
     if len(points) > 1:
         ind["variation"] = round(points[-1][1] - points[-2][1], 3)
+        ind["ecart_jours"] = _ecart_en_jours(points[-2][0], points[-1][0])
 
 
 # ---------------------------------------------------------------------
@@ -132,6 +159,57 @@ def _boe(conf, ind):
     ind["source"] = "Banque d'Angleterre"
     if len(points) > 1:
         ind["variation"] = round(points[-1][1] - points[-2][1], 3)
+
+
+# ---------------------------------------------------------------------
+# Autres banques centrales
+# ---------------------------------------------------------------------
+
+def _boc(conf, ind):
+    """Banque du Canada. Son API « Valet » est ouverte, sans clé."""
+    url = f"https://www.bankofcanada.ca/valet/observations/{conf['cle']}/json?recent=3"
+    observations = _get(url).json().get("observations", [])
+    points = []
+    for o in observations:
+        bloc = o.get(conf["cle"])
+        if bloc and bloc.get("v") not in (None, ""):
+            points.append((o["d"], float(bloc["v"])))
+    if not points:
+        raise ValueError("série vide")
+    points.sort(key=lambda p: p[0])
+    ind["valeur"] = round(points[-1][1], 3)
+    ind["date"] = points[-1][0]
+    ind["source"] = "Banque du Canada"
+    if len(points) > 1:
+        ind["variation"] = round(points[-1][1] - points[-2][1], 3)
+        ind["ecart_jours"] = _ecart_en_jours(points[-2][0], points[-1][0])
+
+
+def _snb(conf, ind):
+    """Banque nationale suisse. Portail de données ouvert, format CSV à points-virgules."""
+    url = f"https://data.snb.ch/api/cube/{conf['cle']}/data/csv/fr"
+    lignes = [l for l in _get(url).text.splitlines() if ";" in l]
+    points = []
+    for ligne in lignes:
+        morceaux = ligne.split(";")
+        if len(morceaux) < 2:
+            continue
+        date, valeur = morceaux[0].strip(), morceaux[-1].strip()
+        if not re.match(r"^\d{4}(-\d{2}){0,2}$", date):
+            continue
+        try:
+            points.append((date, float(valeur.replace(",", "."))))
+        except ValueError:
+            continue
+    if not points:
+        raise ValueError("aucune observation exploitable")
+    points.sort(key=lambda p: p[0])
+    ind["valeur"] = round(points[-1][1], 3)
+    ind["date"] = points[-1][0]
+    ind["source"] = "Banque nationale suisse"
+    if len(points) > 1:
+        ind["variation"] = round(points[-1][1] - points[-2][1], 3)
+        ind["ecart_jours"] = _ecart_en_jours(points[-2][0], points[-1][0])
 
 
 # ---------------------------------------------------------------------
@@ -444,6 +522,8 @@ RECUPERATEURS = {
     "bce": _bce,
     "epargne_fr": _epargne_fr,
     "tresor_us": _tresor_us,
+    "boc": _boc,
+    "snb": _snb,
     "bls": _bls,
     "fred": _fred,
     "fed": _fed,
@@ -502,25 +582,60 @@ def inspecter(conf):
         print(f"  {l.get('TIME_PERIOD')}  {l.get('OBS_VALUE')}")
 
 
-def _periode(ind):
-    if ind.get("date") in (None, ""):
-        return None
+def _lire_date(valeur):
+    """Accepte 2026-08-17, 08/17/2026, 2026-08, 2026-Q2 et 2026."""
+    texte = str(valeur or "")[:10]
+    trimestre = re.match(r"(\d{4})-?Q([1-4])", texte)
+    if trimestre:
+        return datetime(int(trimestre.group(1)), int(trimestre.group(2)) * 3, 1)
     for format_ in ("%Y-%m-%d", "%m/%d/%Y", "%Y-%m", "%Y"):
         try:
-            observee = datetime.strptime(str(ind["date"])[:10], format_)
-            break
+            return datetime.strptime(texte, format_)
         except ValueError:
-            observee = None
-    if not observee:
-        return None
-    jours = (datetime.now(timezone.utc).replace(tzinfo=None) - observee).days
-    if jours <= 5:
+            continue
+    return None
+
+
+def _ecart_en_jours(avant, apres):
+    a, b = _lire_date(avant), _lire_date(apres)
+    return (b - a).days if a and b else None
+
+
+def _periode(ind):
+    """
+    La période d'une variation, c'est l'intervalle entre les deux dernières
+    observations — pas l'âge de la dernière. Une série mensuelle publiée avec
+    deux mois de retard compare bien deux mois, pas un trimestre.
+    """
+    jours = ind.get("ecart_jours")
+    if jours is None:
+        observee = _lire_date(ind.get("date"))
+        if not observee:
+            return None
+        jours = (datetime.now(timezone.utc).replace(tzinfo=None) - observee).days
+    if jours <= 6:
         return "24 h"
     if jours <= 45:
         return "un mois"
     if jours <= 130:
         return "un trimestre"
     return "un an"
+
+
+def _est_perime(ind):
+    if ind.get("repli") or ind.get("source") == "saisi à la main":
+        return False
+    """
+    Une série arrêtée continue de répondre : le Royaume-Uni a quitté les
+    statistiques de la BCE, et sa dernière observation date de 2020. L'afficher
+    comme un chiffre du jour serait un mensonge.
+    """
+    observee = _lire_date(ind.get("date"))
+    if not observee:
+        return False
+    age = (datetime.now(timezone.utc).replace(tzinfo=None) - observee).days
+    attendu = ind.get("ecart_jours") or 31
+    return age > max(3 * attendu, 120)
 
 
 def tous_les_indicateurs(config, verbeux=True):
@@ -554,6 +669,9 @@ def tous_les_indicateurs(config, verbeux=True):
         # « +0,15 » ne veut rien dire sans sa période : une série quotidienne
         # compare deux jours, une série mensuelle deux mois.
         ind["periode"] = _periode(ind)
+        if ind["statut"] == "ok" and _est_perime(ind):
+            ind["statut"] = "perime"
+            ind["erreur"] = f"série arrêtée, dernière observation {ind.get('date')}"
         resultats[conf["id"]] = ind
         if verbeux and conf.get("actif", True):
             marque = "ok   " if ind["statut"] == "ok" else "ÉCHEC"

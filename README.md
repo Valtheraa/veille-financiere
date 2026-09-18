@@ -81,8 +81,12 @@ dominante.
 Chômage, inflation, taux 10 ans et 2 ans américains fonctionnent sans rien
 configurer : ils viennent du Bureau of Labor Statistics et du Trésor.
 
-Les créations d'emplois et le PIB américain passent par FRED, la base de la Fed
-de Saint-Louis, qui demande une clé. Elle est gratuite et immédiate :
+Six lignes passent par FRED, la base de la Fed de Saint-Louis, qui demande une
+clé : le **taux directeur de la Fed** (la cible annoncée, celle que citent les
+journaux), les créations d'emplois, le PIB américain, la dette et le déficit
+américains, l'inflation japonaise. Sans la clé, le taux directeur est remplacé
+à l'écran par le taux effectif, constaté sur le marché, qui suit la cible avec
+un jour de retard — les deux diffèrent donc le jour d'une décision. Elle est gratuite et immédiate :
 crée un compte sur fredaccount.stlouisfed.org, demande une clé API, puis
 ajoute-la en secret GitHub sous le nom `FRED_API_KEY`. Sans elle, ces deux
 lignes affichent « indisponible » et le reste fonctionne normalement.
