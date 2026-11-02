@@ -1,5 +1,5 @@
 {
- "genere_le": "2026-11-01T21:57:47.783780+00:00",
+ "genere_le": "2026-11-02T13:21:51.354201+00:00",
  "categories": [
   {
    "id": "taux",
@@ -186,7 +186,7 @@
    "valeur_usd": null,
    "variation": 0.0,
    "variation_pct": null,
-   "date": "2026-10-31",
+   "date": "2026-11-02",
    "source": "BCE",
    "statut": "ok",
    "repli": false,
@@ -208,7 +208,7 @@
    "valeur_usd": null,
    "variation": 0.0,
    "variation_pct": null,
-   "date": "2026-10-31",
+   "date": "2026-11-02",
    "source": "BCE",
    "statut": "ok",
    "repli": false,
@@ -226,11 +226,11 @@
    "revision": null,
    "unite": "%",
    "note": "€STR : ce que les banques se prêtent entre elles au jour le jour",
-   "valeur": 2.439,
+   "valeur": 2.44,
    "valeur_usd": null,
-   "variation": 0.0,
+   "variation": 0.001,
    "variation_pct": null,
-   "date": "2026-10-29",
+   "date": "2026-10-30",
    "source": "BCE",
    "statut": "ok",
    "repli": false,
@@ -250,13 +250,13 @@
    "note": "la référence des crédits à taux variable",
    "valeur": 2.635,
    "valeur_usd": null,
-   "variation": 0.122,
+   "variation": -0.0,
    "variation_pct": null,
-   "date": "2026-09",
+   "date": "2026-10",
    "source": "BCE",
    "statut": "ok",
    "repli": false,
-   "ecart_jours": 31,
+   "ecart_jours": 30,
    "ambigu": null,
    "erreur": null,
    "periode": "un mois"
@@ -270,15 +270,15 @@
    "revision": null,
    "unite": "%",
    "note": null,
-   "valeur": 3.247,
+   "valeur": 3.239,
    "valeur_usd": null,
-   "variation": 0.293,
+   "variation": -0.008,
    "variation_pct": null,
-   "date": "2026-09",
+   "date": "2026-10",
    "source": "BCE",
    "statut": "ok",
    "repli": false,
-   "ecart_jours": 31,
+   "ecart_jours": 30,
    "ambigu": null,
    "erreur": null,
    "periode": "un mois"
@@ -382,11 +382,11 @@
    "revision": null,
    "unite": "pts",
    "note": null,
-   "valeur": 646.75,
+   "valeur": 645.19,
    "valeur_usd": null,
-   "variation": 6.09,
-   "variation_pct": 0.95,
-   "date": "2026-10-30",
+   "variation": 1.51,
+   "variation_pct": 0.23,
+   "date": "2026-11-02",
    "source": "Yahoo Finance",
    "statut": "ok",
    "repli": false,
@@ -669,11 +669,11 @@
    "revision": null,
    "unite": "pts",
    "note": null,
-   "valeur": 7969.42,
+   "valeur": 7972.2,
    "valeur_usd": null,
-   "variation": 122.1,
-   "variation_pct": 1.56,
-   "date": "2026-10-30",
+   "variation": 85.06,
+   "variation_pct": 1.08,
+   "date": "2026-11-02",
    "source": "Yahoo Finance",
    "statut": "ok",
    "repli": false,
@@ -695,7 +695,7 @@
    "valeur_usd": null,
    "variation": 0.0,
    "variation_pct": null,
-   "date": "2026-11-01",
+   "date": "2026-11-02",
    "source": "FRED",
    "statut": "ok",
    "repli": false,
@@ -735,11 +735,11 @@
    "revision": null,
    "unite": "%",
    "note": "SOFR : l'équivalent américain du taux au jour le jour",
-   "valeur": 3.94,
+   "valeur": 3.95,
    "valeur_usd": null,
-   "variation": 0.0,
+   "variation": 0.01,
    "variation_pct": null,
-   "date": "2026-10-29",
+   "date": "2026-10-30",
    "source": "Fed de New York",
    "statut": "ok",
    "repli": false,
@@ -933,11 +933,11 @@
    "revision": null,
    "unite": "pts",
    "note": "au-dessus de 25, les marchés ont peur",
-   "valeur": 19.42,
+   "valeur": 19.46,
    "valeur_usd": null,
-   "variation": 1.03,
-   "variation_pct": 5.6,
-   "date": "2026-10-30",
+   "variation": 1.94,
+   "variation_pct": 11.07,
+   "date": "2026-11-02",
    "source": "Yahoo Finance",
    "statut": "ok",
    "repli": false,
@@ -959,7 +959,7 @@
    "valeur_usd": null,
    "variation": 0.0,
    "variation_pct": null,
-   "date": "29 Oct 2026",
+   "date": "30 Oct 2026",
    "source": "Banque d'Angleterre",
    "statut": "ok",
    "repli": false,
@@ -977,11 +977,11 @@
    "revision": null,
    "unite": "pts",
    "note": null,
-   "valeur": 10729.78,
+   "valeur": 10704.87,
    "valeur_usd": null,
-   "variation": 39.38,
-   "variation_pct": 0.37,
-   "date": "2026-10-30",
+   "variation": -62.43,
+   "variation_pct": -0.58,
+   "date": "2026-11-02",
    "source": "Yahoo Finance",
    "statut": "ok",
    "repli": false,
@@ -1043,11 +1043,11 @@
    "revision": null,
    "unite": "pts",
    "note": null,
-   "valeur": 25818.21,
+   "valeur": 25778.0,
    "valeur_usd": null,
-   "variation": 636.56,
-   "variation_pct": 2.53,
-   "date": "2026-10-30",
+   "variation": 367.16,
+   "variation_pct": 1.44,
+   "date": "2026-11-02",
    "source": "Yahoo Finance",
    "statut": "ok",
    "repli": false,
@@ -1065,11 +1065,11 @@
    "revision": null,
    "unite": "€",
    "note": "suivi via l'ETF CW8, en euros",
-   "valeur": 705.01,
+   "valeur": 702.52,
    "valeur_usd": null,
-   "variation": -4.49,
-   "variation_pct": -0.63,
-   "date": "2026-10-30",
+   "variation": -13.08,
+   "variation_pct": -1.83,
+   "date": "2026-11-02",
    "source": "Yahoo Finance",
    "statut": "ok",
    "repli": false,
@@ -1087,11 +1087,11 @@
    "revision": null,
    "unite": "pts",
    "note": null,
-   "valeur": 63290.11,
+   "valeur": 63081.86,
    "valeur_usd": null,
-   "variation": 1100.46,
-   "variation_pct": 1.77,
-   "date": "2026-10-30",
+   "variation": -186.51,
+   "variation_pct": -0.29,
+   "date": "2026-11-02",
    "source": "Yahoo Finance",
    "statut": "ok",
    "repli": false,
@@ -1197,11 +1197,11 @@
    "revision": null,
    "unite": "$",
    "note": "le premier canal par lequel la géopolitique touche l'inflation",
-   "valeur": 113.43,
+   "valeur": 108.62,
    "valeur_usd": null,
-   "variation": -0.45,
-   "variation_pct": -0.4,
-   "date": "2026-10-30",
+   "variation": -6.7,
+   "variation_pct": -5.81,
+   "date": "2026-11-02",
    "source": "Yahoo Finance",
    "statut": "ok",
    "repli": false,
@@ -1219,11 +1219,11 @@
    "revision": null,
    "unite": "$",
    "note": null,
-   "valeur": 3898.9,
+   "valeur": 3909.0,
    "valeur_usd": null,
-   "variation": -175.7,
-   "variation_pct": -4.31,
-   "date": "2026-10-30",
+   "variation": -142.6,
+   "variation_pct": -3.52,
+   "date": "2026-11-02",
    "source": "Yahoo Finance",
    "statut": "ok",
    "repli": false,
@@ -1241,11 +1241,11 @@
    "revision": null,
    "unite": "€",
    "note": null,
-   "valeur": 69791,
-   "valeur_usd": 77884,
+   "valeur": 69153,
+   "valeur_usd": 77572,
    "variation": null,
-   "variation_pct": 0.86,
-   "date": "2026-11-01",
+   "variation_pct": -0.64,
+   "date": "2026-11-02",
    "source": "CoinGecko",
    "statut": "ok",
    "repli": false,
@@ -1263,11 +1263,11 @@
    "revision": null,
    "unite": "€",
    "note": null,
-   "valeur": 2027.54,
-   "valeur_usd": 2262.66,
+   "valeur": 2030.98,
+   "valeur_usd": 2278.23,
    "variation": null,
-   "variation_pct": 0.82,
-   "date": "2026-11-01",
+   "variation_pct": 0.45,
+   "date": "2026-11-02",
    "source": "CoinGecko",
    "statut": "ok",
    "repli": false,
@@ -1285,11 +1285,11 @@
    "revision": null,
    "unite": "€",
    "note": null,
-   "valeur": 84.51,
-   "valeur_usd": 94.31,
+   "valeur": 83.56,
+   "valeur_usd": 93.74,
    "variation": null,
-   "variation_pct": -1.16,
-   "date": "2026-11-01",
+   "variation_pct": -1.43,
+   "date": "2026-11-02",
    "source": "CoinGecko",
    "statut": "ok",
    "repli": false,
@@ -1307,11 +1307,11 @@
    "revision": null,
    "unite": "Md €",
    "note": null,
-   "valeur": 2336.2,
-   "valeur_usd": 2607.1,
+   "valeur": 2313.3,
+   "valeur_usd": 2594.8,
    "variation": null,
-   "variation_pct": -3.23,
-   "date": "2026-11-01",
+   "variation_pct": -3.82,
+   "date": "2026-11-02",
    "source": "CoinGecko",
    "statut": "ok",
    "repli": false,
@@ -1329,11 +1329,11 @@
    "revision": null,
    "unite": "%",
    "note": null,
-   "valeur": 60.0,
+   "valeur": 59.9,
    "valeur_usd": null,
    "variation": null,
    "variation_pct": null,
-   "date": "2026-11-01",
+   "date": "2026-11-02",
    "source": "CoinGecko",
    "statut": "ok",
    "repli": false,
@@ -1351,11 +1351,11 @@
    "revision": null,
    "unite": "/100",
    "note": "Fear",
-   "valeur": 34.0,
+   "valeur": 37.0,
    "valeur_usd": null,
-   "variation": 4.0,
+   "variation": 3.0,
    "variation_pct": null,
-   "date": "2026-11-01",
+   "date": "2026-11-02",
    "source": "Alternative.me",
    "statut": "ok",
    "repli": false,
@@ -1485,11 +1485,11 @@
    "revision": null,
    "unite": "pts",
    "note": null,
-   "valeur": 49500.97,
+   "valeur": 49592.5,
    "valeur_usd": null,
-   "variation": 941.97,
-   "variation_pct": 1.94,
-   "date": "2026-10-30",
+   "variation": 405.5,
+   "variation_pct": 0.82,
+   "date": "2026-11-02",
    "source": "Yahoo Finance",
    "statut": "ok",
    "repli": false,
@@ -1596,11 +1596,11 @@
    "revision": null,
    "unite": "$",
    "note": null,
-   "valeur": 2.9,
+   "valeur": 2.97,
    "valeur_usd": null,
-   "variation": 0.2,
-   "variation_pct": 7.45,
-   "date": "2026-10-30",
+   "variation": 0.15,
+   "variation_pct": 5.5,
+   "date": "2026-11-02",
    "source": "Yahoo Finance",
    "statut": "ok",
    "repli": false,
@@ -1618,11 +1618,11 @@
    "revision": null,
    "unite": "$",
    "note": null,
-   "valeur": 49.28,
+   "valeur": 50.02,
    "valeur_usd": null,
-   "variation": -5.02,
-   "variation_pct": -9.24,
-   "date": "2026-10-30",
+   "variation": -3.43,
+   "variation_pct": -6.42,
+   "date": "2026-11-02",
    "source": "Yahoo Finance",
    "statut": "ok",
    "repli": false,
@@ -1640,11 +1640,11 @@
    "revision": null,
    "unite": "$",
    "note": "le baromètre de l'industrie mondiale",
-   "valeur": 6.48,
+   "valeur": 6.51,
    "valeur_usd": null,
-   "variation": -0.14,
-   "variation_pct": -2.11,
-   "date": "2026-10-30",
+   "variation": -0.13,
+   "variation_pct": -1.99,
+   "date": "2026-11-02",
    "source": "Yahoo Finance",
    "statut": "ok",
    "repli": false,
@@ -1662,11 +1662,11 @@
    "revision": null,
    "unite": "$",
    "note": null,
-   "valeur": 603.5,
+   "valeur": 606.5,
    "valeur_usd": null,
-   "variation": -6.75,
-   "variation_pct": -1.11,
-   "date": "2026-10-30",
+   "variation": 7.5,
+   "variation_pct": 1.25,
+   "date": "2026-11-02",
    "source": "Yahoo Finance",
    "statut": "ok",
    "repli": false,
@@ -1780,149 +1780,717 @@
   {
    "label": "Décision de taux de la Fed",
    "date": "2026-10-28",
-   "jours": -4,
+   "jours": -5,
    "detail": "annonce à 20h, heure de Paris"
   },
   {
    "label": "Décision de taux de la BCE",
    "date": "2026-10-29",
-   "jours": -3,
+   "jours": -4,
    "detail": "annonce à 14h15, conférence de presse à 14h45"
   },
   {
    "label": "Inflation zone euro, première estimation",
    "date": "2026-11-02",
-   "jours": 1,
+   "jours": 0,
    "detail": "Eurostat"
   },
   {
    "label": "Chômage zone euro",
    "date": "2026-11-03",
-   "jours": 2,
+   "jours": 1,
    "detail": "Eurostat"
   },
   {
    "label": "Emploi américain (chiffres mensuels)",
    "date": "2026-11-06",
-   "jours": 5,
+   "jours": 4,
    "detail": "créations d'emplois et taux de chômage, 14h30 heure de Paris"
   },
   {
    "label": "Inflation américaine",
    "date": "2026-11-12",
-   "jours": 11,
+   "jours": 10,
    "detail": "indice des prix à la consommation, 14h30 heure de Paris"
   },
   {
    "label": "Indice des prix définitif",
    "date": "2026-11-15",
-   "jours": 14,
+   "jours": 13,
    "detail": "Insee"
   },
   {
    "label": "Compte rendu de la dernière réunion de la Fed",
    "date": "2026-11-20",
-   "jours": 19,
+   "jours": 18,
    "detail": "publié environ trois semaines après chaque décision"
   },
   {
    "label": "Inflation France, première estimation",
    "date": "2026-11-30",
-   "jours": 29,
+   "jours": 28,
    "detail": "Insee, 8h45"
   },
   {
    "label": "Croissance du PIB français",
    "date": "2026-11-30",
-   "jours": 29,
+   "jours": 28,
    "detail": "Insee, publication trimestrielle fin janvier, avril, juillet et octobre"
   },
   {
    "label": "Décision de taux de la Fed",
    "date": "2026-12-09",
-   "jours": 38,
+   "jours": 37,
    "detail": "avec les projections et le dot plot"
   },
   {
    "label": "Décision de taux de la BCE",
    "date": "2026-12-17",
-   "jours": 46,
+   "jours": 45,
    "detail": "avec projections macroéconomiques"
   },
   {
    "label": "Adoption définitive de la loi de finances",
    "date": "2026-12-20",
-   "jours": 49,
+   "jours": 48,
    "detail": null
   },
   {
    "label": "Décision de taux de la Fed",
    "date": "2027-01-27",
-   "jours": 87,
+   "jours": 86,
    "detail": null
   },
   {
    "label": "Révision du Livret A, du LDDS et du LEP",
    "date": "2027-02-01",
-   "jours": 92,
+   "jours": 91,
    "detail": "nouveau taux applicable au 1er février"
   },
   {
    "label": "Décision de taux de la BCE",
    "date": "2027-02-04",
-   "jours": 95,
+   "jours": 94,
    "detail": null
   },
   {
    "label": "Décision de taux de la Fed",
    "date": "2027-03-17",
-   "jours": 136,
+   "jours": 135,
    "detail": "avec les projections et le dot plot"
   },
   {
    "label": "Décision de taux de la BCE",
    "date": "2027-03-18",
-   "jours": 137,
+   "jours": 136,
    "detail": "avec projections macroéconomiques"
   },
   {
    "label": "Ouverture de la déclaration de revenus",
    "date": "2027-04-10",
-   "jours": 160,
+   "jours": 159,
    "detail": null
   },
   {
    "label": "Décision de taux de la Fed",
    "date": "2027-04-28",
-   "jours": 178,
+   "jours": 177,
    "detail": null
   },
   {
    "label": "Décision de taux de la BCE",
    "date": "2027-04-29",
-   "jours": 179,
+   "jours": 178,
    "detail": null
   },
   {
    "label": "Décision de taux de la Fed",
    "date": "2027-06-09",
-   "jours": 220,
+   "jours": 219,
    "detail": "avec les projections et le dot plot"
   },
   {
    "label": "Décision de taux de la BCE",
    "date": "2027-06-10",
-   "jours": 221,
+   "jours": 220,
    "detail": "avec projections macroéconomiques"
   },
   {
    "label": "Décision de taux de la BCE",
    "date": "2027-07-22",
-   "jours": 263,
+   "jours": 262,
    "detail": null
   }
  ],
  "articles": [
+  {
+   "conserver": 21,
+   "id": "2f1c29a26f98b558",
+   "titre": "Point marchés-Wall Street vue en hausse, le pétrole recule face à des espoirs au Moyen-Orient",
+   "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxQV3I4S0hDdU5KcHNseUxZaVpYOFljMGF1TFJGNURTVXd6VGtFR2xSdU0xckNROVk3Z2puYW10YW5MUGZlNmJKNUtFczU3T3FxUXVrRll5cmE1UVBWNGhOY2p2WE5PTWlRcE9lZVZpSktmUXVOa1FkT0FQcE5RaUxLV1JNNFQtcmRFTUEyenBBWC01dVpyTXNpVHM0OWxIQ1RNT2pLdWdJX3ZKZGRaQy1PTjBJX1libElMSVZUZ1ZSVDFLcDZ0RGdVdVh6S0pjLTdtRW00TzNpd1FwSDZJR3ZOOFNVVGtTN2V1?oc=5",
+   "source": "Zonebourse",
+   "rubrique": "Géopolitique à effet marché",
+   "categorie": "geo",
+   "genre": "recherche",
+   "publie_le": "2026-11-02T12:57:25+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 32,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": [
+    {
+     "source": "Bourse Direct",
+     "url": "https://news.google.com/rss/articles/CBMioAJBVV95cUxQMWllVDhjS1U4ODJCajJVaV9DOG5qTE1GWldTWDRGZHRZNkJNT0xOOEtPUlo2Sk9tWmxRN196aG9oT0dyVWdjemNRVWltY3BCeHJaQk44c0ZyN1AwRVl1VTNMeFlVVEg1aG5wTFpCSWQ2bDAtd1d0dFlzQ1JhYnlyX1V5Tm9aTW0zX3VZSGMyMTZnTk50MUVvQjFMY2RZS1ZaVjdSdTZmaFdfSU9GY2RLLUxvR3kyT2xWZDRoOVNCN2twNG82RWJRdFI3alJVNVhLWkVkbXFnUHphWjltTVh6SUdvRHhmVThfcU1XSzhpcGtpUFA4RWljQjVwb0E0QjYtMnpucTU4Q0NOWEVsb09ERkNsaHRqOWN0M3JjUXdrOW0?oc=5"
+    },
+    {
+     "source": "Infomédiaire",
+     "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOa0d2RG1iR2l6Y1dCd3JpcHJXRnc5Ukk5ck52Z05uQ2xON0paR0pjbFlkUVBlQkw4QTRISVZfc0tyeWE3OXgzSzJESk5UWVA5aXU2WV9ZU05wemxmZ1dTaTRISHAyTEpoOUhoQXVhZ3lhaTl1ZVBKT2NDRUp0ellMSWVidTZfMEs2NlFrcWU4b05jQjgzWWx3SHFpMGhIc1A0VHFqdmNsWWhqUQ?oc=5"
+    },
+    {
+     "source": "Les Affaires",
+     "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOYlphemFXNUVrZDlhR0xPTTBPcWpjUDltajEtYi1zczhSc1o3RnBvcmdLZWIyWUdET040alpzWmJldXpTZGVPOXhXUXBPN1hQZ3dvZzhsM1RIY0RtcmlMcVlQaWRlY0ZTYkpxUzBsTV9yQ3hhczVOZDhTQnNGemRpNzhBLS15cHk3dzd1WHpQV0J5T2hxN2VaWmxnZ2ozb2ZkalpDOGw0QUs3UDJyV1pTdWNVMVo4dGtta3hDSw?oc=5"
+    }
+   ]
+  },
+  {
+   "conserver": 21,
+   "id": "8779a7157c7bc3f7",
+   "titre": "Les marchés boursiers européens reculent légèrement, le pétrole chute alors que la prudence règne à l'approche",
+   "url": "https://news.google.com/rss/articles/CBMiugJBVV95cUxQNG5DVUpOTzZVTmp3VFBxTTk2NnRfWDhIclNNZVVzODk4UTlYZ3p2dzdIaVBCUzVWTFVrZWRrRk81ZFV4VV9HeWFMbmlaWnlTUE5SYXcyc1lBQV8tc3VJSXdaTWtubnFZYVJERWtFbFdBczFOVXlFcngyNUxHWVUzRnpUNHpmaGFDN0lva3NORGtHTFlBVkNzTHM4VWpOWUFFVEpjLXZiN3M0OGtMWHZvYzBUZGRiMXZ6SThfTTdCdXZobUhPckdjSFNHeXhlS3dWcTVTRDJkbTFXZEhCTGdmYUVKYWtIaEYtWndISkxTUUFNWHBUWmVZYmlUWVMxZVY2WlctN2E1LWhiLW1JcU95dGNlT3ZDeWpXUzZobVpaWUdUN21WbU12TGJZVTZPWHhpcDZzN2JBNFo3UdIBvwJBVV95cUxOZ3Itb3NYWjN6U1IxU05mOXp3Qmxmc09mSmcxN3Q2ZlhPQkRNaFE3N0RKRkNYWFZPTTZEdThKX0k0X215Uy1URUpFcUxTODZTZ09Ob3k5VGJwU3NsUzRKY2Y2dXVDTExxZ3UwaDRTcWRvQWtHbWVpckdTWDNrb3VnTmU3cWxmLVg5RTJfLWcyeFFPQ1lBUnVCMmVDNGs3MHVMTE81bTY0eFhLZjBlcWlCWWRvazhMcWIzcGdabVFhN3dEYjZiNGxYSmFCWWpQUEg0Sm1saGVrQldnbkZYeEMwZ2FrdjFpUWNCM2VZcElva3JqTVljU1VVSmZ2dUVUMkpxZGlOMllHS1N5SlVnay1tZkxEeFhxbXgyMnVpU0VBM0o1QnA0OVhwdzR5dnhVNHNOaUJEamVHQ1dJWnMydFJJ?oc=5",
+   "source": "Boursorama",
+   "rubrique": "Géopolitique à effet marché",
+   "categorie": "geo",
+   "genre": "recherche",
+   "publie_le": "2026-11-02T12:42:07+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 32,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": [
+    {
+     "source": "Zonebourse Suisse",
+     "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPb2pfeGNRQmRHcFR1Z3dvRUsxemNpaXFTU3VzX1lfVUptUlZEZV9Yc0M1T2hfaTNxQ3RrczFBWi1nZnBZSEIzTjNVM2NkalZmUTJ0aklmOHpMODdkbFNPYXlxS2tDSk50Z0dxQmRQTXpQOTdtY2ZOc2ViYkdubmhVWmVrblhHbmc4ejFURVE0NXlmME5ScnloT0FORWtweUE3YW94VXY5X24yb1NPN1NIWGdsSGl6OXp6UWZBS0NjV29WMnVpV2c?oc=5"
+    },
+    {
+     "source": "TradingView",
+     "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBxaWF4U3hkYUdVMTRxUWZTZ0ZMclpELWpuRmdoSEJvaV9TY1RrLU03YnREMkNGNjNsZUdHTjBURERHN2JzWWNwLXdIcHp1NkszOTJtQ2JsUVdCS1RmMlMzZ2Vn?oc=5"
+    },
+    {
+     "source": "Investing.com France",
+     "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPdHh2THZtNldPVjVvN2ZpYklkdkd0ZU5tOGZKOEVKbm1FeDBXMkxqcmVkUklwWk5fM3I5aXlGX05kRzBwS0djYnlOR0dzNnY4VTdnVjgzTXlGejEwNFNEc0xzSFFGN0JrUHVVRnFCUnpmcnRET2NEOWN0WC13NnZldmR2SXdkdl8ta0Y5U3Vzb1RTUDV1a01TTXptdkFZM1J1OVVPNnhlVGZfcDl5ZExxUGs5V3l0c0tLb2tUUjZGNGV0NVpaaUZN?oc=5"
+    }
+   ]
+  },
+  {
+   "conserver": 21,
+   "id": "178e77d1a40daaf4",
+   "titre": "Le pétrole en baisse avec l’espoir que Trump choisisse la diplomatie au Moyen-Orient",
+   "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxNSzJ5ampXNEZmM0VmeldyVmFQNWNjVUZhLVlVbFd6VjJEeGFCMkV1d093TmZWUFQ2UmR0OUx6REljRDRzU19aS3MzSVY2UDFXdlljdGk4WTBhVVVlQ2hsTUFNZXZ5RUZYNEQweHBqSUVZR2ZELUpNOVA2YXNqdDEyektSSHZGZjR1U2w1dlRROGw5SXZWZmdtQlI1YWh6VG1QTXVYdTlMOE53dFpXTkF1VW1rOEpEYnA1aWoyeC1pYkhQS09GbWZ1NzVVaTZUR0ptVmtQVDZxZ0o?oc=5",
+   "source": "La Presse",
+   "rubrique": "Tensions et énergie",
+   "categorie": "geo",
+   "genre": "recherche",
+   "publie_le": "2026-11-02T11:56:09+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 22,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": []
+  },
+  {
+   "conserver": 21,
+   "id": "9374342eeb916861",
+   "titre": "Des espoirs de paix au Moyen-Orient font baisser les cours du pétrole et relancent un peu le Cac 40, Alstom plonge en Bourse après un nouvel avertissement",
+   "url": "https://news.google.com/rss/articles/CBMingJBVV95cUxNWXlyY3hOMEJPcm94cnk0LWxmcmh1ejBReE9RMXc0cVB3ZmllYUhoTzlKWGJZTDFKbGVTMXliYUtMWnQ3QjJ2LVpWOXZ0bUJYRE53MG9aTWxDQVZRNVh5dFpka0wxRFJDbi1KckNXbi1EMVdqMmx2SG1KN01fLXZLbUdtNDYxemZ3ckIxWm5VVmNCclNuT1FobGc3RXFWVUp4N0t2UWh4clZhWWE0OE5LeC03Z2l4ZXNqVnl4MWtUZ2lEdUN0MFhRUXRISkliVVByS3pGMl9kcHQ1dFZTQ1oxbV8yN2hNT0d0cDJyTFlPRTVhS21sM1BIZWo2dVIxdmdOa0dqSHhsdzFGQnMzdjFTQ21hb0RGMjA2dFJhNUZB?oc=5",
+   "source": "Les Echos",
+   "rubrique": "Marchés actions",
+   "categorie": "marches",
+   "genre": "recherche",
+   "publie_le": "2026-11-02T11:17:00+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 32,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": [
+    {
+     "source": "Capital.fr",
+     "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNS0h5Vy1KSy1yTHZZRFUyQkI1UGxWb0JMQmhaUmtwM183MHMyV3ZIM2Y5eVFfdDlVLXYzSUJSOVM4eFpIUFk2dTFsNDVjalBnOTFMbXdIOXhhNU5sMHRURU9OSVFaSmxHdk9rRFFKWld0V3BqcFRaMkpSVmZXRGk5SnlTZE1ySVc2SXg0cXFuYVpSdjRJcTJXQnlVN3hkTVBqLWNDTTc2ME9MT1UxZXJmV2lkbHNlVm1aUkRfMXJoaWVXWDFFbFFv?oc=5"
+    }
+   ]
+  },
+  {
+   "conserver": 21,
+   "id": "7b7f4ef8d9e4b04c",
+   "titre": "CAC40 : retour au-dessus des 8.000 points, Alstom chute",
+   "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQdkhJZ1R6UVNRYUYzMTBPbUgtazNha0ZKWUQ4cUNPeTZnYUxCcUZfLXp5ZnNCcnRsRThvTk5vMV9PZ3plRjVrNzQ1UDREajN1Q0ZXWEg0T1VGX2RQSjZ6RkVCYVBLY1h5T0RNX0VOZ1hVc002NWZxa3E5aTdWbEV2eFc4Y1gxZFI4Z2tBVFJDcHZLbTNhb1J3QUZvV1lRVWY5bTZTR3NST1hhMHc?oc=5",
+   "source": "Le Revenu",
+   "rubrique": "Marchés actions",
+   "categorie": "marches",
+   "genre": "recherche",
+   "publie_le": "2026-11-02T11:09:00+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 32,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": []
+  },
+  {
+   "conserver": 21,
+   "id": "fcd3ccf264fb73f4",
+   "titre": "Mi-séance Paris : le CAC 40 retrouve les 8.000 points...",
+   "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNd2xabDJtY3FyN3VxeGdBLTJ1QkpoZ0RqZ1MtSUlJN1hZUmNjcjVETjR0dzBrV3lwMFQ5S212U0tUU05pemR0Yi1KM0R5NzRCbEJnbkdyU2E2enhBRFJJT1NZMThUejBFYlA2bFdNQUNwSnllNTFteENiYjNiWjRPUXQzMjM3VUcwdlpLTzlUanFmRnFiSGdEal9ib3h1SUN2ZmVF0gGjAUFVX3lxTE13bFpsMm1jcXI3dXF4Z0EtMnVCSmhnRGpnUy1JSUk3WFlSY2NyNURONHR3MGtXeXAwVDlLbXZTS1RTTml6ZHRiLUozRHk3NEJsQmduR3JTYTZ6eEFEUklPU1kxOFR6MEViUDZsV01BQ3BKeWU1MW14Q2JiM2JaNE9RdDMyMzdVRzB2WktPOVRqcWZGcWJIZ0RqX2JveHVJQ3ZmZUU?oc=5",
+   "source": "Fortuneo",
+   "rubrique": "Marchés actions",
+   "categorie": "marches",
+   "genre": "recherche",
+   "publie_le": "2026-11-02T11:00:00+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 32,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": [
+    {
+     "source": "Boursier.com",
+     "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPMVR4WlVSU0kyMGpGdjhWRW5FbmJoNlNwb29Xd29ERGZiMGs1WUdIMG9ERlluQmpXTmtuQ2R5RmpyREZLLUdqSEtNR3ljSy03S0FrT2YyMWJaZTdxX1hUYnRPSnVzbk1tZm5pMzdGeHh3ZTVHc3NZT1IzdGRQOUwzeXprQUh2SFI0V25kMGxYbE96ZGRrMThZaExsSUczWEZkRG8wdlNkLUgyU2J1MVVnVi1nbFlTQjBzOEwtZzZESDY?oc=5"
+    }
+   ]
+  },
+  {
+   "conserver": 21,
+   "id": "d5de7dd01e2634e8",
+   "titre": "Pétrole / Opep+ : maintien des objectifs de production pour les derniers mois de l’année",
+   "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPNjZVdUNVRnhmRjhOcF9JWTdmX1FoR3dIXy1GN0IwOEFNTGNIcU93emgyMDF0VEQydDFHMTNUU3UxRnBoWWxsbkdyNWxNZWxqNTV2VGw1a3NQSWFxd3ZXRS1ZNmY1VnBiSkItU0NUemlGcUZoZURkOXUxVG5US3RmaXJVSmdzdEU4a19DZzFyUXMybDRwdTBTR3NfOWl1blVqaWNUWktENlg?oc=5",
+   "source": "Le Revenu",
+   "rubrique": "Géopolitique à effet marché",
+   "categorie": "geo",
+   "genre": "recherche",
+   "publie_le": "2026-11-02T10:36:00+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 32,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": []
+  },
+  {
+   "conserver": 180,
+   "id": "abdd415a066fd30c",
+   "titre": "Aujourd'hui l'économie - Comment mobiliser l'épargne des Français pour financer l'économie",
+   "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPekk4TnEwLVhneFlSZUw0UEZZQWtOc2djbHh6RmhZcjVPX0NWRkJOTFM2eTlDN2gzQ0FTYmRWZXpPQXJYb1R2TjAyd190WnJOWWtZc2FOWWJVek5BVkdadVEySUtLVldJc0RHSWFmd2VxM1pQVmpqWnJWRnVaOGlsNmVELXJpeE5zYXJ6YWR3WmFTZVhPLUQ2STVsVlpnX1dfcERUNERLY0xKSjNXcjMyNDhQZ2xlQlU?oc=5",
+   "source": "RFI",
+   "rubrique": "Banque de France",
+   "categorie": "macro",
+   "genre": "recherche",
+   "publie_le": "2026-11-02T10:19:43+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 32,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": []
+  },
+  {
+   "conserver": 21,
+   "id": "0bafa29d21efd34c",
+   "titre": "APN : M. Lebbou entame la présentation du projet de loi de finances 2027",
+   "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOVTlkLXh3cUlaLWdxN2NMR28tNGZnWVJGVk8wbV9XUEtZT3Y5VGs3TmJsVWZZa0FpeGNCYU5kd0FRMDdha0J0ZENFYnhPeTJrUUE4U3J2NUliLW5zdUhOSGdySWxBREh6a1FfOFRKQjcxS243b1JLUkk1NmRxM3hCS1FQWmx0MVowWS12RmRjYU9EdllJcElzZ0gwMHgySWhkMXhneWFPVG0zdW44Y1NXcTk0b1loM2hT?oc=5",
+   "source": "El Moudjahid",
+   "rubrique": "Fiscalité et loi de finances",
+   "categorie": "macro",
+   "genre": "recherche",
+   "publie_le": "2026-11-02T10:18:19+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 48,
+   "signaux": [
+    "loi de finances"
+   ],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": [
+    {
+     "source": "وكالة الأنباء الجزائرية",
+     "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOeHlnT1haREZfLVBqb0RaMHo1V0w5Z2wtS0RpT2tabjZ1Sjh0dmZCWVE2U3Z5d0xIQUFTaXlic25tOXBLWkZCM19jRFI2THI0V3N4S2lCWlgzNmVFeXFRSkI2SENNWXpZbHg4a2QyU0JmaGJRamFwRTV0REJXV2ZuZVhuTWlrWUMtSUttdW51VzE5eXhONEpUR2lwY3lnbHhseFpfNEFhQWlHeUN3UExWN1EyVnpyeDNQTjlZVjcyRQ?oc=5"
+    },
+    {
+     "source": "Actualite.cd",
+     "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQQlJGVHR3WmI2bUdlb2M0QlVHZnRNMHFPWDNISVNqU1hoQkRSZXBzbnNrRzJaYU5SZm1LdVloemgwUVBuUjFCRngzQmd2aXBybTd4YV9QNVdWaTczSFE1Ql9Ta0c4S1YwcFNXSndiRVh6d3F5b3JZTWE0bTMwdmFGblNHNWZfem1USEF5REpkM2JuNXBZMUhsR045eTBMQVRBaG92ZTdhRUg1S0UwYXZPS3NoT2JQYUl5cEpJ?oc=5"
+    },
+    {
+     "source": "Il Mattino",
+     "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQdDlrVVNZU2ZIa1g3QW5kYmJwTi1saUNQd0txdzhHdUpwMTlPZF9KeDg3bXdRc2hqWUtCRDlhSWpCcVFydDJid0pJb3FlYXItbi1NNXBkV2JmNEU3VVFzZlM2TGdua0Y2ckpRLUxLeGRvcm11UlZVS0lEbXZUZEl2NVktRS1vT1N0dl9IUFFnQkoyN183V25hWE5wdF84QU9KVkpEQU5qRFltaFVFUFHSAbMBQVVfeXFMTXo2TURLS3BzUXI5dXA5NlFGcGQweTQxdHN4TmFMQTRmc0xEY0ZTSE0zTFlNOUJ0UDNuQkczU0lfbzVVbFNjVTJoX2JoY2U0SzJHSXlMMkt3NjBnelk4THI3QW4zYWdzVm1lYnJzN3FySkRCeDgwSkNPTGxmMExTTGl2SUl3NnBnWVhpRy1wQTdhRUFQV180Yjh1MWlXZTQwaUhpRll4b0NseU5MQldYMzFqRHM?oc=5"
+    },
+    {
+     "source": "LaPresse News",
+     "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNOVplYnZ5OWFZN3JjeGthT3BmcGpoZFhPMjZZZ1JYWFlRaHVFTnZlamJyZmlaVGZOeXBta19VaWxJUC1CZmpkMXE2cklhOWtVU0oyVDAyNTZtUEZoa29wUks0SDA5T0ZMOUFIUy1GdXdyNkxGQlVXRzdPRHlxZkdQTWxSeXFMLWo3a2FobEJtOUJPcWpzSHUtNEZXWVA5eG1uMzRDYnF4OEZwaEVDNnFqVEdoQjJTMlMxQmUwMV9WS2NCT2hrR0ZnYjk5ekF0dE9qTFBoLUFzOUhwNmZ6SnhLSXZZd3VYUHgy?oc=5"
+    }
+   ]
+  },
+  {
+   "conserver": 21,
+   "id": "bc443ea4920e44f6",
+   "titre": "Lettre ouverte au président de l'Assemblée nationale: Objet : Nécessité du vote de la loi de finances rectificative",
+   "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQT0NzU3EwZUd3UVRhOE1udEtqWndfR20xeklHblhsemF3X09JbnlDSVEyaXJ6bXdVbUxPdE5jMmFneUZyLXBkcU5oTDcwY1M0cjQ4Q1ZneHdmZU1lZnM0ZHg4YktDUEk5a3JLWlZIOFVQT1NIcDVFNkVxbllpdWRRbEZtTzhMV2xXRENfOUo4cWVTQkZGY2JMdGlYdG9ydEVOTS1mdmZKc0FNUFVWaEdHRWg2aFZVN2piWnJkUDRSTVd1cEtzV2JHS3RSRmF4bzB2WGF0eFhiSWg3alUzdFBMRw?oc=5",
+   "source": "Leral.net",
+   "rubrique": "Fiscalité et loi de finances",
+   "categorie": "macro",
+   "genre": "recherche",
+   "publie_le": "2026-11-02T10:01:00+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 48,
+   "signaux": [
+    "loi de finances"
+   ],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": [
+    {
+     "source": "SenePlus",
+     "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNMjl0ZnlHSE5MLS1IOElfLV9JdUV5cmhPb2hodi1mbmVvZktPS3VNYjAway1HMFlUQjhoMjJQS2VBZndQeDVuVDJlWEc1bWJjSHJISmdReEJVS1lLYnZSbmpuRDZ1REJaV2dwdHEzUm5VQk5WRmw2MUlTdmR5bkNRX0dqcWFKanFpcFNfSFYxVjl6TUFPclhIb1NhM3BzN0dPN0JfeA?oc=5"
+    },
+    {
+     "source": "nations-sn.com",
+     "url": "https://news.google.com/rss/articles/CBMikwJBVV95cUxQSWZzbU8zWmxhX2Fua0JRWVFwNGpxRFE2X3J3Q2dzWWxRNk9VSDNmUHY1NWgzbXVQNHpiRHVETTdmSHZUdVpiemNlSE1tYWZ4ckl5bm5yOE0zUlVZUGVmYVVVZGhoSTNZVVQyWFg2QkFMMWI0N1FPNUo3U2FkQm1XX2ZremlZSmhBbjM3aFk0cktHelpyMnpsREItODk3QmxKZnRUc281RG01TFJpS0ZCZ0NfemxiTUI1NlItS2xxSC1vSlFLNmZvNlVBY0Rwc2xMSWMwOC1SWU42ZUxCa1ZGVnBQN1l4SEtKc2VyaFMzd2JYZTJGNjNHbkJJZVlST3QxZHl6RjdIQjVkeXVTRWI2WEpUTQ?oc=5"
+    }
+   ]
+  },
+  {
+   "conserver": 21,
+   "id": "c37a14aec811e1aa",
+   "titre": "Administrer sans loi de finances : l'avis du Conseil d’État du 9 juillet 2026. Une nouvelle hypothèse de recours à la loi spéciale 1/2 Par Émilien Quinart",
+   "url": "https://news.google.com/rss/articles/CBMimwJBVV95cUxNdzdLVjg2c0pQTmE2NTNPXzg5OFNDQ0xoVWpubVpYZTIzMThncW1sdjJTV3N6eHQ4d1hkOTNiZ1NHUGNWVnF2R2paeUo0dGx6ZzFmUEwyUGNJb3VuR2FhNDFTRWR1cmE3SG1GdHM0VnV2SF9LMUVzZ1hTcGU1am11YlowWWdJTVUza1JVc0QyMGIyLVVub1U5c3dFWGEwY2VXTXA0bzNFVXE0cWtnRFZSdkc0dDdfa2NCdEpiaGUtX1Y4RlEwbFJKbHVfSEZDdmdveUVjZ2ZVWGdKWHREbDU1ZkpMb1F3UmxMQ3RibTZqSWpuYVBfanljWlM1eTF1bi1mNDFJQkczcXh4czJQUUM1YVNmY0dvcGtlck4w?oc=5",
+   "source": "JP blog -",
+   "rubrique": "Fiscalité et loi de finances",
+   "categorie": "macro",
+   "genre": "recherche",
+   "publie_le": "2026-11-02T09:52:33+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 48,
+   "signaux": [
+    "loi de finances"
+   ],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": []
+  },
+  {
+   "conserver": 21,
+   "id": "541aa3d0c24a0c1d",
+   "titre": "Bourse européenne : le STOXX 600 stagne, le pétrole recule",
+   "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOV25nYzFBODVPTFM0eVpGTmpkMTY0U243QWNkY1ZHT0ZpYjEwT2w3YVYxWTFkZEFkbVZYWjBfajhEWmlSNzdtdlNOSUNwMW1EM1ZMLU1mak5LNVpiYWl3VkU1eGZRa0pJMFJ6VHRMRXFNQ3pkVE1GSUFadGpkQ1p6TzRhSXltMFQ2SU85Z0tNTDFlR2VFNllYSFJpWS1pdF9JdVBPSi13cDBNQ2x5?oc=5",
+   "source": "Le Revenu",
+   "rubrique": "Géopolitique à effet marché",
+   "categorie": "geo",
+   "genre": "recherche",
+   "publie_le": "2026-11-02T09:41:00+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 32,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": []
+  },
+  {
+   "conserver": 21,
+   "id": "554af56be931e01b",
+   "titre": "Livret A et LEP : les taux pourraient grimper en février 2027",
+   "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxObGhzSWxQdnRBdkpaSFFubFpCVTBIcmQ1aXluangyZ3llOUdDT2NWZEl1WV9yeUFwNVF1WTE4czdkcWRfZmxEbkNiX3BJUWN2WjZsaW5sUmUzMjU0UG9adHI5ZExYd1ZnV0V0OHBUaXlTTUdXajJOM0hWSXBZRUZST1BuRlEzUGI1OFd1Snp6QU9GR0ZEM3pDd3hXeTFobDJDT1BLYTUtZ09PQTJIZVRCQXJfUVNnUTh2UUYtcVZoeGxwQQ?oc=5",
+   "source": "Le Revenu",
+   "rubrique": "Épargne réglementée",
+   "categorie": "taux",
+   "genre": "recherche",
+   "publie_le": "2026-11-02T09:36:00+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 38,
+   "signaux": [
+    "livret A"
+   ],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": [
+    {
+     "source": "Bourse Inside",
+     "url": "https://news.google.com/rss/articles/CBMigwJBVV95cUxOazFYaHAxY0xLWkRhbkEtUHo5dWxzVFBKUDZEdkM3SE53TnM5dWRSaDhEUjNqeGRDdG9jSzRuWkJzYUxlckktQS1IdHhlanZWdFJRaW9LQVU3TUxJVUczM2gxWURtMzRPU0hnS0s0djRrbW1EYkVCcVcwT3hvTWdtaFh0VXpvTUVSVWpucTluVnNJQ21qang3enEtTzVCMGNOaGVrMVBkSFg0cDVQLWthMUZCdzdlM05EaXI3UlZMSkg4d3RkaVNYMDhqcGFzcTBHSWNEMGxQdGFYZFc3eFhialJQd0NTbGV6Sy1ndjdZVjF5d0ZUTUVNajNrZjhNUHRjbGQ4?oc=5"
+    },
+    {
+     "source": "Vie Pratique Féminin",
+     "url": "https://news.google.com/rss/articles/CBMiigJBVV95cUxOeUQtSnBMUDcteWlKVlFxVUJDcWc0MGJNOXFKMHpXS3dIZWlObWpnc0Fxc3JqMnZ4bHhoMjJMaC16Nmk1QUtRVUc1VlZzVjd4VjR0eEhwWUlETlZOVDY4bWtBcXFrT09TbWFsUl90R3ZsTktDd1BxeWhYOE41cUh3YVlTTTlncUtXV2kzZ1hqRjhEdDR5SEY5bWRUNFNQak5Udkk0LWJoalNQemF5RGxWZU1tWjcwV1dobnYwUkozbWhVenIwQWN6NVp2RlY0aDBaaVJIR0M4Rm90RDFrWTVGYm80Y2lDM0RMR0tlLTdEMEM0WkV5M3VQVDZXNkxQanhUWlFjQ0JhSGNnQQ?oc=5"
+    },
+    {
+     "source": "MoneyVox",
+     "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxPS0hmaWNIZFpaSzB0eEZMZzMwZ3BwRE9OWTlQVEZRT2RtRlYwZXhIaEJmRWtneG5zUTZBUTlnSmVKblJ3alZDdnFTdFVJOHdHOTE2dktYOGIzdkZpWC1PTkdYZ3NjUGZjRTlNY1Qxa2ZhOWxZSlZlNElhZTMzUzBseHhQRm80VmNBc0I4S0tLeDJtUGdVNGxfQTAxQS1jcDZlRmVHOVg5WVhvNGlTc3V0S2s0WlNFVXFkR09XYU93eEVrQWxCMDBPb2tTdkhpNUgwSDdyb2tTVk42Y1Z2VmVpczN2UzlFZGZIWDR3?oc=5"
+    },
+    {
+     "source": "Tout Sur Mes Finances",
+     "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPa005d2hvLXpfcGxLUTVpbDNxZGo3c0RlQ0RJY0lOTU5EMDZGTmI1Q3ZqaXV3aW9lWUM2anN4NVJrQkZWLTN3TFEySVZXckw4TU02cXo1dmo2Q1NyUGJlNXUxS0NPOGxsZnBEUllXcTltamg3eXdXUG9uMG9VQkxhV0JBSnRaVFk1V0RWWGh2cTlJS0FQS1R0cnZzUFFYcERETXRCUFYxakoyRDNjVzFkM1hoaTY2S0w5MHFsbm1RRjEtLUlMVXc?oc=5"
+    }
+   ]
+  },
+  {
+   "conserver": 21,
+   "id": "c599f349ecd8d3ba",
+   "titre": "La Bourse de Paris stable avant les élections de mi-mandat aux Etats-Unis",
+   "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOR3ljeHhWYS1UbzhTck0xZkN2dVVxcmw3ekdLTWZ5QlZTQ1hsVmFHSzBYZUNJZkN1ZzQ1UzFXTlpIMGZjU21hOVNrNzEtSUR2dEdnR2FGbHlpSVRCdEVkLWRNci1qNXdFTDVSdVkwT3BkWDBQRWQ1TjZfUG00U1prQU82ODk4SlpidVVuRzQyUDRUdHZhUzVtcEFYVQ?oc=5",
+   "source": "Yahoo Finance France",
+   "rubrique": "Géopolitique à effet marché",
+   "categorie": "geo",
+   "genre": "recherche",
+   "publie_le": "2026-11-02T09:32:01+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 32,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": [
+    {
+     "source": "XTB.com",
+     "url": "https://news.google.com/rss/articles/CBMitwJBVV95cUxNNlRBaHM5R25FcmhNRG1yRWtSOVlMM3VPOThxVU43c21uNUJkMjlITUZjekIyX0RTUGd6dmJmbEJnaG03d3RUS2JpLWpYTTdCU2JpN0ZtVkxsX3p6TFFFcDM1YldUdVNOMDNwM3RTYnRPSGthNDNIcm1SUkxQbExWWUplSkstbXYwYlhwV3FXcElDMjlnOFNjcGxidXB3aGZjWkpXVEFVUERwRGl2VGdnNWtZTzVvNHNmMWxHM2duY1RqR1Y1aUxub0ZpYWhMX2U2dllBYkhRSU1DcFdDM1QzRlVSUUx1X3o4eVlOX3hpbkxKTGxxUnF4a2tUNkdfd2g5bTQ4dWFwY1c5YWVUSTk2T014N0dyNE5OQVlNNUExbHp4NW5GN3VUMkZ5OWVuaUJlOWljUWxHMA?oc=5"
+    }
+   ]
+  },
+  {
+   "conserver": null,
+   "id": "ab4c32c288110538",
+   "titre": "Boris Vujčić: Integrated, open and resilient: Europe’s strengths in a fragmenting world",
+   "url": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp.261102~70003226e9.en.html",
+   "source": "Banque centrale européenne",
+   "rubrique": "Banque centrale européenne",
+   "categorie": "macro",
+   "genre": "officiel",
+   "publie_le": "2026-11-02T09:30:00+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 50,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": []
+  },
+  {
+   "conserver": 21,
+   "id": "ab7ad7fffbb1397a",
+   "titre": "ACTIONS AU MOYEN-ORIENT — Les marchés du Golfe évoluent en ordre dispersé, les investisseurs surveillant les pourparlers entre l’Iran et le Qatar",
+   "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxPTHhPS0JIZ08yZ3lYSm9SRVdyNEcyMW12R0QtR1R1YzZ6c1VnWm9PMVRHaVpiVDE2dERxNUtvUWpfcDNSdEFKdzZkMFZ5c2EtLWRKQXFXa1dUSXZ1dDdRdjhJZTNMdGZfUlZ5el9CRldOVE1OZEhWRjVGQjZfbElFLXN6XzZsWG5QZ3pIYUhYZUNHUmUyOEI1YUl1NHV6U3loVUVienpHcXBFeEZXOW1XZnlSWWc5QTVWQTQ4X1pLcUQ3dHBPcklxRE1sYTh3VEZOV29RaUFGWnduR3VFUzRlbEkyaXNXVlZCSzcxZm93?oc=5",
+   "source": "Zonebourse Suisse",
+   "rubrique": "Tensions et énergie",
+   "categorie": "geo",
+   "genre": "recherche",
+   "publie_le": "2026-11-02T08:57:35+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 22,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": [
+    {
+     "source": "Zonebourse",
+     "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxOVFVwajh4N2ZxeGdrZGtvT0JJd0x4ell2ZFlZQnM5TDJtcTV6YW1Gb3BhLXc1dEwxUGwtV0JpMDM4enQ1aGJXVUNJMDFPeG13VUlvYm5OM2JBQTIyM21xSm8tekdZdEpMVXdqV0xnSnowbkNsUU5iaTFJb1pIMVJQcjRfTDVkckV3R3EwZjl6Q3RKYkY4UDA0cDd3Y2NCQjlNNkxhb0JUSDRKQ25hLTBQQTVUajdnVF9hQUJPVjhuYVNXN1JZMVdlRlJFb3VjX1lzOTU1bTh3ZDR0YWQ5Y25fR0Vkc2FiQWNTamhGUw?oc=5"
+    }
+   ]
+  },
+  {
+   "conserver": 21,
+   "id": "6efc62f44d0a0c1b",
+   "titre": "Livret A : si vous avez plus de 5 000 euros dessus, cette vérification peut vous rapporter davantage d’intérêts dès maintenant",
+   "url": "https://news.google.com/rss/articles/CBMihwJBVV95cUxNTkI3NFJ5QTktWnM0NEpqUm03bzN1emxkNTJpYmpoc19sTjM5Q3lzdjRiSjRYT3Z1bkdSR3hSYkVkb1hFb0RURnhVM2dQMGR5a0hFanRDY0VrUERIMDRZaU14aU02bDF1UUduN3JHOThQb0JrNHdjMHY4aVY4cjFqdHF0T0NjcVVkT0VqeVNpM0hCaUUtc0IzQ2w4c1V6YnN2a3p1LVR2X2h1bXh0SkRJbmM4WmxvZElNSGNsM1RwWXk2dmlIWGhsV0p0Z211U0xSSE9ndU5pWjFwU1RLd2hJeTNmYmJTVFpVdFVRYWVoUGFBckVQS2RRMXJmOWRCOEphYzM5SzVHbw?oc=5",
+   "source": "Modes et travaux",
+   "rubrique": "Épargne réglementée",
+   "categorie": "taux",
+   "genre": "recherche",
+   "publie_le": "2026-11-02T08:32:15+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 38,
+   "signaux": [
+    "livret A"
+   ],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": [
+    {
+     "source": "Capital.fr",
+     "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPa0lYSXo5ZHRMOS1PUEpfZTIwZHhaTmxfVXd2ZjlJVWtvTW5DY1h0WkxVeG9HTjZKR2VUQ3FQRUg0YW00aVNiQzFMOUlRZ19hUlI2UzJwamF4X2pQMDEzNE9yYlgtWVdYSHNUanZiaGJwb29sTm1fVDRyTFBzVlhuYUZYcWF0T1VxanZGajAzaS1WSFB6ZVVNNHkzV2VkMWtyLWZDdU1SV19ONzFWS0R0TS1PTmtYRG5FYmFDeFV3?oc=5"
+    }
+   ]
+  },
+  {
+   "conserver": 21,
+   "id": "1f24ab2ccdca45cb",
+   "titre": "Crise énergétique : face au choc pétrolier, les États multiplient les mesures d’urgence",
+   "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxPbDRyUkEtRFc5cnBHNDEtQWJLbEJ4eEJ0bFRWSlVCYl95MjF2UHRLaTFMdGxBdHBnenkwcXcybmg4RHdxbGhHUDNOWVRSZ0V2Zk1ScUFSYnlsaU5vckhVaVozcVI4dHFoMDNRVDUtMDZWWXQwTG5KSndwRURRR0ZNd2tMODlPa0VWaFE?oc=5",
+   "source": "Gaz d'aujourd'hui",
+   "rubrique": "Tensions et énergie",
+   "categorie": "geo",
+   "genre": "recherche",
+   "publie_le": "2026-11-02T07:57:49+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 22,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": []
+  },
+  {
+   "conserver": 21,
+   "id": "d4697eda3d4ccd7b",
+   "titre": "Point bourse : recul du pétrole, regain d’optimisme sur la tech, à quoi s’attendre cette semaine ?",
+   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNanlHYUFVOUdTYzA3WGJpZl9hdkU0akFvTXotMXotdzdmR250RVk3X2dIcnFXUWdIOGdKZFZuOGJ5TEM0QkF1RkN3M3EzX05PNkpFNlNpVVExb2JBRll6UEVlT2FDXzg3YjJPWF9fb3dJMThYbVRYVFhyWnZtRnVqVXhVR29WTEdfV2xXLUdZZnA?oc=5",
+   "source": "Trends-Tendances",
+   "rubrique": "Géopolitique à effet marché",
+   "categorie": "geo",
+   "genre": "recherche",
+   "publie_le": "2026-11-02T07:17:15+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 26,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": []
+  },
+  {
+   "conserver": 180,
+   "id": "d9ddd2755581d79a",
+   "titre": "Cryptomonnaies : les 3 propositions de la France pour faire évoluer la réglementation européenne",
+   "url": "https://news.google.com/rss/articles/CBMihwJBVV95cUxQdWlyMEJuNEJsR0d0YUJ4eXZlSGVvN3lqb3kybTA0eGJvNXBkSGhRdnVLM2YzaDYtaUYwUWowQUJpc2JyanNIZW1QdFhFek5oVGdvWnBiSm42N0ZZdDNpdlVZQkh0SndWQThOSi1aeVBMLTNIRVNGVDJNRnUxX0NEMkhLWlczU21RRFRyWUxfVy1HN05MWmxHdDVVMDFlOGh0Q0ctRE1jcmdXTWs4ZXJjSW92TENjUElOSlRPeXpWVmV2em50UjJna01pQ2pCekxsOHR2cjdOcTdteUwzMEZwYWx3WTNmd2tvOFB5aFdlTVRZODJNMjJuRGpfa29xeDdPeEdzRHhCVdIBhwJBVV95cUxQdWlyMEJuNEJsR0d0YUJ4eXZlSGVvN3lqb3kybTA0eGJvNXBkSGhRdnVLM2YzaDYtaUYwUWowQUJpc2JyanNIZW1QdFhFek5oVGdvWnBiSm42N0ZZdDNpdlVZQkh0SndWQThOSi1aeVBMLTNIRVNGVDJNRnUxX0NEMkhLWlczU21RRFRyWUxfVy1HN05MWmxHdDVVMDFlOGh0Q0ctRE1jcmdXTWs4ZXJjSW92TENjUElOSlRPeXpWVmV2em50UjJna01pQ2pCekxsOHR2cjdOcTdteUwzMEZwYWx3WTNmd2tvOFB5aFdlTVRZODJNMjJuRGpfa29xeDdPeEdzRHhCVQ?oc=5",
+   "source": "Boursorama",
+   "rubrique": "ACPR",
+   "categorie": "macro",
+   "genre": "recherche",
+   "publie_le": "2026-11-02T07:03:09+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 26,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": []
+  },
+  {
+   "conserver": 180,
+   "id": "d7fc20a4ad1c394f",
+   "titre": "Adhésion NOVA 2026 , Ensemble, révélons le Potentiel de chacun",
+   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQSG01RXBVRHZfQ19ya2k1TXlxR3dtZUZhRFdqSFFCcjI3ampDbFNQYjc4ejFIQU9MdGhZUEFMNVJ2eFJUblZPWVlPSnlCR1Z3OHRqY2JPOEFpNVdENGJ6MUtDdE9LOGUyTEF3NHNFZmE1eWk1dmRDTXlpdFhURHlVTmQzQUxtZHJEb0djcGUtd0U0aWpvVno0ZHJVQ1I4ZzZnbm1sY2NaUWFzYWttNENYX1RkUDYtLWhlNXc?oc=5",
+   "source": "HelloAsso",
+   "rubrique": "ACPR",
+   "categorie": "macro",
+   "genre": "recherche",
+   "publie_le": "2026-11-02T06:37:09+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 26,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": []
+  },
+  {
+   "conserver": 21,
+   "id": "f6ec7f829df3007d",
+   "titre": "Énergie : selon le WSJ, les États-Unis font pression pour la reprise des ventes de gaz russe vers l'UE via l'Ukraine",
+   "url": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxPMTBrOHZCSUF5TjZkbmoxeEY3Uk9iZlZ6ZXV0TFppU2U2WU9BTUYtOUNHX2UyUFJXbFpxQzNjLWNNemp2WVVISXU2Ykd0ODZyNDFHRV9weEdwcEk1ZWlFV1JjalR6LTlFWWwxMGJONHpfZUVZdVh4V3BKZ0lPcmZUWDNMWkVuQXVLYUhvOHJ4ajhOVS1PS01kcVY4bGNqa0I4cTRscWY5LTVDWWJHaHlVd2ZlLVpleXFMaV9TX2U5M293RjBSZ2hBd3VPNUxTU3doR2NOX1U5dDNxT1dPaHVhXzFENFNLZTJULUh3dUZOWQ?oc=5",
+   "source": "LaPresse News",
+   "rubrique": "Tensions et énergie",
+   "categorie": "geo",
+   "genre": "recherche",
+   "publie_le": "2026-11-02T05:58:06+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 16,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": []
+  },
+  {
+   "conserver": 21,
+   "id": "ab1f119541974231",
+   "titre": "L’or progresse grâce au repli du pétrole, les marchés analysent les signaux de la Réserve fédérale (Fed)",
+   "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxQYkc2ei1xVmRzVzV2QmVRR3doQm51dmNHS1dnR3V1d1FSQmt0MUN2ZWJQa1dNTVhRMW43SUVYZURnbUVNM1NQZ2dNMUM3X0xwMm50VUpSdFVUQzFxUVFuU21yWVF1a0UtLTVHU2FnYUtJM0lBVTNuZXlFdXc3aWU4cUpDNDdYbnZSWHlFaG9BQV90VEl5WlRFb1JKbkt6MUtNcVFxUktSakxwN2xTcnpaZGhPaFR0eEU5X182OWw4MW9kSTV6cy1GUEN6YTJwY0RCaEN2OExkekJXVEpnUzlwWXhERXZCUXhoVlNidmZB?oc=5",
+   "source": "Zonebourse Suisse",
+   "rubrique": "Géopolitique à effet marché",
+   "categorie": "geo",
+   "genre": "recherche",
+   "publie_le": "2026-11-02T05:04:33+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 26,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": []
+  },
+  {
+   "conserver": 21,
+   "id": "2917a962c219db67",
+   "titre": "Anthropic Synthetic ETP | CLAU | 21shares | Anthropic Pre-IPO ETF",
+   "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9qLTBNYnBpVHFnNHRkVWM3WkZCbHBIazFQb3Z5LVdIclFQa0FjQ3VOVTdocTBCdk5Uc2hiUTFyQ0ctbElxQU0zeEluMV9va3pHMDJydC1B?oc=5",
+   "source": "21Shares",
+   "rubrique": "ETF et PEA",
+   "categorie": "marches",
+   "genre": "recherche",
+   "publie_le": "2026-11-02T01:02:13+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 26,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": []
+  },
+  {
+   "conserver": 21,
+   "id": "71baaae4a507d28f",
+   "titre": "Le CAC 40 reprend 2,4 % sur la semaine malgré les doutes sur l’IA",
+   "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNak5wYVd0OVlhODBqdEVRaDItOU9kSnUzeWpia0YtNVpxLWRlckEwODZVaDZTTFdwWjhSbmhySjVwTU9tdUhiVVJ5RlpNa3MyZ0ZfMFJpM2VJU0RtWmhrSy1MRUloQXIxNmtZNGRlQ2o0YVRKLXhkNHVOMnZlRWM5VnRhV0k4SjFUQ296NjNlT20xdlhWcVJLTmtxaU0xWXc0RzJJX3FHU0pCUGJEUjJRX3ZoLS1IbFBXT28yOA?oc=5",
+   "source": "Zoom Invest",
+   "rubrique": "Marchés actions",
+   "categorie": "marches",
+   "genre": "recherche",
+   "publie_le": "2026-11-01T23:26:15+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 26,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": [
+    {
+     "source": "BFM Bourse",
+     "url": "https://news.google.com/rss/articles/CBMilAJBVV95cUxQZ2QtdndFRmZ5NXV5TDl5T3VneWNJaTZSNUF4VkdqVkwzRjY0ckpQckJnemh3NFdEZV9RaWd3OXlYMlRFbnlnUEk0WWpOMEpLcmp1OEhmR1lXTnowWWdkNTNuRXoyYVdZNFVSSjdzV1pwX1NsVHlRZW5PdlZxdjdJeDlVbXVLaG1oRG9Dd2kycUdPWkJJUVM5T2w5ZzhpWlJ0QjNvaFkzZDZhOVg1clZaMUNsNExPOFJyTVZQTmV4bkdQSlFUaDdJR1RwZnJhQV9keEZlMmZHdmgzQkRYVVVsam5IOGduTkM0Y0R5VHhQZG5EeW9WWHdhQkpkSDA1Wmlsd3NsV1BoTzNrcTJVeWlVc0tyM3Y?oc=5"
+    }
+   ]
+  },
+  {
+   "conserver": 21,
+   "id": "f4dea9dc0dd6ccc2",
+   "titre": "Le cours de Bitcoin 39 % sous son sommet, les meme coins chutent jusqu’à 99 %, mais le S&P 500 proche de son record",
+   "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPcFRIU25OSXFQN0pYZ1FJSkZEODF2N0o5RG5WZENVTjlEcjZoQlVsNkxyNkxTbEMycV9jMTk4WF9RMWJJQWc2Rlh2UExIeTJmRHpJdHdnb2tIY2VwY2RSR245djhfcDlTVEtmOGRTdkhzZTVsS1loSnVjakRIMkdMbGFORFhsclV1NFY0?oc=5",
+   "source": "Yahoo Finance France",
+   "rubrique": "Crypto",
+   "categorie": "crypto",
+   "genre": "recherche",
+   "publie_le": "2026-11-01T23:00:00+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 26,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": []
+  },
+  {
+   "conserver": 180,
+   "id": "6ea951085a800439",
+   "titre": "Royaume-Uni - Veille climat environnement énergie industrie transport n°33 du SER de Londres",
+   "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxOT2RPLXgxdmpOc2pXd01uM0hNamFmbmNXMWI1d1NMczJaUzNpS0pNTGx5OEJjcXNVTTFGdndpTXlseXZadmZDb1J2dzFka1U1WERHQWVxVFVqeGlWeThoWDhsRjNmNXRxRkF3cEhSbmluWnF5UFROa2tYSVZfaENlQWd4MzlPUjhhNjlacDFwdTBmeGw1R0xTelprcEZ6UFp5bHBxMnM3U0l3SnljVUNmN2R2ZVNWdUd3QUhld1BvQzZUX25OUVBOMHoxdmtaRUhDM01YNVg4X01ZQXRaRzA4?oc=5",
+   "source": "economie.gouv.fr",
+   "rubrique": "Direction générale du Trésor",
+   "categorie": "macro",
+   "genre": "recherche",
+   "publie_le": "2026-11-01T23:00:00+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 16,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": []
+  },
   {
    "conserver": 21,
    "id": "bc0e0e0439e7a562",
@@ -1935,21 +2503,12 @@
    "publie_le": "2026-11-01T17:23:23+00:00",
    "date_estimee": false,
    "resume": "",
-   "score": 38,
+   "score": 32,
    "signaux": [
     "inflation"
    ],
    "premiere_vue": "2026-11-01T21:57:47.723104+00:00",
-   "autres": [
-    {
-     "source": "BeInCrypto",
-     "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE4wU2ZFT1BCc3d1MWRKdFM4ZXU2ZDdaUVJOV3ZjTzJVQXRLRDJ2NjJiRjJxS2ZBbm91Yk9TWTlDUXFCSjJ2OUk0T0EtQVR0UnVDeUVXWmpXSWUwUmp0Qk5aSXFzTjlNd0xlSlZOTEdhS0Y4MWM4TFdZaGd4VV9vZw?oc=5"
-    },
-    {
-     "source": "Euronews.com",
-     "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNQkJuUHFBSXdFT2ExQ0tPVGlMYzNkZURDZjVheGxaSGl4WEpUemtXaDczdm15QnYtQkFLN3hJazlObW9QeW5rTktiaEJaSXdnXzRiZE95WFlPVUoxZlNiVlJ3eW9WLUtzVGdBc0hXZURTN2MzcmdUX2o0OG5BNDFKNXUycVV3TzYzMnAwQkZFSnA5aWtHTV9hc2htRnlDYzBBenZNYWQ2bUhRVmJrSFR5Ql9n?oc=5"
-    }
-   ]
+   "autres": []
   },
   {
    "conserver": 21,
@@ -1980,7 +2539,7 @@
    "publie_le": "2026-11-01T16:45:10+00:00",
    "date_estimee": false,
    "resume": "",
-   "score": 32,
+   "score": 26,
    "signaux": [],
    "premiere_vue": "2026-11-01T21:57:47.723104+00:00",
    "autres": [
@@ -2035,7 +2594,7 @@
    "rubrique": "Crédit immobilier",
    "categorie": "taux",
    "genre": "recherche",
-   "publie_le": "2026-11-01T14:35:00+00:00",
+   "publie_le": "2026-11-01T14:51:48+00:00",
    "date_estimee": false,
    "resume": "",
    "score": 36,
@@ -2064,36 +2623,6 @@
   },
   {
    "conserver": 21,
-   "id": "7bdb9ab9bf393e11",
-   "titre": "Actions du Moyen-Orient — le Qatar s'envole, à contre-courant du repli des marchés du Golfe sur fond de craintes liées à la guerre avec l'Iran",
-   "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxOVFVwajh4N2ZxeGdrZGtvT0JJd0x4ell2ZFlZQnM5TDJtcTV6YW1Gb3BhLXc1dEwxUGwtV0JpMDM4enQ1aGJXVUNJMDFPeG13VUlvYm5OM2JBQTIyM21xSm8tekdZdEpMVXdqV0xnSnowbkNsUU5iaTFJb1pIMVJQcjRfTDVkckV3R3EwZjl6Q3RKYkY4UDA0cDd3Y2NCQjlNNkxhb0JUSDRKQ25hLTBQQTVUajdnVF9hQUJPVjhuYVNXN1JZMVdlRlJFb3VjX1lzOTU1bTh3ZDR0YWQ5Y25fR0Vkc2FiQWNTamhGUw?oc=5",
-   "source": "Zonebourse",
-   "rubrique": "Tensions et énergie",
-   "categorie": "geo",
-   "genre": "recherche",
-   "publie_le": "2026-11-01T13:03:22+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 16,
-   "signaux": [],
-   "premiere_vue": "2026-11-01T21:57:47.723104+00:00",
-   "autres": [
-    {
-     "source": "Google Actualités",
-     "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQWTRoMVhMTnplb0pwaXFKMkVyREhNSkNMSUtHVVRZWnBLNjdjV1h4MVBhbWNma0x6dGRZTWhJOVQxN0hRbVpFX1RIc0I4Y3RBLUlVRWJsZUtNRzhjeDlKR0NUZzdLQjJja0x3a2tweGp3NzE2OWtPN0NqazB1OUN4ZWFOSHZEME9IMzVvWC1FUmd5Q0V6ZDU3dmVZMjYyMU5qcnpnNUNtcm85NlU5WHp6WktFNk9pVzhxdE9sM1V3?oc=5"
-    },
-    {
-     "source": "Noovo Info",
-     "url": "https://news.google.com/rss/articles/CBMiiwJBVV95cUxPTUF0Xzc1cWJKbmthTFpBWm5uTHFyM1ZwNlhQV3VQa0xydWlmLVUxc0VfSGZrRlVWd19jaXd3N1BlVGc2Tnl5ZlBvRVhaSkt3cjJwYnNpTVZyZW5aaHVid3BaRUVfbWxzNm12TklEZC1wSmJ6UkhJdDJrOC1LV0FEM2k4STBIakd5cDR4UFhWVWJhUWVmMzFJUVdBLXBhdFpkUW5jYVBDa0pLMmVTOXFxNnRIMHVnakNFcEJiZzJDaUJPYmhWNXZvOUt5d2g5ZjJkcHhXRnhjS1hqNndVaUlZTElZVUZKeXpMQVdjQjhLWUVXQTJvcTRoX0dxSDBKWkxIc2ZNNEpMbW5weFE?oc=5"
-    },
-    {
-     "source": "La Libre.be",
-     "url": "https://news.google.com/rss/articles/CBMikgJBVV95cUxQNlZ0U2o5cmRUaFJzX2k1ODFPZW5UcHM3NXpLQTBuYTJCcDlDQVlrbXVva3JuUTJ0M00yU0RxNG5uY0I2R2xsTGpNcTBQNTJTdVdzU1cwdnByeXlvVGNtNE9KYUxNdV9YRWk3YzQwa3VLMGxwNEJPOWdkR2J6aEdrSG5GZzQ5UVNYT2c4a18yVTZfbGVKSlM1QklLa1pSWk50bHBxbjNxczhWUzRUQVRPSjJiT25ReHlObFRZaXZLZTRUVkY2cmV4bzJBalFzUFZ1aXdBZTFsUk9CZGNnSGRKMTNNOG00MXUzcjU4b3NIQUkyeGFkM2trOUZ1T2xoTFEyZk9DTlFrcE8wZXV1RFVCZE5n?oc=5"
-    }
-   ]
-  },
-  {
-   "conserver": 21,
    "id": "99d3af7eac16bd72",
    "titre": "11 % des Français détiennent des cryptomonnaies : comment investir dans le bitcoin et les autres actifs numériques sans mettre son épargne en danger",
    "url": "https://news.google.com/rss/articles/CBMipAJBVV95cUxPQ2JUYlhLM1M2ajQ0aWIwZE5MR0Q5U1U2TTBUNUYwVnpoYUVocjVMc0lrdnFEVWtHX3luMUZraXZ3bWxoQkJDbGZBb21RUDE5eEV1SWpraTU1bG9GNmZtZjVBbGlXZHItenRuQkF0bHBObThwY1c2NEw1dTFGVTRTVEhwMmhEa0lKdnoxMTY5cGUxTWxRcGlncWw2QndmWDFpdHE0bXlnWXZtQ3ZRX1pXNC1ySWtiZDVVcmYxR2RCZWRQZk5mVkh6SXYzZGVjR3pHUngyZ19FVUpkYmdHbnJSekRxTlc3bWhHQUNlQ1FSanEzZ3hUaXBHYmxEdkRWV3BhVHJwZzBNZHU0RXllN0UzYzlsbWlaMTJrRlVzZk1sdWltWlE2?oc=5",
@@ -2104,7 +2633,7 @@
    "publie_le": "2026-11-01T11:00:00+00:00",
    "date_estimee": false,
    "resume": "",
-   "score": 26,
+   "score": 20,
    "signaux": [],
    "premiere_vue": "2026-11-01T17:53:28.219672+00:00",
    "autres": []
@@ -2128,6 +2657,30 @@
   },
   {
    "conserver": 21,
+   "id": "2341df6ab05f25ed",
+   "titre": "\"Le budget sera refusé par le Parlement\", prévoit Philippe Juvin, rapporteur général du projet de loi de finances, qui plaide pour un recours au 49.3",
+   "url": "https://news.google.com/rss/articles/CBMipgJBVV95cUxOdFNqVWZuQVY5N2ZGVzdoYUlPdjFOdE55Q0ZNM05ycURxNkV5dFJSUzVCNEpFYXBvUnZyNU1ublBqWFdKLTBkd3llakI3aXlzZnozOFdTRTRPUGRubmI4ZXhTQWxTUlZqUVM4QVB5NzVRYm5fMktuRUJXV0tNT2dSdHhYWU5CWE1tQjJRWG5yNkd2UlB3OThaNmxRWHg1Z1NzSFNXYndIM3A0bFVZQXY2LU9WVnFHNGxrOC12MUhUTDloMGpQSTAzUHoydlZXV3ZQN0lOenBGbjJwVmhOSlBRTTdxUlJCOFJPQk1pMU92MjlhYnduN1NkVFdNUHd5cUpNSkpnUUxVRkRtb2ZZX1B1cTNmOHQtRTdDRzZxTFdUb3ZnS0lrN1E?oc=5",
+   "source": "franceinfo",
+   "rubrique": "Fiscalité et loi de finances",
+   "categorie": "macro",
+   "genre": "recherche",
+   "publie_le": "2026-11-01T09:34:04+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 36,
+   "signaux": [
+    "loi de finances"
+   ],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": [
+    {
+     "source": "LaPresse News",
+     "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxOM1h0d2xUZjE0bEpJSzZKSXp6X2h5TF90RmhpT3djZUI0RHZWY2x2Uno2MVVKOG04WkVySldmanhxRjRsaGMtQzl2VEYtX3E1YUxyUENxcXZ2TFY4Q1FrMHRwTlhtVGpVd3NVN2NTY1MyUnNnLWU2d3J5cmttNGtpSzBwQVhrZFdpc1BxLVpaNDRtR1dicVBhY0JHQnVqRGw2QzE5ekY1Vm50T0RTcmxFWWFIYWhkU0ltWmc4M3dtMElBY3dqTVNlMmlqLTlYZS1rRUJhU1lnSGRwXzdLWXJGaFpsNUFrTFU?oc=5"
+    }
+   ]
+  },
+  {
+   "conserver": 21,
    "id": "f27d176baacba23b",
    "titre": "Taux immobilier novembre 2026 : forte hausse, chiffres et prévisions",
    "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFB6Q1ctUjMzYnZHQ1dZc0RhUE4yMzBXWk1RaTFnMG9QamN5SEY1ZHRkYmlrNEhMOGlIY01BWFFmR1pSaGtGNERDQUYwdXhNRE9OeXUwMVdUODY4emZJRlhBNzZLejI4NnVpSFZtR3BqcFlhUy1ndVpR?oc=5",
@@ -2138,13 +2691,21 @@
    "publie_le": "2026-11-01T07:48:22+00:00",
    "date_estimee": false,
    "resume": "",
-   "score": 36,
+   "score": 30,
    "signaux": [],
    "premiere_vue": "2026-11-01T21:57:47.723104+00:00",
    "autres": [
     {
+     "source": "MoneyVox",
+     "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBrRkpRYjlKVFVnclNKWWoyc0FpZlVhaFlhdGJxX3FVcUhWS1hxSjFoWmUtbjF2RTN3S3FrNGRnSERpLXJ4Uzl3ai04bm1JZlp5SG9qdnQ0YU54ZGNhNlE?oc=5"
+    },
+    {
      "source": "Le Grenier de l'éco",
      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPNUg4M19rdXlVUUZZNnN0bWE5ZE5DaDhEdGc3QXNhN1c2a256U0pKY0xCd29ORktHZ3czcjFXbGZsVjNKa2ZkN3BPUG1zLUs1Q0F6d2xyV2oybkdVMXhTUm1OdDI3NzFTUDNTRERHcHhHeTdUaHF0eGQzM2pRYXNiMVBBejVfWkp0a2FLbUpqMThMejBubnRqVmFGOUVSdw?oc=5"
+    },
+    {
+     "source": "MySweetImmo",
+     "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFBWYW1GWno1aGlfTDJxdHktRk9CUHk3Vi1ibWtSM1gzaGFtZ0hZODUwV09zZ3hydzBwd3I5OFNQeTJnWG9JWElELU1YZ2l5a1I3TXUwOUxlaw?oc=5"
     }
    ]
   },
@@ -2163,41 +2724,7 @@
    "score": 26,
    "signaux": [],
    "premiere_vue": "2026-11-01T17:53:28.219672+00:00",
-   "autres": [
-    {
-     "source": "Boursorama",
-     "url": "https://news.google.com/rss/articles/CBMihgJBVV95cUxNbXY5bHhnZ1loZXU5dkMxbVp6Q2lGYU9XTi1EZk4ycVBBMTR0S0JJY1hXZks1VXR4Z1lLaEtyRi1NTWlFb0NoSDFyR3l2T2VtOXpQTXczN1J2R1dSdHRmVXk3b1BOcmkwdTUwR0pwTW9mVnhxR01INE1JaVZ5WWtXVlltX0lYeHQtMUdkc18wbE9fempqQy14QWlhazFRNmo0TFZsSWhoMHlKalZrVVYxVWtsNHVSaG4tb0Q1MTJMQUt4SjB3ZHZIRWI4NXUwS0lNRS1NOHZ1b2N6WWota0JIUU43QkVIeTg2c0FLbkRRYVFnMUZPR2YxcWtTeGNVc2VuZ0JWUUNR0gGLAkFVX3lxTE5ENUJNblRQOUVJZ2hvYzJSTmhZbGhnbFJLLVE0THlMLTlBU05xb19MLVRhOXFXcGhfcE9NalNaOHNpNEo0V0pqb1NoVktuRUlQQ0Q5WDNQLVVrVnpWckhBWnJkMjBpeGZqOG05RDF1ek9yNHVkeVctUU96NFNxMEJadkpTTW13SUQwVTNVc3pHY19tWHRTaWVERC1ITXN2UXY2SFdtVHBGY3FXaVo2YnUwN3h1OXdzWkx6dDgtb1NPUGY4MFp1U2VRTVAyQ1pHa3NmT2NqcTdCUkE2TDVxa3RmaURZZ0I3LWowRmtjZVZsNlhXSzBySUlnMU02V1Q5dS13ZUlYeUQ5TjRrOA?oc=5"
-    }
-   ]
-  },
-  {
-   "conserver": 180,
-   "id": "e630a0c5e73477f1",
-   "titre": "Livret A et LEP : dopée par l'inflation, la formule de calcul prépare une hausse bien plus forte que prévu pour votre épargne au 1er février 2027",
-   "url": "https://news.google.com/rss/articles/CBMigwJBVV95cUxOazFYaHAxY0xLWkRhbkEtUHo5dWxzVFBKUDZEdkM3SE53TnM5dWRSaDhEUjNqeGRDdG9jSzRuWkJzYUxlckktQS1IdHhlanZWdFJRaW9LQVU3TUxJVUczM2gxWURtMzRPU0hnS0s0djRrbW1EYkVCcVcwT3hvTWdtaFh0VXpvTUVSVWpucTluVnNJQ21qang3enEtTzVCMGNOaGVrMVBkSFg0cDVQLWthMUZCdzdlM05EaXI3UlZMSkg4d3RkaVNYMDhqcGFzcTBHSWNEMGxQdGFYZFc3eFhialJQd0NTbGV6Sy1ndjdZVjF5d0ZUTUVNajNrZjhNUHRjbGQ4?oc=5",
-   "source": "Bourse Inside",
-   "rubrique": "Banque de France",
-   "categorie": "macro",
-   "genre": "recherche",
-   "publie_le": "2026-11-01T05:30:00+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 38,
-   "signaux": [
-    "inflation",
-    "livret A"
-   ],
-   "premiere_vue": "2026-11-01T17:53:28.219672+00:00",
-   "autres": [
-    {
-     "source": "Vie Pratique Féminin",
-     "url": "https://news.google.com/rss/articles/CBMiigJBVV95cUxOeUQtSnBMUDcteWlKVlFxVUJDcWc0MGJNOXFKMHpXS3dIZWlObWpnc0Fxc3JqMnZ4bHhoMjJMaC16Nmk1QUtRVUc1VlZzVjd4VjR0eEhwWUlETlZOVDY4bWtBcXFrT09TbWFsUl90R3ZsTktDd1BxeWhYOE41cUh3YVlTTTlncUtXV2kzZ1hqRjhEdDR5SEY5bWRUNFNQak5Udkk0LWJoalNQemF5RGxWZU1tWjcwV1dobnYwUkozbWhVenIwQWN6NVp2RlY0aDBaaVJIR0M4Rm90RDFrWTVGYm80Y2lDM0RMR0tlLTdEMEM0WkV5M3VQVDZXNkxQanhUWlFjQ0JhSGNnQQ?oc=5"
-    },
-    {
-     "source": "MoneyVox",
-     "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxPS0hmaWNIZFpaSzB0eEZMZzMwZ3BwRE9OWTlQVEZRT2RtRlYwZXhIaEJmRWtneG5zUTZBUTlnSmVKblJ3alZDdnFTdFVJOHdHOTE2dktYOGIzdkZpWC1PTkdYZ3NjUGZjRTlNY1Qxa2ZhOWxZSlZlNElhZTMzUzBseHhQRm80VmNBc0I4S0tLeDJtUGdVNGxfQTAxQS1jcDZlRmVHOVg5WVhvNGlTc3V0S2s0WlNFVXFkR09XYU93eEVrQWxCMDBPb2tTdkhpNUgwSDdyb2tTVk42Y1Z2VmVpczN2UzlFZGZIWDR3?oc=5"
-    }
-   ]
+   "autres": []
   },
   {
    "conserver": 180,
@@ -2211,27 +2738,8 @@
    "publie_le": "2026-11-01T05:11:33+00:00",
    "date_estimee": false,
    "resume": "",
-   "score": 16,
+   "score": 10,
    "signaux": [],
-   "premiere_vue": "2026-11-01T11:47:32.773380+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "a84d61a0a1144ed1",
-   "titre": "Loi de finances rectificative, l’exécutif renvoie la balle au parlement",
-   "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNMjl0ZnlHSE5MLS1IOElfLV9JdUV5cmhPb2hodi1mbmVvZktPS3VNYjAway1HMFlUQjhoMjJQS2VBZndQeDVuVDJlWEc1bWJjSHJISmdReEJVS1lLYnZSbmpuRDZ1REJaV2dwdHEzUm5VQk5WRmw2MUlTdmR5bkNRX0dqcWFKanFpcFNfSFYxVjl6TUFPclhIb1NhM3BzN0dPN0JfeA?oc=5",
-   "source": "SenePlus",
-   "rubrique": "Fiscalité et loi de finances",
-   "categorie": "macro",
-   "genre": "recherche",
-   "publie_le": "2026-10-31T23:55:28+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 42,
-   "signaux": [
-    "loi de finances"
-   ],
    "premiere_vue": "2026-11-01T11:47:32.773380+00:00",
    "autres": []
   },
@@ -2250,20 +2758,7 @@
    "score": 26,
    "signaux": [],
    "premiere_vue": "2026-11-01T17:53:28.219672+00:00",
-   "autres": [
-    {
-     "source": "Zonebourse",
-     "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPbGlJXzg5MmNIYmp3QlBpV21UN0wwdWdHUHgteGRqc0NnYnlZMmpqMWo0dXVwN3lmdzhwMU1wejBBMEVvbWk2WXBiNkpiT0R6eldWb21MMDdwN09Ia1dJSDJVcy1RZU9sazRhdlJDY3BhZk1KcUVZcWs2T1ZqczN0bE9aTUJTbV94SjFjclpqM01YRlJtUUpNVWFQOVBGVFVNUkVtQ2pyOTF1OHNRbXd2NlNiOWozaW9YNkZhRVhRdi1YbkNiWW5Pb1J5ZUE0Ny1JWXVhaVNSaFBDc3c?oc=5"
-    },
-    {
-     "source": "L'Agefi",
-     "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOR2VKMzhLMzRjRTR4b2ZJOUcwX2NPek5RMGVDQVZmN0VHeDVIejdWUnUzenNBeUtmWkhrVTR4SVFFUWFOdFFUVzQ1U0llc1lpMjNLOGNDa3ZRNTFJNkdjM3U2ck9Zc1BBNXZjbUo5dXFhc3RDcXR4SDA0TkVoQThZSVE4WXUxcy0yXzFkMWhDeUE?oc=5"
-    },
-    {
-     "source": "Boursier.com",
-     "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNdDc4bVJ5UjBLbVhUVXY4TUxySk1oZVBVMkRzbi1JdTlIZXVTQ2RMSUJnb0pJMEFxbGhDMG9fYjNnRjZxUHRfZjVFSm5RZkpWVUZ6czk2eWdqdEFEWURJd1JpV29oNjhKVnBUczBUSkFPX2hnenVrTEw1MllXX1dkSjNnTnBNOG1GcWxwOURWa2d5bS1lZUxxX0pvdU13cFRuU05NcGNXNWN0cUdXdGFTdTRjZ2puZFlteENnQy0wRG1fNll0?oc=5"
-    }
-   ]
+   "autres": []
   },
   {
    "conserver": 180,
@@ -2277,7 +2772,7 @@
    "publie_le": "2026-10-31T23:05:57+00:00",
    "date_estimee": false,
    "resume": "",
-   "score": 16,
+   "score": 10,
    "signaux": [],
    "premiere_vue": "2026-10-31T23:18:07.377367+00:00",
    "autres": []
@@ -2297,12 +2792,7 @@
    "score": 20,
    "signaux": [],
    "premiere_vue": "2026-11-01T21:57:47.723104+00:00",
-   "autres": [
-    {
-     "source": "Bitcoin.fr",
-     "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE4zbjNzcy13NHVmV05RZXEwTzdkeHRlUWljM1JzTHR4T2hac0JUTjJfa1drX0ZRYUtveTVFbTFwdjR5UWRhekFUQkxuRThqLVhxbERkRXJ5YVVEQVQxVENaQVhneXlSS21OM2prTC1n?oc=5"
-    }
-   ]
+   "autres": []
   },
   {
    "conserver": 180,
@@ -2374,7 +2864,7 @@
    "publie_le": "2026-10-31T15:00:09+00:00",
    "date_estimee": false,
    "resume": "",
-   "score": 32,
+   "score": 20,
    "signaux": [],
    "premiere_vue": "2026-10-31T16:01:15.621534+00:00",
    "autres": [
@@ -2441,6 +2931,34 @@
    "autres": []
   },
   {
+   "conserver": 21,
+   "id": "0d0ce205e13523b7",
+   "titre": "Loi de finances rectificative 2026, Abdourahmane Sarr plaide pour un compromis",
+   "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNVXRlVC1VSmYxVENzYmJmSTRsMWxveXZsT1ZZcGJ1MUEyM3RpMEZRSXNocm1mNlE4VkUtaXNvcFkxcEZJcldydUVzM2huWWJzMlJrZkZBd3AyUVV2UmU4UnlZUDVzMlNUaUdnTE9ocU13WHhaOTdEbnJBbG9UVk1PNDZ0NTY0T09GZUJ1aVM1ZDQ4dVhUd3luakxhRks3ZUdIQ19sMU9FVGpYNUZXb0NJ?oc=5",
+   "source": "SenePlus",
+   "rubrique": "Fiscalité et loi de finances",
+   "categorie": "macro",
+   "genre": "recherche",
+   "publie_le": "2026-10-31T09:54:38+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 36,
+   "signaux": [
+    "loi de finances"
+   ],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": [
+    {
+     "source": "actusen",
+     "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOaS1HTTZOamtOcEVkY2V3cWhjY3dmUkYxWW9tQWJlY1BpVUZJc1dVUUVJVWdCVDVqQk1SX1RMZzFzeUxaQXJPalAzS2ZkVTNtNDRaU21wYnE5RlR1Q1FrM0R5cENPTzFtVjVaYkx0YWMtX2R0alM0WWNGZ3hPNGhObGs5V3ozQnFhUUs2aG5MS3FTNEgzc1FwaXc4NUZmdTBnU25WV2J3LUFUM2luTzNDZFhUc0l6R25vSktnNFZ1bzY?oc=5"
+    },
+    {
+     "source": "DAKARACTU.COM",
+     "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxPbWwwU2NlUWJOUXlGb2dQZjA3bUNfUWpWTVNqenhhOVBRNkE5NENnYkJ2Zm1KM1JnNTVORElwQ3hsazZFSkN1cDl6eHhXQzNqN2xfV2ZvR2JVQU93b2otajBuX0I4T1l0U0M4RUw5bDRQR0ROVjFua2lITkJ0Zk1nVTNMdVZHSE1XaFVvUmVkbDh5N1JiUkpYQ3JuSmJnWlBUR0g3NnFGM3RVNGZFNTU1X0xBRVZGbVZ2amlfdVNmd2VNSlVlZm1wVklXSVdGOXQxd2lrMWNMX3pjZ0MzNWJSLXh3UDRiOXBwWTE5Xw?oc=5"
+    }
+   ]
+  },
+  {
    "conserver": 180,
    "id": "aee0ffadef306094",
    "titre": "Crédit immobilier : la BCE maintient ses taux directeurs, mais les banques peuvent encore changer les leurs",
@@ -2457,40 +2975,7 @@
     "taux directeur"
    ],
    "premiere_vue": "2026-10-31T23:18:07.377367+00:00",
-   "autres": [
-    {
-     "source": "Le Revenu",
-     "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNU0ZvNC1kb1d3U2piRWtvZ2NHV00zUmpDcnpCYzQwZ3RRZWxrTUtiR083RnVkcUR3TFhkTUhudS1fX1V1Q2tLV2pfNHA1VF9PeWNGOXJ2dGx2cEZGNzdoNV9wdm9uSWhNVkZ3X1lldUF4SVBUVjR1TklzMkxiSGZ1ZVFxQnFZd3daYXJiZE1UR2xtUTNYUlpVZWloSVVGX1JJci1GLVJKSDNoY3BnUEE?oc=5"
-    }
-   ]
-  },
-  {
-   "conserver": 21,
-   "id": "608343481ca3c954",
-   "titre": "Assemblée nationale : le projet de loi de finances 2027, chiffré à 24,8 milliards USD, déclaré recevable",
-   "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQQlJGVHR3WmI2bUdlb2M0QlVHZnRNMHFPWDNISVNqU1hoQkRSZXBzbnNrRzJaYU5SZm1LdVloemgwUVBuUjFCRngzQmd2aXBybTd4YV9QNVdWaTczSFE1Ql9Ta0c4S1YwcFNXSndiRVh6d3F5b3JZTWE0bTMwdmFGblNHNWZfem1USEF5REpkM2JuNXBZMUhsR045eTBMQVRBaG92ZTdhRUg1S0UwYXZPS3NoT2JQYUl5cEpJ?oc=5",
-   "source": "Actualite.cd",
-   "rubrique": "Fiscalité et loi de finances",
-   "categorie": "macro",
-   "genre": "recherche",
-   "publie_le": "2026-10-31T09:02:34+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 36,
-   "signaux": [
-    "loi de finances"
-   ],
-   "premiere_vue": "2026-10-31T10:50:48.652535+00:00",
-   "autres": [
-    {
-     "source": "actusen",
-     "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOaS1HTTZOamtOcEVkY2V3cWhjY3dmUkYxWW9tQWJlY1BpVUZJc1dVUUVJVWdCVDVqQk1SX1RMZzFzeUxaQXJPalAzS2ZkVTNtNDRaU21wYnE5RlR1Q1FrM0R5cENPTzFtVjVaYkx0YWMtX2R0alM0WWNGZ3hPNGhObGs5V3ozQnFhUUs2aG5MS3FTNEgzc1FwaXc4NUZmdTBnU25WV2J3LUFUM2luTzNDZFhUc0l6R25vSktnNFZ1bzY?oc=5"
-    },
-    {
-     "source": "DAKARACTU.COM",
-     "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxPbWwwU2NlUWJOUXlGb2dQZjA3bUNfUWpWTVNqenhhOVBRNkE5NENnYkJ2Zm1KM1JnNTVORElwQ3hsazZFSkN1cDl6eHhXQzNqN2xfV2ZvR2JVQU93b2otajBuX0I4T1l0U0M4RUw5bDRQR0ROVjFua2lITkJ0Zk1nVTNMdVZHSE1XaFVvUmVkbDh5N1JiUkpYQ3JuSmJnWlBUR0g3NnFGM3RVNGZFNTU1X0xBRVZGbVZ2amlfdVNmd2VNSlVlZm1wVklXSVdGOXQxd2lrMWNMX3pjZ0MzNWJSLXh3UDRiOXBwWTE5Xw?oc=5"
-    }
-   ]
+   "autres": []
   },
   {
    "conserver": 180,
@@ -2541,7 +3026,12 @@
    "score": 10,
    "signaux": [],
    "premiere_vue": "2026-10-31T10:50:48.652535+00:00",
-   "autres": []
+   "autres": [
+    {
+     "source": "tv5monde",
+     "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOa1ZVVFFQZEV5OTdFdGhzSWI2M2NEXzMxT1o2c05obk1KaFBXN1FqS2hvN3NaUnZFdk5NaHRYVG9VWE15U0lZNF9SQUFyeFg0R0xWNm8tWDdGcDV5VUdjRW04M211UjE0aVU1NTdRTjRlM0lvOU1JSTRZelNBRWNFRS15enFTbHZCNVM5ZERBdXRpc0hBS0VvNDlSNEhWR3VOVnQ3Z2U5YjVNaEJfUzgw?oc=5"
+    }
+   ]
   },
   {
    "conserver": 180,
@@ -2723,23 +3213,6 @@
    "autres": []
   },
   {
-   "conserver": 21,
-   "id": "0aff4ab060201332",
-   "titre": "Graphique des rendements saisonniers Bitcoin GBP (BTC-GBP)",
-   "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE8wRklHeXlSdnpLQ1VzekRMMTBhUFZoUnAwSVl3T3l1ZlpZRjZsNU5GZVBiaW9vNVFHUU96NnVQdUo4VUNTMk1ESDFjNU5hWTRtS3RFY2Q2aWRpRUxUamk1X2ZjaGRBUQ?oc=5",
-   "source": "Yahoo Finance France",
-   "rubrique": "Crypto",
-   "categorie": "crypto",
-   "genre": "recherche",
-   "publie_le": "2026-10-31T00:19:14+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 20,
-   "signaux": [],
-   "premiere_vue": "2026-11-01T21:57:47.723104+00:00",
-   "autres": []
-  },
-  {
    "conserver": 180,
    "id": "bf759b38eefa9212",
    "titre": "coupures_electricite",
@@ -2788,12 +3261,7 @@
    "score": 20,
    "signaux": [],
    "premiere_vue": "2026-11-01T21:57:47.723104+00:00",
-   "autres": [
-    {
-     "source": "Cryptoast",
-     "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE5KaVdNdUdVaV9YRXBRcFBlVFdOLVhWVzVJRzdDRF9OVjVLMHB6M0VrZEFrUHhld25rUHlwV0I2aWFaTFV1QzlsRzVWZG9PbnZpSzAwUEJKbGI3cGNGdlB6aHQ4eW5faFpCUTdZRy1hZlV3ZUowTE95YVZR?oc=5"
-    }
-   ]
+   "autres": []
   },
   {
    "conserver": 21,
@@ -2849,23 +3317,6 @@
    "score": 20,
    "signaux": [],
    "premiere_vue": "2026-10-30T22:12:41.835209+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "543d4f332f27ba9c",
-   "titre": "Le cours de Bitcoin recule, mais trois altcoins pourraient atteindre de nouveaux sommets ce week-end",
-   "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNLWd4MVZpd1FyY1NQTldYS21oYkpaU3pzVmxCU0FIdkk1U3E5NmVzUU9ZajQxXzlqeDZUbjZLOUlxeFFwSHdIaU90cml0U0ZtMGlfZlEzSkpuRVF1NlJOWW4xWEc4UmZEbVRhb2ptbUYyY1Fua3pEUVh2aEpsQlJHbE5lSnV0NENYN3BXd0VuYm9IOXZ4?oc=5",
-   "source": "Yahoo Finance France",
-   "rubrique": "Crypto",
-   "categorie": "crypto",
-   "genre": "recherche",
-   "publie_le": "2026-10-30T18:08:00+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 20,
-   "signaux": [],
-   "premiere_vue": "2026-10-31T10:50:48.652535+00:00",
    "autres": []
   },
   {
@@ -2936,8 +3387,8 @@
    "premiere_vue": "2026-11-01T21:57:47.723104+00:00",
    "autres": [
     {
-     "source": "Boursorama",
-     "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQdTBmbnUxbzlULWkxaGF5T3ZNcDVRejNlYk9QWk9XdkVYOTFIU3BEc3lLMExVQ0NpLXhHUGZsbU4xVHNLYWU1SzRGN18ySWg3Vll5R1ZBbWJ5N3VxRnA4bjM1TE9aZTJESmVJRWRhRkZvVUVNb0RZZk9JaV8yOGV6aGJ5NDZEcVBSdk5VVm9ybE1XalRsdGxqZy1JRXZEQjVwU0ZrWVVEZUMzTmRrbzlCc3V3aWdINEx2R1pTUXo5Zk5vYWZlRnIyNkFXTFQzcWNXOFdnRtIB1AFBVV95cUxQdTBmbnUxbzlULWkxaGF5T3ZNcDVRejNlYk9QWk9XdkVYOTFIU3BEc3lLMExVQ0NpLXhHUGZsbU4xVHNLYWU1SzRGN18ySWg3Vll5R1ZBbWJ5N3VxRnA4bjM1TE9aZTJESmVJRWRhRkZvVUVNb0RZZk9JaV8yOGV6aGJ5NDZEcVBSdk5VVm9ybE1XalRsdGxqZy1JRXZEQjVwU0ZrWVVEZUMzTmRrbzlCc3V3aWdINEx2R1pTUXo5Zk5vYWZlRnIyNkFXTFQzcWNXOFdnRg?oc=5"
+     "source": "economie.gouv.fr",
+     "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNdzNxTGs3cjcybFM0NHlKS3BFT3FNbDluYWZwaEpUQ1UtLXR0Q0tJcTlDZW5SUWNlaUp6SldKampvVExmUXJkSXpvajd0TV85VlY1RFRYQWJpWi05Y3RwNjYxQzVBQ0hqbk1iUEFKcXV6ZFJHcUE3dTZyTnVSZVJ2Z1lFcEgzMUNScGd0b2NueGVUMVRyOVlkVDdxZw?oc=5"
     }
    ]
   },
@@ -2976,23 +3427,6 @@
    "autres": []
   },
   {
-   "conserver": 21,
-   "id": "c1368ca8d1fb8754",
-   "titre": "Cac 40 : Avec la hausse de Sanofi en soutien, le CAC 40 termine à l'équilibre ce vendredi et reprend 2,4% sur la semaine",
-   "url": "https://news.google.com/rss/articles/CBMilAJBVV95cUxQZ2QtdndFRmZ5NXV5TDl5T3VneWNJaTZSNUF4VkdqVkwzRjY0ckpQckJnemh3NFdEZV9RaWd3OXlYMlRFbnlnUEk0WWpOMEpLcmp1OEhmR1lXTnowWWdkNTNuRXoyYVdZNFVSSjdzV1pwX1NsVHlRZW5PdlZxdjdJeDlVbXVLaG1oRG9Dd2kycUdPWkJJUVM5T2w5ZzhpWlJ0QjNvaFkzZDZhOVg1clZaMUNsNExPOFJyTVZQTmV4bkdQSlFUaDdJR1RwZnJhQV9keEZlMmZHdmgzQkRYVVVsam5IOGduTkM0Y0R5VHhQZG5EeW9WWHdhQkpkSDA1Wmlsd3NsV1BoTzNrcTJVeWlVc0tyM3Y?oc=5",
-   "source": "BFM Bourse",
-   "rubrique": "Marchés actions",
-   "categorie": "marches",
-   "genre": "recherche",
-   "publie_le": "2026-10-30T16:30:26+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 20,
-   "signaux": [],
-   "premiere_vue": "2026-10-31T10:50:48.652535+00:00",
-   "autres": []
-  },
-  {
    "conserver": 180,
    "id": "c0815ea45a88d810",
    "titre": "Personnels de la Défense et de la Sécurité : l’association Tégo saisit l’ACPR et menace l’AGPM d’une action en justice",
@@ -3013,23 +3447,6 @@
      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQekJOUWZTRGxPdV9wUmVmQi1MRmhxaFRJOUk4emVxY2pSdURndUVrN0tmWGU4aUNOdXk3WTVkeVFGTXJ0dkJCVXhIaFNsNC0xbG5PLUk3cVZGaDRQaC1leWxzSm5LaThZd3lGeWVINXZFWHA2UkE4SlpNRWpQRExjZjA2ZHFFNDVxc1hobURLQWJMRHdrdnljeVN0WkJRZw?oc=5"
     }
    ]
-  },
-  {
-   "conserver": 21,
-   "id": "1bbe6b090745ed2d",
-   "titre": "Wall Street en baisse : Amazon et Intel plombent les marchés, le pétrole grimpe",
-   "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOa0d2RG1iR2l6Y1dCd3JpcHJXRnc5Ukk5ck52Z05uQ2xON0paR0pjbFlkUVBlQkw4QTRISVZfc0tyeWE3OXgzSzJESk5UWVA5aXU2WV9ZU05wemxmZ1dTaTRISHAyTEpoOUhoQXVhZ3lhaTl1ZVBKT2NDRUp0ellMSWVidTZfMEs2NlFrcWU4b05jQjgzWWx3SHFpMGhIc1A0VHFqdmNsWWhqUQ?oc=5",
-   "source": "Infomédiaire",
-   "rubrique": "Géopolitique à effet marché",
-   "categorie": "geo",
-   "genre": "recherche",
-   "publie_le": "2026-10-30T16:19:54+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 20,
-   "signaux": [],
-   "premiere_vue": "2026-10-30T22:12:41.835209+00:00",
-   "autres": []
   },
   {
    "conserver": 21,
@@ -3135,14 +3552,6 @@
    "premiere_vue": "2026-11-01T21:57:47.723104+00:00",
    "autres": [
     {
-     "source": "BFM",
-     "url": "https://news.google.com/rss/articles/CBMi5AJBVV95cUxQa0Z6VFdiaDU3dkMyekEtemVRcGhxWkZYbmNCZG5jbzExa2lCR1Q2Vjk2bE41R3NCcWNOY0NQYTBDWFRPcnprUUVLY1k5ajdOZzVUU0k2U3JNZnZmcXhjNnh4SVBYYjlWSWxYZnJIWGY2elBsaUdXZ1hIdmZWR2Znem9vX0dTX0xyNzU0RlU4WU1aN1BnU2F4cWxTczhLMk1hQmpjN2QybzdYc0l5T1V1eERQOWpYXzdCcGRSWWNsdWk0RGdzQzZoanNIQ1FkRnZqWnlMbW5qSnR3eXV0bmQwdGRMX0RiRkJzbGVNWGcyQ2F0T1o0djJXUDVnc3liZ2I3STM2MmpXbHRiWnFrS2s0WWdiQzRaVWxXeTdhWW5ZNXp2V0hZMHlLRUtYZW82alJxQVN5WjllSVJKaTRialJBR01JLUt1NUtPdkw2WXZjY08zV1MxanhlbHpoOENySW0wSm1ydQ?oc=5"
-    },
-    {
-     "source": "Le Parisien",
-     "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxNS2hyMTBnU1V3OFA0NFBob3lzN1FwSG9NYThpYXhzcWgzVVBXNDlVbTdpMWZsN3N1VW1uS29WN3J2MzItdHlfU2NrX3dMWXpLS0Z3YklfLXR0cllUc1V0X3Y1eDFTQnoyTGlUVnhOaFZGWVVxelA0c0RzZ3Jxc0hQVG9VVlk5Uk03X050TDJNcF9IY1lickZHWENMRUpFd0R4c0ZJZDNjZjdYUEM3MnNhQmUzaUtKM0JDRVZuRXBEeVN2STNKemNSaEwxYzI0ODBJSEltV3lHbm1rMy00NlNSVEtNY1NhWU9BaWNDWg?oc=5"
-    },
-    {
      "source": "Le Figaro",
      "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxPa0RnQlprNnVtVVBranpUOXV3b1h5TkxZMzhKdUlUVUF3QklVTmljTi1nUHdXblFjSUFreVIxdlVGcUptUTJ5OUh6ZlVhWjhnUjQ0VHBXejRuVVlWM3kxY0hCRGl2SFB5MkUtcVJ1TG1YZDVOcGRoY3J3UVd0NTZVR0QyN09VV2xBWURxQUpNbkpyaHZyM1ZickkzVDZpcmtBU1B5em1PTVpOX29pRUdyYURJT2EyWUx5ZGVDb2FScHpKRTViT1M2UjJGTjhMWWdOVVVQZ0RMTHdUMkJ6RXkzMGptbGt1WW50SGk0?oc=5"
     }
@@ -3217,6 +3626,23 @@
    "autres": []
   },
   {
+   "conserver": 180,
+   "id": "0ad9b14436000f32",
+   "titre": "En septembre 2026, les prix des produits agricoles à la production accélèrent de nouveau sur un an",
+   "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE9iZ2RoVV9JT0R4TTZjR1ZGYUVaczczS1QwVGtmODRMdVdBSVVYcmpvNXVQTjZ5WGZ3RmpJWnQ2eG9CR2twUVQzVkxWbVZRY05iYjJJY2UxYw?oc=5",
+   "source": "Insee",
+   "rubrique": "INSEE — informations rapides",
+   "categorie": "macro",
+   "genre": "recherche",
+   "publie_le": "2026-10-30T12:15:45+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 20,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": []
+  },
+  {
    "conserver": 21,
    "id": "18813c55811b5694",
    "titre": "Pétrole en baisse mais gazole à +51% : voici le mécanisme qui fait exploser le prix de votre plein",
@@ -3252,32 +3678,6 @@
   },
   {
    "conserver": 21,
-   "id": "7740e38a20ad0748",
-   "titre": "Mi-séance Paris : les 8.000 points se rapprochent pour le CAC 40",
-   "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPMVR4WlVSU0kyMGpGdjhWRW5FbmJoNlNwb29Xd29ERGZiMGs1WUdIMG9ERlluQmpXTmtuQ2R5RmpyREZLLUdqSEtNR3ljSy03S0FrT2YyMWJaZTdxX1hUYnRPSnVzbk1tZm5pMzdGeHh3ZTVHc3NZT1IzdGRQOUwzeXprQUh2SFI0V25kMGxYbE96ZGRrMThZaExsSUczWEZkRG8wdlNkLUgyU2J1MVVnVi1nbFlTQjBzOEwtZzZESDY?oc=5",
-   "source": "Boursier.com",
-   "rubrique": "Marchés actions",
-   "categorie": "marches",
-   "genre": "recherche",
-   "publie_le": "2026-10-30T11:00:00+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 32,
-   "signaux": [],
-   "premiere_vue": "2026-10-30T11:18:34.203114+00:00",
-   "autres": [
-    {
-     "source": "Fortuneo",
-     "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPamJiVjktTl93SFc1cGI5TF9sWnZic0pyNERKQW9nUUJLWEFGWXdOQ3Jldmdack85bXRLdXhDZ2djZXBKNEdLeGVLVzZDWXFpTjVVaHdkcGphNzg1XzdEUGtwc040d3RRU05aWFhwWC1aaXY3NHl2Y2Q0aDIwSl9PX3pXSTl1WTVpOWRWbE1rMDhzWFhadmxQTXN0aVlFdERHT2czTV9RN09oSTcwNTJJakZ30gGyAUFVX3lxTE9qYmJWOS1OX3dIVzVwYjlMX2xadmJzSnI0REpBb2dRQktYQUZZd05DcmV2Z1pyTzltdEt1eENnZ2NlcEo0R0t4ZUtXNkNZcWlONVVod2RwamE3ODVfN0RQa3BzTjR3dFFTTlpYWHBYLVppdjc0eXZjZDRoMjBKX09feldJOXVZNWk5ZFZsTWswOHNYWFp2bFBNc3RpWUV0REdPZzNNX1E3T2hJNzA1MklqRnc?oc=5"
-    },
-    {
-     "source": "Zonebourse Suisse",
-     "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPS1FkLXh3SVZDV2RkR0RfU0FXZW16RDVHMHNOMlpzVVRzY1FsMmJ6T2Z6cndtQjJqdEgyZGVFTy1iSHJlTGVpaEZZX0xoSjFUS1JReWZVTlV5ZHFNcW9VSXFHMjVFbGxhNkhld3ZqMTdjbmR0S0xzamdlTjh3MjlYQmRPNmJ6NjJfNEp0VlM1VkZ6aE9ibDA0S01kNTQtSy0wYktjWWJaLWpPb3Jw?oc=5"
-    }
-   ]
-  },
-  {
-   "conserver": 21,
    "id": "88a229191d793569",
    "titre": "La France flirte avec la récession, le CAC 40 reste impassible...",
    "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNZHc0b0hmR012TG9zalBvWGJ6Z1FidXVsWS0zME9qeVQ5ZWlPWEpReV9sWVNZQ0ZYY0lLa2h4U2FFelNBWG5fWHRad0ZyU2YxOWU0OXZvVlRIS3VZWnY5RTNlSC1XQUFodnNKUnFlTFlia1RRdko2ZTdDZWMwcFlnMEx0dUxPcDJNTkRCYmhxN040cWxQM08xakJqRXpfNGFpeVBtSmhxODdWZ9IBrwFBVV95cUxQZ1JSeWlOTnB2RHJSV25GSEdzSnJxY0lMV2NZdDFGa2VDc0FXcWJMd2Z4dTN3bl9jUVM5WkhBS1dEUmE0N0pKOTNXU0R3WmprUXV4U0p4T2R3ZmthaktKWElPaTJDcDZMRTQ4UE1wb1VpRV9TeERHaVY2dUNTVjd3cTVSeDViVWhuYzFTeklBSGRnclVxaWxjRURHdzRsQ28tMHdiX1ViNFBiQ2o5YjRz?oc=5",
@@ -3291,25 +3691,6 @@
    "score": 26,
    "signaux": [
     "récession"
-   ],
-   "premiere_vue": "2026-11-01T17:53:28.219672+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "a75c2db89db4d348",
-   "titre": "France : la flambée de l'énergie fait grimper l'inflation au-delà des 3 %",
-   "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOM2Q4LXNFcmllMHpHNzliNHh3NGpxX0l4TUNTSkZjZFkzOEc3TS0xMGhWREJaOWZfMEVScWtCUnNFcXhkbmtwX1BPcTRNRnNjTVNJc0lZc2JXNVNBc2M4cUVTc2hQNWJxTW9XR2dCVTdyQTBLXzFaMnZWWmcwdElDb1p4SHM4QkRadnBGYjRNRF9IS0oyLUU1OGZ0NkNWTE9iVkl4TUVZdWJUeERGbDJSSWlHQmZFaWhLWlJyR2xpQjI5d0VJX3c?oc=5",
-   "source": "Les Echos",
-   "rubrique": "Tensions et énergie",
-   "categorie": "geo",
-   "genre": "recherche",
-   "publie_le": "2026-10-30T10:41:03+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 16,
-   "signaux": [
-    "inflation"
    ],
    "premiere_vue": "2026-11-01T17:53:28.219672+00:00",
    "autres": []
@@ -3355,6 +3736,28 @@
   },
   {
    "conserver": 21,
+   "id": "cf2a118cb226267b",
+   "titre": "Marché des oléagineux et coproduits du 21 au 28 octobre 2026 - Les prix du colza ont grimpé sur les marchés physique et à terme, dans le sillage du pétrole",
+   "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNN1U3UnJ0T3NtaTYtWDA1SENEbGRuUGRDZGstdFNRLUM4eUxXTHNuMnJuM0dDUlkzbVcyazhTVDVsbjhOM2tEVDBWR0l5TlNGV1VHZDZuRk9nUlBSbHBzYXZ6VFRxS0dwU3BjN09uUVJBaE94OGFQblJSeld6cFlrMUd3ZWlHaGc1eDVwc0ltb1k4N2VJUzJJMzJfYWpNbUltTU9YWWtzZXJyRjRIMXlWWEVVZHVMeUF1QUJad2JR?oc=5",
+   "source": "Réussir",
+   "rubrique": "Géopolitique à effet marché",
+   "categorie": "geo",
+   "genre": "recherche",
+   "publie_le": "2026-10-30T09:16:00+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 20,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": [
+    {
+     "source": "Insee",
+     "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE1rTDJJLXlIWVlKVkFVbmxZbkxDQWNZbUVJS29Rb2U0MzI5aHJtMk12ZDhYelFQOXlGYXhYU1VSTzdpM2hDdkFFeGI5RzE5NTloREpVbGhQTQ?oc=5"
+    }
+   ]
+  },
+  {
+   "conserver": 21,
    "id": "1c6382f23b358b93",
    "titre": "Actions, ETF, produits de bourse : les valeurs américaines les plus achetées à l'approche des midterms",
    "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxOZ0MzaFZPanpYMTNhd0dVcnI2elZZUnpvdXdvMmVzM0NIVFp1QTZ1STNpNFMxa29MTk44QkQ3SHo0T2o1SnZ0cGU4SWN6WjkzSWdpOTV6WVRhM3JkTzVWTUJuN0FocUVhZzVwU0JVekhTSDJhLXV1N0NrQXpxajhCd3VYV1NKMVRBcnZfQWdqaTJDOVpOWXlBcnBRd3VTNFBEcGtyUDRiVGVCWXdIdU1BdlZuYzhhVWVrbzhpR09UU0NSOHpxSEd1TXcwV1I5ajNKcjZR?oc=5",
@@ -3368,12 +3771,7 @@
    "score": 20,
    "signaux": [],
    "premiere_vue": "2026-10-30T17:58:24.303601+00:00",
-   "autres": [
-    {
-     "source": "Zonebourse Suisse",
-     "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOU3NZVk9iNHZpY19JbUhpZzI2VEdwUTA3QVpWOFI5cXJJM0kzZGoxaHZJRTdQalo1aDFoUHJOLVJ1SWJZdmVxMW1fQ193c3M5Q2c1TTVZanhGQVNvX3FBM3dvaXk2X3Ftc3dIOWUtVTdsUFVaRWNCLXc3ZkxWV3A4MmhzMW9VMEd6NlR0cmJITElhUUpZbWxaWG4xMVN6TXBpZ1VMWkZjbjNMMGVSdVJhMU9LVWJtWTZpTGNTbV9pWm4?oc=5"
-    }
-   ]
+   "autres": []
   },
   {
    "conserver": 21,
@@ -3443,7 +3841,12 @@
    "score": 20,
    "signaux": [],
    "premiere_vue": "2026-10-30T22:12:41.835209+00:00",
-   "autres": []
+   "autres": [
+    {
+     "source": "Zonebourse Suisse",
+     "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPS1FkLXh3SVZDV2RkR0RfU0FXZW16RDVHMHNOMlpzVVRzY1FsMmJ6T2Z6cndtQjJqdEgyZGVFTy1iSHJlTGVpaEZZX0xoSjFUS1JReWZVTlV5ZHFNcW9VSXFHMjVFbGxhNkhld3ZqMTdjbmR0S0xzamdlTjh3MjlYQmRPNmJ6NjJfNEp0VlM1VkZ6aE9ibDA0S01kNTQtSy0wYktjWWJaLWpPb3Jw?oc=5"
+    }
+   ]
   },
   {
    "conserver": 21,
@@ -3464,36 +3867,109 @@
   },
   {
    "conserver": 180,
-   "id": "a3c21216948bb5a9",
-   "titre": "En octobre 2026, les prix à la consommation augmenteraient de 3,4 % sur un an - Informations rapides - 266",
-   "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE1rTDJJLXlIWVlKVkFVbmxZbkxDQWNZbUVJS29Rb2U0MzI5aHJtMk12ZDhYelFQOXlGYXhYU1VSTzdpM2hDdkFFeGI5RzE5NTloREpVbGhQTQ?oc=5",
+   "id": "8ba34e21497c6211",
+   "titre": "Au troisième trimestre 2026, l’emploi salarié du secteur privé est quasi stable sur le trimestre (-0,1 %) et en recul sur un an (-0,3 %) - Informations rapides - 265",
+   "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFBlaHFwaW1sc01wQWk1SmVYanYwbzd1RjZxaVVUeE85VHNoZWVOQTIwRWJKWUxXU0s1VlBKMnhoLWhCT0J1ajVueUx3MUlNSjYteWtyVDlraw?oc=5",
    "source": "Insee",
    "rubrique": "INSEE — informations rapides",
    "categorie": "macro",
    "genre": "recherche",
-   "publie_le": "2026-10-30T07:55:11+00:00",
+   "publie_le": "2026-10-30T07:53:22+00:00",
    "date_estimee": false,
    "resume": "",
    "score": 20,
    "signaux": [],
-   "premiere_vue": "2026-10-31T10:50:48.652535+00:00",
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
    "autres": []
   },
   {
    "conserver": 21,
-   "id": "1ef8a8058d0e52b1",
-   "titre": "BNP Paribas Easy European Equity Buffer June UCITS ETF (Acc) | LU3307215619 | A42CKJ",
-   "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9pVTlURENkdVlTNEw2dExjUUQ4Y09ZZzlpZlpEclNvUjJyaTBnSUdYU1g2YVRJeVdpNEpDemJzOTg4RTBQN2Rha3dxMG9WUFNTMER4dGEzMURsSWVU?oc=5",
+   "id": "76edd91ac3ff319f",
+   "titre": "DZ BANK EURO STOXX 50 UCITS ETF | IE000LOAUP03 | A420V2",
+   "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE05N1ExNElfSVBpYWduUjAtb3Y3aXhsT1VlWUhpOHVHLW5vbXdTckhBNC1RTWxIeFcwdXZRT19wbGU3dHlQN0N6ZTY3MW1tT0FZREl0VEE0VEsxMFM5?oc=5",
    "source": "extraETF",
    "rubrique": "ETF et PEA",
    "categorie": "marches",
    "genre": "recherche",
-   "publie_le": "2026-10-30T06:42:51+00:00",
+   "publie_le": "2026-10-30T07:00:00+00:00",
    "date_estimee": false,
    "resume": "",
    "score": 20,
    "signaux": [],
-   "premiere_vue": "2026-10-31T10:50:48.652535+00:00",
+   "premiere_vue": "2026-10-26T10:58:02.353893+00:00",
+   "autres": []
+  },
+  {
+   "conserver": 21,
+   "id": "833cac7dd663dbb4",
+   "titre": "HSBC MSCI World Islamic Screened UCITS ETF | IE000X9FTI22 | A3D1V2",
+   "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFBoczdTZGFOWkdiUXNZX055TFRBNjVGcm9XVlpyRFdOSXZCLVc2NXBKUUtXWUJkYjB2YUtCcG42WEN3QWhBak41V2J6RWZqMUpsQlh6a0ZlZ2ZDN0E3?oc=5",
+   "source": "extraETF",
+   "rubrique": "ETF et PEA",
+   "categorie": "marches",
+   "genre": "recherche",
+   "publie_le": "2026-10-30T07:00:00+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 20,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": [
+    {
+     "source": "L'Agefi",
+     "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOUHlkNGNXV2NveXdlX2dEOEVrWV80RVBoTWl1TnlCME5uWERJV1lEUGRuQ3ZHSjl4ZDJRMGVKUkZ4X25qanNVbFhPYVZzLU1xSHFzVjUxb3g0RW53N19Tcm90SUlYTHVQYlYzVnZMeVZlcFB3UnRRTGJ4LUI0VFJUN2lzaw?oc=5"
+    }
+   ]
+  },
+  {
+   "conserver": 21,
+   "id": "7b966fcf7754104a",
+   "titre": "iShares World Equity High Income Active UCITS ETF (Dist) | IE000KJPDY61 | A40121",
+   "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE16elpYYW9pR0FtUTI0SWt1NTg2SFA2ajA0cldVMTRRS0VBc09FX044YklDMmtEMmpoVzNiRTV2UW80cHA4RHVFN2w0NlFtVGp2M2p6YmhOS0gxdldO?oc=5",
+   "source": "extraETF",
+   "rubrique": "ETF et PEA",
+   "categorie": "marches",
+   "genre": "recherche",
+   "publie_le": "2026-10-30T07:00:00+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 20,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": []
+  },
+  {
+   "conserver": 21,
+   "id": "46f5c3d98520b16e",
+   "titre": "Amundi Bloomberg Equal-weight Commodity ex-Agriculture UCITS ETF | LU1829218749 | LYX0Z2",
+   "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFAzVnNOUklHZkRpXzlyd21hN2JqalhpN3B6bzFDMkZkSzRuSDZLdGRIX3U4S3VubWNMMVoxMUtGbnllNWVKelU5cTBYb1NVZFUtQWxvUS1ObUxnbzlF?oc=5",
+   "source": "extraETF",
+   "rubrique": "ETF et PEA",
+   "categorie": "marches",
+   "genre": "recherche",
+   "publie_le": "2026-10-30T07:00:00+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 20,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": []
+  },
+  {
+   "conserver": 21,
+   "id": "7f7b0147ac6d3b69",
+   "titre": "Secrétariat d'État à l'économie SECO",
+   "url": "https://news.google.com/rss/articles/CBMiQ0FVX3lxTE9zZ1YyeGhKdDhPWmQ1UERFVUNnSU05bHU1dGdLdW9GN1owczZDcEpKRV9NTmpsVHJuUjZuV3g5bE51X0k?oc=5",
+   "source": "admin.ch",
+   "rubrique": "Tensions et énergie",
+   "categorie": "geo",
+   "genre": "recherche",
+   "publie_le": "2026-10-30T07:00:00+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 10,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
    "autres": []
   },
   {
@@ -3566,28 +4042,6 @@
   },
   {
    "conserver": 21,
-   "id": "70236939e6bf8c37",
-   "titre": "HSBC AM lance un ETF Ucits sur la robotique chinoise",
-   "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOUHlkNGNXV2NveXdlX2dEOEVrWV80RVBoTWl1TnlCME5uWERJV1lEUGRuQ3ZHSjl4ZDJRMGVKUkZ4X25qanNVbFhPYVZzLU1xSHFzVjUxb3g0RW53N19Tcm90SUlYTHVQYlYzVnZMeVZlcFB3UnRRTGJ4LUI0VFJUN2lzaw?oc=5",
-   "source": "L'Agefi",
-   "rubrique": "ETF et PEA",
-   "categorie": "marches",
-   "genre": "recherche",
-   "publie_le": "2026-10-30T05:50:34+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 20,
-   "signaux": [],
-   "premiere_vue": "2026-10-30T11:18:34.203114+00:00",
-   "autres": [
-    {
-     "source": "Boursorama",
-     "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxNR3o0bGVRMmdEWFhnckJld05ka19hcV94YW1uWS0tbERGTjI3VG85VVk3R2tFR2hKdkJ2UDdHSkZ2NVRnblZJUFoyZUQ1am4wZjVhbTNVdDBvek43SmUybjhlbk9zN0h3dFQtR2pGY050SnVnUTZzakx6QVJWUGJ3Q2V5S0dQZ2kwRnVaMVkxY0Y3OGFIWk8xWkJPcl9Fbzc1TXNfdVdaT05QRVpyckZnZ2NNZW9ua1JaWVBDSkpiVk9xVzlwYXVlOVZjblJPQzF4RXJVNF96VTJvSzVM0gHiAUFVX3lxTE5kNHEtSjluYW5TYkppR3YtSWVETlc0UWJNaFA3VHMtQWs0NkpzdUI2NWFldEs4Yl8xd1JWZ3pOSnRqM1Flb3UwUUFQNkpuLW5rUS1uTEdOYzFWbW5kSDhLdkhKbVhZYXFSc3dXT2tyajdERTBlR09zMzREUkhfbVM0NnVSWVRGTkxYYzlFQ012UDY1Q1ZJOUM3LU41eGV3T1Q2TlVDZS1kNjhDSUFRVjcwRER2S3dGX1JCNzgxR0JzUTM3T19BRldfb0UzaUN4S016Tjd6SDRjQ2RGR3Z6WTloVFE?oc=5"
-    }
-   ]
-  },
-  {
-   "conserver": 21,
    "id": "c1b08b83d30077af",
    "titre": "MiCA : la France veut revoir le statut de certains stablecoins",
    "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxNUHNwa2g4cUdiNlYzSkprWTFoNFl1YTlVMU5kbFQ1bHBGbnJid2Z6NlZ2V0NLLXNnYlFMaEVZdTh4X2ZwMU80QU4yWjN4VU54c3ExTDRYRlk2N3NqSFFwR05LYV9XMkplbnMydmwtQnJpeW5kdy1fbktXNkFWYUk3cF93Q0tuTm12VVozYTBBalVxUmhlM095ZlRHZC1HNW1ZSjQwaEJiMF9CWVpSazVtVmM3UVBTZ1o5VVRaQ2hMbGdSdFAzRlItRHU2V29MenlPSnI5VmlxWENoem5G?oc=5",
@@ -3618,74 +4072,6 @@
    "score": 20,
    "signaux": [],
    "premiere_vue": "2026-10-30T11:18:34.203114+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 180,
-   "id": "faec34c35d70bf35",
-   "titre": "Ormuz, le talon d’Achille de la puissance financière du Golfe",
-   "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNc1VYSUJKc3dvSVU3R0RWbFZSejRoNF9fbERtMjZuNHFlNURqVjJEVEFQX2FiajByNFlsUXZXYy1DeGhIblFuTVM1Zkh3bUVyWGo4d3M1V0dJbGw2cWtzaFYtTVIzTkx6YldnZTIxVHBfYkVNWFkzbG9Yd0dNeXBZOHNfQ1VMREtkQVNwTU1CQXBYaU1yWlJwbTY5V1RZbFpHN3BNczZ4SXF0SEp6WmYzeWpFd1hDbTQ?oc=5",
-   "source": "economie.gouv.fr",
-   "rubrique": "Direction générale du Trésor",
-   "categorie": "macro",
-   "genre": "recherche",
-   "publie_le": "2026-10-29T23:00:00+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 10,
-   "signaux": [],
-   "premiere_vue": "2026-10-30T11:18:34.203114+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 180,
-   "id": "edd09f779f082685",
-   "titre": "Lettre d’actualités « Agriculture et Agroalimentaire » pour le mois d'octobre 2026",
-   "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxNTVQxNW5LQXhKbWhxNVlaTlJDTVVKQVhmanctaDRhWExabUxLNHN0NmR1bmZuQnNJb3NXTlhnRjdrM00tbFpqUW9VOGczb1RibklVejFlRFUtNW9ENzRWV2ViSTJKR04wSWVJQ1RIZTdxSWtuWTFFcjVzQTVkRUQ1Vk93bHVwcVZTY0pyVHFZSzA2aW5BeENVMXZjcUV0WWw4cEY1ZEtRZ3NMYXZHZ0d4MWJ0VEt4VFozdVMwdE9semdiOXpqYi0yckNPU0NUSlU?oc=5",
-   "source": "economie.gouv.fr",
-   "rubrique": "Direction générale du Trésor",
-   "categorie": "macro",
-   "genre": "recherche",
-   "publie_le": "2026-10-29T23:00:00+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 10,
-   "signaux": [],
-   "premiere_vue": "2026-10-31T16:01:15.621534+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 180,
-   "id": "69aaeee97e0ad169",
-   "titre": "Brèves économiques des Balkans occidentaux du 30 octobre 2026",
-   "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQUlN2TVZJQWVmNWpLWmRpNnJhbzFnVWxESGtVeUJMbDhyTVlEQmhEMGNCUkN1MGNmM2FvUFBmQkk4MUIwdERqZlN6b2VJcFhMbVltTTFtNE1OTTV5bUg5c1A3TF9ndWxLNnB4Y0o3eHhZOE1mUnZOeGhLR0xPM0JicHZnZGJPX0JSYV8ydDNCNVh5U3ZKc1BDYkFzX2VHb0x0N0lBT2Q3Mm1JWFBKZzc2VDM0b2tXUWFP?oc=5",
-   "source": "economie.gouv.fr",
-   "rubrique": "Direction générale du Trésor",
-   "categorie": "macro",
-   "genre": "recherche",
-   "publie_le": "2026-10-29T23:00:00+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 10,
-   "signaux": [],
-   "premiere_vue": "2026-11-01T17:53:28.219672+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "8c988eebb1f73cbb",
-   "titre": "Franklin US Mega Cap 100 UCITS ETF (Acc) EUR-Hedged | IE000JQ1PF28 | A4279Q",
-   "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE93dzdyRGpfRHRzX2RxdFZ3OW8ya0diallQR05ISGExU194dTRHOGpZMzFaY1loR0RodmpnZUVEaEh3c3BUUUVxSXNxQkZqdzYzME5DOVhRTDUwcm05?oc=5",
-   "source": "extraETF",
-   "rubrique": "ETF et PEA",
-   "categorie": "marches",
-   "genre": "recherche",
-   "publie_le": "2026-10-29T22:44:26+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 20,
-   "signaux": [],
-   "premiere_vue": "2026-10-31T10:50:48.652535+00:00",
    "autres": []
   },
   {
@@ -3724,23 +4110,6 @@
   },
   {
    "conserver": 180,
-   "id": "13ed7d5ccfd2f0da",
-   "titre": "En Guadeloupe, huit habitants sur dix sont nés dans l’archipel",
-   "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE5Oc3VyZVRsYUtFV3FwUV85b2xKS09CdEdiMDhqX0pwbDRnVlVVYTI0WW9IWWhRSmRlM1N5dlJENlF2aHp6SmM1Nm9wd21hM0Q4dEJEb0hxOA?oc=5",
-   "source": "Insee",
-   "rubrique": "INSEE — informations rapides",
-   "categorie": "macro",
-   "genre": "recherche",
-   "publie_le": "2026-10-29T20:54:46+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 20,
-   "signaux": [],
-   "premiere_vue": "2026-10-30T11:18:34.203114+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 180,
    "id": "a1156ae7f2b8b734",
    "titre": "La BCE laisse planer le doute sur son soutien à la France",
    "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPTmpMdG5Sc1dLZjNJbmdWa1RQRzJ4RmV4UEtHQ0xwcTgyOGFGQm55MHVZRGJndUpTaU10ZFFNbV8tbFhZeFJfdExNYTVLdlEwLUI0a3U0WmZQZElaR2Vlcl9FSUJrNzU3UzRRYTdTZWMtSVBlYXkwRHVNTXRkbTFLaDBpVTkwemgyOEJsSWlfejMxU1NVUzg4QUNNcUJ0MmZ4RFJzdElRN0Mtb0w2QVd5SGhHMkc?oc=5",
@@ -3771,12 +4140,7 @@
    "score": 20,
    "signaux": [],
    "premiere_vue": "2026-10-29T23:13:47.352455+00:00",
-   "autres": [
-    {
-     "source": "Journal des seniors",
-     "url": "https://news.google.com/rss/articles/CBMikwJBVV95cUxOTDUxa21QQjVILTBSTnV6QVVrSDZNLWNjb195c3Z5d2FZY2Fxbmt1S2NuOVdHdnJIbkFLbTJZdDl3RE10ZzdzdTdqblBjcWJtMGRSblYteVdfTnBkdmdNeUowNmtwM0M2WVRZeFRTWmdJS1BrLVZjUzJxUGcyQTBMZU5qeXJBSEdqNW5ESFlzUW1sVjBkbFR0WmtWeE9INTYteGtNRTVwVXBsLVdUenJvLTBaSGtkN2FZNGNmemZHZUtNRVNJVUxWRDVRLTY4blJEUFdjaXNtaHlQY2ZMRWUyaHdhc3h3OXR6MENyQ29IeTJTeGUzcVVOZl9tMTh2WVVkV2JJNFhOMVZXdWVTSEVIZEhlRQ?oc=5"
-    }
-   ]
+   "autres": []
   },
   {
    "conserver": 21,
@@ -3831,25 +4195,6 @@
   },
   {
    "conserver": 21,
-   "id": "ca417d6eda991fb6",
-   "titre": "Rejeté par les députés, le Livret A à 30 000 euros revient par la petite porte",
-   "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPa0lYSXo5ZHRMOS1PUEpfZTIwZHhaTmxfVXd2ZjlJVWtvTW5DY1h0WkxVeG9HTjZKR2VUQ3FQRUg0YW00aVNiQzFMOUlRZ19hUlI2UzJwamF4X2pQMDEzNE9yYlgtWVdYSHNUanZiaGJwb29sTm1fVDRyTFBzVlhuYUZYcWF0T1VxanZGajAzaS1WSFB6ZVVNNHkzV2VkMWtyLWZDdU1SV19ONzFWS0R0TS1PTmtYRG5FYmFDeFV3?oc=5",
-   "source": "Capital.fr",
-   "rubrique": "Épargne réglementée",
-   "categorie": "taux",
-   "genre": "recherche",
-   "publie_le": "2026-10-29T16:29:29+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 26,
-   "signaux": [
-    "livret A"
-   ],
-   "premiere_vue": "2026-10-29T18:24:30.282368+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
    "id": "1dcef66d08786851",
    "titre": "L'action Saint-Gobain repasse au-dessus de sa MM20 et gagne 2,5 % en séance",
    "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNVUVDU2NZWjNKMWd5SkFWWVZpaTUyRV9KQjBXd2gxUFJyOWpEbzVJcUZvUG93NkJzbmFScThjZmFqX3lrald1elFXSlpmcW1POTZFQUN5RGpKallZOTVnZkR4WmRXU0dKd2VLOWxfcWxkbk9uZUVMYi1FVzRBc19taUN5aVNIcnhPVkZRanQ5aUQzNkMwQV9jRmxqWFI4eFd4UktmRjhFYVZFMVhQakVOQXVlLUhiSzRFekstcmdGaE1NWHNB?oc=5",
@@ -3881,30 +4226,6 @@
    "signaux": [],
    "premiere_vue": "2026-10-29T18:24:30.282368+00:00",
    "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "654bf0d39fde5ee2",
-   "titre": "Projet de loi de finances, Schlein : « La seule bonne nouvelle, c'est que ce sera le dernier de ce gouvernement »",
-   "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxOM1h0d2xUZjE0bEpJSzZKSXp6X2h5TF90RmhpT3djZUI0RHZWY2x2Uno2MVVKOG04WkVySldmanhxRjRsaGMtQzl2VEYtX3E1YUxyUENxcXZ2TFY4Q1FrMHRwTlhtVGpVd3NVN2NTY1MyUnNnLWU2d3J5cmttNGtpSzBwQVhrZFdpc1BxLVpaNDRtR1dicVBhY0JHQnVqRGw2QzE5ekY1Vm50T0RTcmxFWWFIYWhkU0ltWmc4M3dtMElBY3dqTVNlMmlqLTlYZS1rRUJhU1lnSGRwXzdLWXJGaFpsNUFrTFU?oc=5",
-   "source": "LaPresse News",
-   "rubrique": "Fiscalité et loi de finances",
-   "categorie": "macro",
-   "genre": "recherche",
-   "publie_le": "2026-10-29T15:18:27+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 36,
-   "signaux": [
-    "loi de finances"
-   ],
-   "premiere_vue": "2026-10-29T18:24:30.282368+00:00",
-   "autres": [
-    {
-     "source": "Orange Actualités",
-     "url": "https://news.google.com/rss/articles/CBMiiAJBVV95cUxNdGxrWi10a0dKY05KOWtIcXY1ajJSNjNsTnU2OHBkeWN0SmpIQkkwMGR0V200cmQyU3RRa2wzQnFjZFZnOG8wTEhzV0QtYVgzWkpnZ3I2dDl6ZVBUc29HMkZVWFc5WFFSbTQwZ0xHdm1saTVjV3BlWFlPR1RsRG1tblNtSlo2WmhXd2U4a2tLcV9lSmNSdnAybkZCMDlGV3dxa0xrS0hHOW5WQzdZcGZVUUQwZjN3cVZNUU9TWGM5S3RSb0pKcUIyYjBfdUJVcGpRazEzNzRQTXJfTmZFZDAwU1ROeGtzR2piSVBfSWFIcUFvV2ZFcktQTWxaYmNHem5zdlZITVU3aEY?oc=5"
-    }
-   ]
   },
   {
    "conserver": 21,
@@ -3993,40 +4314,6 @@
   },
   {
    "conserver": 21,
-   "id": "fa9f962158f36aa8",
-   "titre": "Pétrole : les cours du brut reculent après leur progression de la veille",
-   "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNR2R2RGdPUjhuanBjWFR4M01KZkRWc1pfSUZIZzdRY0xlaUVSd243MG1LLTIzVHVDdm5GRlk1X1NvWjIzZUVZMFBrZldzRTFTNk03d2tBT0hDQ0M0ZHlsb2MxTXBTM3F6SW5EWTlfdEZkZmlFUUhEMEFqWWFUSG8wcjJ0UEdpTEpmLTNzTl9Ka0c1UDRvTVhVZ3RzNXpNa1J4VW5kWk5IRF9jbjVY?oc=5",
-   "source": "Le Revenu",
-   "rubrique": "Géopolitique à effet marché",
-   "categorie": "geo",
-   "genre": "recherche",
-   "publie_le": "2026-10-29T12:23:00+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 20,
-   "signaux": [],
-   "premiere_vue": "2026-10-30T11:18:34.203114+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 180,
-   "id": "a2393deed57b9759",
-   "titre": "Un ménage sur six est en situation de vulnérabilité énergétique liée à son logement en Occitanie",
-   "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE00bkQ5OWJnQ0tja0RmeWdsYk5Na3A5NVVJdnBZZEZqUkp5NENzT0g1d01lZl9FcWFDa0x0MFFZUEV3STBuOWNaRmdpc0pRWldUb25lVl9QSQ?oc=5",
-   "source": "Insee",
-   "rubrique": "INSEE — informations rapides",
-   "categorie": "macro",
-   "genre": "recherche",
-   "publie_le": "2026-10-29T12:06:31+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 20,
-   "signaux": [],
-   "premiere_vue": "2026-11-01T11:47:32.773380+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
    "id": "0098ade248415133",
    "titre": "Le prêt et le rendement du Bitcoin pourraient alimenter la prochaine vague de demande institutionnelle, selon Rootstock",
    "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5SN2Y4bEY4Y1ZDSnFnQ3I3VVNRQjZ4NlVCTEZ1cEw4SE55YmVOazM0Zm9ielU3RngyQlhLN3R1OG03XzBQWGc4aVh2RkNsQ1B2bG0xdHZrUko4N3FLOV9UUUtvWGFITFNQYTYwLWVLUQ?oc=5",
@@ -4054,7 +4341,7 @@
    "publie_le": "2026-10-29T11:26:30+00:00",
    "date_estimee": false,
    "resume": "",
-   "score": 26,
+   "score": 18,
    "signaux": [
     "inflation"
    ],
@@ -4073,7 +4360,7 @@
    "publie_le": "2026-10-29T11:25:18+00:00",
    "date_estimee": false,
    "resume": "",
-   "score": 16,
+   "score": 8,
    "signaux": [
     "inflation"
    ],
@@ -4092,7 +4379,7 @@
    "publie_le": "2026-10-29T11:06:37+00:00",
    "date_estimee": false,
    "resume": "",
-   "score": 36,
+   "score": 28,
    "signaux": [
     "AMF"
    ],
@@ -4167,7 +4454,7 @@
    "publie_le": "2026-10-29T10:38:33+00:00",
    "date_estimee": false,
    "resume": "",
-   "score": 10,
+   "score": 2,
    "signaux": [],
    "premiere_vue": "2026-10-29T11:27:04.301502+00:00",
    "autres": []
@@ -4220,7 +4507,7 @@
    "publie_le": "2026-10-29T10:02:33+00:00",
    "date_estimee": false,
    "resume": "",
-   "score": 36,
+   "score": 28,
    "signaux": [
     "loi de finances"
    ],
@@ -4256,7 +4543,7 @@
    "publie_le": "2026-10-29T09:59:54+00:00",
    "date_estimee": false,
    "resume": "",
-   "score": 20,
+   "score": 12,
    "signaux": [],
    "premiere_vue": "2026-11-01T11:47:32.773380+00:00",
    "autres": []
@@ -4292,7 +4579,7 @@
    "publie_le": "2026-10-29T09:00:43+00:00",
    "date_estimee": false,
    "resume": "",
-   "score": 26,
+   "score": 18,
    "signaux": [
     "livret A"
    ],
@@ -4311,17 +4598,12 @@
    "publie_le": "2026-10-29T09:00:00+00:00",
    "date_estimee": false,
    "resume": "",
-   "score": 36,
+   "score": 28,
    "signaux": [
     "loi de finances"
    ],
    "premiere_vue": "2026-10-31T19:53:21.015715+00:00",
-   "autres": [
-    {
-     "source": "Leral.net",
-     "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxQUDNnRHVNQ0RRQVBSZmdZb3lLQ01yV2gzb2VLNVEzTTk3S09pVkp5NEl2TWlWMWZMNTlLNlN0NGJJVFZzS3IyR1NTRU1XNHc5cXM5d1ZnN1g4MVdVdktiN3YtaXFsbnIyT3JrXzItNTBRb3FoLVZrUGNuV2JuYjM0ejlkTjZjdnphY0hHSmxlZGRRZ1gtX1R3aWFvNkZtRWpydU9IcUl2QWxjMmN0cGU0REp2cGo2OUJPalV3MG1tdTZrNTFTbU1kWGMzb0steXN4ZXc?oc=5"
-    }
-   ]
+   "autres": []
   },
   {
    "conserver": 21,
@@ -4359,40 +4641,6 @@
   },
   {
    "conserver": 180,
-   "id": "0c15014e58e72922",
-   "titre": "En Guyane, un habitant sur trois est né à l’étranger",
-   "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE5qUVlBcU91NV9BaXRyQmNYR0x5NzkxNE5TcFpFcG13ZEN3RUVzalV0TENPWDdhQ0s4bDE3MDRTSmRQV1VKenBqWWRJOEJxU24tZEczZ0c3NA?oc=5",
-   "source": "Insee",
-   "rubrique": "INSEE — informations rapides",
-   "categorie": "macro",
-   "genre": "recherche",
-   "publie_le": "2026-10-29T07:00:00+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 20,
-   "signaux": [],
-   "premiere_vue": "2026-10-30T22:12:41.835209+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "76edd91ac3ff319f",
-   "titre": "DZ BANK EURO STOXX 50 UCITS ETF | IE000LOAUP03 | A420V2",
-   "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE05N1ExNElfSVBpYWduUjAtb3Y3aXhsT1VlWUhpOHVHLW5vbXdTckhBNC1RTWxIeFcwdXZRT19wbGU3dHlQN0N6ZTY3MW1tT0FZREl0VEE0VEsxMFM5?oc=5",
-   "source": "extraETF",
-   "rubrique": "ETF et PEA",
-   "categorie": "marches",
-   "genre": "recherche",
-   "publie_le": "2026-10-29T07:00:00+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 20,
-   "signaux": [],
-   "premiere_vue": "2026-10-26T10:58:02.353893+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 180,
    "id": "a01cc4e51d9fc5b1",
    "titre": "Combien rapporte un LEP plein en 2026 avec un taux à 3,5",
    "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPdjJ6WkduY0Eyb0hWUlhIY0JJUUNiNzNjMm9IWllnaG9iOWJ5eXFWVHFwYi1BTFBXbWhiYm1aNWJHRXJuV04xNHB6eG8xa1BsbGJMOUJYRVFTZjhLN2VHSDBRbjRIMGptdU1tYWdIZXM1VEpHUEgwVTVqM1dfUUxTb0M2QWpaWVhvdU1FRVNRa1RRZXBiMVNYSTVDYm02ZDJfQXluQXhlRnc0eDd0T1pwUlZFaw?oc=5",
@@ -4403,15 +4651,10 @@
    "publie_le": "2026-10-29T07:00:00+00:00",
    "date_estimee": false,
    "resume": "",
-   "score": 20,
+   "score": 12,
    "signaux": [],
    "premiere_vue": "2026-11-01T17:53:28.219672+00:00",
-   "autres": [
-    {
-     "source": "Tout Sur Mes Finances",
-     "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPa005d2hvLXpfcGxLUTVpbDNxZGo3c0RlQ0RJY0lOTU5EMDZGTmI1Q3ZqaXV3aW9lWUM2anN4NVJrQkZWLTN3TFEySVZXckw4TU02cXo1dmo2Q1NyUGJlNXUxS0NPOGxsZnBEUllXcTltamg3eXdXUG9uMG9VQkxhV0JBSnRaVFk1V0RWWGh2cTlJS0FQS1R0cnZzUFFYcERETXRCUFYxakoyRDNjVzFkM1hoaTY2S0w5MHFsbm1RRjEtLUlMVXc?oc=5"
-    }
-   ]
+   "autres": []
   },
   {
    "conserver": 21,
@@ -4425,9 +4668,26 @@
    "publie_le": "2026-10-29T07:00:00+00:00",
    "date_estimee": false,
    "resume": "",
-   "score": 20,
+   "score": 12,
    "signaux": [],
    "premiere_vue": "2026-11-01T17:53:28.219672+00:00",
+   "autres": []
+  },
+  {
+   "conserver": 21,
+   "id": "74cf441e04fbb141",
+   "titre": "Meilleur PEA : le comparatif 2026 !",
+   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBJUXl2VGRqbk9oNXVlaGRPUzBmbGxVY3BpcXE2RFpMM0hBbG5oRlBKWk1jV1U0Y1VHYm1mZHpQVDI5VHNNeFMtdHo3WXZCb3RDbWVLbnhWbXRVMUNXaUlwellSMTAxSWc?oc=5",
+   "source": "Finance Héros",
+   "rubrique": "ETF et PEA",
+   "categorie": "marches",
+   "genre": "recherche",
+   "publie_le": "2026-10-29T07:00:00+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 12,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
    "autres": []
   },
   {
@@ -4459,7 +4719,7 @@
    "publie_le": "2026-10-29T05:00:00+00:00",
    "date_estimee": false,
    "resume": "",
-   "score": 26,
+   "score": 18,
    "signaux": [
     "hausse des taux"
    ],
@@ -4495,7 +4755,7 @@
    "publie_le": "2026-10-29T00:00:00+00:00",
    "date_estimee": false,
    "resume": "ESMA publishes latest edition of its newsletter 29 October 2026 ESMA newsletter The European Securities and Markets Authority (ESMA), the EU’s financial markets regulator and supervisor, has published today the latest edition of its Spotlight on Markets newsle",
-   "score": 18,
+   "score": 10,
    "signaux": [],
    "premiere_vue": "2026-10-29T18:24:30.282368+00:00",
    "autres": []
@@ -4512,7 +4772,7 @@
    "publie_le": "2026-10-29T00:00:00+00:00",
    "date_estimee": false,
    "resume": "ESMA proposes simpler EU Taxonomy reporting 29 October 2026 Issuer disclosure Sustainable finance The European Securities and Markets Authority (ESMA), the EU’s financial markets regulator and supervisor, has published its Final Report providing technical advi",
-   "score": 18,
+   "score": 10,
    "signaux": [],
    "premiere_vue": "2026-10-29T18:24:30.282368+00:00",
    "autres": []
@@ -4546,32 +4806,10 @@
    "publie_le": "2026-10-28T22:27:24+00:00",
    "date_estimee": false,
    "resume": "",
-   "score": 20,
+   "score": 12,
    "signaux": [],
    "premiere_vue": "2026-10-31T19:53:21.015715+00:00",
    "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "012d6232d82a3537",
-   "titre": "Les cours du pétrole augmentent face aux craintes d’escalade au Moyen-Orient",
-   "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOYlphemFXNUVrZDlhR0xPTTBPcWpjUDltajEtYi1zczhSc1o3RnBvcmdLZWIyWUdET040alpzWmJldXpTZGVPOXhXUXBPN1hQZ3dvZzhsM1RIY0RtcmlMcVlQaWRlY0ZTYkpxUzBsTV9yQ3hhczVOZDhTQnNGemRpNzhBLS15cHk3dzd1WHpQV0J5T2hxN2VaWmxnZ2ozb2ZkalpDOGw0QUs3UDJyV1pTdWNVMVo4dGtta3hDSw?oc=5",
-   "source": "Les Affaires",
-   "rubrique": "Tensions et énergie",
-   "categorie": "geo",
-   "genre": "recherche",
-   "publie_le": "2026-10-28T21:53:23+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 2,
-   "signaux": [],
-   "premiere_vue": "2026-10-31T16:01:15.621534+00:00",
-   "autres": [
-    {
-     "source": "La Libre.be",
-     "url": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxOXzVsZ0VFSXg3OUtwRzRqTFducG9zWDYxc2E2cVdYLUIwQVVtVU0xN1VFMXptVG9aSUx3X09JeEdQa1A1ZmxtTndlMGk5Vm5GNzdGNVBMOGM1TG5lbFlObk95M2pUUDhIZW0tT3hUOUphRFgxelFFbl9QRzlodnhubGY3WTBCb21WdWZ0cjl5dWlsWVJydGNBbF95bnJHMk5EN0FlWHY0NWZ1eE1DSE5TeWFPNXVVQTFNWEFpalF3QzFVUm5jNGpFcDVZYzUzZ203T2ozU2pISzJyV2RZSXdFa2l6SXh2QVNBNkE?oc=5"
-    }
-   ]
   },
   {
    "conserver": 21,
@@ -4622,24 +4860,16 @@
    "score": 26,
    "signaux": [],
    "premiere_vue": "2026-10-29T11:27:04.301502+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "17a83a13b10133f3",
-   "titre": "Le CIBC Active Investment Grade Corporate Bond ETF annonce un dividende mensuel, payable le 04 novembre 2026",
-   "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxPWHpDS29hMk5XX1BFMmxrb2RCR19yWkxSczJnZmlaUE1pWGdoNmNwY2xqaE5mbHYya1FfMTI4bFVKQWZaM1BrRWR2emYza21ILTVLVzZQUEd5UkNGS2tjU2dXRkZHUDBGM1JOUWcxdHBDQkhwZWs2WlpDZzlnM1hMSThBOE9ac3FyTWVlR2I4NHZWUlZkTGdsOHlGSnhDM2FCYWxLNm9LT1RhNFNocGU4TmF5cEF0Qk51UXp1clFXWDBBLU51TGRvRTN6ZTVYS1JOYS1SOHNDRzFHWHEyV2txVDhDNE1EYmY3OU9nUTZId2Q?oc=5",
-   "source": "Zonebourse Suisse",
-   "rubrique": "ETF et PEA",
-   "categorie": "marches",
-   "genre": "recherche",
-   "publie_le": "2026-10-28T20:39:00+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 20,
-   "signaux": [],
-   "premiere_vue": "2026-10-29T18:24:30.282368+00:00",
-   "autres": []
+   "autres": [
+    {
+     "source": "Boursier.com",
+     "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNbXN4NUxVM1BycExOQXg3R2lwV1VCYWVSUDN0YWQyS2pzV3hpVTA4TkpZeUctTzhweWZ0MFhXZDV2WWEzNHFGbVRzc3hHOTRVbmRwNDlheDhWckdRS1V2a2pLOVVSMTAyZDZ5VndkM29lTXpUbjJISU5kTE5DdGd4VzNEamh1T2UxVzNXOXRGeG0?oc=5"
+    },
+    {
+     "source": "extraETF",
+     "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE1fYUhnZFRtWndGV1BZam5wM2pCcE1rd1AzOTZjRWh2WXhCTmc0N2wxT1o3TVFNVXVLeHdtYVJlalpJNFU4bDVFNkNXYjFmaWlMTjh2VzBEdUY2aDct?oc=5"
+    }
+   ]
   },
   {
    "conserver": 180,
@@ -4656,6 +4886,23 @@
    "score": 12,
    "signaux": [],
    "premiere_vue": "2026-10-30T22:12:41.835209+00:00",
+   "autres": []
+  },
+  {
+   "conserver": 21,
+   "id": "a51cac1a2298a509",
+   "titre": "PEA : vers la fin des ETF MSCI World et autres fonds exposés hors d’Europe ?",
+   "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOcTh2WHFWSkljNG0tU3lxQzkxanp3cTA0NGZjOW5HNU9jdmdXWkhxNlhxNUktdEdtRXczaDJndFd5VXNrdlpRYjRRLVYyVHEyMGpGc1JjRlB2cm94cnZmR3FmWmxmTWxnOFlPX1lQNFZIcnFQckxHNTlHWDJmckppTjJ4NXYxLXVIMXV6WW9hbWFSd3hUbHRQcC1UUW5pMUpOV3gyVzFQU0hUWjlRYjc4OFpxWTRvWUNpZGVr?oc=5",
+   "source": "Tout Sur Mes Finances",
+   "rubrique": "ETF et PEA",
+   "categorie": "marches",
+   "genre": "recherche",
+   "publie_le": "2026-10-28T19:48:49+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 12,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
    "autres": []
   },
   {
@@ -4687,7 +4934,7 @@
    "publie_le": "2026-10-28T19:40:33+00:00",
    "date_estimee": false,
    "resume": "",
-   "score": 26,
+   "score": 18,
    "signaux": [
     "AMF"
    ],
@@ -4709,25 +4956,6 @@
    "score": 20,
    "signaux": [],
    "premiere_vue": "2026-10-28T23:06:30.476249+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "4bd0dfc34beb86bf",
-   "titre": "[TRIBUNE] ASSEMBLÉE NATIONALE/LOI DE FINANCES RECTIFICATIVE : ‘Je m’interroge. Qui pour arrêter les dérives du perchoir ?’ (Par Babacar Gaye, ancien parlementaire)",
-   "url": "https://news.google.com/rss/articles/CBMikwJBVV95cUxQSWZzbU8zWmxhX2Fua0JRWVFwNGpxRFE2X3J3Q2dzWWxRNk9VSDNmUHY1NWgzbXVQNHpiRHVETTdmSHZUdVpiemNlSE1tYWZ4ckl5bm5yOE0zUlVZUGVmYVVVZGhoSTNZVVQyWFg2QkFMMWI0N1FPNUo3U2FkQm1XX2ZremlZSmhBbjM3aFk0cktHelpyMnpsREItODk3QmxKZnRUc281RG01TFJpS0ZCZ0NfemxiTUI1NlItS2xxSC1vSlFLNmZvNlVBY0Rwc2xMSWMwOC1SWU42ZUxCa1ZGVnBQN1l4SEtKc2VyaFMzd2JYZTJGNjNHbkJJZVlST3QxZHl6RjdIQjVkeXVTRWI2WEpUTQ?oc=5",
-   "source": "nations-sn.com",
-   "rubrique": "Fiscalité et loi de finances",
-   "categorie": "macro",
-   "genre": "recherche",
-   "publie_le": "2026-10-28T18:40:14+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 28,
-   "signaux": [
-    "loi de finances"
-   ],
-   "premiere_vue": "2026-11-01T11:47:32.773380+00:00",
    "autres": []
   },
   {
@@ -4824,38 +5052,36 @@
   },
   {
    "conserver": 21,
-   "id": "6ae3638aaf52d18f",
-   "titre": "Budget, Meloni : « Le Conseil des ministres approuve le projet de loi de finances d’environ 26 milliards d’euros »",
-   "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNOVplYnZ5OWFZN3JjeGthT3BmcGpoZFhPMjZZZ1JYWFlRaHVFTnZlamJyZmlaVGZOeXBta19VaWxJUC1CZmpkMXE2cklhOWtVU0oyVDAyNTZtUEZoa29wUks0SDA5T0ZMOUFIUy1GdXdyNkxGQlVXRzdPRHlxZkdQTWxSeXFMLWo3a2FobEJtOUJPcWpzSHUtNEZXWVA5eG1uMzRDYnF4OEZwaEVDNnFqVEdoQjJTMlMxQmUwMV9WS2NCT2hrR0ZnYjk5ekF0dE9qTFBoLUFzOUhwNmZ6SnhLSXZZd3VYUHgy?oc=5",
-   "source": "LaPresse News",
-   "rubrique": "Fiscalité et loi de finances",
-   "categorie": "macro",
+   "id": "68968a0d419cb353",
+   "titre": "Cac 40 : En attendant la Fed et les résultats de Microsoft et d'Alphabet, le CAC 40 termine à l'équilibre parfait",
+   "url": "https://news.google.com/rss/articles/CBMijgJBVV95cUxNY0RpQmRQWFNteU01TjhpbU1Da081aEtuZWZfQzVXLTNxT25KSi1NNmFTN3YxaWNYVDZWVUVpX3hxYkVMU3pBLU1YRGxpSmNtanh5VkpfVlhMYVprcUV2b1Nvc0tsNVQzTVprZkhJMU50YTBSQUM4TlUxRGRkWjJzVWFBellVZlU4QVZzM0pFTGRmSHl4MjlqOXBuSVNaZ21pV2tSREVEaFVoMWFYSmk2RUx1aXBTMTR6bE82MFZ3dy1zc1F6ZEZCTEZBWXdGeHBPblUxajQ5bUw5M1ozTU5rZGxLdkhRZXVDLVZjM1pqc3NhdW1mckdaS3pyU1UxeVNhbEF3dThiZHR3STZjY2c?oc=5",
+   "source": "BFM Bourse",
+   "rubrique": "Marchés actions",
+   "categorie": "marches",
    "genre": "recherche",
-   "publie_le": "2026-10-28T16:55:59+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 28,
-   "signaux": [
-    "loi de finances"
-   ],
-   "premiere_vue": "2026-10-28T23:06:30.476249+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 180,
-   "id": "7fb4276b65e49cd2",
-   "titre": "En septembre 2026, les prix à la consommation diminuent de 0,2 % sur un mois et augmentent de 2,0 % sur un an en Guyane",
-   "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE5TT0RMa2tRT2dqdmViRmlUbTNUa3Nna2lmcXN3am15eTBVcU9RajdIYzRleGhKUkdPNG1PcUprZV9hbjA0OVprdzJ5Qkx5RHpYZDRqeEhFcw?oc=5",
-   "source": "Insee",
-   "rubrique": "INSEE — informations rapides",
-   "categorie": "macro",
-   "genre": "recherche",
-   "publie_le": "2026-10-28T16:35:35+00:00",
+   "publie_le": "2026-10-28T16:47:09+00:00",
    "date_estimee": false,
    "resume": "",
    "score": 12,
    "signaux": [],
-   "premiere_vue": "2026-11-01T11:47:32.773380+00:00",
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": []
+  },
+  {
+   "conserver": 21,
+   "id": "d3b1ca1e95ada7c6",
+   "titre": "Responsabilité du conseiller en gestion de patrimoine : que faire si votre placement a été renouvelé",
+   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPZFpHQ3dNQ25VWGIyS2VTNU1KNVZ2cDFfcFlMSG9mQWx4dE81S0FadWpfcTZIOFlkQzRORHVXdy11VC1yS2thSm93eUVqaWN3MkhKWTRhMXJJc0hpdGpjQlhuYnJDaGdUUTJxeG5MRW5tdDg2RHByQVY3UXhPQXVNTkFod3pxaGtLaHVnS09UbUVHZ2tBX2tpMlFRTjVaT2RWWGE1M1Q1ZFJvOC11TF9DeVV5NTczaTFuZUE?oc=5",
+   "source": "Kohen Avocats",
+   "rubrique": "Banque de détail et courtage",
+   "categorie": "macro",
+   "genre": "recherche",
+   "publie_le": "2026-10-28T16:15:00+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 2,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
    "autres": []
   },
   {
@@ -4941,12 +5167,7 @@
    "score": 32,
    "signaux": [],
    "premiere_vue": "2026-10-28T18:19:16.823086+00:00",
-   "autres": [
-    {
-     "source": "Kohen Avocats",
-     "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNX0VhbjlWSTFnTGwxYlNrWTVwbUZQMEhtS3dCTVNyc0xVQjdXU3dWTkNJTXZ2ajd5eEZ3OWU2U3NGUXV6RGx3bS1BNDJXb2JwdzFLUUp4RC05V0Q5TkNCSS1tck9OR05jN0pxR21DQ2lGejhjT2hiOVM0eVlUV3JYUXI4blYzUy1IcDljR1Y5QnFTOXdVR3VWTzFRcFB5WjUwcjZlQlptR0NDYkVoU284MUEweG1wVk5EZ3F6SDNSRQ?oc=5"
-    }
-   ]
+   "autres": []
   },
   {
    "conserver": 180,
@@ -4994,7 +5215,7 @@
    "publie_le": "2026-10-28T15:14:00+00:00",
    "date_estimee": false,
    "resume": "",
-   "score": 10,
+   "score": 2,
    "signaux": [],
    "premiere_vue": "2026-10-28T18:19:16.823086+00:00",
    "autres": []
@@ -5032,6 +5253,32 @@
    "signaux": [],
    "premiere_vue": "2026-10-28T18:19:16.823086+00:00",
    "autres": []
+  },
+  {
+   "conserver": 21,
+   "id": "4b6495f70c977f3d",
+   "titre": "Guerre en Iran et tensions au Moyen-Orient : quels bouleversements pour les marchés pétroliers - IRIS - Institut de relations internationales et stratégiques",
+   "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQWTRoMVhMTnplb0pwaXFKMkVyREhNSkNMSUtHVVRZWnBLNjdjV1h4MVBhbWNma0x6dGRZTWhJOVQxN0hRbVpFX1RIc0I4Y3RBLUlVRWJsZUtNRzhjeDlKR0NUZzdLQjJja0x3a2tweGp3NzE2OWtPN0NqazB1OUN4ZWFOSHZEME9IMzVvWC1FUmd5Q0V6ZDU3dmVZMjYyMU5qcnpnNUNtcm85NlU5WHp6WktFNk9pVzhxdE9sM1V3?oc=5",
+   "source": "Google Actualités",
+   "rubrique": "Géopolitique à effet marché",
+   "categorie": "geo",
+   "genre": "recherche",
+   "publie_le": "2026-10-28T13:52:43+00:00",
+   "date_estimee": false,
+   "resume": "",
+   "score": 12,
+   "signaux": [],
+   "premiere_vue": "2026-11-02T13:21:51.322650+00:00",
+   "autres": [
+    {
+     "source": "Noovo Info",
+     "url": "https://news.google.com/rss/articles/CBMiiwJBVV95cUxPTUF0Xzc1cWJKbmthTFpBWm5uTHFyM1ZwNlhQV3VQa0xydWlmLVUxc0VfSGZrRlVWd19jaXd3N1BlVGc2Tnl5ZlBvRVhaSkt3cjJwYnNpTVZyZW5aaHVid3BaRUVfbWxzNm12TklEZC1wSmJ6UkhJdDJrOC1LV0FEM2k4STBIakd5cDR4UFhWVWJhUWVmMzFJUVdBLXBhdFpkUW5jYVBDa0pLMmVTOXFxNnRIMHVnakNFcEJiZzJDaUJPYmhWNXZvOUt5d2g5ZjJkcHhXRnhjS1hqNndVaUlZTElZVUZKeXpMQVdjQjhLWUVXQTJvcTRoX0dxSDBKWkxIc2ZNNEpMbW5weFE?oc=5"
+    },
+    {
+     "source": "La Libre.be",
+     "url": "https://news.google.com/rss/articles/CBMikgJBVV95cUxQNlZ0U2o5cmRUaFJzX2k1ODFPZW5UcHM3NXpLQTBuYTJCcDlDQVlrbXVva3JuUTJ0M00yU0RxNG5uY0I2R2xsTGpNcTBQNTJTdVdzU1cwdnByeXlvVGNtNE9KYUxNdV9YRWk3YzQwa3VLMGxwNEJPOWdkR2J6aEdrSG5GZzQ5UVNYT2c4a18yVTZfbGVKSlM1QklLa1pSWk50bHBxbjNxczhWUzRUQVRPSjJiT25ReHlObFRZaXZLZTRUVkY2cmV4bzJBalFzUFZ1aXdBZTFsUk9CZGNnSGRKMTNNOG00MXUzcjU4b3NIQUkyeGFkM2trOUZ1T2xoTFEyZk9DTlFrcE8wZXV1RFVCZE5n?oc=5"
+    }
+   ]
   },
   {
    "conserver": 21,
@@ -5103,23 +5350,6 @@
   },
   {
    "conserver": 21,
-   "id": "576d47d2761db503",
-   "titre": "CAC40 : Worldline et Stellantis progressent, Dassault Systèmes chute",
-   "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOLVVFQW9wYWR2bjM5Wk1rdlVsS3ZRUkdSdDF2TUVRZ1Npa2NmV0Z1R3RFOFdkaGRuc1JpbDA2TEplRVJrMkhfbS1FRDNhU1gtU3Q4b1RSM0xZZ1FBU1dHU0w1ZkNnSmZqcDR3ZWFvcHJsMEtUWTZrcGpxbS1TdkhaWU53amxmTVZ4VEpSOTdEQ1BlUzM4Vk04N3R0Yms1ZmFWQWhpS0VHSEFCbVk?oc=5",
-   "source": "Le Revenu",
-   "rubrique": "Marchés actions",
-   "categorie": "marches",
-   "genre": "recherche",
-   "publie_le": "2026-10-28T11:10:00+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 12,
-   "signaux": [],
-   "premiere_vue": "2026-10-28T18:19:16.823086+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
    "id": "56ae246b7a648a6f",
    "titre": "Les traders de Bitcoin se préparent à la Fed de deux manières très différentes",
    "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBMNldRbi16Um5vUDRTVGJkUkRMOVNxc25IckhLS1hWSzFFZkEwMTcwTS10TWtyRU9vUFBnYjZmeTlsMnY3VlV5MlpYaUR5RTFERjZWWlFkNkJXckNMdU02MTh2czZNVmFfXzRMMGR3?oc=5",
@@ -5150,24 +5380,12 @@
    "score": 20,
    "signaux": [],
    "premiere_vue": "2026-10-31T19:53:21.015715+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "74b5c2b894231aab",
-   "titre": "OBLIGATIONS / ETF : Les taux se tendent légèrement en Europe et aux USA avant la décision de la Fed",
-   "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxOeThZUXFGZm9aQjZoNno0RFFQWGxReU45bTZLUWs4bXE2aFVvaFhJc2xqQWVLM0xObGI1NHd6ZHRlZVhiSGdKcjh5c3lDRDJfWG11Y1dGd0VzVldvVGZPSTZYdVBxbDNCNEsxZUdBMHVuQWUzdEJBRzRFQktkUUpyT2ZvNnRMczVYZUFJMG5Gc3E2cE0yc3FjdUpNaEJLSkNNdDZKVHVxRVQ3Q1ZmT1UyOWRSY3J1bUQ4dnFSdU1FYVNVVVJ1YVoyMGw3YlZoY3FKcUViSGN3UW9ZU09XYzZmUlh6VXp5bmRYYkxr?oc=5",
-   "source": "Zonebourse Suisse",
-   "rubrique": "ETF et PEA",
-   "categorie": "marches",
-   "genre": "recherche",
-   "publie_le": "2026-10-28T09:57:23+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 20,
-   "signaux": [],
-   "premiere_vue": "2026-10-28T23:06:30.476249+00:00",
-   "autres": []
+   "autres": [
+    {
+     "source": "Fortuneo",
+     "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxOVkFtcHFoelJOYVZYcFMweVl6WldrWVlHWTFrYVlTSmpNWGhuUmx2S0ZvLVVNaXVEQy1RTWQxMzg0dDBtcmhkaFJiS3NrblotR1M3N0l4Mm1ld01OV3lmd2R3ZV8wQno2SnVvMGQ0bkZMTzd1ODVDM0lwek4xTWZycmVxUDNJU2VYVENqYzlVRXRHMEtwdDJDdy00SXhMTktyWDR1eV9BVGI0cW93dk0xM2YxaUhVbFVwQ0FEWVVaMnZ6TU5MX1BPMk9WczJXMHd1VDVB0gHYAUFVX3lxTFBBM014Wjd2ajJTZ3NpenNMTnBKZTZoeWlTMDNRX0xvSUZDS3dvSnhGYmJQRlhDM2dGd08zbmVCVFhuSHphTXFUb2dwUHg1NVlyWWYzSHpnNmdJbG1naGRLVDBmMzFpUTNSdmFJN1hOVy1nN3R1NzM5NXRUYnItR3FCNndJaFZIRlI1bmVfSHNHYjkteldBakQ0ZFY5WGJwMjdEN3BfZ1FyMm9UcmhYYXhqclZfZ1Yza2lETjVZQ0V1UWdCYXU5dkZvaS0tbDVoVGdxQ0pXeThsZA?oc=5"
+    }
+   ]
   },
   {
    "conserver": 21,
@@ -5184,23 +5402,6 @@
    "score": 22,
    "signaux": [],
    "premiere_vue": "2026-10-27T21:13:35.409359+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "36c422d081944538",
-   "titre": "Pétrole : les houthis attaquent la principale raffinerie d’Arabie saoudite, les cours repartent à la hausse",
-   "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOREFiZHVza3FiTW1lVnk5RG4yUW9pWUpFZDkzRHFrU2pPU09vZTJwN1k5WWtsajNXUmZfSlhaUEFUT0w2WXl0SXVud21aTnAxcXo5Q051UnJyd1lXTjdLdnluWE9xMzNfNDNRMElMUGhUdGdpdWIyR2xFeHRtR2t0azd1cmg0bGNJNF8wWUs2a1FoOXJhLUYyMWVkUkpQOFRQd0N2M25aRGlKcWhU?oc=5",
-   "source": "Le Revenu",
-   "rubrique": "Géopolitique à effet marché",
-   "categorie": "geo",
-   "genre": "recherche",
-   "publie_le": "2026-10-28T09:48:00+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 12,
-   "signaux": [],
-   "premiere_vue": "2026-11-01T17:53:28.219672+00:00",
    "autres": []
   },
   {
@@ -5274,622 +5475,6 @@
    "signaux": [],
    "premiere_vue": "2026-10-28T11:13:43.480710+00:00",
    "autres": []
-  },
-  {
-   "conserver": 180,
-   "id": "690ce17aeb070661",
-   "titre": "Ardennes : des entreprises résilientes malgré un ralentissement",
-   "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPZF9LRjZGMzZDeU0taHpMMGR6SER3Mzktd0EyLUxQbXk2MFpXdllJSVFFVDUwNzlsYzNudUwwR0gzejhadFR6Q3J3eWtudFZPVWZsbUkyWE82RUdFRWM0RXIxRmF3eDVtX1J1X0I5ZEwxcGpxOXVqejVaTDNlWTh1V2Z2SmF0ZS1yaHNsUkZBVFJGUDhMdy1yeVJfMTRpbTZCdWJJVlVWa0o5cEtuWVE?oc=5",
-   "source": "Les Petites Affiches Matot Braine",
-   "rubrique": "Banque de France",
-   "categorie": "macro",
-   "genre": "recherche",
-   "publie_le": "2026-10-28T07:10:00+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 12,
-   "signaux": [],
-   "premiere_vue": "2026-10-28T11:13:43.480710+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "2d201048c021638d",
-   "titre": "salon-bien-être-lisle-oct-26-conference-etf",
-   "url": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxPRGdiUlgzLVVCM21odHN3blVYeThuVTZ3TnBEdFlVeWFaTld6dE5HVDdicTA4bzNxeGZkeXZVOEdNMVpyQUtGZExsY0FJZ25uQ29OVTNnUG1WRVFZOXZDclUtcW1aWUpZRy1jdGFCb2pzcl9zMTV2VGlvNS1rUERYWkRISkhZWnY2ZVplb3FXb2JheWZiMHIxWGY3V0RiSW1NRXIwMFNIZW1xOFFPNGMwN2lmMUNQR0FaY3Q5T1dhcWZZbWdhUzRCVnYxV0JmVjBFYjByZDJUQnpmbmFoSURpMVFzVXVZQkdCWkpHSVNYNS1UYVU?oc=5",
-   "source": "Petite République.com",
-   "rubrique": "ETF et PEA",
-   "categorie": "marches",
-   "genre": "recherche",
-   "publie_le": "2026-10-28T07:00:00+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 20,
-   "signaux": [],
-   "premiere_vue": "2026-10-29T18:24:30.282368+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "001cac5a75dbcd8a",
-   "titre": "Mon avis sur Placement-direct Patrimoine en 2026",
-   "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQZGc5ZDBnWHhYQnVKNWVXMGJGM3VJNWtTUzhFMlhkb2lzWHJQeWsyU1h3ZkZxM05Fc1ZKRmt2MGFXT0RJNV9wbWNOd2RhT3BnQ2N2STZESDd3RUs3MnJHU1BjQ041aFVmYllPZjZnWGhvbEdtOVdFVUdRUUh2UkNJVjdSRQ?oc=5",
-   "source": "Finance Héros",
-   "rubrique": "Épargne réglementée",
-   "categorie": "taux",
-   "genre": "recherche",
-   "publie_le": "2026-10-28T07:00:00+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 20,
-   "signaux": [],
-   "premiere_vue": "2026-10-31T10:50:48.652535+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 180,
-   "id": "983bcd0e980ff0e7",
-   "titre": "Comment contacter la Banque de France : numéro et horaires pour joindre un conseiller",
-   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE55b1BoSXU2V0xOTjI0cUpZazFsYXhVVE85RlJzMGF4OHlxVWt6THFLMUxWWi1UdFB3eGgxSVdIcUY5cmkwSDJUSlNQemZlNVdyUkZfVWRjeUw3bXg0ZV80OGszZ1l1V1pNakE?oc=5",
-   "source": "Aide-Sociale.fr",
-   "rubrique": "Banque de France",
-   "categorie": "macro",
-   "genre": "recherche",
-   "publie_le": "2026-10-28T07:00:00+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 12,
-   "signaux": [],
-   "premiere_vue": "2026-11-01T11:47:32.773380+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 180,
-   "id": "43e0ac6189768140",
-   "titre": "Nickel est-elle une banque ? Compte, dépôts chez le buraliste, faillite : ce qui protégerait vraiment votre argent (2026)",
-   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQOUZuQjRXRWFPeDVBS2V0eW5XaEpGVk9FbVVNanRlVVUzZnM1RDRRc2Z0SklEa3A3T2MyLUMyc2VjUXlnMDd6Q0hnQWRTQ1lSeHFLRUtybm1yTzBEQVJ3a0R1QU9KVXFkVGNnZzVaWFRfVEVWMUJZem4zajBSbkFrd28wUmVickdOTDRISWRiODhXS0NLZHVwRkJ1YlhqMExKX21WT0JPM251aE05SEFBLUhKN2VMX3ZLU2c?oc=5",
-   "source": "Kohen Avocats",
-   "rubrique": "ACPR",
-   "categorie": "macro",
-   "genre": "recherche",
-   "publie_le": "2026-10-28T06:30:00+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 12,
-   "signaux": [],
-   "premiere_vue": "2026-10-30T22:12:41.835209+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 180,
-   "id": "d4589cc429e19a3b",
-   "titre": "L'ÉDITO ÉCO - Avec la hausse des taux d'intérêt, la capacité d'emprunt des Français diminue",
-   "url": "https://news.google.com/rss/articles/CBMi_AFBVV95cUxNaWxRSWhKQVBDcUNGbC1INy1Ock5pMlA3QktkcHJaVXBHSlZ2TzlTalN6RDdSNWMzcDJ0cDFtNmgzYUNoVjkyamdfdmtkbExlR0VJZDdWbFFxYVd6MVI5SXE0WVA5MFJWVE9RbmR3V2lPLXRwUnE2ZF9laGZ1NWdnbGFzazExazlRX1d4YUpESXh0b25RdGpGa1JHOGItdDgzQ0Nzek5naWtSZTctSUo5N1Bhc2E2Vl9ZR19HcVJkcnlBV2VRSERXX2lGYlVoREllUjFkeUMzUUEtRzFTZ3FPYlJWT3EyZ3NZMVZxMVVNRkFIWFFpSU5uZ19Dbmc?oc=5",
-   "source": "BFM",
-   "rubrique": "Banque de France",
-   "categorie": "macro",
-   "genre": "recherche",
-   "publie_le": "2026-10-28T05:31:01+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 26,
-   "signaux": [
-    "hausse des taux"
-   ],
-   "premiere_vue": "2026-10-30T11:18:34.203114+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "f4afaaed04211b36",
-   "titre": "Crédit immobilier : « Les banques déroulent encore le tapis rouge, malgré la nervosité ambiante »",
-   "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9ONVlMRC1NNS1GeElCUjUwTWhrZ3dpR19PX2YtUmpoMng2VUpzYnJwcWJuc0JCQi1VSUJmdmQyd0NRUW5PR3NWUWI3cnU4U2o4RmFRUUl3Y2R0RkNBS1NvSnd3?oc=5",
-   "source": "Tout Sur Mes Finances",
-   "rubrique": "Crédit immobilier",
-   "categorie": "taux",
-   "genre": "recherche",
-   "publie_le": "2026-10-28T05:27:17+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 22,
-   "signaux": [],
-   "premiere_vue": "2026-10-28T23:06:30.476249+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "f227afceceb7ece8",
-   "titre": "PEA sans frais et compte courant rémunéré : les arguments de Trade Republic pour séduire ses millions de clients",
-   "url": "https://news.google.com/rss/articles/CBMikwJBVV95cUxNTnpSb2lfWWxHTnpMVmtLb1BkMkJPSk9EYkhqYzJWQUlhaG9LYVd6bjVzNDhEUXdYNVNvYUphVzVTTDdOYzhhOF8zNXZRQ0dscEN1Y2FobjcyQzJ0ZUdMR20tdmdselRxODY3M0ZTMEd5X0daTGxJUlVTVkM3eDdTb2JLM1ZZckxmRXVyODNuMGdqTVhQVnVKalJCNjRZc2dyWmFNalUtTDVyR0xPWHQwa1AwRkdTR0VENEtXeXhfVE9oZzBGLWk1andtMW9zMWRvdUR5dHZleUNCWW5QekNzYTFYcUJoQmRqWkVkUGtBa3dWLXA5TElpQVoxSEdCWHg1X2NnejFFSV9iOVdRZU9ORkNQdw?oc=5",
-   "source": "BFM",
-   "rubrique": "ETF et PEA",
-   "categorie": "marches",
-   "genre": "recherche",
-   "publie_le": "2026-10-28T05:05:00+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 20,
-   "signaux": [],
-   "premiere_vue": "2026-10-28T11:13:43.480710+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "75819b5ab274282d",
-   "titre": "L'inflation PCE sous-jacente devrait s'accélérer en septembre, selon Truflation - Actualités et statistiques",
-   "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQMTFVSzJJdUtMM0NvNUtBYW9yQVNLR2MxODZ3bGs3ZURxRmpVZEtCS19FbExzMEFVRlZzMVJXelFPT1VKQl9tQUllYWdCSDA3VFpEcHNFb3JISkZ4aFd6bWJYcEtodVNraVFycy11OF9vSVFpb0VoOTRPVFJFa01rSERfZXY2bEZUQzZuRmZJQUZwMHpvVzdVcUhJUnlGU3pTZUhhWmlUYWw4QW1ONmlCX3pHellxamc?oc=5",
-   "source": "IndexBox",
-   "rubrique": "Géopolitique à effet marché",
-   "categorie": "geo",
-   "genre": "recherche",
-   "publie_le": "2026-10-28T04:12:20+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 26,
-   "signaux": [
-    "inflation"
-   ],
-   "premiere_vue": "2026-10-31T10:50:48.652535+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "fd5057f126c658f7",
-   "titre": "L’or recule sous l’effet de la hausse du pétrole ; les marchés évaluent les commentaires de Warsh après le statu quo de la Fed sur les taux",
-   "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxPbGp5N2JfR21jMWhweVVxcUhmYmxCRXZIem5TMXhsM2ZRbDdBRjF4VndxU0pvU3dMcVRQNUtVQXA5a2hsc01GN3NfMUV0WERyQ09TYlhjNmwwdmRidkVFZkxhQmdvTWk1dms2Y0pTU2VNbkFkckFMVVNCSlVKQkpyRmR2RmFhYm8yWUNRVkNSNTlhdHhiYmU4Z09oZnlGZTVYRzc1NFZieURmLVlJYVVFT3l4UjRkT1hrM2pxUUxpZzRSREdEVS1OZE1MWjZPR3FoaUdGd0NnTDFLTEJMelJmYjlTUjQzWUlQMEJ5ekRYYUw?oc=5",
-   "source": "Zonebourse",
-   "rubrique": "Géopolitique à effet marché",
-   "categorie": "geo",
-   "genre": "recherche",
-   "publie_le": "2026-10-28T04:07:17+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 12,
-   "signaux": [],
-   "premiere_vue": "2026-11-01T21:57:47.723104+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "f63b146c69e02249",
-   "titre": "L’Arabie saoudite va stocker du pétrole dans les cavernes rocheuses de Jurong à Singapour afin de renforcer la sécurité d’approvisionnement en Asie.",
-   "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNUzBiVVhzVDUyY3JGVXp3aHl0Z0hZSWZ2QjdiYnh5TTloQTBxN0NZbGRPbllORDZFaF9Kcy05TEN5M1FmTTFaTzNUVEpzM2J3S1paYkV2RGoxLTdTd1ZwV19zVExsdndHV3VzSVU3N1ZLSUdObC1kZnZYUnZlTVJGak1IZ0pKTVRPODh3R0tTbF9XdzNfdU5MRU5EQkpXMloxXzI5RDRDa0FVOHJLWG84MnNHeXV2VlMwZXdGUEIxUDZmNkVzYTVjOXFRb09xTlpONGM5Yg?oc=5",
-   "source": "internationalfinance.com",
-   "rubrique": "Géopolitique à effet marché",
-   "categorie": "geo",
-   "genre": "recherche",
-   "publie_le": "2026-10-28T02:00:05+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 20,
-   "signaux": [],
-   "premiere_vue": "2026-10-31T10:50:48.652535+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 180,
-   "id": "421ffa62d8312007",
-   "titre": "Fiché Banque de France (FICP) : comment savoir si je suis fiché, combien de temps et comment obtenir le défichage en surendettement, que faire",
-   "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQakpWaHdoLUx1YTJuaVVKckdEcm9zcGI0M1g3YUZUdmNyV0hEdzAxWWJZS1J6VDhRZTVYajdHYVJUUE4wTjlNZWJNd3RsbG1McjhKdUR0YnhKZXVreHFFUDNtQ0ZpdWkwdWdVX2Q1SXBYeV9idU5KeWhyV3NNUTJuS3VWandVZEh3RVlKb2YxZTZlQ281dmN5UWxjYnJzS3cxTlhibHBPNHJJTEppM3hmdQ?oc=5",
-   "source": "Kohen Avocats",
-   "rubrique": "Banque de France",
-   "categorie": "macro",
-   "genre": "recherche",
-   "publie_le": "2026-10-28T01:52:00+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 12,
-   "signaux": [],
-   "premiere_vue": "2026-10-29T23:13:47.352455+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "e9b2cf73ead44270",
-   "titre": "Budget britannique : un peu d'air promis aux ménages, sous l'œil des marchés",
-   "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQc3lzRG9TU2MwN0N4MndmM2xtSVIxNEU3ZmwtS1RndmN3LWtaTU5LUUdydEFfbDNHUk4tYW4yNmFMUERPUDR3MG5icFQyWmlQXzZieklVOWFRUHhlbmRoaDJuVXFMVDM3cFR5RGE3TGlDNWdKUC15b19GMTU0dlVvT0Z4S3F3ZXk5X01SdFFubHZDazZFYmpuODZXOVg5QzlMcTkwUmVkT0pkQjVEbkhKX3gwR0NUT1hJUXpPUzRaYw?oc=5",
-   "source": "tv5monde",
-   "rubrique": "Tensions et énergie",
-   "categorie": "geo",
-   "genre": "recherche",
-   "publie_le": "2026-10-28T00:41:00+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 10,
-   "signaux": [],
-   "premiere_vue": "2026-10-30T22:12:41.835209+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 180,
-   "id": "35e435e54ae93fb2",
-   "titre": "Rejoins les bénévoles pour nettoyer les déchets dans nos rivières dans le 82",
-   "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxPN0lRLW1MVGxEOF84WnEyeHhhMDA0YkpwY0tMYnpVeG50VmdwNmNtaWhLcFlKU191X21CZnFsLXpMei1rVUNCVGdtQWdMYnYtcE83TVBlODRqOFBDazZ1NEF0MmQ4eW1vc1ZXVVhpVFd1NnE3azJaMnRQd1YtQW1mbWJVb2NJVVYzMGlkM0hLNTJ6VTMtWGhOOERyRFBuZ0lXRmFfd0E3WE5pSmZVcUJpM0dreEdvY1JHejdiczVMQ1RCcWVlSFFiRkZldmMzc0tiR0FWVUxkOVRJVjR0S1E?oc=5",
-   "source": "HelloAsso",
-   "rubrique": "ACPR",
-   "categorie": "macro",
-   "genre": "recherche",
-   "publie_le": "2026-10-28T00:28:40+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 20,
-   "signaux": [],
-   "premiere_vue": "2026-10-29T23:13:47.352455+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "2b0f814f57a4c41d",
-   "titre": "Le scénario du rebond se renforce",
-   "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxPb21FaTR6bGpMLVR3cWRDVi02UnIwYU81YUEtX3B3U2RKZkpHUG5RRndtUUp2TDVjc3pzdmJIazhtRUhsMzFtanVUNDZlY2NBQk9lenJObmRkcFpWUFJEUkh4RS1rMTh1Xy1ET3VvOTJKRTRsQWV2dUh1cVVBRFJvQkJjMUFZZW1ZWXJ0RDhLUVdjR2QwRDNEWEg0SjNtNmNlUzVrOWI1a1JqYXBYX0pkZ0JBUWlqRU5VclFOY2htM2JzRnZremRiMEMyaVFPZG5WMFhDa2xmdGNHdVVFQTUxbU95RQ?oc=5",
-   "source": "Bourse Direct",
-   "rubrique": "Marchés actions",
-   "categorie": "marches",
-   "genre": "recherche",
-   "publie_le": "2026-10-27T23:00:00+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 12,
-   "signaux": [],
-   "premiere_vue": "2026-11-01T17:53:28.219672+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "db54a150853ab35b",
-   "titre": "À l’horizon 2027, comment répartir son épargne entre liquidités, sécurité et dynamisme",
-   "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNYWhHV2l5bFZ6SHpic1NtbnNHdG5BZElRSEVIR0Nlc1FQcG93YThpMXhXa04zX2tqZ1JyalUwNTZRVDBFeVF1Tm4xYTJ5MEFjSzJyMVVWWWxDM3U4Qm4zdDlPWmNxZm9vT2dwTGtvYmhfaGFqZHdVbUxETGUtU3YxQmItZ2JTX2RncVJtNmoxQTNzeVBFckxSOWx5VGF1V05oN3NkNEx1aGRPQ0R3WVNvQndSZkljSFpLd1o4?oc=5",
-   "source": "https://renseignementeconomique.fr/",
-   "rubrique": "Épargne réglementée",
-   "categorie": "taux",
-   "genre": "recherche",
-   "publie_le": "2026-10-27T22:50:53+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 20,
-   "signaux": [],
-   "premiere_vue": "2026-10-29T23:13:47.352455+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "b61f5f6e6a3e64a7",
-   "titre": "ACF Assurances piraté : Les données de 23 000 clients revendiquées",
-   "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE1PVXNHZnJXQnFMdDViTXlqWEd2bG5OUkc0Z3RZQ2tLTG42dWxEMEw3UHFkaHVmNFFNRmozYmZnYjFsank5bHRaRjQ2RQ?oc=5",
-   "source": "FrenchBreaches",
-   "rubrique": "Banque de détail et courtage",
-   "categorie": "macro",
-   "genre": "recherche",
-   "publie_le": "2026-10-27T21:14:00+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 10,
-   "signaux": [],
-   "premiere_vue": "2026-10-28T11:13:43.480710+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "9b2b33a57824136d",
-   "titre": "Les Bourses européennes positives : le pétrole en recul apaise les marchés avant la Fed et la BCE",
-   "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOVHFRdzVjbFFRdVU4MW1RRlhvV3ZEYjU5cUFucnlkNFY1cFRTU1dCZFFoTUh1U3g0N0V6emw2eXRpWXM1STVQTU1aU2t3SGJ0TG5QRTZiY3ZPcW91dUtyQ0JiX0hyREhLQkNnTUFiUkRUeEI4cGJOa29nc2V5WHVCaE00UjJvaHhoM1p2TllPTFF2bWdzYW9Ham1HWnp2RERpTEk2TDJtZThrQVFsSWhMYkhSbkFEZ1lBNkhoRTVacmI5VWdhVTVpbjN3?oc=5",
-   "source": "https://renseignementeconomique.fr/",
-   "rubrique": "Géopolitique à effet marché",
-   "categorie": "geo",
-   "genre": "recherche",
-   "publie_le": "2026-10-27T19:31:05+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 12,
-   "signaux": [],
-   "premiere_vue": "2026-10-29T18:24:30.282368+00:00",
-   "autres": [
-    {
-     "source": "Zonebourse",
-     "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNZDJ5cTFsR1hXZjBNZk90b2ZsMVFiSDktRXZpeDJvaEt2UEJIZmNrUzFtWmFKWnp2TUVmWU45V09aNm1LS25iZExIY2JaTnRXWjRzSGZVSW9QSm1vUWpKX09HUXZpakRvQlVUVEhzS1dDckJmUE05dXQ5dGwxQXFFRlR0c2c0NGNuMFQza05BbHFEWHF4YTE3VHpqUkVqcTJianJsU3BsTUdSOHNqRXhxaXo2eW1TRzZneEYta21xSUVPVFFWbjRPbzViVlF6SnRnNGgwYnY5OTBsSXgwN1lzb3Nqd29XTUti?oc=5"
-    }
-   ]
-  },
-  {
-   "conserver": 21,
-   "id": "b3a4b3df47e7b410",
-   "titre": "Bourse Direct ouvre le prêt de titres aux PEA, avec des risques à mesurer",
-   "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPMzRVa1d3b3hKNDFPeS1qZGwzYjFfSXN2M1oyY05meUpKRGFCdEpnOUFxcmFsUnB5YjNXNHQ1SFIxRnJZcUk1a3RaVjVqdUoybUNfNUtjMzZGbERoMDJaU3RySG1JU0kxdGFFYkNZOG9jNnpzM2l4S3BtTmZMcEFqX2ZtTkpYUnFYN0V0RFJpbDV6cEV1d0tvaFdiSUdyNW0tRFJ2RjFjYUtKelV3cnZKcWhnMmlZVWdqa2gyQVBfWUtQbjFOMkJQMlpn?oc=5",
-   "source": "Zoom Invest",
-   "rubrique": "ETF et PEA",
-   "categorie": "marches",
-   "genre": "recherche",
-   "publie_le": "2026-10-27T19:27:02+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 20,
-   "signaux": [],
-   "premiere_vue": "2026-10-27T21:13:35.409359+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "892b24c37f45c21c",
-   "titre": "Retraite 2027 : pourquoi certains retraités vont payer jusqu'à 300 euros d'impôts en plus dès l'an prochain ?",
-   "url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxNdkN0MGRwMDdWQlpoa0lCZk0yQ0N0Y0tjUnRYTmJJdVJ0cnpVTzFlTUV5VS15YVhxZGUzMWtGTUpYWXhjLXJOVmZKQkJFb3JDQlloUzhmcWZ4UEFuMUtaS2NoVUdtdWRXUUpDZjI0MWtBT0NOVFpkSU9aQVlqbXV0Q0x6bC12dDRFMXRMZWt4dUJiQ1N1MTQ0TWlrMlBEZXZVZG0wc3pmT3NBaTkwVWFpbUVzYjdaZzhNQzFudXRYT3JjZnhyTjJkY1lvcy0xcVc0dGk2UGRiSDdkUXdmcnNxcExNVm9pcXhzNExQZXU3Y3Z3UQ?oc=5",
-   "source": "Marie France, magazine féminin",
-   "rubrique": "Fiscalité et loi de finances",
-   "categorie": "macro",
-   "genre": "recherche",
-   "publie_le": "2026-10-27T19:25:22+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 22,
-   "signaux": [],
-   "premiere_vue": "2026-10-29T11:27:04.301502+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 180,
-   "id": "97af5f429a4ad4aa",
-   "titre": "Banque de France : cinq outils d’IA déjà déployés, des gains mesurés pour les agents",
-   "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQc3pkMDBmcFNhSlRMaElBLUJVbl91cmNZOWlpM2hJQURWeFhuQzlQSVdpOGpJNzFOVFlTbWNYb0VhM0xrYTBmZVNKRDJjbDBMaEQyUl9nNHZJdFRsSTE3ZjVCSGhLNTdVZXlCdjdCLUd2NUZtUnA4aW5jUDVVVGxzb05ySFRCNHktWmFrT3VvVWNZdlhWc3pvOWlId2FSS0d4UWlZ?oc=5",
-   "source": "Economie Matin",
-   "rubrique": "ACPR",
-   "categorie": "macro",
-   "genre": "recherche",
-   "publie_le": "2026-10-27T18:30:00+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 12,
-   "signaux": [],
-   "premiere_vue": "2026-10-28T11:13:43.480710+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "49c031ff6a4976f4",
-   "titre": "Vérification du bénéficiaire, virement instantané : ce que doit faire la banque",
-   "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNdWtoU1JjQVZwVXd6WG1qWlNaemFmX1drM2tIWEV3a3RfWFhfcUdSVDdfbEFqNlhsZ2Z5Y1Z1VnFsbmxVT1B5NllwZVN3cVIzbVRfeG5LdzJJcjBVVlIxSXYxMDZtamRyb2ZWTjA4UF9tY2lVRy1ya2g4TnJ2cVFQZTljaEd3WVEydjNxRkNqVy11YlpSQmtqYVc4VUJPSUMtZ3ZsS0thaDdtRGFFQ08tM2VqVQ?oc=5",
-   "source": "Mediaterranee.com",
-   "rubrique": "Journal officiel et textes réglementaires",
-   "categorie": "macro",
-   "genre": "recherche",
-   "publie_le": "2026-10-27T18:07:24+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 20,
-   "signaux": [],
-   "premiere_vue": "2026-10-28T18:19:16.823086+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "8ee505783fc81b67",
-   "titre": "Pétrole : bientôt une cotation en Bourse pour la raffinerie publique du Ghana ?",
-   "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQYVRMNUk1RFpUZXlXdUQzOHBVSDMwOFFhVW9jNlVLeHRUbUlPZ3lpT2NzeUZQc0I5XzYzOXBHLXRsaE1SbE9Pc0o4Skx6Tm43VFJtOFRybDN1Z2d5TXBpMjB5QXlYZ2E2ZXBVVUN0aXBjOWJMTzgtejlRaXd6ODVBYkpBdktGQzNpOTJNekhnNTR1WlRfR0pNeUVLV1pnaGZaem1taFVENGlUZlpxZFFYYU13Q2M5X1lZa3FEdk83cTZmUEdvdFFNdFRxWQ?oc=5",
-   "source": "La Tribune",
-   "rubrique": "Géopolitique à effet marché",
-   "categorie": "geo",
-   "genre": "recherche",
-   "publie_le": "2026-10-27T18:05:01+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 12,
-   "signaux": [],
-   "premiere_vue": "2026-10-27T21:13:35.409359+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "e0d8588c41cfcfc6",
-   "titre": "Cathie Wood’s Ark réduit ses avoirs en ETF Bitcoin alors que le BTC prolonge ses pertes d’octobre",
-   "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxORGdRS3VINDlOWFBRTWZTZXVlQmRHRkpKZ2Y2TTFYWVZrYi1hdUctREFTVC14QklaSXJ2bFVoVkxubFBEcTZnLXNJWDdFd1Zkb0FUdFVKTjJLNThydEV3QV84djh1MnFNQ3lIODRKanVOdlVLa0xRclBYalZDUnNQelNBX1BfOVJwWDFpam5sSWhWZWhIcnVDeTFQdzQ1b2lnVlBqSjUwVF9EX3VUWHN4bzdWYllZa004RXNSdUZQSVVRakpwSFE?oc=5",
-   "source": "Benzinga France",
-   "rubrique": "ETF et PEA",
-   "categorie": "marches",
-   "genre": "recherche",
-   "publie_le": "2026-10-27T17:50:41+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 20,
-   "signaux": [],
-   "premiere_vue": "2026-10-28T23:06:30.476249+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "bb6a0a1943c175c8",
-   "titre": "La Norvège et l’Ukraine ont conclu un accord de coopération dans le domaine de l’énergie",
-   "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQWGIyRVFiNDRRRUxmUHB4V29vRDdwdmYzajFjOVhRallvZ0VGVXNkQm85SklFQ1d1ZkNpbjRKdVZnWS1wT1Uybm1FNWd1RDFBcW01R3NLc2RfeVNPZmFld1RWeGczbDk0SGRfOWxwWHFMb2xMQlFuQjRlVFJVc0ZOWHd6YzRBLTB1UnJnSDhR?oc=5",
-   "source": "Mezha.net",
-   "rubrique": "Tensions et énergie",
-   "categorie": "geo",
-   "genre": "recherche",
-   "publie_le": "2026-10-27T17:31:03+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 2,
-   "signaux": [],
-   "premiere_vue": "2026-10-27T21:13:35.409359+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "3fb6579b5a62e3b4",
-   "titre": "Impôts 2025 et compte PayPal : fiscalité en France, déclaration, obligations",
-   "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNckF2UFU2YzVzYUFaRW9IVnI1VVdoWS1nRThsdmFNNTJpdEhzbmVOYnd5QjBEYkJzSzdQMHEzOHphWFBUN0lFUkVYM0tmeUZVa2tCSmYwRzlhSTV3b3FGaE05UGQxZGJrMmNLMXEtUmNuTl9KTHF0ekdrZEZGNDItY19mU0EtSlJMUVpvSnRSazc3VmlLdzU3d3NWZVJLX19ib2FsRXlxOA?oc=5",
-   "source": "Tout Sur Mes Finances",
-   "rubrique": "Fiscalité crypto France",
-   "categorie": "crypto",
-   "genre": "recherche",
-   "publie_le": "2026-10-27T17:26:19+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 28,
-   "signaux": [
-    "fiscalité"
-   ],
-   "premiere_vue": "2026-10-31T16:01:15.621534+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "d877cdf7267a5813",
-   "titre": "La Russie est-elle invincible? Ce traité militaire vieux de cent ans qui nous éclaire sur la guerre en Ukraine",
-   "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxNRHowNllsQXUyMmxEd2E2amNyUUJHc1hJTTQ2YXJLMFBtUmNrNF9KM2FEQnNjdV8yclYxOTlLQ2xqOGkyM2FlS0dFVXc5X3dILUF1UE9zOURGLTd6Z3ExaV9jclk5SmtxNXN4V2QyTXFOQm9kcks3UHMtZFJEVG1BSVhIVXZzdUYyaHhqaXFLRFhiNjlkcUZid1dfR1EwbGo0VU5PTGQtdHFHY184NUxWTmotNXNCdG1OaUFpMTBhZ1pwZ0ZmMlA1U2R2YmxUOThGa1ZBdVAtdU1nWW1o?oc=5",
-   "source": "magazine GEO",
-   "rubrique": "Tensions et énergie",
-   "categorie": "geo",
-   "genre": "recherche",
-   "publie_le": "2026-10-27T17:18:00+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 2,
-   "signaux": [],
-   "premiere_vue": "2026-10-28T11:13:43.480710+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "de0315b4dfcd821b",
-   "titre": "« Des mesures absolument scandaleuses » : Pourquoi ce maire des Alpes-Maritimes s’oppose farouchement au projet de loi de finances déposé par le gouvernement ?",
-   "url": "https://news.google.com/rss/articles/CBMioAJBVV95cUxNem1xSXpYN0ZXZHliRjEyYWZEb3ViNmZfMkZQdDZVSEx6Wk9BZlVJQVNjcTRmd0Eza3lnb2hHcFRqWWhEbFJwVGRZaVhFTE9lSDUtYVNuOVd5SmZDOERYTWl0ZjdkMGdoeU1BSnBDWWhVa21HRE9QNi1CdW5qa0pNcEw2WHVmUFNzNmZ0UDRySUVrZzZDejhiZEZMbjhDa2pPYmFWX1RLTE82UHEzdTg3VXRuR0JpazRmVlNRYlFBVDVpX3dVcUw5MFBJNlBwWEJTS3NfdzdjRVFmUG43bmk3NmVFSUxVaEhjamZOaGdPbDdyZVhnR3BiUVhsQklISHQtNjdBbkRKR0FMYlhEbmdWYlhoc0tnRnRadGw2UFRscEI?oc=5",
-   "source": "Nice-Matin",
-   "rubrique": "Fiscalité et loi de finances",
-   "categorie": "macro",
-   "genre": "recherche",
-   "publie_le": "2026-10-27T17:15:02+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 28,
-   "signaux": [
-    "loi de finances"
-   ],
-   "premiere_vue": "2026-11-01T17:53:28.219672+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "56fe8c70a59ee783",
-   "titre": "Malgré la reprise des flux pétroliers, l’AIE anticipe des marchés durablement perturbés",
-   "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQdEx2M292enJIdEhMb0FKMWl2QVBTVlRkWXJfZFozYS1lSl9LOEszbWhOeWhzUVJtZ0VsX2VES21yNUsxLUlic1RETlB1ZlZNeEhLRkQ1VjB3ZUpiMXl2UENCbHBwQkhkSWxFX0JaWWtSYURJTHBsdnRDWWIxWXh4ZFdHR2JfVWNzUVJuc0lxRDFTS1NReHppWE1ZZ1ZQOGxPdmN2RWF3NEdIX0VBSHBIZW14R2FEVG10clI1WjBIX1ktUWR0X0xJSUg5a1REd2RmOVN5eUg2c0ItWWVKRFZNN0ZlUQ?oc=5",
-   "source": "AGENCE ECOFIN",
-   "rubrique": "Tensions et énergie",
-   "categorie": "geo",
-   "genre": "recherche",
-   "publie_le": "2026-10-27T17:14:00+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 2,
-   "signaux": [],
-   "premiere_vue": "2026-10-30T11:18:34.203114+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 180,
-   "id": "5454df59dcc70e4e",
-   "titre": "Arnaque au faux courtier : plus d’un milliard d’euros volés aux emprunteurs",
-   "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNdHFwcmRLc0JMSXcxOXZ0WFhVRmJLZzNRelR1R0xnTlJkV3JYcm95aXA0cnBHMnFlZm5pOUJPREFKdnMzZ1d0UGdqMHg0Q01vTUExQzVheWNRNnJzM2ZIX05LZEJiNl9IbkU4Ym9ueWYwQnJTWWtYMU13NGpGZEJJbkgzMzRPSnVVeW1sVWRwczZCMnNVLXlKS3czRWZvWjZKbHBaeUtfMUg5M3Jw?oc=5",
-   "source": "https://renseignementeconomique.fr/",
-   "rubrique": "ACPR",
-   "categorie": "macro",
-   "genre": "recherche",
-   "publie_le": "2026-10-27T17:10:57+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 18,
-   "signaux": [
-    "arnaque"
-   ],
-   "premiere_vue": "2026-10-28T11:13:43.480710+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "63438f228c8b4e64",
-   "titre": "«Taxe émeutes» : une contribution de 0,8 % sur les assurances dommages dès 2027",
-   "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNTDR4TUt4eGtKQk1ybVpmMGdVUGlBaVFMVUxwSWp1aU5pSnNvV0oyZUR0U2hhZV8zT3p5Y25sNWJZRzA5RmxVMDh1b3dHaTRaRlRlY051OEd1Ynd5cTA4TlQ1MmRpOXhUWFBpTHJuV2J5NjJFUm13R3c3VE1xaUpURkZwVW5EaDFUbmtHLWNJSkN0WDJsblh3b1h4cmxlXy1XVkZTWmo5c243TEhEY0E?oc=5",
-   "source": "lejdd.fr",
-   "rubrique": "Journal officiel et textes réglementaires",
-   "categorie": "macro",
-   "genre": "recherche",
-   "publie_le": "2026-10-27T16:51:34+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 20,
-   "signaux": [],
-   "premiere_vue": "2026-10-28T18:19:16.823086+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "206a291499750050",
-   "titre": "PLF 2027 : croissance, inflation, pétrole… les hypothèses retenues par le gouvernement",
-   "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNZmZfOTB4SHJudzBGMG94TE1zVDRsaTlLYWZOcXU2My15Vl8wSEpVaHMyQzNMeWsyeW52b2pWZ0hQZ0ZXNnhHd0xuVlUzeWs3R1puYmgzeG1GY1JESFRXaVBSS0RmR1laaHRqZjB5S0N6QzlCbFJ1Um1Dajc4SEMxbGdqMkpWU1dEb3RrTkpGNVFvbUZ4V3BXaXZOamFORGNRNUVhX0R0MmdvOWJ5eTlmaXc3WGlyYkE4X3VTSjNPeXZjVEZQYmg3aw?oc=5",
-   "source": "Business News",
-   "rubrique": "Géopolitique à effet marché",
-   "categorie": "geo",
-   "genre": "recherche",
-   "publie_le": "2026-10-27T16:12:00+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 18,
-   "signaux": [
-    "inflation"
-   ],
-   "premiere_vue": "2026-10-27T21:13:35.409359+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "da2a2dce791db1b0",
-   "titre": "Endettement, usure, apport : les 6 raisons d’un refus de prêt immobilier",
-   "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNa2JkcjRzQ3hSdXpiLWxKbUZINEJtOXZtWV9kclJrRjVtSlR3dXoySXlHLWFhSW5jRkM5QzF3bENhTm85bTVpUWNCNWp6b3p3Qk1TaEVuSkRwbzl4OHUzZWVMazdNM25rRnByN2t1Z0FsQkdMUEJvOTNCbUVySGRkZ2psaE91cnJETkFxeDRQWkJFTGVHbVppZHZPbm01VU9mR2dSUzgzLXpnRGs4SXNTX1dUZVM0OUhOSFpBRWdWRTRldw?oc=5",
-   "source": "SeLoger",
-   "rubrique": "Crédit immobilier",
-   "categorie": "taux",
-   "genre": "recherche",
-   "publie_le": "2026-10-27T16:02:25+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 22,
-   "signaux": [],
-   "premiere_vue": "2026-11-01T21:57:47.723104+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "1b63601279611dbd",
-   "titre": "[EXPRESS] LOI DE FINANCES RECTIFICATIVE 2026 : dans le but de relancer le dialogue entre le gouvernement et les députés, le texte renvoyé en commission",
-   "url": "https://news.google.com/rss/articles/CBMijgJBVV95cUxPZFUwcGxXWngwVV9xY2JJcFJYdkRQNTBkeFpSU2tXQlg2N2lNeHhZREF2S2txck14UVk5Q2pwN0tLZjFrY2k2ekoyU2s3S201NFhVVWN3aUVDb1Zac2lTejM3N3N0WHFlZmdJZ0JFLWNfRVc4Ry13SDJWdEwzakZrd2llZFMyeGpFYUx4TWxLTTV4TGhDLVZRMWlhSzdHa21ESmZzVHlhZW9xV0NGdUlhcTlpc1BQWkMtRmR5Mi1oRlFadjdNYmYwcUxHa2VxeE9RWWlMUi0zMnBDQ3F1NENVZ05BUXBNNTdlelgyb2RFZ2dPa25QdlZEb0syZWRRY2J2Q3NnMWJvdEc2VlRaZlE?oc=5",
-   "source": "nations-sn.com",
-   "rubrique": "Fiscalité et loi de finances",
-   "categorie": "macro",
-   "genre": "recherche",
-   "publie_le": "2026-10-27T15:22:56+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 28,
-   "signaux": [
-    "loi de finances"
-   ],
-   "premiere_vue": "2026-11-01T21:57:47.723104+00:00",
-   "autres": []
-  },
-  {
-   "conserver": 21,
-   "id": "de4b7a8f77216d53",
-   "titre": "Livret A sous 2% : le grand retour de ce placement garanti qui va enfin redonner du rendement à votre épargne d'ici 2027",
-   "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxOaFJmQjItSGhCR3M1b0tFUWFvd19NZjZ0eGllenAxRFVzMk9YSVpidjQtZ2l5Tno4YlpmV2lIdi1aQjAwR0xJcGppYTl1T1cxYzhLcWhuZ192aWhuSVp0eVEwLUdfMkFyQnp6emFLRVM1ajlQYkRkUnlVbHRkbDdlV1NoWFlzLVdrWXh4T2xFTC1XdzVueGlUOEQyRXdET1JZS2RXOHpqSGRaYnRWMzBwUE9pNC1GdTZCYTltY2tfcTM3aUpyaTZ6NWFoNkdGY0MwdkVXZ19HTkdXcmJsd3ZLaGgtZFA?oc=5",
-   "source": "Bourse Inside",
-   "rubrique": "Épargne réglementée",
-   "categorie": "taux",
-   "genre": "recherche",
-   "publie_le": "2026-10-27T14:34:43+00:00",
-   "date_estimee": false,
-   "resume": "",
-   "score": 18,
-   "signaux": [
-    "livret A"
-   ],
-   "premiere_vue": "2026-11-01T21:57:47.723104+00:00",
-   "autres": []
   }
  ],
  "sources": [
@@ -5921,7 +5506,7 @@
    "nom": "AMF",
    "genre": "officiel",
    "ok": true,
-   "nombre": 5,
+   "nombre": 2,
    "erreur": "flux direct indisponible (HTTPError), repli en place",
    "secours": true
   },
@@ -5929,7 +5514,7 @@
    "nom": "INSEE — informations rapides",
    "genre": "officiel",
    "ok": true,
-   "nombre": 13,
+   "nombre": 17,
    "erreur": "flux direct indisponible (HTTPError), repli en place",
    "secours": true
   },
@@ -5937,7 +5522,7 @@
    "nom": "BOFiP — actualités fiscales",
    "genre": "officiel",
    "ok": true,
-   "nombre": 1,
+   "nombre": 0,
    "erreur": "flux direct indisponible (HTTPError), repli en place",
    "secours": true
   },
@@ -5945,7 +5530,7 @@
    "nom": "ACPR",
    "genre": "officiel",
    "ok": true,
-   "nombre": 30,
+   "nombre": 28,
    "erreur": "flux direct indisponible (HTTPError), repli en place",
    "secours": true
   },
@@ -5961,7 +5546,7 @@
    "nom": "Direction générale du Trésor",
    "genre": "officiel",
    "ok": true,
-   "nombre": 13,
+   "nombre": 30,
    "erreur": "flux direct indisponible (HTTPError), repli en place",
    "secours": true
   },
@@ -5969,7 +5554,7 @@
    "nom": "Crédit immobilier",
    "genre": "recherche",
    "ok": true,
-   "nombre": 10,
+   "nombre": 8,
    "erreur": null,
    "secours": false
   },
@@ -5977,7 +5562,7 @@
    "nom": "Épargne réglementée",
    "genre": "recherche",
    "ok": true,
-   "nombre": 20,
+   "nombre": 22,
    "erreur": null,
    "secours": false
   },
@@ -5985,7 +5570,7 @@
    "nom": "Marchés actions",
    "genre": "recherche",
    "ok": true,
-   "nombre": 19,
+   "nombre": 24,
    "erreur": null,
    "secours": false
   },
@@ -6009,7 +5594,7 @@
    "nom": "Fiscalité crypto France",
    "genre": "recherche",
    "ok": true,
-   "nombre": 1,
+   "nombre": 2,
    "erreur": null,
    "secours": false
   },
@@ -6017,7 +5602,7 @@
    "nom": "Banque de détail et courtage",
    "genre": "recherche",
    "ok": true,
-   "nombre": 5,
+   "nombre": 6,
    "erreur": null,
    "secours": false
   },
@@ -6033,7 +5618,7 @@
    "nom": "Journal officiel et textes réglementaires",
    "genre": "recherche",
    "ok": true,
-   "nombre": 19,
+   "nombre": 16,
    "erreur": null,
    "secours": false
   },
@@ -6041,7 +5626,7 @@
    "nom": "Géopolitique à effet marché",
    "genre": "recherche",
    "ok": true,
-   "nombre": 26,
+   "nombre": 30,
    "erreur": null,
    "secours": false
   },
@@ -6049,10 +5634,10 @@
    "nom": "Tensions et énergie",
    "genre": "recherche",
    "ok": true,
-   "nombre": 30,
+   "nombre": 19,
    "erreur": null,
    "secours": false
   }
  ],
- "resume": "Sur 24 heures : Argent -9,24 %, Gaz naturel +7,45 %, Indice de volatilité (VIX) +5,60 %. 17 sujets depuis hier, surtout en macro."
+ "resume": "Sur 24 heures : Indice de volatilité (VIX) +11,07 %, Argent -6,42 %, Pétrole Brent -5,81 %. 34 sujets depuis hier, surtout en geo."
 }
